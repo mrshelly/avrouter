@@ -28,6 +28,7 @@ include_directories(${OPENSSL_INCLUDE_DIR})
 #include_directories(${PKCS11_INCLUDE_DIRS})
 include_directories(include)
 include_directories(proto_doc)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/proto_doc)
 
 link_libraries(${Boost_LIBRARIES} ${OPENSSL_LIBRARIES} ${PKCS11_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
