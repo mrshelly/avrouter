@@ -118,6 +118,8 @@ namespace av_router {
 		}
 		boost::scoped_ptr<google::protobuf::Message> defer(msg);
 
+		LOG_DBG << this << " recv: " << msg->GetTypeName();
+
 		// 处理这个消息.
 		m_server.do_message(msg, shared_from_this());
 

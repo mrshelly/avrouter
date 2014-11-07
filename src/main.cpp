@@ -4,10 +4,14 @@
 #include "login_moudle.hpp"
 #include "server.hpp"
 
+#include <openssl/dh.h>
+#include <openssl/aes.h>
+
 using namespace av_router;
 
-void terminator(io_service_pool& ios, server& serv)
+void terminator(io_service_pool& ios, server& serv, login_moudle& login)
 {
+	login.quit();
 	serv.stop();
 	ios.stop();
 }
@@ -20,7 +24,7 @@ int main(int argc, char** argv)
 	// 创建服务器.
 	server serv(io_pool, 5432);
 	// 创建登陆处理模块.
-	login_moudle moudle_login;
+	login_moudle moudle_login(io_pool.get_io_service());
 
 	// 添加登陆处理模块.
 	serv.add_message_process_moudle("proto.client_hello", boost::bind(&login_moudle::process_hello_message, &moudle_login, _1, _2, _3));
@@ -35,7 +39,7 @@ int main(int argc, char** argv)
 #if defined(SIGQUIT)
 	terminator_signal.add(SIGQUIT);
 #endif // defined(SIGQUIT)
-	terminator_signal.async_wait(boost::bind(&terminator, boost::ref(io_pool), boost::ref(serv)));
+	terminator_signal.async_wait(boost::bind(&terminator, boost::ref(io_pool), boost::ref(serv), boost::ref(moudle_login)));
 
 	// 开始启动整个系统事件循环.
 	io_pool.run();

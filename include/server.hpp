@@ -39,13 +39,20 @@ namespace av_router {
 	private:
 		// 处理客户连接.
 		void handle_accept(const boost::system::error_code& error);
+		// 滴哒.
+		void on_tick(const boost::system::error_code& error);
 		// 调用name所对应的消息处理模块.
 		void do_message(google::protobuf::Message*, connection_ptr);
+		// 开始的具体实现.
+		void start_impl();
+		// 继续定时器.
+		void continue_timer();
 
 	private:
 		io_service_pool& m_io_service_pool;
 		boost::asio::io_service& m_io_service;
 		boost::asio::ip::tcp::acceptor m_acceptor;
+		boost::asio::deadline_timer m_timer;
 		connection_ptr m_connection;
 		connection_manager m_connection_manager;
 		boost::shared_mutex m_message_callback_mtx;

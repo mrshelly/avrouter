@@ -7,6 +7,7 @@ namespace av_router {
 		: m_io_service_pool(ios)
 		, m_io_service(ios.get_io_service())
 		, m_acceptor(m_io_service)
+		, m_timer(m_io_service)
 	{
 		boost::asio::ip::tcp::resolver resolver(m_io_service);
 		std::ostringstream port_string;
@@ -52,15 +53,22 @@ namespace av_router {
 
 	void server::start()
 	{
+		start_impl();
+		continue_timer();
+	}
+
+	void server::start_impl()
+	{
 		m_connection = boost::make_shared<connection>(boost::ref(m_io_service_pool.get_io_service()), boost::ref(*this), &m_connection_manager);
 		m_acceptor.async_accept(m_connection->socket(), boost::bind(&server::handle_accept, this, boost::asio::placeholders::error));
 	}
 
 	void server::stop()
 	{
+		boost::system::error_code ignore_ec;
+		m_timer.cancel(ignore_ec);
 		m_acceptor.close();
 		m_connection_manager.stop_all();
-		boost::system::error_code ignore_ec;
 	}
 
 	void server::handle_accept(const boost::system::error_code& error)
@@ -74,7 +82,22 @@ namespace av_router {
 
 		m_connection_manager.start(m_connection);
 
-		start();
+		start_impl();
+	}
+
+	void server::on_tick(const boost::system::error_code& error)
+	{
+		// TODO: 定时要做的事.
+		continue_timer();
+	}
+
+	void server::do_message(google::protobuf::Message* msg, connection_ptr conn)
+	{
+		const std::string name = msg->GetTypeName();
+		if (m_message_callback.find(name) == m_message_callback.end())
+			return;
+		boost::shared_lock<boost::shared_mutex> l(m_message_callback_mtx);
+		m_message_callback[name](msg, conn, boost::ref(m_connection_manager));
 	}
 
 	bool server::add_message_process_moudle(const std::string& name, message_callback cb)
@@ -101,13 +124,9 @@ namespace av_router {
 		return true;
 	}
 
-	void server::do_message(google::protobuf::Message* msg, connection_ptr conn)
+	void server::continue_timer()
 	{
-		const std::string name = msg->GetTypeName();
-		if (m_message_callback.find(name) == m_message_callback.end())
-			return;
-		boost::shared_lock<boost::shared_mutex> l(m_message_callback_mtx);
-		m_message_callback[name](msg, conn, boost::ref(m_connection_manager));
+		m_timer.expires_from_now(seconds(1));
+		m_timer.async_wait(boost::bind(&server::on_tick, this, boost::asio::placeholders::error));
 	}
-
 }
