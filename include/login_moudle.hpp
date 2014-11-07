@@ -20,6 +20,7 @@ namespace av_router {
 
 	public:
 		void process_message(google::protobuf::Message*, connection_ptr, connection_manager&);
+		void process_hello_message(google::protobuf::Message*, connection_ptr, connection_manager&);
 	};
 
 }
