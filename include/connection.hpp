@@ -43,6 +43,8 @@ namespace av_router {
 		tcp::socket& socket();
 
 	private:
+		void close();
+
 		void handle_read_header(const boost::system::error_code& error, std::size_t bytes_transferred);
 		void handle_read_body(const boost::system::error_code& error, std::size_t bytes_transferred);
 

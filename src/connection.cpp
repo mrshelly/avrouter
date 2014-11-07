@@ -1,6 +1,7 @@
 ﻿#include "server.hpp"
 #include "connection.hpp"
 #include "logging.hpp"
+#include "serialization.hpp"
 
 namespace av_router {
 
@@ -21,7 +22,7 @@ namespace av_router {
 	{
 		LOG_DBG << "start the connection: " << this;
 
-		m_request.consume(m_request.size());
+		m_response.consume(m_response.size());
 		m_abort = false;
 
 		boost::system::error_code ignore_ec;
@@ -29,7 +30,7 @@ namespace av_router {
 		if (ignore_ec)
 			LOG_ERR << "connection::start, Set option to nodelay, error message :" << ignore_ec.message();
 
-		boost::asio::async_read(m_socket, m_request, boost::asio::transfer_exactly(4),
+		boost::asio::async_read(m_socket, m_response, boost::asio::transfer_exactly(4),
 			boost::bind(&connection::handle_read_header,
 				shared_from_this(),
 				boost::asio::placeholders::error,
@@ -50,16 +51,45 @@ namespace av_router {
 		return m_socket;
 	}
 
+	void connection::close()
+	{
+		m_connection_manager->stop(shared_from_this());
+	}
+
 	void connection::handle_read_header(const boost::system::error_code& error, std::size_t bytes_transferred)
 	{
 		// 出错处理.
 		if (error || m_abort)
 		{
-			m_connection_manager->stop(shared_from_this());
+			close();
 			return;
 		}
 
+		// 复制出来,避免影响m_response中接收到的数据, 也就4个字节.
+		boost::asio::streambuf tempbuf;
+		boost::asio::buffer_copy(tempbuf.prepare(m_response.size()), m_response.data());
+		tempbuf.commit(m_response.size());
 
+		// 获得包长度, 转为主机字节序.
+		std::istream os(&tempbuf);
+		int packet_length = 0;
+		os >> packet_length;
+		packet_length = ntohl(packet_length);
+
+		if (packet_length > 64 * 1024) // 过大的数据包, 此客户端有问题, 果然断开.
+		{
+			close();
+			return;
+		}
+
+		// 继续读取packet_length长度的数据.
+		boost::asio::async_read(m_socket, m_response, boost::asio::transfer_exactly(packet_length),
+			boost::bind(&connection::handle_read_header,
+				shared_from_this(),
+				boost::asio::placeholders::error,
+				boost::asio::placeholders::bytes_transferred
+			)
+		);
 	}
 
 	void connection::handle_read_body(const boost::system::error_code& error, std::size_t bytes_transferred)
@@ -67,8 +97,36 @@ namespace av_router {
 		// 出错处理.
 		if (error || m_abort)
 		{
-			m_connection_manager->stop(shared_from_this());
+			close();
 			return;
 		}
+
+		// 读取到body并处理.
+		int packet_length = static_cast<int>(bytes_transferred + 4);
+		std::string message;
+		message.resize(packet_length);
+		m_response.sgetn(&message[0], packet_length);
+		m_response.consume(packet_length);
+
+		// 解析包.
+		google::protobuf::Message* msg = decode(message);
+		if (!msg)
+		{
+			close();
+			return;
+		}
+
+		// 处理这个消息.
+		m_server.do_message(msg, shared_from_this());
+
+		// 继续下一个消息头读取.
+		boost::asio::async_read(m_socket, m_response, boost::asio::transfer_exactly(4),
+			boost::bind(&connection::handle_read_header,
+				shared_from_this(),
+				boost::asio::placeholders::error,
+				boost::asio::placeholders::bytes_transferred
+			)
+		);
+
 	}
 }
