@@ -16,7 +16,7 @@ namespace av_router {
 		DH_free(m_dh);
 	}
 
-	void login_moudle::process_message(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
+	void login_moudle::process_login_message(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
 	{
 		proto::login * login = dynamic_cast<proto::login*>(msg);
 

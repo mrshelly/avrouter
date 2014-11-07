@@ -19,18 +19,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="generated_proto\message.pb.cc" />
+    <ClCompile Include="generated_proto\old.pb.cc" />
+    <ClCompile Include="generated_proto\user.pb.cc" />
     <ClCompile Include="src\connection.cpp" />
     <ClCompile Include="src\io_service_pool.cpp" />
-    <ClCompile Include="src\login.pb.cc" />
     <ClCompile Include="src\login_moudle.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\server.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="generated_proto\message.pb.h" />
+    <ClInclude Include="generated_proto\old.pb.h" />
+    <ClInclude Include="generated_proto\user.pb.h" />
     <ClInclude Include="include\connection.hpp" />
     <ClInclude Include="include\io_service_pool.hpp" />
     <ClInclude Include="include\logging.hpp" />
-    <ClInclude Include="include\login.pb.h" />
     <ClInclude Include="include\login_moudle.hpp" />
     <ClInclude Include="include\serialization.hpp" />
     <ClInclude Include="include\server.hpp" />
@@ -124,7 +128,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_WIN32_WINNT=0x0501;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>.\include;.\third_party\protobuf\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\include;.\third_party\protobuf\src;.\generated_proto;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,7 +167,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions> /Qvec-report:2</AdditionalOptions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>.\include;.\third_party\protobuf\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\include;.\third_party\protobuf\src;.\generated_proto;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
