@@ -47,10 +47,12 @@ void protobuf_AssignDesc_user_2eproto() {
       "user.proto");
   GOOGLE_CHECK(file != NULL);
   client_hello_descriptor_ = file->message_type(0);
-  static const int client_hello_offsets_[3] = {
+  static const int client_hello_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(client_hello, client_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(client_hello, version_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(client_hello, random_key_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(client_hello, random_g_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(client_hello, random_p_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(client_hello, random_pub_key_),
   };
   client_hello_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -67,7 +69,7 @@ void protobuf_AssignDesc_user_2eproto() {
   static const int server_hello_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(server_hello, servername_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(server_hello, version_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(server_hello, random_key_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(server_hello, random_pub_key_),
   };
   server_hello_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -177,19 +179,20 @@ void protobuf_AddDesc_user_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\nuser.proto\022\005proto\"C\n\014client_hello\022\016\n\006c"
-    "lient\030\001 \002(\t\022\017\n\007version\030\002 \002(\r\022\022\n\nrandom_k"
-    "ey\030\003 \001(\014\"G\n\014server_hello\022\022\n\nservername\030\001"
-    " \002(\t\022\017\n\007version\030\002 \002(\r\022\022\n\nrandom_key\030\003 \002("
-    "\014\"J\n\005login\022\021\n\tuser_name\030\001 \002(\t\022\032\n\022encrype"
-    "d_radom_key\030\002 \002(\014\022\022\n\nother_info\030\003 \001(\t\"\257\001"
-    "\n\014login_result\0225\n\006result\030\001 \002(\0162%.proto.l"
-    "ogin_result.login_result_code\"h\n\021login_r"
-    "esult_code\022\021\n\rLOGIN_SUCCEED\020\000\022\020\n\014NO_SUCH"
-    "_USER\020\001\022\025\n\021PEREMISSON_DENIED\020\002\022\027\n\023PUBLIC"
-    "_KEY_MISMATCH\020\003\"`\n\ruser_register\022\021\n\tuser"
-    "_name\030\001 \002(\t\022\022\n\nrsa_pubkey\030\002 \002(\014\022\024\n\014mail_"
-    "address\030\003 \001(\t\022\022\n\ncell_phone\030\004 \001(\t", 513);
+    "\n\nuser.proto\022\005proto\"k\n\014client_hello\022\016\n\006c"
+    "lient\030\001 \002(\t\022\017\n\007version\030\002 \002(\r\022\020\n\010random_g"
+    "\030\003 \002(\014\022\020\n\010random_p\030\004 \002(\014\022\026\n\016random_pub_k"
+    "ey\030\005 \002(\014\"K\n\014server_hello\022\022\n\nservername\030\001"
+    " \002(\t\022\017\n\007version\030\002 \002(\r\022\026\n\016random_pub_key\030"
+    "\005 \002(\014\"J\n\005login\022\021\n\tuser_name\030\001 \002(\t\022\032\n\022enc"
+    "ryped_radom_key\030\002 \002(\014\022\022\n\nother_info\030\003 \001("
+    "\t\"\257\001\n\014login_result\0225\n\006result\030\001 \002(\0162%.pro"
+    "to.login_result.login_result_code\"h\n\021log"
+    "in_result_code\022\021\n\rLOGIN_SUCCEED\020\000\022\020\n\014NO_"
+    "SUCH_USER\020\001\022\025\n\021PEREMISSON_DENIED\020\002\022\027\n\023PU"
+    "BLIC_KEY_MISMATCH\020\003\"`\n\ruser_register\022\021\n\t"
+    "user_name\030\001 \002(\t\022\022\n\nrsa_pubkey\030\002 \002(\014\022\024\n\014m"
+    "ail_address\030\003 \001(\t\022\022\n\ncell_phone\030\004 \001(\t", 557);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "user.proto", &protobuf_RegisterTypes);
   client_hello::default_instance_ = new client_hello();
@@ -217,7 +220,9 @@ struct StaticDescriptorInitializer_user_2eproto {
 #ifndef _MSC_VER
 const int client_hello::kClientFieldNumber;
 const int client_hello::kVersionFieldNumber;
-const int client_hello::kRandomKeyFieldNumber;
+const int client_hello::kRandomGFieldNumber;
+const int client_hello::kRandomPFieldNumber;
+const int client_hello::kRandomPubKeyFieldNumber;
 #endif  // !_MSC_VER
 
 client_hello::client_hello()
@@ -241,9 +246,18 @@ void client_hello::SharedCtor() {
   _cached_size_ = 0;
   client_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   version_ = 0u;
-  random_key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  random_g_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  random_p_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  random_pub_key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
+
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+client_hello::client_hello(client_hello&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
 
 client_hello::~client_hello() {
   // @@protoc_insertion_point(destructor:proto.client_hello)
@@ -254,8 +268,14 @@ void client_hello::SharedDtor() {
   if (client_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete client_;
   }
-  if (random_key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete random_key_;
+  if (random_g_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete random_g_;
+  }
+  if (random_p_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete random_p_;
+  }
+  if (random_pub_key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete random_pub_key_;
   }
   if (this != default_instance_) {
   }
@@ -283,16 +303,26 @@ client_hello* client_hello::New() const {
 }
 
 void client_hello::Clear() {
-  if (_has_bits_[0 / 32] & 7) {
+  if (_has_bits_[0 / 32] & 31) {
     if (has_client()) {
       if (client_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
         client_->clear();
       }
     }
     version_ = 0u;
-    if (has_random_key()) {
-      if (random_key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        random_key_->clear();
+    if (has_random_g()) {
+      if (random_g_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        random_g_->clear();
+      }
+    }
+    if (has_random_p()) {
+      if (random_p_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        random_p_->clear();
+      }
+    }
+    if (has_random_pub_key()) {
+      if (random_pub_key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        random_pub_key_->clear();
       }
     }
   }
@@ -337,16 +367,42 @@ bool client_hello::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(26)) goto parse_random_key;
+        if (input->ExpectTag(26)) goto parse_random_g;
         break;
       }
 
-      // optional bytes random_key = 3;
+      // required bytes random_g = 3;
       case 3: {
         if (tag == 26) {
-         parse_random_key:
+         parse_random_g:
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_random_key()));
+                input, this->mutable_random_g()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_random_p;
+        break;
+      }
+
+      // required bytes random_p = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_random_p:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_random_p()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(42)) goto parse_random_pub_key;
+        break;
+      }
+
+      // required bytes random_pub_key = 5;
+      case 5: {
+        if (tag == 42) {
+         parse_random_pub_key:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_random_pub_key()));
         } else {
           goto handle_unusual;
         }
@@ -394,10 +450,22 @@ void client_hello::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->version(), output);
   }
 
-  // optional bytes random_key = 3;
-  if (has_random_key()) {
+  // required bytes random_g = 3;
+  if (has_random_g()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      3, this->random_key(), output);
+      3, this->random_g(), output);
+  }
+
+  // required bytes random_p = 4;
+  if (has_random_p()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      4, this->random_p(), output);
+  }
+
+  // required bytes random_pub_key = 5;
+  if (has_random_pub_key()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      5, this->random_pub_key(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -426,11 +494,25 @@ void client_hello::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->version(), target);
   }
 
-  // optional bytes random_key = 3;
-  if (has_random_key()) {
+  // required bytes random_g = 3;
+  if (has_random_g()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        3, this->random_key(), target);
+        3, this->random_g(), target);
+  }
+
+  // required bytes random_p = 4;
+  if (has_random_p()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        4, this->random_p(), target);
+  }
+
+  // required bytes random_pub_key = 5;
+  if (has_random_pub_key()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        5, this->random_pub_key(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -459,11 +541,25 @@ int client_hello::ByteSize() const {
           this->version());
     }
 
-    // optional bytes random_key = 3;
-    if (has_random_key()) {
+    // required bytes random_g = 3;
+    if (has_random_g()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->random_key());
+          this->random_g());
+    }
+
+    // required bytes random_p = 4;
+    if (has_random_p()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->random_p());
+    }
+
+    // required bytes random_pub_key = 5;
+    if (has_random_pub_key()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->random_pub_key());
     }
 
   }
@@ -499,8 +595,14 @@ void client_hello::MergeFrom(const client_hello& from) {
     if (from.has_version()) {
       set_version(from.version());
     }
-    if (from.has_random_key()) {
-      set_random_key(from.random_key());
+    if (from.has_random_g()) {
+      set_random_g(from.random_g());
+    }
+    if (from.has_random_p()) {
+      set_random_p(from.random_p());
+    }
+    if (from.has_random_pub_key()) {
+      set_random_pub_key(from.random_pub_key());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -519,7 +621,7 @@ void client_hello::CopyFrom(const client_hello& from) {
 }
 
 bool client_hello::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
 
   return true;
 }
@@ -528,7 +630,9 @@ void client_hello::Swap(client_hello* other) {
   if (other != this) {
     std::swap(client_, other->client_);
     std::swap(version_, other->version_);
-    std::swap(random_key_, other->random_key_);
+    std::swap(random_g_, other->random_g_);
+    std::swap(random_p_, other->random_p_);
+    std::swap(random_pub_key_, other->random_pub_key_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -549,7 +653,7 @@ void client_hello::Swap(client_hello* other) {
 #ifndef _MSC_VER
 const int server_hello::kServernameFieldNumber;
 const int server_hello::kVersionFieldNumber;
-const int server_hello::kRandomKeyFieldNumber;
+const int server_hello::kRandomPubKeyFieldNumber;
 #endif  // !_MSC_VER
 
 server_hello::server_hello()
@@ -573,9 +677,16 @@ void server_hello::SharedCtor() {
   _cached_size_ = 0;
   servername_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   version_ = 0u;
-  random_key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  random_pub_key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
+
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+server_hello::server_hello(server_hello&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
 
 server_hello::~server_hello() {
   // @@protoc_insertion_point(destructor:proto.server_hello)
@@ -586,8 +697,8 @@ void server_hello::SharedDtor() {
   if (servername_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete servername_;
   }
-  if (random_key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete random_key_;
+  if (random_pub_key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete random_pub_key_;
   }
   if (this != default_instance_) {
   }
@@ -622,9 +733,9 @@ void server_hello::Clear() {
       }
     }
     version_ = 0u;
-    if (has_random_key()) {
-      if (random_key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        random_key_->clear();
+    if (has_random_pub_key()) {
+      if (random_pub_key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        random_pub_key_->clear();
       }
     }
   }
@@ -669,16 +780,16 @@ bool server_hello::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(26)) goto parse_random_key;
+        if (input->ExpectTag(42)) goto parse_random_pub_key;
         break;
       }
 
-      // required bytes random_key = 3;
-      case 3: {
-        if (tag == 26) {
-         parse_random_key:
+      // required bytes random_pub_key = 5;
+      case 5: {
+        if (tag == 42) {
+         parse_random_pub_key:
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_random_key()));
+                input, this->mutable_random_pub_key()));
         } else {
           goto handle_unusual;
         }
@@ -726,10 +837,10 @@ void server_hello::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->version(), output);
   }
 
-  // required bytes random_key = 3;
-  if (has_random_key()) {
+  // required bytes random_pub_key = 5;
+  if (has_random_pub_key()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      3, this->random_key(), output);
+      5, this->random_pub_key(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -758,11 +869,11 @@ void server_hello::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->version(), target);
   }
 
-  // required bytes random_key = 3;
-  if (has_random_key()) {
+  // required bytes random_pub_key = 5;
+  if (has_random_pub_key()) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        3, this->random_key(), target);
+        5, this->random_pub_key(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -791,11 +902,11 @@ int server_hello::ByteSize() const {
           this->version());
     }
 
-    // required bytes random_key = 3;
-    if (has_random_key()) {
+    // required bytes random_pub_key = 5;
+    if (has_random_pub_key()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->random_key());
+          this->random_pub_key());
     }
 
   }
@@ -831,8 +942,8 @@ void server_hello::MergeFrom(const server_hello& from) {
     if (from.has_version()) {
       set_version(from.version());
     }
-    if (from.has_random_key()) {
-      set_random_key(from.random_key());
+    if (from.has_random_pub_key()) {
+      set_random_pub_key(from.random_pub_key());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -860,7 +971,7 @@ void server_hello::Swap(server_hello* other) {
   if (other != this) {
     std::swap(servername_, other->servername_);
     std::swap(version_, other->version_);
-    std::swap(random_key_, other->random_key_);
+    std::swap(random_pub_key_, other->random_pub_key_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -908,6 +1019,13 @@ void login::SharedCtor() {
   other_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
+
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+login::login(login&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
 
 login::~login() {
   // @@protoc_insertion_point(destructor:proto.login)
@@ -1281,6 +1399,13 @@ void login_result::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+login_result::login_result(login_result&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
+
 login_result::~login_result() {
   // @@protoc_insertion_point(destructor:proto.login_result)
   SharedDtor();
@@ -1516,6 +1641,13 @@ void user_register::SharedCtor() {
   cell_phone_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
+
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+user_register::user_register(user_register&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
 
 user_register::~user_register() {
   // @@protoc_insertion_point(destructor:proto.user_register)
