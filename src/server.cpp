@@ -104,6 +104,8 @@ namespace av_router {
 	void server::do_message(google::protobuf::Message* msg, connection_ptr conn)
 	{
 		const std::string name = msg->GetTypeName();
+		if (m_message_callback.find(name) == m_message_callback.end())
+			return;
 		boost::shared_lock<boost::shared_mutex> l(m_message_callback_mtx);
 		m_message_callback[name](msg, conn, boost::ref(m_connection_manager));
 	}
