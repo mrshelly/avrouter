@@ -34,19 +34,27 @@ namespace av_router {
 		proto::client_hello * client_hello = dynamic_cast<proto::client_hello*>(hellomsg);
 		// 生成随机数然后返回 m_dh->p ，让客户端去算共享密钥
 		DH_generate_parameters_ex(m_dh,64,DH_GENERATOR_5,NULL);
+		m_dh->g = BN_bin2bn((const unsigned char *) client_hello->random_g().data(), client_hello->random_g().length(), m_dh->g);
+		m_dh->p = BN_bin2bn((const unsigned char *) client_hello->random_p().data(), client_hello->random_p().length(), m_dh->p);
+
+		DH_generate_key(m_dh);
 		proto::server_hello server_hello;
 
 		server_hello.set_servername("avrouter");
 		server_hello.set_version(001);
-		server_hello.set_random_p((const void*)bin_key, BN_bn2bin(m_dh->p, bin_key));
 		server_hello.set_random_pub_key((const void*)bin_key, BN_bn2bin(m_dh->pub_key, bin_key));
-		m_dh->g =BN_bin2bn((const unsigned char *) client_hello->random_g().data(), client_hello->random_g().length(), m_dh->g);
-		m_dh->pub_key =BN_bin2bn((const unsigned char *) client_hello->random_pub_key().data(), client_hello->random_pub_key().length(), m_dh->pub_key);
-		DH_generate_key(m_dh);
 
 		m_shared_key.resize(DH_size(m_dh));
 		// 密钥就算出来啦！
-		DH_compute_key(&m_shared_key[0], m_dh->pub_key, m_dh);
+		BIGNUM * client_pubkey = BN_bin2bn((const unsigned char *) client_hello->random_pub_key().data(), client_hello->random_pub_key().length(), NULL);
+		DH_compute_key(&m_shared_key[0], client_pubkey, m_dh);
+		BN_free(client_pubkey);
+
+		printf("key = 0x");
+		for (int i=0; i<DH_size(m_dh); ++i) {
+			printf("%x%x", (m_shared_key[i] >> 4) & 0xf, m_shared_key[i] & 0xf);
+		}
+		printf("\n");
 
 		std::string response = encode(server_hello);
 		// 发回消息
