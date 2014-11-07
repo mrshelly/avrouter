@@ -73,9 +73,8 @@ namespace av_router {
 		tempbuf.commit(m_response.size());
 
 		// 获得包长度, 转为主机字节序.
-		std::istream os(&tempbuf);
 		int packet_length = 0;
-		os >> packet_length;
+		tempbuf.sgetn(reinterpret_cast<char*>(&packet_length), sizeof(packet_length));
 		packet_length = ntohl(packet_length);
 
 		if (packet_length > 64 * 1024) // 过大的数据包, 此客户端有问题, 果然断开.
@@ -86,7 +85,7 @@ namespace av_router {
 
 		// 继续读取packet_length长度的数据.
 		boost::asio::async_read(m_socket, m_response, boost::asio::transfer_exactly(packet_length),
-			boost::bind(&connection::handle_read_header,
+			boost::bind(&connection::handle_read_body,
 				shared_from_this(),
 				boost::asio::placeholders::error,
 				boost::asio::placeholders::bytes_transferred

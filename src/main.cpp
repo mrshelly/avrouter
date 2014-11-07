@@ -23,8 +23,8 @@ int main(int argc, char** argv)
 	login_moudle moudle_login;
 
 	// 添加登陆处理模块.
-	serv.add_message_process_moudle("client_hello", boost::bind(&login_moudle::process_hello_message, &moudle_login, _1, _2, _3));
-	serv.add_message_process_moudle("login", boost::bind(&login_moudle::process_login_message, &moudle_login, _1, _2, _3));
+	serv.add_message_process_moudle("proto.client_hello", boost::bind(&login_moudle::process_hello_message, &moudle_login, _1, _2, _3));
+	serv.add_message_process_moudle("proto.login", boost::bind(&login_moudle::process_login_message, &moudle_login, _1, _2, _3));
 	// 启动服务器.
 	serv.start();
 
