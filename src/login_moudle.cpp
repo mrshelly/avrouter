@@ -16,7 +16,7 @@ namespace av_router {
 
 	void login_moudle::process_hello_message(google::protobuf::Message* hellomsg, connection_ptr, connection_manager&)
 	{
-		proto::client_hello * client_hello = dynamic_cast<proto::client_hello>(hellomsg);
+		proto::client_hello* client_hello = dynamic_cast<proto::client_hello*>(hellomsg);
 		// TODO: 生成随机数然后返回
 	}
 
