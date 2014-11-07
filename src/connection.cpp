@@ -1,4 +1,6 @@
-﻿#include "server.hpp"
+﻿#include <boost/smart_ptr.hpp>
+
+#include "server.hpp"
 #include "connection.hpp"
 #include "logging.hpp"
 #include "serialization.hpp"
@@ -115,6 +117,7 @@ namespace av_router {
 			close();
 			return;
 		}
+		boost::scoped_ptr<google::protobuf::Message> defer(msg);
 
 		// 处理这个消息.
 		m_server.do_message(msg, shared_from_this());
