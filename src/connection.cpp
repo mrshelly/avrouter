@@ -132,4 +132,49 @@ namespace av_router {
 		);
 
 	}
+
+	void connection::handle_write(const boost::system::error_code& error)
+	{
+		if (!error)
+		{
+			m_write_queue.pop_front();
+			if (!m_write_queue.empty())
+			{
+				boost::asio::async_write(m_socket,
+					boost::asio::buffer(m_write_queue.front().data(),
+					m_write_queue.front().length()),
+					boost::bind(&connection::handle_write,
+					shared_from_this(),
+					boost::asio::placeholders::error
+					)
+				);
+			}
+		}
+		else
+		{
+			close();
+		}
+	}
+
+	void connection::write_msg(const std::string& msg)
+	{
+		m_io_service.post(boost::bind(&connection::do_write, shared_from_this(), msg));
+	}
+
+	void connection::do_write(std::string msg)
+	{
+		bool write_in_progress = !m_write_queue.empty();
+		m_write_queue.push_back(msg);
+		if (!write_in_progress)
+		{
+			boost::asio::async_write(m_socket,
+				boost::asio::buffer(m_write_queue.front().data(),
+				m_write_queue.front().length()),
+				boost::bind(&connection::handle_write,
+				shared_from_this(),
+				boost::asio::placeholders::error
+				)
+			);
+		}
+	}
 }
