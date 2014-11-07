@@ -9,14 +9,23 @@ namespace av_router {
 	login_moudle::login_moudle(boost::asio::io_service& io)
 		: m_io_service(io)
 		, m_timer(io)
-	{}
+	{
+		continue_timer();
+	}
 
 	login_moudle::~login_moudle()
 	{}
 
 	void login_moudle::process_login_message(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
 	{
-		proto::login * login = dynamic_cast<proto::login*>(msg);
+		proto::login* login = dynamic_cast<proto::login*>(msg);
+		std::map<ptrdiff_t, login_state>::iterator iter = m_log_state.find(reinterpret_cast<ptrdiff_t>(connection.get()));
+		if (iter == m_log_state.end())
+			return;
+
+		// 登陆成功.
+		login_state& state = iter->second;
+		state.status = login_state::succeed;
 
 		// TODO 解密 encryped_radom_key 后应该是一个 sha1 hash过的密码
 		login->encryped_radom_key();
@@ -34,6 +43,7 @@ namespace av_router {
 	{
 		proto::client_hello* client_hello = dynamic_cast<proto::client_hello*>(hellomsg);
 		login_state& state = m_log_state[reinterpret_cast<ptrdiff_t>(connection.get())];
+		state.status = login_state::hello;
 
 		std::vector<uint8_t> shared_key;
 		DH* dh = DH_new();
@@ -68,7 +78,7 @@ namespace av_router {
 		LOG_DBG << "key: " << key;
 		std::string response = encode(server_hello);
 
-		// 发回消息
+		// 发回消息.
 		connection->write_msg(response);
 	}
 
