@@ -34,13 +34,14 @@ namespace av_router {
 		proto::client_hello * client_hello = dynamic_cast<proto::client_hello*>(hellomsg);
 		// 生成随机数然后返回 m_dh->p ，让客户端去算共享密钥
 		DH_generate_parameters_ex(m_dh,64,DH_GENERATOR_5,NULL);
-		m_dh->g =BN_bin2bn((const unsigned char *) client_hello->random_key().data(), client_hello->random_key().length(), m_dh->g);
-
 		proto::server_hello server_hello;
 
 		server_hello.set_servername("avrouter");
 		server_hello.set_version(001);
-		server_hello.set_random_key((const void*)bin_key, BN_bn2bin(m_dh->p, bin_key));
+		server_hello.set_random_p((const void*)bin_key, BN_bn2bin(m_dh->p, bin_key));
+		server_hello.set_random_pub_key((const void*)bin_key, BN_bn2bin(m_dh->pub_key, bin_key));
+		m_dh->g =BN_bin2bn((const unsigned char *) client_hello->random_g().data(), client_hello->random_g().length(), m_dh->g);
+		m_dh->pub_key =BN_bin2bn((const unsigned char *) client_hello->random_pub_key().data(), client_hello->random_pub_key().length(), m_dh->pub_key);
 		DH_generate_key(m_dh);
 
 		m_shared_key.resize(DH_size(m_dh));
