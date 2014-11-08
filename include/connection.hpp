@@ -47,7 +47,7 @@ namespace av_router {
 		void write_msg(const std::string& msg);
 
 		boost::any retrive_module_private(const std::string& module_name);
-		void store_module_private(const std::string& module_name, const boost::any & ptr);
+		void store_module_private(const std::string& module_name, const boost::any& ptr);
 	private:
 		void close();
 

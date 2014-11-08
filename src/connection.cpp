@@ -188,7 +188,7 @@ namespace av_router {
 		return m_module_private_info_ptrs[module_name];
 	}
 
-	void connection::store_module_private(const std::string& module_name, const boost::any & ptr)
+	void connection::store_module_private(const std::string& module_name, const boost::any& ptr)
 	{
 		m_module_private_info_ptrs[module_name] = ptr;
 	}

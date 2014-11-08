@@ -25,6 +25,9 @@
     <ClCompile Include="generated_proto\user.pb.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\packet_forward.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\connection.hpp">
@@ -52,6 +55,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="generated_proto\user.pb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\packet_forward.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
