@@ -24,6 +24,7 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/unknown_field_set.h>
+#include "address.pb.h"  // IWYU pragma: export
 // @@protoc_insertion_point(includes)
 
 namespace proto {
@@ -33,7 +34,6 @@ void  protobuf_AddDesc_message_2eproto();
 void protobuf_AssignDesc_message_2eproto();
 void protobuf_ShutdownFile_message_2eproto();
 
-class avAddress;
 class avPacket;
 class avPacket_ack_control;
 class aGMP;
@@ -42,120 +42,6 @@ class aGMP_NOROUTTOHOST;
 class aGMP_TTLOUT;
 
 // ===================================================================
-
-class avAddress : public ::google::protobuf::Message {
- public:
-  avAddress();
-  virtual ~avAddress();
-
-  avAddress(const avAddress& from);
-
-  inline avAddress& operator=(const avAddress& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const avAddress& default_instance();
-
-  void Swap(avAddress* other);
-
-  // implements Message ----------------------------------------------
-
-  avAddress* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const avAddress& from);
-  void MergeFrom(const avAddress& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required string username = 1;
-  inline bool has_username() const;
-  inline void clear_username();
-  static const int kUsernameFieldNumber = 1;
-  inline const ::std::string& username() const;
-  inline void set_username(const ::std::string& value);
-  inline void set_username(const char* value);
-  inline void set_username(const char* value, size_t size);
-  inline ::std::string* mutable_username();
-  inline ::std::string* release_username();
-  inline void set_allocated_username(::std::string* username);
-
-  // required string domain = 2;
-  inline bool has_domain() const;
-  inline void clear_domain();
-  static const int kDomainFieldNumber = 2;
-  inline const ::std::string& domain() const;
-  inline void set_domain(const ::std::string& value);
-  inline void set_domain(const char* value);
-  inline void set_domain(const char* value, size_t size);
-  inline ::std::string* mutable_domain();
-  inline ::std::string* release_domain();
-  inline void set_allocated_domain(::std::string* domain);
-
-  // optional string resource = 3;
-  inline bool has_resource() const;
-  inline void clear_resource();
-  static const int kResourceFieldNumber = 3;
-  inline const ::std::string& resource() const;
-  inline void set_resource(const ::std::string& value);
-  inline void set_resource(const char* value);
-  inline void set_resource(const char* value, size_t size);
-  inline ::std::string* mutable_resource();
-  inline ::std::string* release_resource();
-  inline void set_allocated_resource(::std::string* resource);
-
-  // @@protoc_insertion_point(class_scope:proto.avAddress)
- private:
-  inline void set_has_username();
-  inline void clear_has_username();
-  inline void set_has_domain();
-  inline void clear_has_domain();
-  inline void set_has_resource();
-  inline void clear_has_resource();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
-  ::std::string* username_;
-  ::std::string* domain_;
-  ::std::string* resource_;
-  friend void  protobuf_AddDesc_message_2eproto();
-  friend void protobuf_AssignDesc_message_2eproto();
-  friend void protobuf_ShutdownFile_message_2eproto();
-
-  void InitAsDefaultInstance();
-  static avAddress* default_instance_;
-};
-// -------------------------------------------------------------------
 
 class avPacket_ack_control : public ::google::protobuf::Message {
  public:
@@ -354,6 +240,13 @@ class avPacket : public ::google::protobuf::Message {
   inline bool msg_dont_route() const;
   inline void set_msg_dont_route(bool value);
 
+  // optional uint64 timestamp = 10;
+  inline bool has_timestamp() const;
+  inline void clear_timestamp();
+  static const int kTimestampFieldNumber = 10;
+  inline ::google::protobuf::uint64 timestamp() const;
+  inline void set_timestamp(::google::protobuf::uint64 value);
+
   // optional .proto.avPacket.ack_control need_seq = 11;
   inline bool has_need_seq() const;
   inline void clear_need_seq();
@@ -391,6 +284,8 @@ class avPacket : public ::google::protobuf::Message {
   inline void clear_has_encrype_method();
   inline void set_has_msg_dont_route();
   inline void clear_has_msg_dont_route();
+  inline void set_has_timestamp();
+  inline void clear_has_timestamp();
   inline void set_has_need_seq();
   inline void clear_has_need_seq();
   inline void set_has_payload();
@@ -407,6 +302,7 @@ class avPacket : public ::google::protobuf::Message {
   ::std::string* upperlayerpotocol_;
   ::google::protobuf::uint32 time_to_live_;
   ::google::protobuf::uint32 encrype_method_;
+  ::google::protobuf::uint64 timestamp_;
   ::proto::avPacket_ack_control* need_seq_;
   ::std::string* payload_;
   bool msg_dont_route_;
@@ -777,238 +673,6 @@ class aGMP : public ::google::protobuf::Message {
 
 // ===================================================================
 
-// avAddress
-
-// required string username = 1;
-inline bool avAddress::has_username() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void avAddress::set_has_username() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void avAddress::clear_has_username() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void avAddress::clear_username() {
-  if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    username_->clear();
-  }
-  clear_has_username();
-}
-inline const ::std::string& avAddress::username() const {
-  // @@protoc_insertion_point(field_get:proto.avAddress.username)
-  return *username_;
-}
-inline void avAddress::set_username(const ::std::string& value) {
-  set_has_username();
-  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    username_ = new ::std::string;
-  }
-  username_->assign(value);
-  // @@protoc_insertion_point(field_set:proto.avAddress.username)
-}
-inline void avAddress::set_username(const char* value) {
-  set_has_username();
-  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    username_ = new ::std::string;
-  }
-  username_->assign(value);
-  // @@protoc_insertion_point(field_set_char:proto.avAddress.username)
-}
-inline void avAddress::set_username(const char* value, size_t size) {
-  set_has_username();
-  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    username_ = new ::std::string;
-  }
-  username_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:proto.avAddress.username)
-}
-inline ::std::string* avAddress::mutable_username() {
-  set_has_username();
-  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    username_ = new ::std::string;
-  }
-  // @@protoc_insertion_point(field_mutable:proto.avAddress.username)
-  return username_;
-}
-inline ::std::string* avAddress::release_username() {
-  clear_has_username();
-  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    return NULL;
-  } else {
-    ::std::string* temp = username_;
-    username_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-    return temp;
-  }
-}
-inline void avAddress::set_allocated_username(::std::string* username) {
-  if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete username_;
-  }
-  if (username) {
-    set_has_username();
-    username_ = username;
-  } else {
-    clear_has_username();
-    username_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  }
-  // @@protoc_insertion_point(field_set_allocated:proto.avAddress.username)
-}
-
-// required string domain = 2;
-inline bool avAddress::has_domain() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void avAddress::set_has_domain() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void avAddress::clear_has_domain() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void avAddress::clear_domain() {
-  if (domain_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    domain_->clear();
-  }
-  clear_has_domain();
-}
-inline const ::std::string& avAddress::domain() const {
-  // @@protoc_insertion_point(field_get:proto.avAddress.domain)
-  return *domain_;
-}
-inline void avAddress::set_domain(const ::std::string& value) {
-  set_has_domain();
-  if (domain_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    domain_ = new ::std::string;
-  }
-  domain_->assign(value);
-  // @@protoc_insertion_point(field_set:proto.avAddress.domain)
-}
-inline void avAddress::set_domain(const char* value) {
-  set_has_domain();
-  if (domain_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    domain_ = new ::std::string;
-  }
-  domain_->assign(value);
-  // @@protoc_insertion_point(field_set_char:proto.avAddress.domain)
-}
-inline void avAddress::set_domain(const char* value, size_t size) {
-  set_has_domain();
-  if (domain_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    domain_ = new ::std::string;
-  }
-  domain_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:proto.avAddress.domain)
-}
-inline ::std::string* avAddress::mutable_domain() {
-  set_has_domain();
-  if (domain_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    domain_ = new ::std::string;
-  }
-  // @@protoc_insertion_point(field_mutable:proto.avAddress.domain)
-  return domain_;
-}
-inline ::std::string* avAddress::release_domain() {
-  clear_has_domain();
-  if (domain_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    return NULL;
-  } else {
-    ::std::string* temp = domain_;
-    domain_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-    return temp;
-  }
-}
-inline void avAddress::set_allocated_domain(::std::string* domain) {
-  if (domain_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete domain_;
-  }
-  if (domain) {
-    set_has_domain();
-    domain_ = domain;
-  } else {
-    clear_has_domain();
-    domain_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  }
-  // @@protoc_insertion_point(field_set_allocated:proto.avAddress.domain)
-}
-
-// optional string resource = 3;
-inline bool avAddress::has_resource() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void avAddress::set_has_resource() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void avAddress::clear_has_resource() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void avAddress::clear_resource() {
-  if (resource_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    resource_->clear();
-  }
-  clear_has_resource();
-}
-inline const ::std::string& avAddress::resource() const {
-  // @@protoc_insertion_point(field_get:proto.avAddress.resource)
-  return *resource_;
-}
-inline void avAddress::set_resource(const ::std::string& value) {
-  set_has_resource();
-  if (resource_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    resource_ = new ::std::string;
-  }
-  resource_->assign(value);
-  // @@protoc_insertion_point(field_set:proto.avAddress.resource)
-}
-inline void avAddress::set_resource(const char* value) {
-  set_has_resource();
-  if (resource_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    resource_ = new ::std::string;
-  }
-  resource_->assign(value);
-  // @@protoc_insertion_point(field_set_char:proto.avAddress.resource)
-}
-inline void avAddress::set_resource(const char* value, size_t size) {
-  set_has_resource();
-  if (resource_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    resource_ = new ::std::string;
-  }
-  resource_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:proto.avAddress.resource)
-}
-inline ::std::string* avAddress::mutable_resource() {
-  set_has_resource();
-  if (resource_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    resource_ = new ::std::string;
-  }
-  // @@protoc_insertion_point(field_mutable:proto.avAddress.resource)
-  return resource_;
-}
-inline ::std::string* avAddress::release_resource() {
-  clear_has_resource();
-  if (resource_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    return NULL;
-  } else {
-    ::std::string* temp = resource_;
-    resource_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-    return temp;
-  }
-}
-inline void avAddress::set_allocated_resource(::std::string* resource) {
-  if (resource_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete resource_;
-  }
-  if (resource) {
-    set_has_resource();
-    resource_ = resource;
-  } else {
-    clear_has_resource();
-    resource_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  }
-  // @@protoc_insertion_point(field_set_allocated:proto.avAddress.resource)
-}
-
-// -------------------------------------------------------------------
-
 // avPacket_ack_control
 
 // required uint64 ack_seq = 1;
@@ -1345,15 +1009,39 @@ inline void avPacket::set_msg_dont_route(bool value) {
   // @@protoc_insertion_point(field_set:proto.avPacket.msg_dont_route)
 }
 
-// optional .proto.avPacket.ack_control need_seq = 11;
-inline bool avPacket::has_need_seq() const {
+// optional uint64 timestamp = 10;
+inline bool avPacket::has_timestamp() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void avPacket::set_has_need_seq() {
+inline void avPacket::set_has_timestamp() {
   _has_bits_[0] |= 0x00000080u;
 }
-inline void avPacket::clear_has_need_seq() {
+inline void avPacket::clear_has_timestamp() {
   _has_bits_[0] &= ~0x00000080u;
+}
+inline void avPacket::clear_timestamp() {
+  timestamp_ = GOOGLE_ULONGLONG(0);
+  clear_has_timestamp();
+}
+inline ::google::protobuf::uint64 avPacket::timestamp() const {
+  // @@protoc_insertion_point(field_get:proto.avPacket.timestamp)
+  return timestamp_;
+}
+inline void avPacket::set_timestamp(::google::protobuf::uint64 value) {
+  set_has_timestamp();
+  timestamp_ = value;
+  // @@protoc_insertion_point(field_set:proto.avPacket.timestamp)
+}
+
+// optional .proto.avPacket.ack_control need_seq = 11;
+inline bool avPacket::has_need_seq() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void avPacket::set_has_need_seq() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void avPacket::clear_has_need_seq() {
+  _has_bits_[0] &= ~0x00000100u;
 }
 inline void avPacket::clear_need_seq() {
   if (need_seq_ != NULL) need_seq_->::proto::avPacket_ack_control::Clear();
@@ -1388,13 +1076,13 @@ inline void avPacket::set_allocated_need_seq(::proto::avPacket_ack_control* need
 
 // optional bytes payload = 8;
 inline bool avPacket::has_payload() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 inline void avPacket::set_has_payload() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000200u;
 }
 inline void avPacket::clear_has_payload() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void avPacket::clear_payload() {
   if (payload_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {

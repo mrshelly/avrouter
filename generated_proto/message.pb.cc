@@ -20,9 +20,6 @@ namespace proto {
 
 namespace {
 
-const ::google::protobuf::Descriptor* avAddress_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  avAddress_reflection_ = NULL;
 const ::google::protobuf::Descriptor* avPacket_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   avPacket_reflection_ = NULL;
@@ -51,25 +48,8 @@ void protobuf_AssignDesc_message_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "message.proto");
   GOOGLE_CHECK(file != NULL);
-  avAddress_descriptor_ = file->message_type(0);
-  static const int avAddress_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avAddress, username_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avAddress, domain_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avAddress, resource_),
-  };
-  avAddress_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      avAddress_descriptor_,
-      avAddress::default_instance_,
-      avAddress_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avAddress, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avAddress, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(avAddress));
-  avPacket_descriptor_ = file->message_type(1);
-  static const int avPacket_offsets_[9] = {
+  avPacket_descriptor_ = file->message_type(0);
+  static const int avPacket_offsets_[10] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, src_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, dest_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, publickey_),
@@ -77,6 +57,7 @@ void protobuf_AssignDesc_message_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, upperlayerpotocol_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, encrype_method_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, msg_dont_route_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, timestamp_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, need_seq_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, payload_),
   };
@@ -106,7 +87,7 @@ void protobuf_AssignDesc_message_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(avPacket_ack_control));
-  aGMP_descriptor_ = file->message_type(2);
+  aGMP_descriptor_ = file->message_type(1);
   static const int aGMP_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(aGMP, pkreply_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(aGMP, noroutetohost_),
@@ -181,8 +162,6 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    avAddress_descriptor_, &avAddress::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     avPacket_descriptor_, &avPacket::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     avPacket_ack_control_descriptor_, &avPacket_ack_control::default_instance());
@@ -199,8 +178,6 @@ void protobuf_RegisterTypes(const ::std::string&) {
 }  // namespace
 
 void protobuf_ShutdownFile_message_2eproto() {
-  delete avAddress::default_instance_;
-  delete avAddress_reflection_;
   delete avPacket::default_instance_;
   delete avPacket_reflection_;
   delete avPacket::_default_upperlayerpotocol_;
@@ -222,26 +199,26 @@ void protobuf_AddDesc_message_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
+  ::proto::protobuf_AddDesc_address_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\rmessage.proto\022\005proto\"\?\n\tavAddress\022\020\n\010u"
-    "sername\030\001 \002(\t\022\016\n\006domain\030\002 \002(\t\022\020\n\010resourc"
-    "e\030\003 \001(\t\"\252\002\n\010avPacket\022\035\n\003src\030\001 \002(\0132\020.prot"
-    "o.avAddress\022\036\n\004dest\030\002 \002(\0132\020.proto.avAddr"
-    "ess\022\021\n\tpublickey\030\003 \001(\014\022\030\n\014time_to_live\030\004"
-    " \002(\r:\00264\022\037\n\021upperlayerpotocol\030\006 \002(\t:\004avi"
-    "m\022\031\n\016encrype_method\030\007 \001(\r:\0010\022\026\n\016msg_dont"
-    "_route\030\t \001(\010\022-\n\010need_seq\030\013 \001(\0132\033.proto.a"
-    "vPacket.ack_control\022\017\n\007payload\030\010 \001(\014\032\036\n\013"
-    "ack_control\022\017\n\007ack_seq\030\001 \002(\004\"\371\001\n\004aGMP\022$\n"
-    "\007pkreply\030\001 \001(\0132\023.proto.aGMP.PKREPLY\022/\n\rn"
-    "oroutetohost\030\002 \001(\0132\030.proto.aGMP.NOROUTTO"
-    "HOST\022\"\n\006ttlout\030\003 \001(\0132\022.proto.aGMP.TTLOUT"
-    "\032\034\n\007PKREPLY\022\021\n\tx509_cert\030\001 \002(\014\032.\n\014NOROUT"
-    "TOHOST\022\036\n\004host\030\001 \002(\0132\020.proto.avAddress\032("
-    "\n\006TTLOUT\022\036\n\004host\030\001 \002(\0132\020.proto.avAddress", 640);
+    "\n\rmessage.proto\022\005proto\032\raddress.proto\"\275\002"
+    "\n\010avPacket\022\035\n\003src\030\001 \002(\0132\020.proto.avAddres"
+    "s\022\036\n\004dest\030\002 \002(\0132\020.proto.avAddress\022\021\n\tpub"
+    "lickey\030\003 \001(\014\022\030\n\014time_to_live\030\004 \002(\r:\00264\022\037"
+    "\n\021upperlayerpotocol\030\006 \002(\t:\004avim\022\031\n\016encry"
+    "pe_method\030\007 \001(\r:\0010\022\026\n\016msg_dont_route\030\t \001"
+    "(\010\022\021\n\ttimestamp\030\n \001(\004\022-\n\010need_seq\030\013 \001(\0132"
+    "\033.proto.avPacket.ack_control\022\017\n\007payload\030"
+    "\010 \001(\014\032\036\n\013ack_control\022\017\n\007ack_seq\030\001 \002(\004\"\371\001"
+    "\n\004aGMP\022$\n\007pkreply\030\001 \001(\0132\023.proto.aGMP.PKR"
+    "EPLY\022/\n\rnoroutetohost\030\002 \001(\0132\030.proto.aGMP"
+    ".NOROUTTOHOST\022\"\n\006ttlout\030\003 \001(\0132\022.proto.aG"
+    "MP.TTLOUT\032\034\n\007PKREPLY\022\021\n\tx509_cert\030\001 \002(\014\032"
+    ".\n\014NOROUTTOHOST\022\036\n\004host\030\001 \002(\0132\020.proto.av"
+    "Address\032(\n\006TTLOUT\022\036\n\004host\030\001 \002(\0132\020.proto."
+    "avAddressP\000", 611);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "message.proto", &protobuf_RegisterTypes);
-  avAddress::default_instance_ = new avAddress();
   avPacket::_default_upperlayerpotocol_ =
       new ::std::string("avim", 4);
   avPacket::default_instance_ = new avPacket();
@@ -250,7 +227,6 @@ void protobuf_AddDesc_message_2eproto() {
   aGMP_PKREPLY::default_instance_ = new aGMP_PKREPLY();
   aGMP_NOROUTTOHOST::default_instance_ = new aGMP_NOROUTTOHOST();
   aGMP_TTLOUT::default_instance_ = new aGMP_TTLOUT();
-  avAddress::default_instance_->InitAsDefaultInstance();
   avPacket::default_instance_->InitAsDefaultInstance();
   avPacket_ack_control::default_instance_->InitAsDefaultInstance();
   aGMP::default_instance_->InitAsDefaultInstance();
@@ -266,370 +242,6 @@ struct StaticDescriptorInitializer_message_2eproto {
     protobuf_AddDesc_message_2eproto();
   }
 } static_descriptor_initializer_message_2eproto_;
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int avAddress::kUsernameFieldNumber;
-const int avAddress::kDomainFieldNumber;
-const int avAddress::kResourceFieldNumber;
-#endif  // !_MSC_VER
-
-avAddress::avAddress()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:proto.avAddress)
-}
-
-void avAddress::InitAsDefaultInstance() {
-}
-
-avAddress::avAddress(const avAddress& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:proto.avAddress)
-}
-
-void avAddress::SharedCtor() {
-  ::google::protobuf::internal::GetEmptyString();
-  _cached_size_ = 0;
-  username_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  domain_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  resource_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-avAddress::~avAddress() {
-  // @@protoc_insertion_point(destructor:proto.avAddress)
-  SharedDtor();
-}
-
-void avAddress::SharedDtor() {
-  if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete username_;
-  }
-  if (domain_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete domain_;
-  }
-  if (resource_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete resource_;
-  }
-  if (this != default_instance_) {
-  }
-}
-
-void avAddress::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* avAddress::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return avAddress_descriptor_;
-}
-
-const avAddress& avAddress::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_message_2eproto();
-  return *default_instance_;
-}
-
-avAddress* avAddress::default_instance_ = NULL;
-
-avAddress* avAddress::New() const {
-  return new avAddress;
-}
-
-void avAddress::Clear() {
-  if (_has_bits_[0 / 32] & 7) {
-    if (has_username()) {
-      if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        username_->clear();
-      }
-    }
-    if (has_domain()) {
-      if (domain_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        domain_->clear();
-      }
-    }
-    if (has_resource()) {
-      if (resource_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        resource_->clear();
-      }
-    }
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool avAddress::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:proto.avAddress)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string username = 1;
-      case 1: {
-        if (tag == 10) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_username()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->username().data(), this->username().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "username");
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(18)) goto parse_domain;
-        break;
-      }
-
-      // required string domain = 2;
-      case 2: {
-        if (tag == 18) {
-         parse_domain:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_domain()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->domain().data(), this->domain().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "domain");
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(26)) goto parse_resource;
-        break;
-      }
-
-      // optional string resource = 3;
-      case 3: {
-        if (tag == 26) {
-         parse_resource:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_resource()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->resource().data(), this->resource().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "resource");
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:proto.avAddress)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:proto.avAddress)
-  return false;
-#undef DO_
-}
-
-void avAddress::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:proto.avAddress)
-  // required string username = 1;
-  if (has_username()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->username().data(), this->username().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "username");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->username(), output);
-  }
-
-  // required string domain = 2;
-  if (has_domain()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->domain().data(), this->domain().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "domain");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->domain(), output);
-  }
-
-  // optional string resource = 3;
-  if (has_resource()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->resource().data(), this->resource().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "resource");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->resource(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:proto.avAddress)
-}
-
-::google::protobuf::uint8* avAddress::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:proto.avAddress)
-  // required string username = 1;
-  if (has_username()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->username().data(), this->username().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "username");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->username(), target);
-  }
-
-  // required string domain = 2;
-  if (has_domain()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->domain().data(), this->domain().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "domain");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->domain(), target);
-  }
-
-  // optional string resource = 3;
-  if (has_resource()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->resource().data(), this->resource().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "resource");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->resource(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:proto.avAddress)
-  return target;
-}
-
-int avAddress::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string username = 1;
-    if (has_username()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->username());
-    }
-
-    // required string domain = 2;
-    if (has_domain()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->domain());
-    }
-
-    // optional string resource = 3;
-    if (has_resource()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->resource());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void avAddress::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const avAddress* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const avAddress*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void avAddress::MergeFrom(const avAddress& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_username()) {
-      set_username(from.username());
-    }
-    if (from.has_domain()) {
-      set_domain(from.domain());
-    }
-    if (from.has_resource()) {
-      set_resource(from.resource());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void avAddress::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void avAddress::CopyFrom(const avAddress& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool avAddress::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
-
-  return true;
-}
-
-void avAddress::Swap(avAddress* other) {
-  if (other != this) {
-    std::swap(username_, other->username_);
-    std::swap(domain_, other->domain_);
-    std::swap(resource_, other->resource_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata avAddress::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = avAddress_descriptor_;
-  metadata.reflection = avAddress_reflection_;
-  return metadata;
-}
-
 
 // ===================================================================
 
@@ -865,6 +477,7 @@ const int avPacket::kTimeToLiveFieldNumber;
 const int avPacket::kUpperlayerpotocolFieldNumber;
 const int avPacket::kEncrypeMethodFieldNumber;
 const int avPacket::kMsgDontRouteFieldNumber;
+const int avPacket::kTimestampFieldNumber;
 const int avPacket::kNeedSeqFieldNumber;
 const int avPacket::kPayloadFieldNumber;
 #endif  // !_MSC_VER
@@ -898,6 +511,7 @@ void avPacket::SharedCtor() {
   upperlayerpotocol_ = const_cast< ::std::string*>(_default_upperlayerpotocol_);
   encrype_method_ = 0u;
   msg_dont_route_ = false;
+  timestamp_ = GOOGLE_ULONGLONG(0);
   need_seq_ = NULL;
   payload_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -947,7 +561,18 @@ avPacket* avPacket::New() const {
 }
 
 void avPacket::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<avPacket*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
   if (_has_bits_[0 / 32] & 255) {
+    ZR_(encrype_method_, timestamp_);
     if (has_src()) {
       if (src_ != NULL) src_->::proto::avAddress::Clear();
     }
@@ -965,17 +590,22 @@ void avPacket::Clear() {
         upperlayerpotocol_->assign(*_default_upperlayerpotocol_);
       }
     }
-    encrype_method_ = 0u;
     msg_dont_route_ = false;
+  }
+  if (_has_bits_[8 / 32] & 768) {
     if (has_need_seq()) {
       if (need_seq_ != NULL) need_seq_->::proto::avPacket_ack_control::Clear();
     }
-  }
-  if (has_payload()) {
-    if (payload_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-      payload_->clear();
+    if (has_payload()) {
+      if (payload_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        payload_->clear();
+      }
     }
   }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -1099,6 +729,21 @@ bool avPacket::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(80)) goto parse_timestamp;
+        break;
+      }
+
+      // optional uint64 timestamp = 10;
+      case 10: {
+        if (tag == 80) {
+         parse_timestamp:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &timestamp_)));
+          set_has_timestamp();
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectTag(90)) goto parse_need_seq;
         break;
       }
@@ -1190,6 +835,11 @@ void avPacket::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(9, this->msg_dont_route(), output);
   }
 
+  // optional uint64 timestamp = 10;
+  if (has_timestamp()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(10, this->timestamp(), output);
+  }
+
   // optional .proto.avPacket.ack_control need_seq = 11;
   if (has_need_seq()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
@@ -1260,6 +910,11 @@ void avPacket::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(9, this->msg_dont_route(), target);
   }
 
+  // optional uint64 timestamp = 10;
+  if (has_timestamp()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(10, this->timestamp(), target);
+  }
+
   // optional .proto.avPacket.ack_control need_seq = 11;
   if (has_need_seq()) {
     target = ::google::protobuf::internal::WireFormatLite::
@@ -1326,6 +981,15 @@ int avPacket::ByteSize() const {
       total_size += 1 + 1;
     }
 
+    // optional uint64 timestamp = 10;
+    if (has_timestamp()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt64Size(
+          this->timestamp());
+    }
+
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     // optional .proto.avPacket.ack_control need_seq = 11;
     if (has_need_seq()) {
       total_size += 1 +
@@ -1333,8 +997,6 @@ int avPacket::ByteSize() const {
           this->need_seq());
     }
 
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     // optional bytes payload = 8;
     if (has_payload()) {
       total_size += 1 +
@@ -1390,11 +1052,14 @@ void avPacket::MergeFrom(const avPacket& from) {
     if (from.has_msg_dont_route()) {
       set_msg_dont_route(from.msg_dont_route());
     }
-    if (from.has_need_seq()) {
-      mutable_need_seq()->::proto::avPacket_ack_control::MergeFrom(from.need_seq());
+    if (from.has_timestamp()) {
+      set_timestamp(from.timestamp());
     }
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (from.has_need_seq()) {
+      mutable_need_seq()->::proto::avPacket_ack_control::MergeFrom(from.need_seq());
+    }
     if (from.has_payload()) {
       set_payload(from.payload());
     }
@@ -1438,6 +1103,7 @@ void avPacket::Swap(avPacket* other) {
     std::swap(upperlayerpotocol_, other->upperlayerpotocol_);
     std::swap(encrype_method_, other->encrype_method_);
     std::swap(msg_dont_route_, other->msg_dont_route_);
+    std::swap(timestamp_, other->timestamp_);
     std::swap(need_seq_, other->need_seq_);
     std::swap(payload_, other->payload_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);

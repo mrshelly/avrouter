@@ -307,13 +307,6 @@ void client_hello::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-#if __cplusplus >= 201103L || _MSC_VER >= 1600
-client_hello::client_hello(client_hello&& from)
-  : ::google::protobuf::Message() {
-  Swap(&from);
-}
-#endif
-
 client_hello::~client_hello() {
   // @@protoc_insertion_point(destructor:proto.client_hello)
   SharedDtor();
@@ -738,13 +731,6 @@ void server_hello::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-#if __cplusplus >= 201103L || _MSC_VER >= 1600
-server_hello::server_hello(server_hello&& from)
-  : ::google::protobuf::Message() {
-  Swap(&from);
-}
-#endif
-
 server_hello::~server_hello() {
   // @@protoc_insertion_point(destructor:proto.server_hello)
   SharedDtor();
@@ -1134,13 +1120,6 @@ void login::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-#if __cplusplus >= 201103L || _MSC_VER >= 1600
-login::login(login&& from)
-  : ::google::protobuf::Message() {
-  Swap(&from);
-}
-#endif
-
 login::~login() {
   // @@protoc_insertion_point(destructor:proto.login)
   SharedDtor();
@@ -1501,13 +1480,6 @@ void login_result::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-#if __cplusplus >= 201103L || _MSC_VER >= 1600
-login_result::login_result(login_result&& from)
-  : ::google::protobuf::Message() {
-  Swap(&from);
-}
-#endif
-
 login_result::~login_result() {
   // @@protoc_insertion_point(destructor:proto.login_result)
   SharedDtor();
@@ -1743,13 +1715,6 @@ void user_register::SharedCtor() {
   cell_phone_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
-
-#if __cplusplus >= 201103L || _MSC_VER >= 1600
-user_register::user_register(user_register&& from)
-  : ::google::protobuf::Message() {
-  Swap(&from);
-}
-#endif
 
 user_register::~user_register() {
   // @@protoc_insertion_point(destructor:proto.user_register)
@@ -2160,13 +2125,6 @@ void user_cert_lost_request::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-#if __cplusplus >= 201103L || _MSC_VER >= 1600
-user_cert_lost_request::user_cert_lost_request(user_cert_lost_request&& from)
-  : ::google::protobuf::Message() {
-  Swap(&from);
-}
-#endif
-
 user_cert_lost_request::~user_cert_lost_request() {
   // @@protoc_insertion_point(destructor:proto.user_cert_lost_request)
   SharedDtor();
@@ -2526,13 +2484,6 @@ void user_cert_lost_verify::SharedCtor() {
   secret_code_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
-
-#if __cplusplus >= 201103L || _MSC_VER >= 1600
-user_cert_lost_verify::user_cert_lost_verify(user_cert_lost_verify&& from)
-  : ::google::protobuf::Message() {
-  Swap(&from);
-}
-#endif
 
 user_cert_lost_verify::~user_cert_lost_verify() {
   // @@protoc_insertion_point(destructor:proto.user_cert_lost_verify)
