@@ -41,6 +41,12 @@ namespace av_router {
 			// TODO 暂时不实现非本域的转发.
 		}
 
+		// 根据发送人更新 routing_table
+		if(m_routing_table.find(pkt->src().username()) == std::end(m_routing_table))
+		{
+			m_routing_table.insert(std::make_pair(pkt->src().username(), connection));
+		}
+
 		// 根据用户名找到连接.
 		auto forward_target = m_routing_table.find(pkt->dest().username());
 		connection_ptr conn = forward_target->second.lock();
