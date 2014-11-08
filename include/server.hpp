@@ -65,8 +65,8 @@ namespace av_router {
 		connection_manager m_connection_manager;
 		boost::shared_mutex m_message_callback_mtx;
 		boost::shared_mutex m_connection_callback_mtx;
-		message_callback_table m_message_callback;
-		connection_callback_table m_connection_callback;
+		message_callback_table m_message_callbacks;
+		connection_callback_table m_connection_callbacks;
 	};
 
 }
