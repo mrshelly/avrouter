@@ -5,8 +5,6 @@
 #include "packet_forward.hpp"
 #include "server.hpp"
 
-#include <openssl/dh.h>
-#include <openssl/aes.h>
 
 using namespace av_router;
 
