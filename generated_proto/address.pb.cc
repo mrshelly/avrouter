@@ -130,6 +130,13 @@ void avAddress::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+avAddress::avAddress(avAddress&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
+
 avAddress::~avAddress() {
   // @@protoc_insertion_point(destructor:proto.avAddress)
   SharedDtor();

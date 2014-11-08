@@ -241,6 +241,13 @@ void text_message::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+text_message::text_message(text_message&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
+
 text_message::~text_message() {
   // @@protoc_insertion_point(destructor:proto.text_message)
   SharedDtor();
@@ -640,6 +647,13 @@ void img_message::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+img_message::img_message(img_message&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
+
 img_message::~img_message() {
   // @@protoc_insertion_point(destructor:proto.img_message)
   SharedDtor();
@@ -979,6 +993,13 @@ void emoji_message::SharedCtor() {
   custom_image_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
+
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+emoji_message::emoji_message(emoji_message&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
 
 emoji_message::~emoji_message() {
   // @@protoc_insertion_point(destructor:proto.emoji_message)
@@ -1331,6 +1352,13 @@ void avim_message::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+avim_message::avim_message(avim_message&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
+
 avim_message::~avim_message() {
   // @@protoc_insertion_point(destructor:proto.avim_message)
   SharedDtor();
@@ -1604,6 +1632,13 @@ void avim_packet::SharedCtor() {
   _cached_size_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
+
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+avim_packet::avim_packet(avim_packet&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
 
 avim_packet::~avim_packet() {
   // @@protoc_insertion_point(destructor:proto.avim_packet)

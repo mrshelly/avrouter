@@ -271,6 +271,13 @@ void avPacket_ack_control::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+avPacket_ack_control::avPacket_ack_control(avPacket_ack_control&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
+
 avPacket_ack_control::~avPacket_ack_control() {
   // @@protoc_insertion_point(destructor:proto.avPacket.ack_control)
   SharedDtor();
@@ -516,6 +523,13 @@ void avPacket::SharedCtor() {
   payload_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
+
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+avPacket::avPacket(avPacket&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
 
 avPacket::~avPacket() {
   // @@protoc_insertion_point(destructor:proto.avPacket)
@@ -1150,6 +1164,13 @@ void aGMP_PKREPLY::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+aGMP_PKREPLY::aGMP_PKREPLY(aGMP_PKREPLY&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
+
 aGMP_PKREPLY::~aGMP_PKREPLY() {
   // @@protoc_insertion_point(destructor:proto.aGMP.PKREPLY)
   SharedDtor();
@@ -1382,6 +1403,13 @@ void aGMP_NOROUTTOHOST::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+aGMP_NOROUTTOHOST::aGMP_NOROUTTOHOST(aGMP_NOROUTTOHOST&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
+
 aGMP_NOROUTTOHOST::~aGMP_NOROUTTOHOST() {
   // @@protoc_insertion_point(destructor:proto.aGMP.NOROUTTOHOST)
   SharedDtor();
@@ -1612,6 +1640,13 @@ void aGMP_TTLOUT::SharedCtor() {
   host_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
+
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+aGMP_TTLOUT::aGMP_TTLOUT(aGMP_TTLOUT&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
 
 aGMP_TTLOUT::~aGMP_TTLOUT() {
   // @@protoc_insertion_point(destructor:proto.aGMP.TTLOUT)
@@ -1849,6 +1884,13 @@ void aGMP::SharedCtor() {
   ttlout_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
+
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+aGMP::aGMP(aGMP&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
 
 aGMP::~aGMP() {
   // @@protoc_insertion_point(destructor:proto.aGMP)
