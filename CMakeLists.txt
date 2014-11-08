@@ -13,8 +13,13 @@ set(CMAKE_COMPILER_IS_WIN_ICC 1)
 endif()
 endif()
 
+if(MSVC)
+	set (Boost_USE_MULTITHREADED TRUE)
+	set (Boost_USE_STATIC_LIBS TRUE)
+endif()
+
 find_package(Threads REQUIRED)
-find_package(Boost 1.54 REQUIRED thread system coroutine context regex)
+find_package(Boost 1.54 COMPONENTS thread system coroutine context regex date_time chrono filesystem REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(OpenSSL REQUIRED)
 #find_package(PkgConfig REQUIRED)
@@ -29,6 +34,8 @@ include_directories(${OPENSSL_INCLUDE_DIR})
 include_directories(include)
 include_directories(proto_doc)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/proto_doc)
+
+link_directories(${Boost_LIB_DIRS})
 
 link_libraries(${Boost_LIBRARIES} ${OPENSSL_LIBRARIES} ${PKCS11_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
