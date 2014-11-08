@@ -94,10 +94,11 @@ namespace av_router {
 	void server::do_message(google::protobuf::Message* msg, connection_ptr conn)
 	{
 		const std::string name = msg->GetTypeName();
-		if (m_message_callback.find(name) == m_message_callback.end())
-			return;
 		boost::shared_lock<boost::shared_mutex> l(m_message_callback_mtx);
-		m_message_callback[name](msg, conn, boost::ref(m_connection_manager));
+		message_callback_table::iterator iter = m_message_callback.find(name);
+		if (iter == m_message_callback.end())
+			return;
+		iter->second(msg, conn, boost::ref(m_connection_manager)); // 或者直接: m_message_callback[name](msg, conn, boost::ref(m_connection_manager));
 	}
 
 	bool server::add_message_process_moudle(const std::string& name, message_callback cb)
