@@ -95,8 +95,8 @@ namespace av_router {
 	{
 		const std::string name = msg->GetTypeName();
 		boost::shared_lock<boost::shared_mutex> l(m_message_callback_mtx);
-		message_callback_table::iterator iter = m_message_callback.find(name);
-		if (iter == m_message_callback.end())
+		message_callback_table::iterator iter = m_message_callbacks.find(name);
+		if (iter == m_message_callbacks.end())
 			return;
 		iter->second(msg, conn, boost::ref(m_connection_manager)); // 或者直接: m_message_callback[name](msg, conn, boost::ref(m_connection_manager));
 	}
@@ -104,58 +104,55 @@ namespace av_router {
 	void server::do_connection_notify(int type, connection_ptr conn)
 	{
 		boost::shared_lock<boost::shared_mutex> l(m_connection_callback_mtx);
-
-		std::for_each(std::begin(m_connection_callback), std::end(m_connection_callback),
-			[&](const std::pair<std::string, connection_callback> & item){
-				item.second(type, conn, boost::ref(m_connection_manager));
-			});
+		for (const auto& item : m_connection_callbacks)
+			item.second(type, conn, boost::ref(m_connection_manager));
 	}
 
 	bool server::add_message_process_moudle(const std::string& name, message_callback cb)
 	{
 		boost::unique_lock<boost::shared_mutex> l(m_message_callback_mtx);
-		if (m_message_callback.find(name) != m_message_callback.end())
+		if (m_message_callbacks.find(name) != m_message_callbacks.end())
 		{
 			BOOST_ASSERT("module already exist!" && false);
 			return false;
 		}
-		m_message_callback[name] = cb;
+		m_message_callbacks[name] = cb;
 		return true;
 	}
 
 	bool server::del_message_process_moudle(const std::string& name)
 	{
 		boost::unique_lock<boost::shared_mutex> l(m_message_callback_mtx);
-		if (m_message_callback.find(name) == m_message_callback.end())
+		if (m_message_callbacks.find(name) == m_message_callbacks.end())
 		{
 			BOOST_ASSERT("not found the moudle" && false);
 			return false;
 		}
-		m_message_callback.erase(name);
+		m_message_callbacks.erase(name);
 		return true;
 	}
 
 	bool server::add_connection_process_moudle(const std::string& name, connection_callback cb)
 	{
 		boost::unique_lock<boost::shared_mutex> l(m_connection_callback_mtx);
-		if (m_connection_callback.find(name) != m_connection_callback.end())
+		if (m_connection_callbacks.find(name) != m_connection_callbacks.end())
 		{
 			BOOST_ASSERT("module already exist!" && false);
 			return false;
 		}
-		m_connection_callback[name] = cb;
+		m_connection_callbacks[name] = cb;
 		return true;
 	}
 
 	bool server::del_connection_process_moudle(const std::string& name)
 	{
 		boost::unique_lock<boost::shared_mutex> l(m_connection_callback_mtx);
-		if (m_connection_callback.find(name) == m_connection_callback.end())
+		if (m_connection_callbacks.find(name) == m_connection_callbacks.end())
 		{
 			BOOST_ASSERT("not found the moudle" && false);
 			return false;
 		}
-		m_connection_callback.erase(name);
+		m_connection_callbacks.erase(name);
 		return true;
 	}
 

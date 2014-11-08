@@ -23,15 +23,12 @@ namespace av_router {
 
 	public:
 		void connection_notify(int type, connection_ptr, connection_manager&);
-
 		void process_packet(google::protobuf::Message*, connection_ptr, connection_manager&);
 
 	private:
 		boost::asio::io_service& m_io_service;
 		std::string m_thisdomain;
-
-		typedef  std::map<std::string, connection_ptr> routing_table_type;
-
+		typedef std::map<std::string, connection_weak_ptr> routing_table_type;
 		routing_table_type m_routing_table;
 	};
 
