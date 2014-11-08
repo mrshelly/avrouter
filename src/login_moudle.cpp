@@ -27,7 +27,7 @@ namespace av_router {
 		login_state& state = iter->second;
 		state.status = login_state::succeed;
 
-		// TODO 解密 encryped_radom_key 后应该是一个 sha1 hash过的密码
+		// TODO 用户的公钥解密 encryped_radom_key 后应该是一个 symmetickey
 		login->encryped_radom_key();
 		// TODO: 处理登陆.login
 
@@ -78,6 +78,8 @@ namespace av_router {
 
 		LOG_DBG << "key: " << key;
 		std::string response = encode(server_hello);
+
+		connection->store_module_private("symmetickey", shared_key);
 
 		// 发回消息.
 		connection->write_msg(response);
