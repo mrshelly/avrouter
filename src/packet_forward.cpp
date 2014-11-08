@@ -18,19 +18,23 @@ namespace av_router {
 
 	void packet_forward::connection_notify(int type, connection_ptr connection, connection_manager&)
 	{
-		boost::any private_ptr = connection->retrive_module_private("routing_table");
-		if( private_ptr.empty() )
+		try
 		{
-			private_ptr = boost::make_shared<routine_table_type>();
-			connection->store_module_private("routine_table", private_ptr);
+			if( type != 0)
+			{
+				// 从 routing table 里删掉这个连接
+				boost::any username_ = connection->retrive_module_private("username");
+				std::string username = boost::any_cast<std::string>(username);
+
+				m_routing_table.erase(username);
+			}
 		}
+		catch(const boost::bad_any_cast &)
+		{}
 	}
 
 	void packet_forward::process_packet(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
 	{
-		boost::any private_ptr = connection->retrive_module_private("routing_table");
-		boost::shared_ptr<routine_table_type> routing_table = boost::any_cast<boost::shared_ptr<routine_table_type>>(private_ptr);
-
 		proto::avPacket * pkt = dynamic_cast<proto::avPacket*>(msg);
 		if( pkt->dest().domain() != m_thisdomain)
 		{
@@ -38,9 +42,9 @@ namespace av_router {
 		}
 
 		// 根据用户名找到连接
-		auto forward_target = routing_table->find(pkt->dest().username());
+		auto forward_target = m_routing_table.find(pkt->dest().username());
 
-		if( forward_target != routing_table->end() )
+		if( forward_target != m_routing_table.end() )
 		{
 			// 找到, 转发过去
 			// TTL 减1

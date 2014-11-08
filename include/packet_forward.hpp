@@ -30,7 +30,9 @@ namespace av_router {
 		boost::asio::io_service& m_io_service;
 		std::string m_thisdomain;
 
-		typedef  std::map<std::string, connection_ptr> routine_table_type;
+		typedef  std::map<std::string, connection_ptr> routing_table_type;
+
+		routing_table_type m_routing_table;
 	};
 
 }
