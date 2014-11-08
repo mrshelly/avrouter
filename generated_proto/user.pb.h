@@ -310,6 +310,18 @@ class server_hello : public ::google::protobuf::Message {
   inline ::std::string* release_random_pub_key();
   inline void set_allocated_random_pub_key(::std::string* random_pub_key);
 
+  // required string server_av_address = 3;
+  inline bool has_server_av_address() const;
+  inline void clear_server_av_address();
+  static const int kServerAvAddressFieldNumber = 3;
+  inline const ::std::string& server_av_address() const;
+  inline void set_server_av_address(const ::std::string& value);
+  inline void set_server_av_address(const char* value);
+  inline void set_server_av_address(const char* value, size_t size);
+  inline ::std::string* mutable_server_av_address();
+  inline ::std::string* release_server_av_address();
+  inline void set_allocated_server_av_address(::std::string* server_av_address);
+
   // @@protoc_insertion_point(class_scope:proto.server_hello)
  private:
   inline void set_has_servername();
@@ -318,6 +330,8 @@ class server_hello : public ::google::protobuf::Message {
   inline void clear_has_version();
   inline void set_has_random_pub_key();
   inline void clear_has_random_pub_key();
+  inline void set_has_server_av_address();
+  inline void clear_has_server_av_address();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -325,6 +339,7 @@ class server_hello : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::std::string* servername_;
   ::std::string* random_pub_key_;
+  ::std::string* server_av_address_;
   ::google::protobuf::uint32 version_;
   friend void  protobuf_AddDesc_user_2eproto();
   friend void protobuf_AssignDesc_user_2eproto();
@@ -1230,6 +1245,82 @@ inline void server_hello::set_allocated_random_pub_key(::std::string* random_pub
     random_pub_key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
   // @@protoc_insertion_point(field_set_allocated:proto.server_hello.random_pub_key)
+}
+
+// required string server_av_address = 3;
+inline bool server_hello::has_server_av_address() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void server_hello::set_has_server_av_address() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void server_hello::clear_has_server_av_address() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void server_hello::clear_server_av_address() {
+  if (server_av_address_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    server_av_address_->clear();
+  }
+  clear_has_server_av_address();
+}
+inline const ::std::string& server_hello::server_av_address() const {
+  // @@protoc_insertion_point(field_get:proto.server_hello.server_av_address)
+  return *server_av_address_;
+}
+inline void server_hello::set_server_av_address(const ::std::string& value) {
+  set_has_server_av_address();
+  if (server_av_address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    server_av_address_ = new ::std::string;
+  }
+  server_av_address_->assign(value);
+  // @@protoc_insertion_point(field_set:proto.server_hello.server_av_address)
+}
+inline void server_hello::set_server_av_address(const char* value) {
+  set_has_server_av_address();
+  if (server_av_address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    server_av_address_ = new ::std::string;
+  }
+  server_av_address_->assign(value);
+  // @@protoc_insertion_point(field_set_char:proto.server_hello.server_av_address)
+}
+inline void server_hello::set_server_av_address(const char* value, size_t size) {
+  set_has_server_av_address();
+  if (server_av_address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    server_av_address_ = new ::std::string;
+  }
+  server_av_address_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:proto.server_hello.server_av_address)
+}
+inline ::std::string* server_hello::mutable_server_av_address() {
+  set_has_server_av_address();
+  if (server_av_address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    server_av_address_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:proto.server_hello.server_av_address)
+  return server_av_address_;
+}
+inline ::std::string* server_hello::release_server_av_address() {
+  clear_has_server_av_address();
+  if (server_av_address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = server_av_address_;
+    server_av_address_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void server_hello::set_allocated_server_av_address(::std::string* server_av_address) {
+  if (server_av_address_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete server_av_address_;
+  }
+  if (server_av_address) {
+    set_has_server_av_address();
+    server_av_address_ = server_av_address;
+  } else {
+    clear_has_server_av_address();
+    server_av_address_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:proto.server_hello.server_av_address)
 }
 
 // -------------------------------------------------------------------

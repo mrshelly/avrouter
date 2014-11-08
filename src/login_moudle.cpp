@@ -49,7 +49,7 @@ namespace av_router {
 		DH* dh = DH_new();
 		unsigned char bin_key[512] = { 0 };
 
-		// 生成随机数然后返回 m_dh->p ，让客户端去算共享密钥
+		// 生成随机数然后返回 m_dh->p ，让客户端去算共享密钥.
 		DH_generate_parameters_ex(dh, 64, DH_GENERATOR_5, NULL);
 		dh->g = BN_bin2bn((const unsigned char *)client_hello->random_g().data(), client_hello->random_g().length(), dh->g);
 		dh->p = BN_bin2bn((const unsigned char *)client_hello->random_p().data(), client_hello->random_p().length(), dh->p);

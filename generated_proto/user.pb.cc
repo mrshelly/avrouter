@@ -66,10 +66,11 @@ void protobuf_AssignDesc_user_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(client_hello));
   server_hello_descriptor_ = file->message_type(1);
-  static const int server_hello_offsets_[3] = {
+  static const int server_hello_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(server_hello, servername_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(server_hello, version_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(server_hello, random_pub_key_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(server_hello, server_av_address_),
   };
   server_hello_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -182,17 +183,18 @@ void protobuf_AddDesc_user_2eproto() {
     "\n\nuser.proto\022\005proto\"k\n\014client_hello\022\016\n\006c"
     "lient\030\001 \002(\t\022\017\n\007version\030\002 \002(\r\022\020\n\010random_g"
     "\030\003 \002(\014\022\020\n\010random_p\030\004 \002(\014\022\026\n\016random_pub_k"
-    "ey\030\005 \002(\014\"K\n\014server_hello\022\022\n\nservername\030\001"
+    "ey\030\005 \002(\014\"f\n\014server_hello\022\022\n\nservername\030\001"
     " \002(\t\022\017\n\007version\030\002 \002(\r\022\026\n\016random_pub_key\030"
-    "\005 \002(\014\"J\n\005login\022\021\n\tuser_name\030\001 \002(\t\022\032\n\022enc"
-    "ryped_radom_key\030\002 \002(\014\022\022\n\nother_info\030\003 \001("
-    "\t\"\257\001\n\014login_result\0225\n\006result\030\001 \002(\0162%.pro"
-    "to.login_result.login_result_code\"h\n\021log"
-    "in_result_code\022\021\n\rLOGIN_SUCCEED\020\000\022\020\n\014NO_"
-    "SUCH_USER\020\001\022\025\n\021PEREMISSON_DENIED\020\002\022\027\n\023PU"
-    "BLIC_KEY_MISMATCH\020\003\"`\n\ruser_register\022\021\n\t"
-    "user_name\030\001 \002(\t\022\022\n\nrsa_pubkey\030\002 \002(\014\022\024\n\014m"
-    "ail_address\030\003 \001(\t\022\022\n\ncell_phone\030\004 \001(\t", 557);
+    "\005 \002(\014\022\031\n\021server_av_address\030\003 \002(\t\"J\n\005logi"
+    "n\022\021\n\tuser_name\030\001 \002(\t\022\032\n\022encryped_radom_k"
+    "ey\030\002 \002(\014\022\022\n\nother_info\030\003 \001(\t\"\257\001\n\014login_r"
+    "esult\0225\n\006result\030\001 \002(\0162%.proto.login_resu"
+    "lt.login_result_code\"h\n\021login_result_cod"
+    "e\022\021\n\rLOGIN_SUCCEED\020\000\022\020\n\014NO_SUCH_USER\020\001\022\025"
+    "\n\021PEREMISSON_DENIED\020\002\022\027\n\023PUBLIC_KEY_MISM"
+    "ATCH\020\003\"`\n\ruser_register\022\021\n\tuser_name\030\001 \002"
+    "(\t\022\022\n\nrsa_pubkey\030\002 \002(\014\022\024\n\014mail_address\030\003"
+    " \001(\t\022\022\n\ncell_phone\030\004 \001(\t", 584);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "user.proto", &protobuf_RegisterTypes);
   client_hello::default_instance_ = new client_hello();
@@ -654,6 +656,7 @@ void client_hello::Swap(client_hello* other) {
 const int server_hello::kServernameFieldNumber;
 const int server_hello::kVersionFieldNumber;
 const int server_hello::kRandomPubKeyFieldNumber;
+const int server_hello::kServerAvAddressFieldNumber;
 #endif  // !_MSC_VER
 
 server_hello::server_hello()
@@ -678,6 +681,7 @@ void server_hello::SharedCtor() {
   servername_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   version_ = 0u;
   random_pub_key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  server_av_address_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -699,6 +703,9 @@ void server_hello::SharedDtor() {
   }
   if (random_pub_key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete random_pub_key_;
+  }
+  if (server_av_address_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete server_av_address_;
   }
   if (this != default_instance_) {
   }
@@ -726,7 +733,7 @@ server_hello* server_hello::New() const {
 }
 
 void server_hello::Clear() {
-  if (_has_bits_[0 / 32] & 7) {
+  if (_has_bits_[0 / 32] & 15) {
     if (has_servername()) {
       if (servername_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
         servername_->clear();
@@ -736,6 +743,11 @@ void server_hello::Clear() {
     if (has_random_pub_key()) {
       if (random_pub_key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
         random_pub_key_->clear();
+      }
+    }
+    if (has_server_av_address()) {
+      if (server_av_address_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        server_av_address_->clear();
       }
     }
   }
@@ -777,6 +789,23 @@ bool server_hello::MergePartialFromCodedStream(
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &version_)));
           set_has_version();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_server_av_address;
+        break;
+      }
+
+      // required string server_av_address = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_server_av_address:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_server_av_address()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->server_av_address().data(), this->server_av_address().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "server_av_address");
         } else {
           goto handle_unusual;
         }
@@ -837,6 +866,16 @@ void server_hello::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->version(), output);
   }
 
+  // required string server_av_address = 3;
+  if (has_server_av_address()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->server_av_address().data(), this->server_av_address().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "server_av_address");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->server_av_address(), output);
+  }
+
   // required bytes random_pub_key = 5;
   if (has_random_pub_key()) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
@@ -867,6 +906,17 @@ void server_hello::SerializeWithCachedSizes(
   // required uint32 version = 2;
   if (has_version()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->version(), target);
+  }
+
+  // required string server_av_address = 3;
+  if (has_server_av_address()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->server_av_address().data(), this->server_av_address().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "server_av_address");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->server_av_address(), target);
   }
 
   // required bytes random_pub_key = 5;
@@ -909,6 +959,13 @@ int server_hello::ByteSize() const {
           this->random_pub_key());
     }
 
+    // required string server_av_address = 3;
+    if (has_server_av_address()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->server_av_address());
+    }
+
   }
   if (!unknown_fields().empty()) {
     total_size +=
@@ -945,6 +1002,9 @@ void server_hello::MergeFrom(const server_hello& from) {
     if (from.has_random_pub_key()) {
       set_random_pub_key(from.random_pub_key());
     }
+    if (from.has_server_av_address()) {
+      set_server_av_address(from.server_av_address());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -962,7 +1022,7 @@ void server_hello::CopyFrom(const server_hello& from) {
 }
 
 bool server_hello::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
   return true;
 }
@@ -972,6 +1032,7 @@ void server_hello::Swap(server_hello* other) {
     std::swap(servername_, other->servername_);
     std::swap(version_, other->version_);
     std::swap(random_pub_key_, other->random_pub_key_);
+    std::swap(server_av_address_, other->server_av_address_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
