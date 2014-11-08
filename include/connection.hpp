@@ -71,6 +71,7 @@ namespace av_router {
 	};
 
 	typedef boost::shared_ptr<connection> connection_ptr;
+	typedef boost::weak_ptr<connection> connection_weak_ptr;
 	class connection_manager
 		: private boost::noncopyable
 	{

@@ -43,15 +43,15 @@ namespace av_router {
 
 		// 根据用户名找到连接
 		auto forward_target = m_routing_table.find(pkt->dest().username());
-
-		if( forward_target != m_routing_table.end() )
+		connection_ptr conn = forward_target->second.lock();
+		if(forward_target != m_routing_table.end() && conn)
 		{
 			// 找到, 转发过去
 			// TTL 减1
 			if( pkt->time_to_live() > 1)
 			{
-				pkt->set_time_to_live( pkt->time_to_live() - 1 );
-				forward_target->second->write_msg(encode(*pkt));
+				pkt->set_time_to_live(pkt->time_to_live() - 1);
+				conn->write_msg(encode(*pkt));
 			}
 			else
 			{
