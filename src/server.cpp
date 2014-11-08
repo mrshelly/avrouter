@@ -124,6 +124,30 @@ namespace av_router {
 		return true;
 	}
 
+	bool server::add_connection_process_moudle(const std::string& name, connection_callback cb)
+	{
+		boost::unique_lock<boost::shared_mutex> l(m_connection_callback_mtx);
+		if (m_connection_callback.find(name) != m_connection_callback.end())
+		{
+			BOOST_ASSERT("module already exist!" && false);
+			return false;
+		}
+		m_connection_callback[name] = cb;
+		return true;
+	}
+
+	bool server::del_connection_process_moudle(const std::string& name)
+	{
+		boost::unique_lock<boost::shared_mutex> l(m_connection_callback_mtx);
+		if (m_connection_callback.find(name) == m_connection_callback.end())
+		{
+			BOOST_ASSERT("not found the moudle" && false);
+			return false;
+		}
+		m_connection_callback.erase(name);
+		return true;
+	}
+
 	void server::continue_timer()
 	{
 		m_timer.expires_from_now(seconds(1));

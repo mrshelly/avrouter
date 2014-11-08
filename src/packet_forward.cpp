@@ -16,7 +16,7 @@ namespace av_router {
 	packet_forward::~packet_forward()
 	{}
 
-	void packet_forward::process_packet(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
+	void packet_forward::connection_notify(int type, connection_ptr connection, connection_manager&)
 	{
 		boost::any private_ptr = connection->retrive_module_private("routing_table");
 		if( private_ptr.empty() )
@@ -24,6 +24,11 @@ namespace av_router {
 			private_ptr = boost::make_shared<routine_table_type>();
 			connection->store_module_private("routine_table", private_ptr);
 		}
+	}
+
+	void packet_forward::process_packet(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
+	{
+		boost::any private_ptr = connection->retrive_module_private("routing_table");
 		boost::shared_ptr<routine_table_type> routing_table = boost::any_cast<boost::shared_ptr<routine_table_type>>(private_ptr);
 
 		proto::avPacket * pkt = dynamic_cast<proto::avPacket*>(msg);

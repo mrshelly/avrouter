@@ -22,7 +22,7 @@ namespace av_router {
 		~packet_forward();
 
 	public:
-		void new_connectio();
+		void connection_notify(int type, connection_ptr, connection_manager&);
 
 		void process_packet(google::protobuf::Message*, connection_ptr, connection_manager&);
 

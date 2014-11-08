@@ -19,6 +19,9 @@ namespace av_router {
 	typedef boost::function<void(google::protobuf::Message*, connection_ptr, connection_manager&)> message_callback;
 	typedef std::map<std::string, message_callback> message_callback_table;
 
+	typedef boost::function<void(int type, connection_ptr, connection_manager&)> connection_callback;
+	typedef std::map<std::string, connection_callback> connection_callback_table;
+
 	class server
 		: public boost::noncopyable
 	{
@@ -36,6 +39,9 @@ namespace av_router {
 		bool add_message_process_moudle(const std::string& name, message_callback cb);
 		bool del_message_process_moudle(const std::string& name);
 
+		// 添加或删除 connection 对象的创建撤销事件通知
+		bool add_connection_process_moudle(const std::string& name, connection_callback cb);
+		bool del_connection_process_moudle(const std::string& name);
 	private:
 		// 处理客户连接.
 		void handle_accept(const boost::system::error_code& error);
@@ -56,7 +62,9 @@ namespace av_router {
 		connection_ptr m_connection;
 		connection_manager m_connection_manager;
 		boost::shared_mutex m_message_callback_mtx;
+		boost::shared_mutex m_connection_callback_mtx;
 		message_callback_table m_message_callback;
+		connection_callback_table m_connection_callback;
 	};
 
 }

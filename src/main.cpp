@@ -2,6 +2,7 @@
 
 #include "io_service_pool.hpp"
 #include "login_moudle.hpp"
+#include "packet_forward.hpp"
 #include "server.hpp"
 
 #include <openssl/dh.h>
@@ -25,10 +26,15 @@ int main(int argc, char** argv)
 	server serv(io_pool, 5432);
 	// 创建登陆处理模块.
 	login_moudle moudle_login(io_pool.get_io_service());
+	packet_forward forward_packet(io_pool.get_io_service());
 
 	// 添加登陆处理模块.
 	serv.add_message_process_moudle("proto.client_hello", boost::bind(&login_moudle::process_hello_message, &moudle_login, _1, _2, _3));
 	serv.add_message_process_moudle("proto.login", boost::bind(&login_moudle::process_login_message, &moudle_login, _1, _2, _3));
+
+	// 添加包的转发处理模块
+	serv.add_message_process_moudle("proto.avPacket", boost::bind(&packet_forward::process_packet, &forward_packet, _1, _2, _3));
+	serv.add_connection_process_moudle("proto.avPacket", boost::bind(&packet_forward::connection_notify, &forward_packet, _1, _2, _3));
 	// 启动服务器.
 	serv.start();
 
