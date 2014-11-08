@@ -39,6 +39,8 @@ class server_hello;
 class login;
 class login_result;
 class user_register;
+class user_cert_lost_request;
+class user_cert_lost_verify;
 
 enum login_result_login_result_code {
   login_result_login_result_code_LOGIN_SUCCEED = 0,
@@ -415,17 +417,17 @@ class login : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string user_name = 1;
-  inline bool has_user_name() const;
-  inline void clear_user_name();
-  static const int kUserNameFieldNumber = 1;
-  inline const ::std::string& user_name() const;
-  inline void set_user_name(const ::std::string& value);
-  inline void set_user_name(const char* value);
-  inline void set_user_name(const char* value, size_t size);
-  inline ::std::string* mutable_user_name();
-  inline ::std::string* release_user_name();
-  inline void set_allocated_user_name(::std::string* user_name);
+  // required bytes user_cert = 1;
+  inline bool has_user_cert() const;
+  inline void clear_user_cert();
+  static const int kUserCertFieldNumber = 1;
+  inline const ::std::string& user_cert() const;
+  inline void set_user_cert(const ::std::string& value);
+  inline void set_user_cert(const char* value);
+  inline void set_user_cert(const void* value, size_t size);
+  inline ::std::string* mutable_user_cert();
+  inline ::std::string* release_user_cert();
+  inline void set_allocated_user_cert(::std::string* user_cert);
 
   // required bytes encryped_radom_key = 2;
   inline bool has_encryped_radom_key() const;
@@ -453,8 +455,8 @@ class login : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:proto.login)
  private:
-  inline void set_has_user_name();
-  inline void clear_has_user_name();
+  inline void set_has_user_cert();
+  inline void clear_has_user_cert();
   inline void set_has_encryped_radom_key();
   inline void clear_has_encryped_radom_key();
   inline void set_has_other_info();
@@ -464,7 +466,7 @@ class login : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::std::string* user_name_;
+  ::std::string* user_cert_;
   ::std::string* encryped_radom_key_;
   ::std::string* other_info_;
   friend void  protobuf_AddDesc_user_2eproto();
@@ -731,6 +733,228 @@ class user_register : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static user_register* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class user_cert_lost_request : public ::google::protobuf::Message {
+ public:
+  user_cert_lost_request();
+  virtual ~user_cert_lost_request();
+
+  user_cert_lost_request(const user_cert_lost_request& from);
+
+  inline user_cert_lost_request& operator=(const user_cert_lost_request& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  #if __cplusplus >= 201103L || _MSC_VER >= 1600
+  inline user_cert_lost_request& operator=(user_cert_lost_request&& from) {
+    if (&from != this) {
+      Clear();
+      Swap(&from);
+    }
+    return *this;
+  }
+
+  user_cert_lost_request(user_cert_lost_request&& from);
+  #endif
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const user_cert_lost_request& default_instance();
+
+  void Swap(user_cert_lost_request* other);
+
+  // implements Message ----------------------------------------------
+
+  user_cert_lost_request* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const user_cert_lost_request& from);
+  void MergeFrom(const user_cert_lost_request& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string user_name = 1;
+  inline bool has_user_name() const;
+  inline void clear_user_name();
+  static const int kUserNameFieldNumber = 1;
+  inline const ::std::string& user_name() const;
+  inline void set_user_name(const ::std::string& value);
+  inline void set_user_name(const char* value);
+  inline void set_user_name(const char* value, size_t size);
+  inline ::std::string* mutable_user_name();
+  inline ::std::string* release_user_name();
+  inline void set_allocated_user_name(::std::string* user_name);
+
+  // optional string mail_address = 3;
+  inline bool has_mail_address() const;
+  inline void clear_mail_address();
+  static const int kMailAddressFieldNumber = 3;
+  inline const ::std::string& mail_address() const;
+  inline void set_mail_address(const ::std::string& value);
+  inline void set_mail_address(const char* value);
+  inline void set_mail_address(const char* value, size_t size);
+  inline ::std::string* mutable_mail_address();
+  inline ::std::string* release_mail_address();
+  inline void set_allocated_mail_address(::std::string* mail_address);
+
+  // optional string cell_phone = 4;
+  inline bool has_cell_phone() const;
+  inline void clear_cell_phone();
+  static const int kCellPhoneFieldNumber = 4;
+  inline const ::std::string& cell_phone() const;
+  inline void set_cell_phone(const ::std::string& value);
+  inline void set_cell_phone(const char* value);
+  inline void set_cell_phone(const char* value, size_t size);
+  inline ::std::string* mutable_cell_phone();
+  inline ::std::string* release_cell_phone();
+  inline void set_allocated_cell_phone(::std::string* cell_phone);
+
+  // @@protoc_insertion_point(class_scope:proto.user_cert_lost_request)
+ private:
+  inline void set_has_user_name();
+  inline void clear_has_user_name();
+  inline void set_has_mail_address();
+  inline void clear_has_mail_address();
+  inline void set_has_cell_phone();
+  inline void clear_has_cell_phone();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* user_name_;
+  ::std::string* mail_address_;
+  ::std::string* cell_phone_;
+  friend void  protobuf_AddDesc_user_2eproto();
+  friend void protobuf_AssignDesc_user_2eproto();
+  friend void protobuf_ShutdownFile_user_2eproto();
+
+  void InitAsDefaultInstance();
+  static user_cert_lost_request* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class user_cert_lost_verify : public ::google::protobuf::Message {
+ public:
+  user_cert_lost_verify();
+  virtual ~user_cert_lost_verify();
+
+  user_cert_lost_verify(const user_cert_lost_verify& from);
+
+  inline user_cert_lost_verify& operator=(const user_cert_lost_verify& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  #if __cplusplus >= 201103L || _MSC_VER >= 1600
+  inline user_cert_lost_verify& operator=(user_cert_lost_verify&& from) {
+    if (&from != this) {
+      Clear();
+      Swap(&from);
+    }
+    return *this;
+  }
+
+  user_cert_lost_verify(user_cert_lost_verify&& from);
+  #endif
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const user_cert_lost_verify& default_instance();
+
+  void Swap(user_cert_lost_verify* other);
+
+  // implements Message ----------------------------------------------
+
+  user_cert_lost_verify* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const user_cert_lost_verify& from);
+  void MergeFrom(const user_cert_lost_verify& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string secret_code = 1;
+  inline bool has_secret_code() const;
+  inline void clear_secret_code();
+  static const int kSecretCodeFieldNumber = 1;
+  inline const ::std::string& secret_code() const;
+  inline void set_secret_code(const ::std::string& value);
+  inline void set_secret_code(const char* value);
+  inline void set_secret_code(const char* value, size_t size);
+  inline ::std::string* mutable_secret_code();
+  inline ::std::string* release_secret_code();
+  inline void set_allocated_secret_code(::std::string* secret_code);
+
+  // @@protoc_insertion_point(class_scope:proto.user_cert_lost_verify)
+ private:
+  inline void set_has_secret_code();
+  inline void clear_has_secret_code();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* secret_code_;
+  friend void  protobuf_AddDesc_user_2eproto();
+  friend void protobuf_AssignDesc_user_2eproto();
+  friend void protobuf_ShutdownFile_user_2eproto();
+
+  void InitAsDefaultInstance();
+  static user_cert_lost_verify* default_instance_;
 };
 // ===================================================================
 
@@ -1327,80 +1551,80 @@ inline void server_hello::set_allocated_server_av_address(::std::string* server_
 
 // login
 
-// required string user_name = 1;
-inline bool login::has_user_name() const {
+// required bytes user_cert = 1;
+inline bool login::has_user_cert() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void login::set_has_user_name() {
+inline void login::set_has_user_cert() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void login::clear_has_user_name() {
+inline void login::clear_has_user_cert() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void login::clear_user_name() {
-  if (user_name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    user_name_->clear();
+inline void login::clear_user_cert() {
+  if (user_cert_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_cert_->clear();
   }
-  clear_has_user_name();
+  clear_has_user_cert();
 }
-inline const ::std::string& login::user_name() const {
-  // @@protoc_insertion_point(field_get:proto.login.user_name)
-  return *user_name_;
+inline const ::std::string& login::user_cert() const {
+  // @@protoc_insertion_point(field_get:proto.login.user_cert)
+  return *user_cert_;
 }
-inline void login::set_user_name(const ::std::string& value) {
-  set_has_user_name();
-  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    user_name_ = new ::std::string;
+inline void login::set_user_cert(const ::std::string& value) {
+  set_has_user_cert();
+  if (user_cert_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_cert_ = new ::std::string;
   }
-  user_name_->assign(value);
-  // @@protoc_insertion_point(field_set:proto.login.user_name)
+  user_cert_->assign(value);
+  // @@protoc_insertion_point(field_set:proto.login.user_cert)
 }
-inline void login::set_user_name(const char* value) {
-  set_has_user_name();
-  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    user_name_ = new ::std::string;
+inline void login::set_user_cert(const char* value) {
+  set_has_user_cert();
+  if (user_cert_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_cert_ = new ::std::string;
   }
-  user_name_->assign(value);
-  // @@protoc_insertion_point(field_set_char:proto.login.user_name)
+  user_cert_->assign(value);
+  // @@protoc_insertion_point(field_set_char:proto.login.user_cert)
 }
-inline void login::set_user_name(const char* value, size_t size) {
-  set_has_user_name();
-  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    user_name_ = new ::std::string;
+inline void login::set_user_cert(const void* value, size_t size) {
+  set_has_user_cert();
+  if (user_cert_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_cert_ = new ::std::string;
   }
-  user_name_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:proto.login.user_name)
+  user_cert_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:proto.login.user_cert)
 }
-inline ::std::string* login::mutable_user_name() {
-  set_has_user_name();
-  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    user_name_ = new ::std::string;
+inline ::std::string* login::mutable_user_cert() {
+  set_has_user_cert();
+  if (user_cert_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_cert_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:proto.login.user_name)
-  return user_name_;
+  // @@protoc_insertion_point(field_mutable:proto.login.user_cert)
+  return user_cert_;
 }
-inline ::std::string* login::release_user_name() {
-  clear_has_user_name();
-  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+inline ::std::string* login::release_user_cert() {
+  clear_has_user_cert();
+  if (user_cert_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
   } else {
-    ::std::string* temp = user_name_;
-    user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    ::std::string* temp = user_cert_;
+    user_cert_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     return temp;
   }
 }
-inline void login::set_allocated_user_name(::std::string* user_name) {
-  if (user_name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete user_name_;
+inline void login::set_allocated_user_cert(::std::string* user_cert) {
+  if (user_cert_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete user_cert_;
   }
-  if (user_name) {
-    set_has_user_name();
-    user_name_ = user_name;
+  if (user_cert) {
+    set_has_user_cert();
+    user_cert_ = user_cert;
   } else {
-    clear_has_user_name();
-    user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    clear_has_user_cert();
+    user_cert_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:proto.login.user_name)
+  // @@protoc_insertion_point(field_set_allocated:proto.login.user_cert)
 }
 
 // required bytes encryped_radom_key = 2;
@@ -1890,6 +2114,318 @@ inline void user_register::set_allocated_cell_phone(::std::string* cell_phone) {
     cell_phone_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
   // @@protoc_insertion_point(field_set_allocated:proto.user_register.cell_phone)
+}
+
+// -------------------------------------------------------------------
+
+// user_cert_lost_request
+
+// required string user_name = 1;
+inline bool user_cert_lost_request::has_user_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void user_cert_lost_request::set_has_user_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void user_cert_lost_request::clear_has_user_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void user_cert_lost_request::clear_user_name() {
+  if (user_name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_name_->clear();
+  }
+  clear_has_user_name();
+}
+inline const ::std::string& user_cert_lost_request::user_name() const {
+  // @@protoc_insertion_point(field_get:proto.user_cert_lost_request.user_name)
+  return *user_name_;
+}
+inline void user_cert_lost_request::set_user_name(const ::std::string& value) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(value);
+  // @@protoc_insertion_point(field_set:proto.user_cert_lost_request.user_name)
+}
+inline void user_cert_lost_request::set_user_name(const char* value) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(value);
+  // @@protoc_insertion_point(field_set_char:proto.user_cert_lost_request.user_name)
+}
+inline void user_cert_lost_request::set_user_name(const char* value, size_t size) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:proto.user_cert_lost_request.user_name)
+}
+inline ::std::string* user_cert_lost_request::mutable_user_name() {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_name_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:proto.user_cert_lost_request.user_name)
+  return user_name_;
+}
+inline ::std::string* user_cert_lost_request::release_user_name() {
+  clear_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = user_name_;
+    user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void user_cert_lost_request::set_allocated_user_name(::std::string* user_name) {
+  if (user_name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete user_name_;
+  }
+  if (user_name) {
+    set_has_user_name();
+    user_name_ = user_name;
+  } else {
+    clear_has_user_name();
+    user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:proto.user_cert_lost_request.user_name)
+}
+
+// optional string mail_address = 3;
+inline bool user_cert_lost_request::has_mail_address() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void user_cert_lost_request::set_has_mail_address() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void user_cert_lost_request::clear_has_mail_address() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void user_cert_lost_request::clear_mail_address() {
+  if (mail_address_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    mail_address_->clear();
+  }
+  clear_has_mail_address();
+}
+inline const ::std::string& user_cert_lost_request::mail_address() const {
+  // @@protoc_insertion_point(field_get:proto.user_cert_lost_request.mail_address)
+  return *mail_address_;
+}
+inline void user_cert_lost_request::set_mail_address(const ::std::string& value) {
+  set_has_mail_address();
+  if (mail_address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    mail_address_ = new ::std::string;
+  }
+  mail_address_->assign(value);
+  // @@protoc_insertion_point(field_set:proto.user_cert_lost_request.mail_address)
+}
+inline void user_cert_lost_request::set_mail_address(const char* value) {
+  set_has_mail_address();
+  if (mail_address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    mail_address_ = new ::std::string;
+  }
+  mail_address_->assign(value);
+  // @@protoc_insertion_point(field_set_char:proto.user_cert_lost_request.mail_address)
+}
+inline void user_cert_lost_request::set_mail_address(const char* value, size_t size) {
+  set_has_mail_address();
+  if (mail_address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    mail_address_ = new ::std::string;
+  }
+  mail_address_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:proto.user_cert_lost_request.mail_address)
+}
+inline ::std::string* user_cert_lost_request::mutable_mail_address() {
+  set_has_mail_address();
+  if (mail_address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    mail_address_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:proto.user_cert_lost_request.mail_address)
+  return mail_address_;
+}
+inline ::std::string* user_cert_lost_request::release_mail_address() {
+  clear_has_mail_address();
+  if (mail_address_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = mail_address_;
+    mail_address_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void user_cert_lost_request::set_allocated_mail_address(::std::string* mail_address) {
+  if (mail_address_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete mail_address_;
+  }
+  if (mail_address) {
+    set_has_mail_address();
+    mail_address_ = mail_address;
+  } else {
+    clear_has_mail_address();
+    mail_address_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:proto.user_cert_lost_request.mail_address)
+}
+
+// optional string cell_phone = 4;
+inline bool user_cert_lost_request::has_cell_phone() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void user_cert_lost_request::set_has_cell_phone() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void user_cert_lost_request::clear_has_cell_phone() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void user_cert_lost_request::clear_cell_phone() {
+  if (cell_phone_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cell_phone_->clear();
+  }
+  clear_has_cell_phone();
+}
+inline const ::std::string& user_cert_lost_request::cell_phone() const {
+  // @@protoc_insertion_point(field_get:proto.user_cert_lost_request.cell_phone)
+  return *cell_phone_;
+}
+inline void user_cert_lost_request::set_cell_phone(const ::std::string& value) {
+  set_has_cell_phone();
+  if (cell_phone_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cell_phone_ = new ::std::string;
+  }
+  cell_phone_->assign(value);
+  // @@protoc_insertion_point(field_set:proto.user_cert_lost_request.cell_phone)
+}
+inline void user_cert_lost_request::set_cell_phone(const char* value) {
+  set_has_cell_phone();
+  if (cell_phone_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cell_phone_ = new ::std::string;
+  }
+  cell_phone_->assign(value);
+  // @@protoc_insertion_point(field_set_char:proto.user_cert_lost_request.cell_phone)
+}
+inline void user_cert_lost_request::set_cell_phone(const char* value, size_t size) {
+  set_has_cell_phone();
+  if (cell_phone_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cell_phone_ = new ::std::string;
+  }
+  cell_phone_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:proto.user_cert_lost_request.cell_phone)
+}
+inline ::std::string* user_cert_lost_request::mutable_cell_phone() {
+  set_has_cell_phone();
+  if (cell_phone_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cell_phone_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:proto.user_cert_lost_request.cell_phone)
+  return cell_phone_;
+}
+inline ::std::string* user_cert_lost_request::release_cell_phone() {
+  clear_has_cell_phone();
+  if (cell_phone_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = cell_phone_;
+    cell_phone_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void user_cert_lost_request::set_allocated_cell_phone(::std::string* cell_phone) {
+  if (cell_phone_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete cell_phone_;
+  }
+  if (cell_phone) {
+    set_has_cell_phone();
+    cell_phone_ = cell_phone;
+  } else {
+    clear_has_cell_phone();
+    cell_phone_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:proto.user_cert_lost_request.cell_phone)
+}
+
+// -------------------------------------------------------------------
+
+// user_cert_lost_verify
+
+// required string secret_code = 1;
+inline bool user_cert_lost_verify::has_secret_code() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void user_cert_lost_verify::set_has_secret_code() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void user_cert_lost_verify::clear_has_secret_code() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void user_cert_lost_verify::clear_secret_code() {
+  if (secret_code_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    secret_code_->clear();
+  }
+  clear_has_secret_code();
+}
+inline const ::std::string& user_cert_lost_verify::secret_code() const {
+  // @@protoc_insertion_point(field_get:proto.user_cert_lost_verify.secret_code)
+  return *secret_code_;
+}
+inline void user_cert_lost_verify::set_secret_code(const ::std::string& value) {
+  set_has_secret_code();
+  if (secret_code_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    secret_code_ = new ::std::string;
+  }
+  secret_code_->assign(value);
+  // @@protoc_insertion_point(field_set:proto.user_cert_lost_verify.secret_code)
+}
+inline void user_cert_lost_verify::set_secret_code(const char* value) {
+  set_has_secret_code();
+  if (secret_code_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    secret_code_ = new ::std::string;
+  }
+  secret_code_->assign(value);
+  // @@protoc_insertion_point(field_set_char:proto.user_cert_lost_verify.secret_code)
+}
+inline void user_cert_lost_verify::set_secret_code(const char* value, size_t size) {
+  set_has_secret_code();
+  if (secret_code_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    secret_code_ = new ::std::string;
+  }
+  secret_code_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:proto.user_cert_lost_verify.secret_code)
+}
+inline ::std::string* user_cert_lost_verify::mutable_secret_code() {
+  set_has_secret_code();
+  if (secret_code_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    secret_code_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:proto.user_cert_lost_verify.secret_code)
+  return secret_code_;
+}
+inline ::std::string* user_cert_lost_verify::release_secret_code() {
+  clear_has_secret_code();
+  if (secret_code_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = secret_code_;
+    secret_code_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void user_cert_lost_verify::set_allocated_secret_code(::std::string* secret_code) {
+  if (secret_code_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete secret_code_;
+  }
+  if (secret_code) {
+    set_has_secret_code();
+    secret_code_ = secret_code;
+  } else {
+    clear_has_secret_code();
+    secret_code_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:proto.user_cert_lost_verify.secret_code)
 }
 
 

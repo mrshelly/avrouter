@@ -36,6 +36,12 @@ const ::google::protobuf::EnumDescriptor* login_result_login_result_code_descrip
 const ::google::protobuf::Descriptor* user_register_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   user_register_reflection_ = NULL;
+const ::google::protobuf::Descriptor* user_cert_lost_request_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  user_cert_lost_request_reflection_ = NULL;
+const ::google::protobuf::Descriptor* user_cert_lost_verify_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  user_cert_lost_verify_reflection_ = NULL;
 
 }  // namespace
 
@@ -85,7 +91,7 @@ void protobuf_AssignDesc_user_2eproto() {
       sizeof(server_hello));
   login_descriptor_ = file->message_type(2);
   static const int login_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(login, user_name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(login, user_cert_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(login, encryped_radom_key_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(login, other_info_),
   };
@@ -134,6 +140,38 @@ void protobuf_AssignDesc_user_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(user_register));
+  user_cert_lost_request_descriptor_ = file->message_type(5);
+  static const int user_cert_lost_request_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(user_cert_lost_request, user_name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(user_cert_lost_request, mail_address_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(user_cert_lost_request, cell_phone_),
+  };
+  user_cert_lost_request_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      user_cert_lost_request_descriptor_,
+      user_cert_lost_request::default_instance_,
+      user_cert_lost_request_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(user_cert_lost_request, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(user_cert_lost_request, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(user_cert_lost_request));
+  user_cert_lost_verify_descriptor_ = file->message_type(6);
+  static const int user_cert_lost_verify_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(user_cert_lost_verify, secret_code_),
+  };
+  user_cert_lost_verify_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      user_cert_lost_verify_descriptor_,
+      user_cert_lost_verify::default_instance_,
+      user_cert_lost_verify_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(user_cert_lost_verify, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(user_cert_lost_verify, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(user_cert_lost_verify));
 }
 
 namespace {
@@ -156,6 +194,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
     login_result_descriptor_, &login_result::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     user_register_descriptor_, &user_register::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    user_cert_lost_request_descriptor_, &user_cert_lost_request::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    user_cert_lost_verify_descriptor_, &user_cert_lost_verify::default_instance());
 }
 
 }  // namespace
@@ -171,6 +213,10 @@ void protobuf_ShutdownFile_user_2eproto() {
   delete login_result_reflection_;
   delete user_register::default_instance_;
   delete user_register_reflection_;
+  delete user_cert_lost_request::default_instance_;
+  delete user_cert_lost_request_reflection_;
+  delete user_cert_lost_verify::default_instance_;
+  delete user_cert_lost_verify_reflection_;
 }
 
 void protobuf_AddDesc_user_2eproto() {
@@ -186,7 +232,7 @@ void protobuf_AddDesc_user_2eproto() {
     "ey\030\005 \002(\014\"f\n\014server_hello\022\022\n\nservername\030\001"
     " \002(\t\022\017\n\007version\030\002 \002(\r\022\026\n\016random_pub_key\030"
     "\005 \002(\014\022\031\n\021server_av_address\030\003 \002(\t\"J\n\005logi"
-    "n\022\021\n\tuser_name\030\001 \002(\t\022\032\n\022encryped_radom_k"
+    "n\022\021\n\tuser_cert\030\001 \002(\014\022\032\n\022encryped_radom_k"
     "ey\030\002 \002(\014\022\022\n\nother_info\030\003 \001(\t\"\257\001\n\014login_r"
     "esult\0225\n\006result\030\001 \002(\0162%.proto.login_resu"
     "lt.login_result_code\"h\n\021login_result_cod"
@@ -194,7 +240,10 @@ void protobuf_AddDesc_user_2eproto() {
     "\n\021PEREMISSON_DENIED\020\002\022\027\n\023PUBLIC_KEY_MISM"
     "ATCH\020\003\"`\n\ruser_register\022\021\n\tuser_name\030\001 \002"
     "(\t\022\022\n\nrsa_pubkey\030\002 \002(\014\022\024\n\014mail_address\030\003"
-    " \001(\t\022\022\n\ncell_phone\030\004 \001(\t", 584);
+    " \001(\t\022\022\n\ncell_phone\030\004 \001(\t\"U\n\026user_cert_lo"
+    "st_request\022\021\n\tuser_name\030\001 \002(\t\022\024\n\014mail_ad"
+    "dress\030\003 \001(\t\022\022\n\ncell_phone\030\004 \001(\t\",\n\025user_"
+    "cert_lost_verify\022\023\n\013secret_code\030\001 \002(\t", 717);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "user.proto", &protobuf_RegisterTypes);
   client_hello::default_instance_ = new client_hello();
@@ -202,11 +251,15 @@ void protobuf_AddDesc_user_2eproto() {
   login::default_instance_ = new login();
   login_result::default_instance_ = new login_result();
   user_register::default_instance_ = new user_register();
+  user_cert_lost_request::default_instance_ = new user_cert_lost_request();
+  user_cert_lost_verify::default_instance_ = new user_cert_lost_verify();
   client_hello::default_instance_->InitAsDefaultInstance();
   server_hello::default_instance_->InitAsDefaultInstance();
   login::default_instance_->InitAsDefaultInstance();
   login_result::default_instance_->InitAsDefaultInstance();
   user_register::default_instance_->InitAsDefaultInstance();
+  user_cert_lost_request::default_instance_->InitAsDefaultInstance();
+  user_cert_lost_verify::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_user_2eproto);
 }
 
@@ -1051,7 +1104,7 @@ void server_hello::Swap(server_hello* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int login::kUserNameFieldNumber;
+const int login::kUserCertFieldNumber;
 const int login::kEncrypedRadomKeyFieldNumber;
 const int login::kOtherInfoFieldNumber;
 #endif  // !_MSC_VER
@@ -1075,7 +1128,7 @@ login::login(const login& from)
 void login::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
-  user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  user_cert_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   encryped_radom_key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   other_info_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -1094,8 +1147,8 @@ login::~login() {
 }
 
 void login::SharedDtor() {
-  if (user_name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete user_name_;
+  if (user_cert_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete user_cert_;
   }
   if (encryped_radom_key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete encryped_radom_key_;
@@ -1130,9 +1183,9 @@ login* login::New() const {
 
 void login::Clear() {
   if (_has_bits_[0 / 32] & 7) {
-    if (has_user_name()) {
-      if (user_name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        user_name_->clear();
+    if (has_user_cert()) {
+      if (user_cert_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        user_cert_->clear();
       }
     }
     if (has_encryped_radom_key()) {
@@ -1160,15 +1213,11 @@ bool login::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string user_name = 1;
+      // required bytes user_cert = 1;
       case 1: {
         if (tag == 10) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_user_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->user_name().data(), this->user_name().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "user_name");
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_user_cert()));
         } else {
           goto handle_unusual;
         }
@@ -1231,14 +1280,10 @@ failure:
 void login::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:proto.login)
-  // required string user_name = 1;
-  if (has_user_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->user_name().data(), this->user_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "user_name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->user_name(), output);
+  // required bytes user_cert = 1;
+  if (has_user_cert()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      1, this->user_cert(), output);
   }
 
   // required bytes encryped_radom_key = 2;
@@ -1267,15 +1312,11 @@ void login::SerializeWithCachedSizes(
 ::google::protobuf::uint8* login::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:proto.login)
-  // required string user_name = 1;
-  if (has_user_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->user_name().data(), this->user_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "user_name");
+  // required bytes user_cert = 1;
+  if (has_user_cert()) {
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->user_name(), target);
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        1, this->user_cert(), target);
   }
 
   // required bytes encryped_radom_key = 2;
@@ -1308,11 +1349,11 @@ int login::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string user_name = 1;
-    if (has_user_name()) {
+    // required bytes user_cert = 1;
+    if (has_user_cert()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->user_name());
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->user_cert());
     }
 
     // required bytes encryped_radom_key = 2;
@@ -1356,8 +1397,8 @@ void login::MergeFrom(const ::google::protobuf::Message& from) {
 void login::MergeFrom(const login& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_user_name()) {
-      set_user_name(from.user_name());
+    if (from.has_user_cert()) {
+      set_user_cert(from.user_cert());
     }
     if (from.has_encryped_radom_key()) {
       set_encryped_radom_key(from.encryped_radom_key());
@@ -1389,7 +1430,7 @@ bool login::IsInitialized() const {
 
 void login::Swap(login* other) {
   if (other != this) {
-    std::swap(user_name_, other->user_name_);
+    std::swap(user_cert_, other->user_cert_);
     std::swap(encryped_radom_key_, other->encryped_radom_key_);
     std::swap(other_info_, other->other_info_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -2082,6 +2123,628 @@ void user_register::Swap(user_register* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = user_register_descriptor_;
   metadata.reflection = user_register_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int user_cert_lost_request::kUserNameFieldNumber;
+const int user_cert_lost_request::kMailAddressFieldNumber;
+const int user_cert_lost_request::kCellPhoneFieldNumber;
+#endif  // !_MSC_VER
+
+user_cert_lost_request::user_cert_lost_request()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:proto.user_cert_lost_request)
+}
+
+void user_cert_lost_request::InitAsDefaultInstance() {
+}
+
+user_cert_lost_request::user_cert_lost_request(const user_cert_lost_request& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:proto.user_cert_lost_request)
+}
+
+void user_cert_lost_request::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  mail_address_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  cell_phone_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+user_cert_lost_request::user_cert_lost_request(user_cert_lost_request&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
+
+user_cert_lost_request::~user_cert_lost_request() {
+  // @@protoc_insertion_point(destructor:proto.user_cert_lost_request)
+  SharedDtor();
+}
+
+void user_cert_lost_request::SharedDtor() {
+  if (user_name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete user_name_;
+  }
+  if (mail_address_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete mail_address_;
+  }
+  if (cell_phone_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete cell_phone_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void user_cert_lost_request::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* user_cert_lost_request::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return user_cert_lost_request_descriptor_;
+}
+
+const user_cert_lost_request& user_cert_lost_request::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_user_2eproto();
+  return *default_instance_;
+}
+
+user_cert_lost_request* user_cert_lost_request::default_instance_ = NULL;
+
+user_cert_lost_request* user_cert_lost_request::New() const {
+  return new user_cert_lost_request;
+}
+
+void user_cert_lost_request::Clear() {
+  if (_has_bits_[0 / 32] & 7) {
+    if (has_user_name()) {
+      if (user_name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        user_name_->clear();
+      }
+    }
+    if (has_mail_address()) {
+      if (mail_address_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        mail_address_->clear();
+      }
+    }
+    if (has_cell_phone()) {
+      if (cell_phone_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        cell_phone_->clear();
+      }
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool user_cert_lost_request::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:proto.user_cert_lost_request)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string user_name = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_user_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->user_name().data(), this->user_name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "user_name");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_mail_address;
+        break;
+      }
+
+      // optional string mail_address = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_mail_address:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_mail_address()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->mail_address().data(), this->mail_address().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "mail_address");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_cell_phone;
+        break;
+      }
+
+      // optional string cell_phone = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_cell_phone:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_cell_phone()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->cell_phone().data(), this->cell_phone().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "cell_phone");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:proto.user_cert_lost_request)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:proto.user_cert_lost_request)
+  return false;
+#undef DO_
+}
+
+void user_cert_lost_request::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:proto.user_cert_lost_request)
+  // required string user_name = 1;
+  if (has_user_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->user_name().data(), this->user_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "user_name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->user_name(), output);
+  }
+
+  // optional string mail_address = 3;
+  if (has_mail_address()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->mail_address().data(), this->mail_address().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "mail_address");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->mail_address(), output);
+  }
+
+  // optional string cell_phone = 4;
+  if (has_cell_phone()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->cell_phone().data(), this->cell_phone().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "cell_phone");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->cell_phone(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:proto.user_cert_lost_request)
+}
+
+::google::protobuf::uint8* user_cert_lost_request::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:proto.user_cert_lost_request)
+  // required string user_name = 1;
+  if (has_user_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->user_name().data(), this->user_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "user_name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->user_name(), target);
+  }
+
+  // optional string mail_address = 3;
+  if (has_mail_address()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->mail_address().data(), this->mail_address().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "mail_address");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->mail_address(), target);
+  }
+
+  // optional string cell_phone = 4;
+  if (has_cell_phone()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->cell_phone().data(), this->cell_phone().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "cell_phone");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->cell_phone(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:proto.user_cert_lost_request)
+  return target;
+}
+
+int user_cert_lost_request::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required string user_name = 1;
+    if (has_user_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->user_name());
+    }
+
+    // optional string mail_address = 3;
+    if (has_mail_address()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->mail_address());
+    }
+
+    // optional string cell_phone = 4;
+    if (has_cell_phone()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->cell_phone());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void user_cert_lost_request::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const user_cert_lost_request* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const user_cert_lost_request*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void user_cert_lost_request::MergeFrom(const user_cert_lost_request& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_user_name()) {
+      set_user_name(from.user_name());
+    }
+    if (from.has_mail_address()) {
+      set_mail_address(from.mail_address());
+    }
+    if (from.has_cell_phone()) {
+      set_cell_phone(from.cell_phone());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void user_cert_lost_request::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void user_cert_lost_request::CopyFrom(const user_cert_lost_request& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool user_cert_lost_request::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void user_cert_lost_request::Swap(user_cert_lost_request* other) {
+  if (other != this) {
+    std::swap(user_name_, other->user_name_);
+    std::swap(mail_address_, other->mail_address_);
+    std::swap(cell_phone_, other->cell_phone_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata user_cert_lost_request::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = user_cert_lost_request_descriptor_;
+  metadata.reflection = user_cert_lost_request_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int user_cert_lost_verify::kSecretCodeFieldNumber;
+#endif  // !_MSC_VER
+
+user_cert_lost_verify::user_cert_lost_verify()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:proto.user_cert_lost_verify)
+}
+
+void user_cert_lost_verify::InitAsDefaultInstance() {
+}
+
+user_cert_lost_verify::user_cert_lost_verify(const user_cert_lost_verify& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:proto.user_cert_lost_verify)
+}
+
+void user_cert_lost_verify::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  secret_code_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+user_cert_lost_verify::user_cert_lost_verify(user_cert_lost_verify&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
+
+user_cert_lost_verify::~user_cert_lost_verify() {
+  // @@protoc_insertion_point(destructor:proto.user_cert_lost_verify)
+  SharedDtor();
+}
+
+void user_cert_lost_verify::SharedDtor() {
+  if (secret_code_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete secret_code_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void user_cert_lost_verify::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* user_cert_lost_verify::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return user_cert_lost_verify_descriptor_;
+}
+
+const user_cert_lost_verify& user_cert_lost_verify::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_user_2eproto();
+  return *default_instance_;
+}
+
+user_cert_lost_verify* user_cert_lost_verify::default_instance_ = NULL;
+
+user_cert_lost_verify* user_cert_lost_verify::New() const {
+  return new user_cert_lost_verify;
+}
+
+void user_cert_lost_verify::Clear() {
+  if (has_secret_code()) {
+    if (secret_code_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+      secret_code_->clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool user_cert_lost_verify::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:proto.user_cert_lost_verify)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string secret_code = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_secret_code()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->secret_code().data(), this->secret_code().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "secret_code");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:proto.user_cert_lost_verify)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:proto.user_cert_lost_verify)
+  return false;
+#undef DO_
+}
+
+void user_cert_lost_verify::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:proto.user_cert_lost_verify)
+  // required string secret_code = 1;
+  if (has_secret_code()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->secret_code().data(), this->secret_code().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "secret_code");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->secret_code(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:proto.user_cert_lost_verify)
+}
+
+::google::protobuf::uint8* user_cert_lost_verify::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:proto.user_cert_lost_verify)
+  // required string secret_code = 1;
+  if (has_secret_code()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->secret_code().data(), this->secret_code().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "secret_code");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->secret_code(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:proto.user_cert_lost_verify)
+  return target;
+}
+
+int user_cert_lost_verify::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required string secret_code = 1;
+    if (has_secret_code()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->secret_code());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void user_cert_lost_verify::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const user_cert_lost_verify* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const user_cert_lost_verify*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void user_cert_lost_verify::MergeFrom(const user_cert_lost_verify& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_secret_code()) {
+      set_secret_code(from.secret_code());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void user_cert_lost_verify::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void user_cert_lost_verify::CopyFrom(const user_cert_lost_verify& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool user_cert_lost_verify::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void user_cert_lost_verify::Swap(user_cert_lost_verify* other) {
+  if (other != this) {
+    std::swap(secret_code_, other->secret_code_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata user_cert_lost_verify::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = user_cert_lost_verify_descriptor_;
+  metadata.reflection = user_cert_lost_verify_reflection_;
   return metadata;
 }
 
