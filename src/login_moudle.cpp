@@ -60,6 +60,7 @@ namespace av_router {
 		server_hello.set_servername("avrouter");
 		server_hello.set_version(001);
 		server_hello.set_random_pub_key((const void*)bin_key, BN_bn2bin(dh->pub_key, bin_key));
+		server_hello.set_server_av_address("router@avplayer.org");
 
 		shared_key.resize(DH_size(dh));
 		BIGNUM* client_pubkey = BN_bin2bn((const unsigned char *)client_hello->random_pub_key().data(), client_hello->random_pub_key().length(), NULL);
