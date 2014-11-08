@@ -18,7 +18,6 @@ namespace av_router {
 
 	connection::~connection()
 	{
-		m_server.do_connection_notify(1, shared_from_this());
 		LOG_DBG << "destruct connection: " << this;
 	}
 
@@ -47,6 +46,7 @@ namespace av_router {
 
 	void connection::stop()
 	{
+		m_server.do_connection_notify(1, shared_from_this());
 		boost::system::error_code ignore_ec;
 		m_abort = true;
 		m_socket.close(ignore_ec);
