@@ -24,7 +24,8 @@ namespace av_router {
 		if (iter == m_log_state.end())
 			return;
 
-		std::vector<uint8_t> symmetickey = boost::any_cast<std::vector<uint8_t>>(connection->retrive_module_private("symmetickey"));
+		std::string login_check_key = boost::any_cast<std::string>(
+			connection->retrive_module_private("login_check_key"));
 
 		const unsigned char * in = (unsigned char *) login->user_cert().data();
 
@@ -34,7 +35,7 @@ namespace av_router {
 		// TODO 首先验证用户的证书
 
 
-		// 证书验证通过后, 用用户的公钥解密 encryped_radom_key 然后比较是否是 symmetickey
+		// 证书验证通过后, 用用户的公钥解密 encryped_radom_key 然后比较是否是 login_check_key
 		// 如果是, 那么此次就不是冒名登录
 
 		// 接着到数据库查询是否阻止登录, 是不是帐号没钱了不给登录了 etc
@@ -92,6 +93,7 @@ namespace av_router {
 		std::string response = encode(server_hello);
 
 		connection->store_module_private("symmetickey", shared_key);
+		connection->store_module_private("login_check_key", server_hello.random_pub_key());
 
 		// 发回消息.
 		connection->write_msg(response);
