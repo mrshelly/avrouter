@@ -104,7 +104,7 @@ namespace av_router {
 	void server::do_connection_notify(int type, connection_ptr conn)
 	{
 		boost::shared_lock<boost::shared_mutex> l(m_connection_callback_mtx);
-		for (auto& item : m_connection_callback)
+		for (const auto& item : m_connection_callback)
 			item.second(type, conn, boost::ref(m_connection_manager));
 	}
 
