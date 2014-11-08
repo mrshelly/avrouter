@@ -1,5 +1,5 @@
 ﻿#include <boost/smart_ptr.hpp>
-
+#include <boost/any.hpp>
 #include "server.hpp"
 #include "connection.hpp"
 #include "logging.hpp"
@@ -178,4 +178,15 @@ namespace av_router {
 			);
 		}
 	}
+
+	boost::any connection::retrive_module_private(const std::string& module_name)
+	{
+		return m_module_private_info_ptrs[module_name];
+	}
+
+	void connection::store_module_private(const std::string& module_name, const boost::any & ptr)
+	{
+		m_module_private_info_ptrs[module_name] = ptr;
+	}
+
 }

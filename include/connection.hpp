@@ -11,6 +11,7 @@
 #include <deque>
 
 #include <boost/noncopyable.hpp>
+#include <boost/any.hpp>
 #include <boost/logic/tribool.hpp>
 #include <boost/tuple/tuple.hpp>
 #include <boost/enable_shared_from_this.hpp>
@@ -45,6 +46,8 @@ namespace av_router {
 		tcp::socket& socket();
 		void write_msg(const std::string& msg);
 
+		boost::any retrive_module_private(const std::string& module_name);
+		void store_module_private(const std::string& module_name, const boost::any & ptr);
 	private:
 		void close();
 
@@ -64,6 +67,7 @@ namespace av_router {
 		typedef std::deque<std::string> write_queue;
 		write_queue m_write_queue;
 		bool m_abort;
+		std::map<std::string, boost::any> m_module_private_info_ptrs;
 	};
 
 	typedef boost::shared_ptr<connection> connection_ptr;
