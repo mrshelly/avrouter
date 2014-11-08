@@ -14,7 +14,6 @@ namespace av_router {
 		, m_connection_manager(connection_man)
 		, m_abort(false)
 	{
-		m_server.do_connection_notify(0, shared_from_this());
 	}
 
 	connection::~connection()
@@ -34,6 +33,8 @@ namespace av_router {
 		m_socket.set_option(tcp::no_delay(true), ignore_ec);
 		if (ignore_ec)
 			LOG_ERR << "connection::start, Set option to nodelay, error message :" << ignore_ec.message();
+
+		m_server.do_connection_notify(0, shared_from_this());
 
 		boost::asio::async_read(m_socket, m_response, boost::asio::transfer_exactly(4),
 			boost::bind(&connection::handle_read_header,
