@@ -13,10 +13,13 @@ namespace av_router {
 		, m_socket(io)
 		, m_connection_manager(connection_man)
 		, m_abort(false)
-	{}
+	{
+		m_server.do_connection_notify(0, shared_from_this());
+	}
 
 	connection::~connection()
 	{
+		m_server.do_connection_notify(1, shared_from_this());
 		LOG_DBG << "destruct connection: " << this;
 	}
 
