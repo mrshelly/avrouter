@@ -3,6 +3,7 @@
 
 #include <openssl/dh.h>
 #include <openssl/aes.h>
+#include <openssl/x509.h>
 
 namespace av_router {
 
@@ -23,15 +24,26 @@ namespace av_router {
 		if (iter == m_log_state.end())
 			return;
 
+		std::vector<uint8_t> symmetickey = boost::any_cast<std::vector<uint8_t>>(connection->retrive_module_private("symmetickey"));
+
+		const unsigned char * in = (unsigned char *) login->user_cert().data();
+
+		boost::shared_ptr<X509> user_cert(d2i_X509(NULL, &in , login->user_cert().length()), X509_free);
+		connection->store_module_private("user_cert", user_cert);
+
+		// TODO 首先验证用户的证书
+
+
+		// 证书验证通过后, 用用户的公钥解密 encryped_radom_key 然后比较是否是 symmetickey
+		// 如果是, 那么此次就不是冒名登录
+
+		// 接着到数据库查询是否阻止登录, 是不是帐号没钱了不给登录了 etc
+
+		login->encryped_radom_key();
+
 		// 登陆成功.
 		login_state& state = iter->second;
 		state.status = login_state::succeed;
-
-		// TODO 用户的公钥解密 encryped_radom_key 后应该是一个 symmetickey
-		login->encryped_radom_key();
-		// TODO: 处理登陆.login
-
-		// NOTE: m_shared_key 是共享的加密密钥
 
 		proto::login_result result;
 		result.set_result(proto::login_result::LOGIN_SUCCEED);
