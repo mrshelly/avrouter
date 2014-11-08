@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="generated_proto\address.pb.cc" />
     <ClCompile Include="generated_proto\message.pb.cc" />
     <ClCompile Include="generated_proto\old.pb.cc" />
     <ClCompile Include="generated_proto\user.pb.cc" />
@@ -30,6 +31,7 @@
     <ClCompile Include="src\server.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="generated_proto\address.pb.h" />
     <ClInclude Include="generated_proto\message.pb.h" />
     <ClInclude Include="generated_proto\old.pb.h" />
     <ClInclude Include="generated_proto\user.pb.h" />
