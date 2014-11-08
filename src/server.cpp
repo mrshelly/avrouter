@@ -101,6 +101,16 @@ namespace av_router {
 		iter->second(msg, conn, boost::ref(m_connection_manager)); // 或者直接: m_message_callback[name](msg, conn, boost::ref(m_connection_manager));
 	}
 
+	void server::do_connection_notify(int type, connection_ptr conn)
+	{
+		boost::shared_lock<boost::shared_mutex> l(m_connection_callback_mtx);
+
+		std::for_each(std::begin(m_connection_callback), std::end(m_connection_callback),
+			[&](const std::pair<std::string, connection_callback> & item){
+				item.second(type, conn, boost::ref(m_connection_manager));
+			});
+	}
+
 	bool server::add_message_process_moudle(const std::string& name, message_callback cb)
 	{
 		boost::unique_lock<boost::shared_mutex> l(m_message_callback_mtx);
