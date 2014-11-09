@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libprotobuf", "third_party\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "soci", "third_party\soci\src\soci.vcxproj", "{34822E9D-4502-4FFF-A1DA-DA47404845AF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpq", "third_party\libpq\libpq.vcxproj", "{EF5E3D85-B612-4BB5-82D4-D79A29360635}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -27,6 +29,10 @@ Global
 		{34822E9D-4502-4FFF-A1DA-DA47404845AF}.Debug|x64.Build.0 = Debug|x64
 		{34822E9D-4502-4FFF-A1DA-DA47404845AF}.Release|x64.ActiveCfg = Release|x64
 		{34822E9D-4502-4FFF-A1DA-DA47404845AF}.Release|x64.Build.0 = Release|x64
+		{EF5E3D85-B612-4BB5-82D4-D79A29360635}.Debug|x64.ActiveCfg = Debug|x64
+		{EF5E3D85-B612-4BB5-82D4-D79A29360635}.Debug|x64.Build.0 = Debug|x64
+		{EF5E3D85-B612-4BB5-82D4-D79A29360635}.Release|x64.ActiveCfg = Release|x64
+		{EF5E3D85-B612-4BB5-82D4-D79A29360635}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
