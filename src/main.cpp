@@ -21,7 +21,7 @@ int main(int argc, char** argv)
 	io_service_pool io_pool(8);
 
 	// 创建服务器.
-	server serv(io_pool, 5432);
+	server serv(io_pool, 24950);
 	// 创建登陆处理模块.
 	login_moudle moudle_login(io_pool.get_io_service());
 	packet_forward forward_packet(io_pool.get_io_service());
