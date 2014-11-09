@@ -5,6 +5,10 @@
 #include "packet_forward.hpp"
 #include "server.hpp"
 
+// 测试数据库.
+#include "soci.h"
+#include "soci-config.h"
+#include "soci-postgresql.h"
 
 using namespace av_router;
 
@@ -15,8 +19,20 @@ void terminator(io_service_pool& ios, server& serv, login_moudle& login)
 	ios.stop();
 }
 
+void test_soci(const soci::backend_factory& backend, std::string conn_str)
+{
+	soci::session sql(backend, conn_str);
+}
+
 int main(int argc, char** argv)
 {
+	{
+		std::string conn_str = "hostaddr = '127.0.0.1' port = '4321' dbname = 'avim' user = 'postgres' password = 'xyz' connect_timeout = '3'";
+		soci::backend_factory const &backEnd = *soci::factory_postgresql();
+
+		test_soci(backEnd, conn_str);
+	}
+
 	// 8线程并发.
 	io_service_pool io_pool(8);
 

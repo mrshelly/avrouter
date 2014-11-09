@@ -38,6 +38,9 @@
     <ClInclude Include="proto\user.pb.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="third_party\libpq\libpq.vcxproj">
+      <Project>{ef5e3d85-b612-4bb5-82d4-d79a29360635}</Project>
+    </ProjectReference>
     <ProjectReference Include="third_party\protobuf\vsprojects\libprotobuf.vcxproj">
       <Project>{3e283f37-a4ed-41b7-a3e6-a2d89d131a30}</Project>
     </ProjectReference>
@@ -89,7 +92,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_WIN32_WINNT=0x0501;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;LOGGER_DBG_VIEW;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>.\include;.\third_party\protobuf\src;.\third_party;.\proto;.\thirdparty\soci\src\core;.\thirdparty\soci\src\backends\postgresql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\include;.\third_party\protobuf\src;.\third_party;.\proto;.\third_party\soci\src\core;.\third_party\soci\src\backends\postgresql;.\third_party\libpq\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -110,7 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions> /Qvec-report:2</AdditionalOptions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>.\include;.\third_party\protobuf\src;.\third_party;.\proto;.\thirdparty\soci\src\core;.\thirdparty\soci\src\backends\postgresql;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\include;.\third_party\protobuf\src;.\third_party;.\proto;.\third_party\soci\src\core;.\third_party\soci\src\backends\postgresql;.\third_party\libpq\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
