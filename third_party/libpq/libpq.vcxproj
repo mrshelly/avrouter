@@ -11,17 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\fe-auth.h" />
-    <ClInclude Include="include\fe_memutils.h" />
-    <ClInclude Include="include\getaddrinfo.h" />
-    <ClInclude Include="include\ip.h" />
-    <ClInclude Include="include\libpq-events.h" />
-    <ClInclude Include="include\md5.h" />
-    <ClInclude Include="include\pqexpbuffer.h" />
-    <ClInclude Include="include\pthread-win32.h" />
-    <ClInclude Include="include\win32.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\chklocale.c" />
     <ClCompile Include="src\crypt.c" />
     <ClCompile Include="src\dirent.c" />

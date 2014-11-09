@@ -15,35 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\win32.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\fe-auth.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\getaddrinfo.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ip.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\libpq-events.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\md5.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\pqexpbuffer.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\pthread-win32.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="include\fe_memutils.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="src\pqsignal.c">
       <Filter>源文件</Filter>
     </ClCompile>
