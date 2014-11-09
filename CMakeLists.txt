@@ -39,6 +39,20 @@ link_directories(${Boost_LIB_DIRS})
 
 link_libraries(${Boost_LIBRARIES} ${OPENSSL_LIBRARIES} ${PKCS11_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
+find_library(SOCI_LIBRARY NAMES soci_core)
+find_library(SOCI_POSTGRES_LIBRARY NAMES soci_postgresql)
+
+if(NOT SOCI_LIBRARY)
+message(FATAL_ERROR "SOCI library NOT FOUND!" )
+endif()
+
+if(NOT SOCI_POSTGRES_LIBRARY)
+message(FATAL_ERROR "SOCI do not have postgresql backend!" )
+endif()
+
+
+link_libraries(${SOCI_LIBRARY})
+
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX OR CMAKE_COMPILER_IS_UNIX_ICC)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
