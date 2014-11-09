@@ -19,10 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="generated_proto\address.pb.cc" />
-    <ClCompile Include="generated_proto\message.pb.cc" />
-    <ClCompile Include="generated_proto\old.pb.cc" />
-    <ClCompile Include="generated_proto\user.pb.cc" />
+    <ClCompile Include="proto\address.pb.cc" />
+    <ClCompile Include="proto\im.pb.cc" />
+    <ClCompile Include="proto\message.pb.cc" />
+    <ClCompile Include="proto\old.pb.cc" />
+    <ClCompile Include="proto\user.pb.cc" />
     <ClCompile Include="src\connection.cpp" />
     <ClCompile Include="src\io_service_pool.cpp" />
     <ClCompile Include="src\login_moudle.cpp" />
@@ -31,10 +32,6 @@
     <ClCompile Include="src\server.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="generated_proto\address.pb.h" />
-    <ClInclude Include="generated_proto\message.pb.h" />
-    <ClInclude Include="generated_proto\old.pb.h" />
-    <ClInclude Include="generated_proto\user.pb.h" />
     <ClInclude Include="include\connection.hpp" />
     <ClInclude Include="include\io_service_pool.hpp" />
     <ClInclude Include="include\logging.hpp" />
@@ -42,6 +39,11 @@
     <ClInclude Include="include\packet_forward.hpp" />
     <ClInclude Include="include\serialization.hpp" />
     <ClInclude Include="include\server.hpp" />
+    <ClInclude Include="proto\address.pb.h" />
+    <ClInclude Include="proto\im.pb.h" />
+    <ClInclude Include="proto\message.pb.h" />
+    <ClInclude Include="proto\old.pb.h" />
+    <ClInclude Include="proto\user.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="third_party\protobuf\vsprojects\libprotobuf.vcxproj">
@@ -132,7 +134,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_WIN32_WINNT=0x0501;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;LOGGER_DBG_VIEW;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>.\include;.\third_party\protobuf\src;.\third_party;.\generated_proto;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\include;.\third_party\protobuf\src;.\third_party;.\proto;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -173,7 +175,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions> /Qvec-report:2</AdditionalOptions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>.\include;.\third_party\protobuf\src;.\third_party;.\generated_proto;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\include;.\third_party\protobuf\src;.\third_party;.\proto;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

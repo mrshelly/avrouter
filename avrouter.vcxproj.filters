@@ -16,20 +16,23 @@
     <ClCompile Include="src\server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="generated_proto\message.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="generated_proto\old.pb.cc">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="generated_proto\user.pb.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\packet_forward.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="generated_proto\address.pb.cc">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="proto\message.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
+    <ClCompile Include="proto\old.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
+    <ClCompile Include="proto\user.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
+    <ClCompile Include="proto\address.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
+    <ClCompile Include="proto\im.pb.cc">
+      <Filter>proto</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -51,20 +54,23 @@
     <ClInclude Include="include\logging.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="generated_proto\message.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="generated_proto\old.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="generated_proto\user.pb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\packet_forward.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="generated_proto\address.pb.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="proto\message.pb.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="proto\old.pb.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="proto\user.pb.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="proto\address.pb.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="proto\im.pb.h">
+      <Filter>proto</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +79,9 @@
     </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{44da83c8-e853-4e94-815b-d4365fe9be5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="proto">
+      <UniqueIdentifier>{aeb4fbc2-ad34-43d3-8df5-862aa18fba1b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
