@@ -5,5 +5,5 @@
 
 ##### 代码获取:
 
-	git clone https://github.com/Jackarain/avrouter.git avrouter
+	git clone https://github.com/avplayer/avrouter.git avrouter
 	$ git submodule update --init
