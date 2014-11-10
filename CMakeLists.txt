@@ -67,5 +67,5 @@ add_subdirectory(src)
 
 check_library_exists(rt clock_gettime "" HAVE_CLOCK_GETTIME)
 if(HAVE_CLOCK_GETTIME)
-        target_link_libraries(QQOfflineFileSender -lrt)
+        link_libraries(-lrt)
 endif(HAVE_CLOCK_GETTIME)
