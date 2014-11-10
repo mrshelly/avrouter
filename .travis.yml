@@ -12,7 +12,7 @@ before_install:
   - mkdir -pv build
   - git submodule update --init
   - mkdir -pv buildsoci
-  - ( cd buildsoci && cmake ../third_party/soci/src -DCMAKE_INSTALL_PREFIX=/usr && make -j2 && sudo make install
+  - ( cd buildsoci && cmake ../third_party/soci/src -DCMAKE_INSTALL_PREFIX=/usr && make -j2 && sudo make install )
 
 before_script:
   cd build && cmake .. -DDEBUG=1
