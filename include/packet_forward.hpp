@@ -18,7 +18,7 @@ namespace av_router {
 	class packet_forward
 	{
 	public:
-		packet_forward(boost::asio::io_service& io);
+		packet_forward(av_router::io_service_pool&);
 		~packet_forward();
 
 	public:
@@ -26,7 +26,7 @@ namespace av_router {
 		void process_packet(google::protobuf::Message*, connection_ptr, connection_manager&);
 
 	private:
-		boost::asio::io_service& m_io_service;
+		av_router::io_service_pool& m_io_service_poll;
 		std::string m_thisdomain;
 		typedef std::map<std::string, connection_weak_ptr> routing_table_type;
 		routing_table_type m_routing_table;

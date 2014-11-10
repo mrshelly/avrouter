@@ -8,8 +8,8 @@
 
 namespace av_router {
 
-	packet_forward::packet_forward(boost::asio::io_service& io)
-		: m_io_service(io)
+	packet_forward::packet_forward(av_router::io_service_pool& io_pool)
+		: m_io_service_poll(io_pool)
 	{
 	}
 

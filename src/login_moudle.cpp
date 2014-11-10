@@ -7,9 +7,9 @@
 
 namespace av_router {
 
-	login_moudle::login_moudle(boost::asio::io_service& io)
-		: m_io_service(io)
-		, m_timer(io)
+	login_moudle::login_moudle(av_router::io_service_pool& io_poll)
+		: m_io_service_pool(io_poll)
+		, m_timer(io_poll.get_io_service())
 	{
 		continue_timer();
 	}
