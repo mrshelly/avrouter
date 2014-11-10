@@ -22,7 +22,7 @@ find_package(Threads REQUIRED)
 find_package(Boost 1.54 COMPONENTS thread system coroutine context regex date_time chrono filesystem REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(OpenSSL REQUIRED)
-#find_package(PkgConfig REQUIRED)
+find_package(PostgreSQL REQUIRED)
 
 #pkg_check_modules(PKCS11 REQUIRED libpkcs11-helper-1 )
 
@@ -52,9 +52,10 @@ if(NOT SOCI_PG_LIBRARY)
 message(FATAL_ERROR "SOCI do not have postgresql backend!" )
 endif()
 
+include_directories( ${PostgreSQL_INCLUDE_DIRS} )
 include_directories( ${SOCI_INCLUDE_DIRS} )
 
-link_libraries(${SOCI_LIBRARY} ${SOCI_PG_LIBRARY})
+link_libraries(${SOCI_LIBRARY} ${SOCI_PG_LIBRARY} ${PostgreSQL_LIBRARIES})
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX OR CMAKE_COMPILER_IS_UNIX_ICC)
 
