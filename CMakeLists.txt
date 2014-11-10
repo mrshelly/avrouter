@@ -22,7 +22,6 @@ find_package(Threads REQUIRED)
 find_package(Boost 1.54 COMPONENTS thread system coroutine context regex date_time chrono filesystem REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(OpenSSL REQUIRED)
-find_package(PostgreSQL REQUIRED)
 
 #pkg_check_modules(PKCS11 REQUIRED libpkcs11-helper-1 )
 
@@ -38,6 +37,10 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/proto_doc)
 link_directories(${Boost_LIB_DIRS})
 
 link_libraries(${Boost_LIBRARIES} ${OPENSSL_LIBRARIES} ${PKCS11_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+set(PostgreSQL_FIND_QUIETLY TRUE)
+find_package(PostgreSQL REQUIRED)
 
 find_library(SOCI_LIBRARY NAMES soci_core HINTS /usr/lib64 /usr/lib /usr/lib/soci/lib)
 find_library(SOCI_PG_LIBRARY NAMES soci_postgresql HINTS /usr/lib64 /usr/lib /usr/lib/soci/lib)

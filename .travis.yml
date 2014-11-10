@@ -13,6 +13,7 @@ before_install:
   - git submodule update --init
   - mkdir -pv buildsoci
   - ( cd buildsoci && cmake ../third_party/soci/src -DCMAKE_INSTALL_PREFIX=/usr && make -j2 && sudo make install )
+  - sudo cp third_party/soci/src/cmake/modules/FindPostgreSQL.cmake /usr/share/cmake-2.8/Modules/FindPostgreSQL.cmake
 
 before_script:
   cd build && cmake .. -DDEBUG=1
