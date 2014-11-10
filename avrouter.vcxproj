@@ -26,6 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\connection.hpp" />
+    <ClInclude Include="include\database.hpp" />
     <ClInclude Include="include\io_service_pool.hpp" />
     <ClInclude Include="include\logging.hpp" />
     <ClInclude Include="include\login_moudle.hpp" />

@@ -75,6 +75,9 @@
     <ClInclude Include="proto\im.pb.h">
       <Filter>proto</Filter>
     </ClInclude>
+    <ClInclude Include="include\database.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
