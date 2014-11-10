@@ -1,14 +1,12 @@
-
 #include "database.hpp"
+#include "logging.hpp"
 
-using av_router::database;
+namespace av_router {
 
-database::database(boost::asio::io_service& io, soci::connection_pool& db_pool)
-{
-	
-}
+	database::database(boost::asio::io_service& io, soci::connection_pool& db_pool)
+	{}
 
-database::~database()
-{
+	database::~database()
+	{}
 
 }
