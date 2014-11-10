@@ -39,7 +39,7 @@ link_directories(${Boost_LIB_DIRS})
 
 link_libraries(${Boost_LIBRARIES} ${OPENSSL_LIBRARIES} ${PKCS11_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
-find_library(SOCI_LIBRARY NAMES soci_core)
+find_library(SOCI_LIBRARY NAMES soci_core HINTS /usr/lib64 /usr/lib /usr/lib/soci/lib)
 # find_library(SOCI_POSTGRES_LIBRARY NAMES soci_postgresql)
 
 find_path( SOCI_INCLUDE_DIRS connection-pool.h PATHS /usr/include/soci /usr/locale/include/soci /opt/soci/include/soci)
