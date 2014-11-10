@@ -24,6 +24,13 @@ void terminator(io_service_pool& ios, server& serv, login_moudle& login)
 
 
 const int pool_size = 32;
+const std::string connection_string = "hostaddr = '127.0.0.1' "
+	"port = '4321' "
+	"user = 'postgres' "
+	"password = 'avrouter' "
+	"dbname = 'avim' "
+	"connect_timeout = '3' "
+	"application_name = 'avrouter'";
 
 int main(int argc, char** argv)
 {
@@ -44,7 +51,7 @@ int main(int argc, char** argv)
 		{
 			soci::session& sql = db_pool.at(i);
 			// 连接本机的数据库.
-			sql.open(db_backend, "hostaddr = '127.0.0.1' port = '4321' user = 'postgres' password = 'avrouter' dbname = 'avim' connect_timeout = '3' application_name = 'avrouter'");
+			sql.open(db_backend, connection_string);
 		}
 	}
 	catch (soci::soci_error& ec)
