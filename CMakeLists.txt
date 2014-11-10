@@ -19,7 +19,8 @@ if(MSVC)
 endif()
 
 find_package(Threads REQUIRED)
-find_package(Boost 1.54 COMPONENTS thread system coroutine context regex date_time chrono filesystem REQUIRED)
+find_package(Boost 1.54 COMPONENTS thread system coroutine context regex
+	date_time chrono filesystem program_options REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(OpenSSL REQUIRED)
 
