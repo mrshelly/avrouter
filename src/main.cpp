@@ -32,33 +32,31 @@ const int pool_size = 32;
 
 int main(int argc, char** argv)
 {
-#ifdef _WIN32
-	// Linux 上使用动态加载, 无需链接到 libsoci_postgresql.so
-	// Windows 上因为是静态链接, 所以需要注册一下 postgresql 后端
-	// 否则回去找没有编译出来的 libsoci_postgresql.dll
-	soci::register_factory_postgresql();
-#endif
-	// 十个数据库并发链接
+	// 直接指定数据库后端, 避免寻找dll而失败, 这里指定为postgresql数据库后端.
+	soci::backend_factory const &db_backend(*soci::factory_postgresql());
+	// 十个数据库并发链接.
 	soci::connection_pool db_pool(pool_size);
-
 	// 8线程并发.
 	io_service_pool io_pool(8);
 
 	// 创建服务器.
 	server serv(io_pool, 24950);
 
-	// 创建数据库连接池
-	// 居然不支持 c++11 模式的 range for , 我就不吐槽了
-	for (size_t i = 0; i != pool_size; ++i)
+	try {
+		// 创建数据库连接池.
+		for (size_t i = 0; i != pool_size; ++i)
+		{
+			soci::session& sql = db_pool.at(i);
+			// 连接本机的数据库.
+			sql.open(db_backend, "hostaddr = '127.0.0.1' port = '4321' user = 'postgres' password = 'wgm001' connect_timeout = '3' application_name = 'avrouter'"); // ALTER DATABASE avim
+		}
+	}
+	catch (soci::soci_error& ec)
 	{
-		soci::session & sql = db_pool.at(i);
-		// 服务器现在还没配置 postgresql , 这里会失败
-		// 代码注释掉先了.
-		//sql.open("postgresql://dbname=avim");
+		LOG_ERR << "create database connection pool failed, error: " << ec.what();
 	}
 
 	database async_database(io_pool.get_io_service(), db_pool);
-
 
 	// 创建登陆处理模块.
 	login_moudle moudle_login(io_pool);
