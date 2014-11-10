@@ -37,13 +37,14 @@ int main(int argc, char** argv)
 	// 创建服务器.
 	server serv(io_pool, 24950);
 
-	try {
+	try
+	{
 		// 创建数据库连接池.
 		for (size_t i = 0; i != pool_size; ++i)
 		{
 			soci::session& sql = db_pool.at(i);
 			// 连接本机的数据库.
-			sql.open(db_backend, "hostaddr = '127.0.0.1' port = '4321' user = 'postgres' password = 'wgm001' connect_timeout = '3' application_name = 'avrouter'"); // ALTER DATABASE avim
+			sql.open(db_backend, "hostaddr = '127.0.0.1' port = '4321' user = 'postgres' password = 'avrouter' dbname = 'avim' connect_timeout = '3' application_name = 'avrouter'");
 		}
 	}
 	catch (soci::soci_error& ec)
