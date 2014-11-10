@@ -1,5 +1,9 @@
 ﻿#include <iostream>
 
+#include <session.h>
+#include <connection-pool.h>
+#include <postgresql/soci-postgresql.h>
+
 #include "io_service_pool.hpp"
 #include "login_moudle.hpp"
 #include "packet_forward.hpp"
@@ -15,13 +19,33 @@ void terminator(io_service_pool& ios, server& serv, login_moudle& login)
 	ios.stop();
 }
 
+const int poolSize = 32;
+
 int main(int argc, char** argv)
 {
+#ifdef _WIN32
+	// Linux 上使用动态加载, 无需链接到 libsoci_postgresql.so
+	// Windows 上因为是静态链接, 所以需要注册一下 postgresql 后端
+	// 否则回去找没有编译出来的 libsoci_postgresql.dll
+	soci::register_factory_postgresql();
+#endif
+	// 十个数据库并发链接
+	soci::connection_pool db_pool(poolSize);
+
 	// 8线程并发.
 	io_service_pool io_pool(8);
 
 	// 创建服务器.
 	server serv(io_pool, 24950);
+
+	// 创建数据库连接池
+	// 居然不支持 c++11 模式的 range for , 我就不吐槽了
+	for (size_t i = 0; i != poolSize; ++i)
+	{
+		soci::session & sql = db_pool.at(i);
+		sql.open("postgresql://dbname=avim");
+	}
+
 	// 创建登陆处理模块.
 	login_moudle moudle_login(io_pool.get_io_service());
 	packet_forward forward_packet(io_pool.get_io_service());
