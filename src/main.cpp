@@ -28,7 +28,7 @@ void terminator(io_service_pool& ios, server& serv, login_moudle& login)
 }
 
 
-const int poolSize = 32;
+const int pool_size = 32;
 
 int main(int argc, char** argv)
 {
@@ -39,7 +39,7 @@ int main(int argc, char** argv)
 	soci::register_factory_postgresql();
 #endif
 	// 十个数据库并发链接
-	soci::connection_pool db_pool(poolSize);
+	soci::connection_pool db_pool(pool_size);
 
 	// 8线程并发.
 	io_service_pool io_pool(8);
@@ -49,7 +49,7 @@ int main(int argc, char** argv)
 
 	// 创建数据库连接池
 	// 居然不支持 c++11 模式的 range for , 我就不吐槽了
-	for (size_t i = 0; i != poolSize; ++i)
+	for (size_t i = 0; i != pool_size; ++i)
 	{
 		soci::session & sql = db_pool.at(i);
 		// 服务器现在还没配置 postgresql , 这里会失败
