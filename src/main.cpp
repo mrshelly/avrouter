@@ -1,12 +1,5 @@
 ﻿#include <iostream>
 
-#include <session.h>
-#include <connection-pool.h>\
-
-#ifdef _WIN32
-#include <postgresql/soci-postgresql.h>
-#endif
-
 #include "database.hpp"
 #include "io_service_pool.hpp"
 #include "login_moudle.hpp"
@@ -14,9 +7,11 @@
 #include "server.hpp"
 
 // 测试数据库.
-#include "soci.h"
-#include "soci-config.h"
-#include "soci-postgresql.h"
+#include <soci.h>
+#include <soci-config.h>
+#include <session.h>
+#include <connection-pool.h>
+#include <postgresql/soci-postgresql.h>
 
 using namespace av_router;
 
