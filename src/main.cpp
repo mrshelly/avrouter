@@ -4,6 +4,7 @@
 #include <connection-pool.h>
 #include <postgresql/soci-postgresql.h>
 
+#include "database.hpp"
 #include "io_service_pool.hpp"
 #include "login_moudle.hpp"
 #include "packet_forward.hpp"
@@ -45,6 +46,8 @@ int main(int argc, char** argv)
 		soci::session & sql = db_pool.at(i);
 		sql.open("postgresql://dbname=avim");
 	}
+
+	database async_database(io_pool.get_io_service(), db_pool);
 
 	// 创建登陆处理模块.
 	login_moudle moudle_login(io_pool);
