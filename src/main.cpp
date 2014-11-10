@@ -1,8 +1,11 @@
 ﻿#include <iostream>
 
 #include <session.h>
-#include <connection-pool.h>
+#include <connection-pool.h>\
+
+#ifdef _WIN32
 #include <postgresql/soci-postgresql.h>
+#endif
 
 #include "database.hpp"
 #include "io_service_pool.hpp"

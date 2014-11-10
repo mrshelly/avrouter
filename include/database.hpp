@@ -27,8 +27,6 @@ using namespace boost::posix_time;
 
 #include <session.h>
 #include <connection-pool.h>
-#include <postgresql/soci-postgresql.h>
-
 
 #include "logging.hpp"
 
