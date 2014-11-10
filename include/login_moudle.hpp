@@ -15,24 +15,25 @@ typedef struct dh_st DH;
 
 namespace av_router {
 
+	class database;
 	class login_moudle
 	{
 	public:
-		login_moudle(boost::asio::io_service& io);
+		login_moudle(av_router::io_service_pool&);
 		~login_moudle();
 
 	public:
 		void quit();
 
-		void process_login_message(google::protobuf::Message*, connection_ptr, connection_manager&);
-		void process_hello_message(google::protobuf::Message*, connection_ptr, connection_manager&);
+		void process_login_message(google::protobuf::Message*, connection_ptr, connection_manager&, database&);
+		void process_hello_message(google::protobuf::Message*, connection_ptr, connection_manager&, database&);
 
 	private:
 		void on_tick(const boost::system::error_code& error);
 		void continue_timer();
 
 	private:
-		boost::asio::io_service& m_io_service;
+		av_router::io_service_pool& m_io_service_pool;
 		boost::asio::deadline_timer m_timer;
 		struct login_state
 		{

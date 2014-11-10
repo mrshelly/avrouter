@@ -1,5 +1,13 @@
 ﻿#include <iostream>
 
+#include <session.h>
+#include <connection-pool.h>\
+
+#ifdef _WIN32
+#include <postgresql/soci-postgresql.h>
+#endif
+
+#include "database.hpp"
 #include "io_service_pool.hpp"
 #include "login_moudle.hpp"
 #include "packet_forward.hpp"
@@ -19,32 +27,46 @@ void terminator(io_service_pool& ios, server& serv, login_moudle& login)
 	ios.stop();
 }
 
-void test_soci(const soci::backend_factory& backend, std::string conn_str)
-{
-	soci::session sql(backend, conn_str);
-}
+
+const int poolSize = 32;
 
 int main(int argc, char** argv)
 {
-	{
-		std::string conn_str = "hostaddr = '127.0.0.1' port = '4321' dbname = 'avim' user = 'postgres' password = 'xyz' connect_timeout = '3'";
-		soci::backend_factory const &backEnd = *soci::factory_postgresql();
-
-		test_soci(backEnd, conn_str);
-	}
+#ifdef _WIN32
+	// Linux 上使用动态加载, 无需链接到 libsoci_postgresql.so
+	// Windows 上因为是静态链接, 所以需要注册一下 postgresql 后端
+	// 否则回去找没有编译出来的 libsoci_postgresql.dll
+	soci::register_factory_postgresql();
+#endif
+	// 十个数据库并发链接
+	soci::connection_pool db_pool(poolSize);
 
 	// 8线程并发.
 	io_service_pool io_pool(8);
 
 	// 创建服务器.
 	server serv(io_pool, 24950);
+
+	// 创建数据库连接池
+	// 居然不支持 c++11 模式的 range for , 我就不吐槽了
+	for (size_t i = 0; i != poolSize; ++i)
+	{
+		soci::session & sql = db_pool.at(i);
+		// 服务器现在还没配置 postgresql , 这里会失败
+		// 代码注释掉先了.
+		//sql.open("postgresql://dbname=avim");
+	}
+
+	database async_database(io_pool.get_io_service(), db_pool);
+
+
 	// 创建登陆处理模块.
-	login_moudle moudle_login(io_pool.get_io_service());
-	packet_forward forward_packet(io_pool.get_io_service());
+	login_moudle moudle_login(io_pool);
+	packet_forward forward_packet(io_pool);
 
 	// 添加登陆处理模块.
-	serv.add_message_process_moudle("proto.client_hello", boost::bind(&login_moudle::process_hello_message, &moudle_login, _1, _2, _3));
-	serv.add_message_process_moudle("proto.login", boost::bind(&login_moudle::process_login_message, &moudle_login, _1, _2, _3));
+	serv.add_message_process_moudle("proto.client_hello", boost::bind(&login_moudle::process_hello_message, &moudle_login, _1, _2, _3, boost::ref(async_database)));
+	serv.add_message_process_moudle("proto.login", boost::bind(&login_moudle::process_login_message, &moudle_login, _1, _2, _3, boost::ref(async_database)));
 
 	// 添加包的转发处理模块
 	serv.add_message_process_moudle("proto.avPacket", boost::bind(&packet_forward::process_packet, &forward_packet, _1, _2, _3));

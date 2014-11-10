@@ -34,6 +34,9 @@
     <ClCompile Include="proto\im.pb.cc">
       <Filter>proto</Filter>
     </ClCompile>
+    <ClCompile Include="src\database.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\connection.hpp">

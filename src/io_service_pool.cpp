@@ -38,7 +38,7 @@ namespace av_router {
 		{
 			boost::shared_ptr<boost::thread> thread(new boost::thread(
 				boost::bind(&boost::asio::io_service::run, io_services_[i])));
-#ifdef BOOST_THREAD_PLATFORM_PTHREAD
+#ifdef _GNU_SOURCE
 			cpu_set_t mask;
 			CPU_ZERO(&mask);
 			CPU_SET(i, &mask);

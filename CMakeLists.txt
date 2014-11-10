@@ -39,17 +39,20 @@ link_directories(${Boost_LIB_DIRS})
 
 link_libraries(${Boost_LIBRARIES} ${OPENSSL_LIBRARIES} ${PKCS11_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
-find_library(SOCI_LIBRARY NAMES soci_core)
-find_library(SOCI_POSTGRES_LIBRARY NAMES soci_postgresql)
+find_library(SOCI_LIBRARY NAMES soci_core HINTS /usr/lib64 /usr/lib /usr/lib/soci/lib)
+# find_library(SOCI_POSTGRES_LIBRARY NAMES soci_postgresql)
+
+find_path( SOCI_INCLUDE_DIRS connection-pool.h PATHS /usr/include/soci /usr/locale/include/soci /opt/soci/include/soci)
 
 if(NOT SOCI_LIBRARY)
 message(FATAL_ERROR "SOCI library NOT FOUND!" )
 endif()
 
-if(NOT SOCI_POSTGRES_LIBRARY)
-message(FATAL_ERROR "SOCI do not have postgresql backend!" )
-endif()
+#if(NOT SOCI_POSTGRES_LIBRARY)
+#message(FATAL_ERROR "SOCI do not have postgresql backend!" )
+#endif()
 
+include_directories( ${SOCI_INCLUDE_DIRS} )
 
 link_libraries(${SOCI_LIBRARY})
 
@@ -62,3 +65,7 @@ endif()
 add_subdirectory(proto_doc)
 add_subdirectory(src)
 
+check_library_exists(rt clock_gettime "" HAVE_CLOCK_GETTIME)
+if(HAVE_CLOCK_GETTIME)
+        link_libraries(-lrt)
+endif(HAVE_CLOCK_GETTIME)
