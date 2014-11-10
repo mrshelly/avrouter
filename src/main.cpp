@@ -38,11 +38,6 @@ int main(int argc, char** argv)
 	soci::backend_factory const &db_backend(*soci::factory_postgresql());
 	// 十个数据库并发链接.
 	soci::connection_pool db_pool(pool_size);
-	// 8线程并发.
-	io_service_pool io_pool(8);
-
-	// 创建服务器.
-	server serv(io_pool, 24950);
 
 	try
 	{
@@ -58,6 +53,11 @@ int main(int argc, char** argv)
 	{
 		LOG_ERR << "create database connection pool failed, error: " << ec.what();
 	}
+
+	// 8线程并发.
+	io_service_pool io_pool(8);
+	// 创建服务器.
+	server serv(io_pool, 24950);
 
 	database async_database(io_pool.get_io_service(), db_pool);
 
