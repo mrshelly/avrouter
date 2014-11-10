@@ -22,6 +22,8 @@ namespace av_router {
 		~database();
 
 	public:
+		boost::asio::io_service& m_io_service;
+		soci::connection_pool& m_db_pool;
 	};
 
 
