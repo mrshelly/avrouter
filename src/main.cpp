@@ -44,11 +44,12 @@ int main(int argc, char** argv)
 	for (size_t i = 0; i != poolSize; ++i)
 	{
 		soci::session & sql = db_pool.at(i);
-		sql.open("postgresql://dbname=avim");
+		// 服务器现在还没配置 postgresql , 这里会失败
+		// 代码注释掉先了.
+		//sql.open("postgresql://dbname=avim");
 	}
 
 	database async_database(io_pool.get_io_service(), db_pool);
-
 
 
 	// 创建登陆处理模块.

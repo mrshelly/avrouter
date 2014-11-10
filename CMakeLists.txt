@@ -48,9 +48,9 @@ if(NOT SOCI_LIBRARY)
 message(FATAL_ERROR "SOCI library NOT FOUND!" )
 endif()
 
-if(NOT SOCI_POSTGRES_LIBRARY)
-message(FATAL_ERROR "SOCI do not have postgresql backend!" )
-endif()
+#if(NOT SOCI_POSTGRES_LIBRARY)
+#message(FATAL_ERROR "SOCI do not have postgresql backend!" )
+#endif()
 
 include_directories( ${SOCI_INCLUDE_DIRS} )
 
