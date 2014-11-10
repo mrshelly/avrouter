@@ -34,6 +34,11 @@ include_directories(include)
 include_directories(proto_doc)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/proto_doc)
 
+check_library_exists(rt clock_gettime "" HAVE_CLOCK_GETTIME)
+if(HAVE_CLOCK_GETTIME)
+        link_libraries(-lrt)
+endif(HAVE_CLOCK_GETTIME)
+
 link_directories(${Boost_LIB_DIRS})
 
 link_libraries(${Boost_LIBRARIES} ${OPENSSL_LIBRARIES} ${PKCS11_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
@@ -61,15 +66,9 @@ include_directories( ${SOCI_INCLUDE_DIRS} )
 link_libraries(${SOCI_LIBRARY} ${SOCI_PG_LIBRARY} ${PostgreSQL_LIBRARIES})
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX OR CMAKE_COMPILER_IS_UNIX_ICC)
-
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-
 endif()
 
 add_subdirectory(proto_doc)
 add_subdirectory(src)
 
-check_library_exists(rt clock_gettime "" HAVE_CLOCK_GETTIME)
-if(HAVE_CLOCK_GETTIME)
-        link_libraries(-lrt)
-endif(HAVE_CLOCK_GETTIME)
