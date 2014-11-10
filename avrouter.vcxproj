@@ -17,6 +17,7 @@
     <ClCompile Include="proto\old.pb.cc" />
     <ClCompile Include="proto\user.pb.cc" />
     <ClCompile Include="src\connection.cpp" />
+    <ClCompile Include="src\database.cpp" />
     <ClCompile Include="src\io_service_pool.cpp" />
     <ClCompile Include="src\login_moudle.cpp" />
     <ClCompile Include="src\main.cpp" />
