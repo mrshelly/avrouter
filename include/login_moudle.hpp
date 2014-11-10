@@ -15,6 +15,7 @@ typedef struct dh_st DH;
 
 namespace av_router {
 
+	class database;
 	class login_moudle
 	{
 	public:
@@ -24,8 +25,8 @@ namespace av_router {
 	public:
 		void quit();
 
-		void process_login_message(google::protobuf::Message*, connection_ptr, connection_manager&);
-		void process_hello_message(google::protobuf::Message*, connection_ptr, connection_manager&);
+		void process_login_message(google::protobuf::Message*, connection_ptr, connection_manager&, database&);
+		void process_hello_message(google::protobuf::Message*, connection_ptr, connection_manager&, database&);
 
 	private:
 		void on_tick(const boost::system::error_code& error);

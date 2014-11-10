@@ -4,6 +4,7 @@
 #include <connection-pool.h>
 #include <postgresql/soci-postgresql.h>
 
+#include "database.hpp"
 #include "io_service_pool.hpp"
 #include "login_moudle.hpp"
 #include "packet_forward.hpp"
@@ -46,13 +47,17 @@ int main(int argc, char** argv)
 		sql.open("postgresql://dbname=avim");
 	}
 
+	database async_database(io_pool.get_io_service(), db_pool);
+
+
+
 	// 创建登陆处理模块.
 	login_moudle moudle_login(io_pool);
 	packet_forward forward_packet(io_pool);
 
 	// 添加登陆处理模块.
-	serv.add_message_process_moudle("proto.client_hello", boost::bind(&login_moudle::process_hello_message, &moudle_login, _1, _2, _3));
-	serv.add_message_process_moudle("proto.login", boost::bind(&login_moudle::process_login_message, &moudle_login, _1, _2, _3));
+	serv.add_message_process_moudle("proto.client_hello", boost::bind(&login_moudle::process_hello_message, &moudle_login, _1, _2, _3, boost::ref(async_database)));
+	serv.add_message_process_moudle("proto.login", boost::bind(&login_moudle::process_login_message, &moudle_login, _1, _2, _3, boost::ref(async_database)));
 
 	// 添加包的转发处理模块
 	serv.add_message_process_moudle("proto.avPacket", boost::bind(&packet_forward::process_packet, &forward_packet, _1, _2, _3));

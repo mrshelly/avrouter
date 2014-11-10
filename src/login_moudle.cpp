@@ -1,4 +1,5 @@
-﻿#include "login_moudle.hpp"
+﻿#include "database.hpp"
+#include "login_moudle.hpp"
 #include "user.pb.h"
 
 #include <openssl/dh.h>
@@ -17,7 +18,7 @@ namespace av_router {
 	login_moudle::~login_moudle()
 	{}
 
-	void login_moudle::process_login_message(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
+	void login_moudle::process_login_message(google::protobuf::Message* msg, connection_ptr connection, connection_manager&, database&)
 	{
 		proto::login* login = dynamic_cast<proto::login*>(msg);
 		std::map<ptrdiff_t, login_state>::iterator iter = m_log_state.find(reinterpret_cast<ptrdiff_t>(connection.get()));
@@ -52,7 +53,7 @@ namespace av_router {
 		connection->write_msg(response);
 	}
 
-	void login_moudle::process_hello_message(google::protobuf::Message* hellomsg, connection_ptr connection, connection_manager&)
+	void login_moudle::process_hello_message(google::protobuf::Message* hellomsg, connection_ptr connection, connection_manager&, database&)
 	{
 		proto::client_hello* client_hello = dynamic_cast<proto::client_hello*>(hellomsg);
 		login_state& state = m_log_state[reinterpret_cast<ptrdiff_t>(connection.get())];
