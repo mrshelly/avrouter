@@ -23,6 +23,7 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
+#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
@@ -36,10 +37,33 @@ void protobuf_ShutdownFile_im_2eproto();
 class text_message;
 class img_message;
 class emoji_message;
+class symmetry_encryption_key_distribution;
 class avim_message;
-class avim_group_message;
 class avim_message_packet;
 
+enum symmetry_encryption_key_distribution_EncryptionType {
+  symmetry_encryption_key_distribution_EncryptionType_AES = 0,
+  symmetry_encryption_key_distribution_EncryptionType_DES = 1,
+  symmetry_encryption_key_distribution_EncryptionType_BlowFish = 2,
+  symmetry_encryption_key_distribution_EncryptionType_TwoFish = 3,
+  symmetry_encryption_key_distribution_EncryptionType_Camellia = 4,
+  symmetry_encryption_key_distribution_EncryptionType_DES3_EDE = 5
+};
+bool symmetry_encryption_key_distribution_EncryptionType_IsValid(int value);
+const symmetry_encryption_key_distribution_EncryptionType symmetry_encryption_key_distribution_EncryptionType_EncryptionType_MIN = symmetry_encryption_key_distribution_EncryptionType_AES;
+const symmetry_encryption_key_distribution_EncryptionType symmetry_encryption_key_distribution_EncryptionType_EncryptionType_MAX = symmetry_encryption_key_distribution_EncryptionType_DES3_EDE;
+const int symmetry_encryption_key_distribution_EncryptionType_EncryptionType_ARRAYSIZE = symmetry_encryption_key_distribution_EncryptionType_EncryptionType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* symmetry_encryption_key_distribution_EncryptionType_descriptor();
+inline const ::std::string& symmetry_encryption_key_distribution_EncryptionType_Name(symmetry_encryption_key_distribution_EncryptionType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    symmetry_encryption_key_distribution_EncryptionType_descriptor(), value);
+}
+inline bool symmetry_encryption_key_distribution_EncryptionType_Parse(
+    const ::std::string& name, symmetry_encryption_key_distribution_EncryptionType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<symmetry_encryption_key_distribution_EncryptionType>(
+    symmetry_encryption_key_distribution_EncryptionType_descriptor(), name, value);
+}
 // ===================================================================
 
 class text_message : public ::google::protobuf::Message {
@@ -430,6 +454,140 @@ class emoji_message : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class symmetry_encryption_key_distribution : public ::google::protobuf::Message {
+ public:
+  symmetry_encryption_key_distribution();
+  virtual ~symmetry_encryption_key_distribution();
+
+  symmetry_encryption_key_distribution(const symmetry_encryption_key_distribution& from);
+
+  inline symmetry_encryption_key_distribution& operator=(const symmetry_encryption_key_distribution& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  #if __cplusplus >= 201103L || _MSC_VER >= 1600
+  inline symmetry_encryption_key_distribution& operator=(symmetry_encryption_key_distribution&& from) {
+    if (&from != this) {
+      Clear();
+      Swap(&from);
+    }
+    return *this;
+  }
+
+  symmetry_encryption_key_distribution(symmetry_encryption_key_distribution&& from);
+  #endif
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const symmetry_encryption_key_distribution& default_instance();
+
+  void Swap(symmetry_encryption_key_distribution* other);
+
+  // implements Message ----------------------------------------------
+
+  symmetry_encryption_key_distribution* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const symmetry_encryption_key_distribution& from);
+  void MergeFrom(const symmetry_encryption_key_distribution& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef symmetry_encryption_key_distribution_EncryptionType EncryptionType;
+  static const EncryptionType AES = symmetry_encryption_key_distribution_EncryptionType_AES;
+  static const EncryptionType DES = symmetry_encryption_key_distribution_EncryptionType_DES;
+  static const EncryptionType BlowFish = symmetry_encryption_key_distribution_EncryptionType_BlowFish;
+  static const EncryptionType TwoFish = symmetry_encryption_key_distribution_EncryptionType_TwoFish;
+  static const EncryptionType Camellia = symmetry_encryption_key_distribution_EncryptionType_Camellia;
+  static const EncryptionType DES3_EDE = symmetry_encryption_key_distribution_EncryptionType_DES3_EDE;
+  static inline bool EncryptionType_IsValid(int value) {
+    return symmetry_encryption_key_distribution_EncryptionType_IsValid(value);
+  }
+  static const EncryptionType EncryptionType_MIN =
+    symmetry_encryption_key_distribution_EncryptionType_EncryptionType_MIN;
+  static const EncryptionType EncryptionType_MAX =
+    symmetry_encryption_key_distribution_EncryptionType_EncryptionType_MAX;
+  static const int EncryptionType_ARRAYSIZE =
+    symmetry_encryption_key_distribution_EncryptionType_EncryptionType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  EncryptionType_descriptor() {
+    return symmetry_encryption_key_distribution_EncryptionType_descriptor();
+  }
+  static inline const ::std::string& EncryptionType_Name(EncryptionType value) {
+    return symmetry_encryption_key_distribution_EncryptionType_Name(value);
+  }
+  static inline bool EncryptionType_Parse(const ::std::string& name,
+      EncryptionType* value) {
+    return symmetry_encryption_key_distribution_EncryptionType_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .proto.symmetry_encryption_key_distribution.EncryptionType keytype = 1;
+  inline bool has_keytype() const;
+  inline void clear_keytype();
+  static const int kKeytypeFieldNumber = 1;
+  inline ::proto::symmetry_encryption_key_distribution_EncryptionType keytype() const;
+  inline void set_keytype(::proto::symmetry_encryption_key_distribution_EncryptionType value);
+
+  // required bytes key = 2;
+  inline bool has_key() const;
+  inline void clear_key();
+  static const int kKeyFieldNumber = 2;
+  inline const ::std::string& key() const;
+  inline void set_key(const ::std::string& value);
+  inline void set_key(const char* value);
+  inline void set_key(const void* value, size_t size);
+  inline ::std::string* mutable_key();
+  inline ::std::string* release_key();
+  inline void set_allocated_key(::std::string* key);
+
+  // @@protoc_insertion_point(class_scope:proto.symmetry_encryption_key_distribution)
+ private:
+  inline void set_has_keytype();
+  inline void clear_has_keytype();
+  inline void set_has_key();
+  inline void clear_has_key();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* key_;
+  int keytype_;
+  friend void  protobuf_AddDesc_im_2eproto();
+  friend void protobuf_AssignDesc_im_2eproto();
+  friend void protobuf_ShutdownFile_im_2eproto();
+
+  void InitAsDefaultInstance();
+  static symmetry_encryption_key_distribution* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class avim_message : public ::google::protobuf::Message {
  public:
   avim_message();
@@ -513,12 +671,34 @@ class avim_message : public ::google::protobuf::Message {
   inline ::proto::img_message* release_item_image();
   inline void set_allocated_item_image(::proto::img_message* item_image);
 
+  // optional .proto.emoji_message item_emoji = 3;
+  inline bool has_item_emoji() const;
+  inline void clear_item_emoji();
+  static const int kItemEmojiFieldNumber = 3;
+  inline const ::proto::emoji_message& item_emoji() const;
+  inline ::proto::emoji_message* mutable_item_emoji();
+  inline ::proto::emoji_message* release_item_emoji();
+  inline void set_allocated_item_emoji(::proto::emoji_message* item_emoji);
+
+  // optional .proto.symmetry_encryption_key_distribution item_key = 20;
+  inline bool has_item_key() const;
+  inline void clear_item_key();
+  static const int kItemKeyFieldNumber = 20;
+  inline const ::proto::symmetry_encryption_key_distribution& item_key() const;
+  inline ::proto::symmetry_encryption_key_distribution* mutable_item_key();
+  inline ::proto::symmetry_encryption_key_distribution* release_item_key();
+  inline void set_allocated_item_key(::proto::symmetry_encryption_key_distribution* item_key);
+
   // @@protoc_insertion_point(class_scope:proto.avim_message)
  private:
   inline void set_has_item_text();
   inline void clear_has_item_text();
   inline void set_has_item_image();
   inline void clear_has_item_image();
+  inline void set_has_item_emoji();
+  inline void clear_has_item_emoji();
+  inline void set_has_item_key();
+  inline void clear_has_item_key();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -526,93 +706,14 @@ class avim_message : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::proto::text_message* item_text_;
   ::proto::img_message* item_image_;
+  ::proto::emoji_message* item_emoji_;
+  ::proto::symmetry_encryption_key_distribution* item_key_;
   friend void  protobuf_AddDesc_im_2eproto();
   friend void protobuf_AssignDesc_im_2eproto();
   friend void protobuf_ShutdownFile_im_2eproto();
 
   void InitAsDefaultInstance();
   static avim_message* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class avim_group_message : public ::google::protobuf::Message {
- public:
-  avim_group_message();
-  virtual ~avim_group_message();
-
-  avim_group_message(const avim_group_message& from);
-
-  inline avim_group_message& operator=(const avim_group_message& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  #if __cplusplus >= 201103L || _MSC_VER >= 1600
-  inline avim_group_message& operator=(avim_group_message&& from) {
-    if (&from != this) {
-      Clear();
-      Swap(&from);
-    }
-    return *this;
-  }
-
-  avim_group_message(avim_group_message&& from);
-  #endif
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const avim_group_message& default_instance();
-
-  void Swap(avim_group_message* other);
-
-  // implements Message ----------------------------------------------
-
-  avim_group_message* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const avim_group_message& from);
-  void MergeFrom(const avim_group_message& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // @@protoc_insertion_point(class_scope:proto.avim_group_message)
- private:
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
-  friend void  protobuf_AddDesc_im_2eproto();
-  friend void protobuf_AssignDesc_im_2eproto();
-  friend void protobuf_ShutdownFile_im_2eproto();
-
-  void InitAsDefaultInstance();
-  static avim_group_message* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -681,25 +782,36 @@ class avim_message_packet : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional .proto.avim_message avim = 1;
-  inline bool has_avim() const;
+  // repeated .proto.avim_message avim = 1;
+  inline int avim_size() const;
   inline void clear_avim();
   static const int kAvimFieldNumber = 1;
-  inline const ::proto::avim_message& avim() const;
-  inline ::proto::avim_message* mutable_avim();
-  inline ::proto::avim_message* release_avim();
-  inline void set_allocated_avim(::proto::avim_message* avim);
+  inline const ::proto::avim_message& avim(int index) const;
+  inline ::proto::avim_message* mutable_avim(int index);
+  inline ::proto::avim_message* add_avim();
+  inline const ::google::protobuf::RepeatedPtrField< ::proto::avim_message >&
+      avim() const;
+  inline ::google::protobuf::RepeatedPtrField< ::proto::avim_message >*
+      mutable_avim();
+
+  // optional uint64 serial = 2;
+  inline bool has_serial() const;
+  inline void clear_serial();
+  static const int kSerialFieldNumber = 2;
+  inline ::google::protobuf::uint64 serial() const;
+  inline void set_serial(::google::protobuf::uint64 value);
 
   // @@protoc_insertion_point(class_scope:proto.avim_message_packet)
  private:
-  inline void set_has_avim();
-  inline void clear_has_avim();
+  inline void set_has_serial();
+  inline void clear_has_serial();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::proto::avim_message* avim_;
+  ::google::protobuf::RepeatedPtrField< ::proto::avim_message > avim_;
+  ::google::protobuf::uint64 serial_;
   friend void  protobuf_AddDesc_im_2eproto();
   friend void protobuf_AssignDesc_im_2eproto();
   friend void protobuf_ShutdownFile_im_2eproto();
@@ -1432,6 +1544,111 @@ inline void emoji_message::set_allocated_custom_image(::std::string* custom_imag
 
 // -------------------------------------------------------------------
 
+// symmetry_encryption_key_distribution
+
+// required .proto.symmetry_encryption_key_distribution.EncryptionType keytype = 1;
+inline bool symmetry_encryption_key_distribution::has_keytype() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void symmetry_encryption_key_distribution::set_has_keytype() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void symmetry_encryption_key_distribution::clear_has_keytype() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void symmetry_encryption_key_distribution::clear_keytype() {
+  keytype_ = 0;
+  clear_has_keytype();
+}
+inline ::proto::symmetry_encryption_key_distribution_EncryptionType symmetry_encryption_key_distribution::keytype() const {
+  // @@protoc_insertion_point(field_get:proto.symmetry_encryption_key_distribution.keytype)
+  return static_cast< ::proto::symmetry_encryption_key_distribution_EncryptionType >(keytype_);
+}
+inline void symmetry_encryption_key_distribution::set_keytype(::proto::symmetry_encryption_key_distribution_EncryptionType value) {
+  assert(::proto::symmetry_encryption_key_distribution_EncryptionType_IsValid(value));
+  set_has_keytype();
+  keytype_ = value;
+  // @@protoc_insertion_point(field_set:proto.symmetry_encryption_key_distribution.keytype)
+}
+
+// required bytes key = 2;
+inline bool symmetry_encryption_key_distribution::has_key() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void symmetry_encryption_key_distribution::set_has_key() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void symmetry_encryption_key_distribution::clear_has_key() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void symmetry_encryption_key_distribution::clear_key() {
+  if (key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    key_->clear();
+  }
+  clear_has_key();
+}
+inline const ::std::string& symmetry_encryption_key_distribution::key() const {
+  // @@protoc_insertion_point(field_get:proto.symmetry_encryption_key_distribution.key)
+  return *key_;
+}
+inline void symmetry_encryption_key_distribution::set_key(const ::std::string& value) {
+  set_has_key();
+  if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    key_ = new ::std::string;
+  }
+  key_->assign(value);
+  // @@protoc_insertion_point(field_set:proto.symmetry_encryption_key_distribution.key)
+}
+inline void symmetry_encryption_key_distribution::set_key(const char* value) {
+  set_has_key();
+  if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    key_ = new ::std::string;
+  }
+  key_->assign(value);
+  // @@protoc_insertion_point(field_set_char:proto.symmetry_encryption_key_distribution.key)
+}
+inline void symmetry_encryption_key_distribution::set_key(const void* value, size_t size) {
+  set_has_key();
+  if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    key_ = new ::std::string;
+  }
+  key_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:proto.symmetry_encryption_key_distribution.key)
+}
+inline ::std::string* symmetry_encryption_key_distribution::mutable_key() {
+  set_has_key();
+  if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    key_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:proto.symmetry_encryption_key_distribution.key)
+  return key_;
+}
+inline ::std::string* symmetry_encryption_key_distribution::release_key() {
+  clear_has_key();
+  if (key_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = key_;
+    key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void symmetry_encryption_key_distribution::set_allocated_key(::std::string* key) {
+  if (key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete key_;
+  }
+  if (key) {
+    set_has_key();
+    key_ = key;
+  } else {
+    clear_has_key();
+    key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:proto.symmetry_encryption_key_distribution.key)
+}
+
+// -------------------------------------------------------------------
+
 // avim_message
 
 // optional .proto.text_message item_text = 1;
@@ -1516,53 +1733,144 @@ inline void avim_message::set_allocated_item_image(::proto::img_message* item_im
   // @@protoc_insertion_point(field_set_allocated:proto.avim_message.item_image)
 }
 
-// -------------------------------------------------------------------
+// optional .proto.emoji_message item_emoji = 3;
+inline bool avim_message::has_item_emoji() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void avim_message::set_has_item_emoji() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void avim_message::clear_has_item_emoji() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void avim_message::clear_item_emoji() {
+  if (item_emoji_ != NULL) item_emoji_->::proto::emoji_message::Clear();
+  clear_has_item_emoji();
+}
+inline const ::proto::emoji_message& avim_message::item_emoji() const {
+  // @@protoc_insertion_point(field_get:proto.avim_message.item_emoji)
+  return item_emoji_ != NULL ? *item_emoji_ : *default_instance_->item_emoji_;
+}
+inline ::proto::emoji_message* avim_message::mutable_item_emoji() {
+  set_has_item_emoji();
+  if (item_emoji_ == NULL) item_emoji_ = new ::proto::emoji_message;
+  // @@protoc_insertion_point(field_mutable:proto.avim_message.item_emoji)
+  return item_emoji_;
+}
+inline ::proto::emoji_message* avim_message::release_item_emoji() {
+  clear_has_item_emoji();
+  ::proto::emoji_message* temp = item_emoji_;
+  item_emoji_ = NULL;
+  return temp;
+}
+inline void avim_message::set_allocated_item_emoji(::proto::emoji_message* item_emoji) {
+  delete item_emoji_;
+  item_emoji_ = item_emoji;
+  if (item_emoji) {
+    set_has_item_emoji();
+  } else {
+    clear_has_item_emoji();
+  }
+  // @@protoc_insertion_point(field_set_allocated:proto.avim_message.item_emoji)
+}
 
-// avim_group_message
+// optional .proto.symmetry_encryption_key_distribution item_key = 20;
+inline bool avim_message::has_item_key() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void avim_message::set_has_item_key() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void avim_message::clear_has_item_key() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void avim_message::clear_item_key() {
+  if (item_key_ != NULL) item_key_->::proto::symmetry_encryption_key_distribution::Clear();
+  clear_has_item_key();
+}
+inline const ::proto::symmetry_encryption_key_distribution& avim_message::item_key() const {
+  // @@protoc_insertion_point(field_get:proto.avim_message.item_key)
+  return item_key_ != NULL ? *item_key_ : *default_instance_->item_key_;
+}
+inline ::proto::symmetry_encryption_key_distribution* avim_message::mutable_item_key() {
+  set_has_item_key();
+  if (item_key_ == NULL) item_key_ = new ::proto::symmetry_encryption_key_distribution;
+  // @@protoc_insertion_point(field_mutable:proto.avim_message.item_key)
+  return item_key_;
+}
+inline ::proto::symmetry_encryption_key_distribution* avim_message::release_item_key() {
+  clear_has_item_key();
+  ::proto::symmetry_encryption_key_distribution* temp = item_key_;
+  item_key_ = NULL;
+  return temp;
+}
+inline void avim_message::set_allocated_item_key(::proto::symmetry_encryption_key_distribution* item_key) {
+  delete item_key_;
+  item_key_ = item_key;
+  if (item_key) {
+    set_has_item_key();
+  } else {
+    clear_has_item_key();
+  }
+  // @@protoc_insertion_point(field_set_allocated:proto.avim_message.item_key)
+}
 
 // -------------------------------------------------------------------
 
 // avim_message_packet
 
-// optional .proto.avim_message avim = 1;
-inline bool avim_message_packet::has_avim() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void avim_message_packet::set_has_avim() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void avim_message_packet::clear_has_avim() {
-  _has_bits_[0] &= ~0x00000001u;
+// repeated .proto.avim_message avim = 1;
+inline int avim_message_packet::avim_size() const {
+  return avim_.size();
 }
 inline void avim_message_packet::clear_avim() {
-  if (avim_ != NULL) avim_->::proto::avim_message::Clear();
-  clear_has_avim();
+  avim_.Clear();
 }
-inline const ::proto::avim_message& avim_message_packet::avim() const {
+inline const ::proto::avim_message& avim_message_packet::avim(int index) const {
   // @@protoc_insertion_point(field_get:proto.avim_message_packet.avim)
-  return avim_ != NULL ? *avim_ : *default_instance_->avim_;
+  return avim_.Get(index);
 }
-inline ::proto::avim_message* avim_message_packet::mutable_avim() {
-  set_has_avim();
-  if (avim_ == NULL) avim_ = new ::proto::avim_message;
+inline ::proto::avim_message* avim_message_packet::mutable_avim(int index) {
   // @@protoc_insertion_point(field_mutable:proto.avim_message_packet.avim)
+  return avim_.Mutable(index);
+}
+inline ::proto::avim_message* avim_message_packet::add_avim() {
+  // @@protoc_insertion_point(field_add:proto.avim_message_packet.avim)
+  return avim_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::proto::avim_message >&
+avim_message_packet::avim() const {
+  // @@protoc_insertion_point(field_list:proto.avim_message_packet.avim)
   return avim_;
 }
-inline ::proto::avim_message* avim_message_packet::release_avim() {
-  clear_has_avim();
-  ::proto::avim_message* temp = avim_;
-  avim_ = NULL;
-  return temp;
+inline ::google::protobuf::RepeatedPtrField< ::proto::avim_message >*
+avim_message_packet::mutable_avim() {
+  // @@protoc_insertion_point(field_mutable_list:proto.avim_message_packet.avim)
+  return &avim_;
 }
-inline void avim_message_packet::set_allocated_avim(::proto::avim_message* avim) {
-  delete avim_;
-  avim_ = avim;
-  if (avim) {
-    set_has_avim();
-  } else {
-    clear_has_avim();
-  }
-  // @@protoc_insertion_point(field_set_allocated:proto.avim_message_packet.avim)
+
+// optional uint64 serial = 2;
+inline bool avim_message_packet::has_serial() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void avim_message_packet::set_has_serial() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void avim_message_packet::clear_has_serial() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void avim_message_packet::clear_serial() {
+  serial_ = GOOGLE_ULONGLONG(0);
+  clear_has_serial();
+}
+inline ::google::protobuf::uint64 avim_message_packet::serial() const {
+  // @@protoc_insertion_point(field_get:proto.avim_message_packet.serial)
+  return serial_;
+}
+inline void avim_message_packet::set_serial(::google::protobuf::uint64 value) {
+  set_has_serial();
+  serial_ = value;
+  // @@protoc_insertion_point(field_set:proto.avim_message_packet.serial)
 }
 
 
@@ -1574,6 +1882,11 @@ inline void avim_message_packet::set_allocated_avim(::proto::avim_message* avim)
 namespace google {
 namespace protobuf {
 
+template <> struct is_proto_enum< ::proto::symmetry_encryption_key_distribution_EncryptionType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::proto::symmetry_encryption_key_distribution_EncryptionType>() {
+  return ::proto::symmetry_encryption_key_distribution_EncryptionType_descriptor();
+}
 
 }  // namespace google
 }  // namespace protobuf

@@ -29,12 +29,13 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* emoji_message_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   emoji_message_reflection_ = NULL;
+const ::google::protobuf::Descriptor* symmetry_encryption_key_distribution_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  symmetry_encryption_key_distribution_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* symmetry_encryption_key_distribution_EncryptionType_descriptor_ = NULL;
 const ::google::protobuf::Descriptor* avim_message_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   avim_message_reflection_ = NULL;
-const ::google::protobuf::Descriptor* avim_group_message_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  avim_group_message_reflection_ = NULL;
 const ::google::protobuf::Descriptor* avim_message_packet_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   avim_message_packet_reflection_ = NULL;
@@ -100,10 +101,29 @@ void protobuf_AssignDesc_im_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(emoji_message));
-  avim_message_descriptor_ = file->message_type(3);
-  static const int avim_message_offsets_[2] = {
+  symmetry_encryption_key_distribution_descriptor_ = file->message_type(3);
+  static const int symmetry_encryption_key_distribution_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(symmetry_encryption_key_distribution, keytype_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(symmetry_encryption_key_distribution, key_),
+  };
+  symmetry_encryption_key_distribution_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      symmetry_encryption_key_distribution_descriptor_,
+      symmetry_encryption_key_distribution::default_instance_,
+      symmetry_encryption_key_distribution_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(symmetry_encryption_key_distribution, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(symmetry_encryption_key_distribution, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(symmetry_encryption_key_distribution));
+  symmetry_encryption_key_distribution_EncryptionType_descriptor_ = symmetry_encryption_key_distribution_descriptor_->enum_type(0);
+  avim_message_descriptor_ = file->message_type(4);
+  static const int avim_message_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_message, item_text_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_message, item_image_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_message, item_emoji_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_message, item_key_),
   };
   avim_message_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -116,23 +136,10 @@ void protobuf_AssignDesc_im_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(avim_message));
-  avim_group_message_descriptor_ = file->message_type(4);
-  static const int avim_group_message_offsets_[1] = {
-  };
-  avim_group_message_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      avim_group_message_descriptor_,
-      avim_group_message::default_instance_,
-      avim_group_message_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_group_message, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_group_message, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(avim_group_message));
   avim_message_packet_descriptor_ = file->message_type(5);
-  static const int avim_message_packet_offsets_[1] = {
+  static const int avim_message_packet_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_message_packet, avim_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_message_packet, serial_),
   };
   avim_message_packet_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -164,9 +171,9 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     emoji_message_descriptor_, &emoji_message::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    avim_message_descriptor_, &avim_message::default_instance());
+    symmetry_encryption_key_distribution_descriptor_, &symmetry_encryption_key_distribution::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    avim_group_message_descriptor_, &avim_group_message::default_instance());
+    avim_message_descriptor_, &avim_message::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     avim_message_packet_descriptor_, &avim_message_packet::default_instance());
 }
@@ -180,10 +187,10 @@ void protobuf_ShutdownFile_im_2eproto() {
   delete img_message_reflection_;
   delete emoji_message::default_instance_;
   delete emoji_message_reflection_;
+  delete symmetry_encryption_key_distribution::default_instance_;
+  delete symmetry_encryption_key_distribution_reflection_;
   delete avim_message::default_instance_;
   delete avim_message_reflection_;
-  delete avim_group_message::default_instance_;
-  delete avim_group_message_reflection_;
   delete avim_message_packet::default_instance_;
   delete avim_message_packet_reflection_;
 }
@@ -200,25 +207,33 @@ void protobuf_AddDesc_im_2eproto() {
     "(\002\022\r\n\005hlink\030\004 \001(\t\"A\n\013img_message\022\r\n\005imag"
     "e\030\001 \002(\014\022\024\n\014image_digest\030\002 \001(\014\022\r\n\005hlink\030\004"
     " \001(\t\"C\n\remoji_message\022\r\n\005emoji\030\001 \002(\t\022\r\n\005"
-    "theme\030\002 \001(\t\022\024\n\014custom_image\030\003 \001(\014\"^\n\014avi"
-    "m_message\022&\n\titem_text\030\001 \001(\0132\023.proto.tex"
-    "t_message\022&\n\nitem_image\030\002 \001(\0132\022.proto.im"
-    "g_message\"\024\n\022avim_group_message\"8\n\023avim_"
-    "message_packet\022!\n\004avim\030\001 \001(\0132\023.proto.avi"
-    "m_message", 409);
+    "theme\030\002 \001(\t\022\024\n\014custom_image\030\003 \001(\014\"\333\001\n$sy"
+    "mmetry_encryption_key_distribution\022K\n\007ke"
+    "ytype\030\001 \002(\0162:.proto.symmetry_encryption_"
+    "key_distribution.EncryptionType\022\013\n\003key\030\002"
+    " \002(\014\"Y\n\016EncryptionType\022\007\n\003AES\020\000\022\007\n\003DES\020\001"
+    "\022\014\n\010BlowFish\020\002\022\013\n\007TwoFish\020\003\022\014\n\010Camellia\020"
+    "\004\022\014\n\010DES3_EDE\020\005\"\307\001\n\014avim_message\022&\n\titem"
+    "_text\030\001 \001(\0132\023.proto.text_message\022&\n\nitem"
+    "_image\030\002 \001(\0132\022.proto.img_message\022(\n\nitem"
+    "_emoji\030\003 \001(\0132\024.proto.emoji_message\022=\n\010it"
+    "em_key\030\024 \001(\0132+.proto.symmetry_encryption"
+    "_key_distribution\"H\n\023avim_message_packet"
+    "\022!\n\004avim\030\001 \003(\0132\023.proto.avim_message\022\016\n\006s"
+    "erial\030\002 \001(\004", 731);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "im.proto", &protobuf_RegisterTypes);
   text_message::default_instance_ = new text_message();
   img_message::default_instance_ = new img_message();
   emoji_message::default_instance_ = new emoji_message();
+  symmetry_encryption_key_distribution::default_instance_ = new symmetry_encryption_key_distribution();
   avim_message::default_instance_ = new avim_message();
-  avim_group_message::default_instance_ = new avim_group_message();
   avim_message_packet::default_instance_ = new avim_message_packet();
   text_message::default_instance_->InitAsDefaultInstance();
   img_message::default_instance_->InitAsDefaultInstance();
   emoji_message::default_instance_->InitAsDefaultInstance();
+  symmetry_encryption_key_distribution::default_instance_->InitAsDefaultInstance();
   avim_message::default_instance_->InitAsDefaultInstance();
-  avim_group_message::default_instance_->InitAsDefaultInstance();
   avim_message_packet::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_im_2eproto);
 }
@@ -1346,9 +1361,326 @@ void emoji_message::Swap(emoji_message* other) {
 
 // ===================================================================
 
+const ::google::protobuf::EnumDescriptor* symmetry_encryption_key_distribution_EncryptionType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return symmetry_encryption_key_distribution_EncryptionType_descriptor_;
+}
+bool symmetry_encryption_key_distribution_EncryptionType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const symmetry_encryption_key_distribution_EncryptionType symmetry_encryption_key_distribution::AES;
+const symmetry_encryption_key_distribution_EncryptionType symmetry_encryption_key_distribution::DES;
+const symmetry_encryption_key_distribution_EncryptionType symmetry_encryption_key_distribution::BlowFish;
+const symmetry_encryption_key_distribution_EncryptionType symmetry_encryption_key_distribution::TwoFish;
+const symmetry_encryption_key_distribution_EncryptionType symmetry_encryption_key_distribution::Camellia;
+const symmetry_encryption_key_distribution_EncryptionType symmetry_encryption_key_distribution::DES3_EDE;
+const symmetry_encryption_key_distribution_EncryptionType symmetry_encryption_key_distribution::EncryptionType_MIN;
+const symmetry_encryption_key_distribution_EncryptionType symmetry_encryption_key_distribution::EncryptionType_MAX;
+const int symmetry_encryption_key_distribution::EncryptionType_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int symmetry_encryption_key_distribution::kKeytypeFieldNumber;
+const int symmetry_encryption_key_distribution::kKeyFieldNumber;
+#endif  // !_MSC_VER
+
+symmetry_encryption_key_distribution::symmetry_encryption_key_distribution()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:proto.symmetry_encryption_key_distribution)
+}
+
+void symmetry_encryption_key_distribution::InitAsDefaultInstance() {
+}
+
+symmetry_encryption_key_distribution::symmetry_encryption_key_distribution(const symmetry_encryption_key_distribution& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:proto.symmetry_encryption_key_distribution)
+}
+
+void symmetry_encryption_key_distribution::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  keytype_ = 0;
+  key_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+symmetry_encryption_key_distribution::symmetry_encryption_key_distribution(symmetry_encryption_key_distribution&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
+
+symmetry_encryption_key_distribution::~symmetry_encryption_key_distribution() {
+  // @@protoc_insertion_point(destructor:proto.symmetry_encryption_key_distribution)
+  SharedDtor();
+}
+
+void symmetry_encryption_key_distribution::SharedDtor() {
+  if (key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete key_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void symmetry_encryption_key_distribution::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* symmetry_encryption_key_distribution::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return symmetry_encryption_key_distribution_descriptor_;
+}
+
+const symmetry_encryption_key_distribution& symmetry_encryption_key_distribution::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_im_2eproto();
+  return *default_instance_;
+}
+
+symmetry_encryption_key_distribution* symmetry_encryption_key_distribution::default_instance_ = NULL;
+
+symmetry_encryption_key_distribution* symmetry_encryption_key_distribution::New() const {
+  return new symmetry_encryption_key_distribution;
+}
+
+void symmetry_encryption_key_distribution::Clear() {
+  if (_has_bits_[0 / 32] & 3) {
+    keytype_ = 0;
+    if (has_key()) {
+      if (key_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        key_->clear();
+      }
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool symmetry_encryption_key_distribution::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:proto.symmetry_encryption_key_distribution)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .proto.symmetry_encryption_key_distribution.EncryptionType keytype = 1;
+      case 1: {
+        if (tag == 8) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::proto::symmetry_encryption_key_distribution_EncryptionType_IsValid(value)) {
+            set_keytype(static_cast< ::proto::symmetry_encryption_key_distribution_EncryptionType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_key;
+        break;
+      }
+
+      // required bytes key = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_key:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_key()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:proto.symmetry_encryption_key_distribution)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:proto.symmetry_encryption_key_distribution)
+  return false;
+#undef DO_
+}
+
+void symmetry_encryption_key_distribution::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:proto.symmetry_encryption_key_distribution)
+  // required .proto.symmetry_encryption_key_distribution.EncryptionType keytype = 1;
+  if (has_keytype()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->keytype(), output);
+  }
+
+  // required bytes key = 2;
+  if (has_key()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      2, this->key(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:proto.symmetry_encryption_key_distribution)
+}
+
+::google::protobuf::uint8* symmetry_encryption_key_distribution::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:proto.symmetry_encryption_key_distribution)
+  // required .proto.symmetry_encryption_key_distribution.EncryptionType keytype = 1;
+  if (has_keytype()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->keytype(), target);
+  }
+
+  // required bytes key = 2;
+  if (has_key()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        2, this->key(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:proto.symmetry_encryption_key_distribution)
+  return target;
+}
+
+int symmetry_encryption_key_distribution::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .proto.symmetry_encryption_key_distribution.EncryptionType keytype = 1;
+    if (has_keytype()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->keytype());
+    }
+
+    // required bytes key = 2;
+    if (has_key()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->key());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void symmetry_encryption_key_distribution::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const symmetry_encryption_key_distribution* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const symmetry_encryption_key_distribution*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void symmetry_encryption_key_distribution::MergeFrom(const symmetry_encryption_key_distribution& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_keytype()) {
+      set_keytype(from.keytype());
+    }
+    if (from.has_key()) {
+      set_key(from.key());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void symmetry_encryption_key_distribution::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void symmetry_encryption_key_distribution::CopyFrom(const symmetry_encryption_key_distribution& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool symmetry_encryption_key_distribution::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void symmetry_encryption_key_distribution::Swap(symmetry_encryption_key_distribution* other) {
+  if (other != this) {
+    std::swap(keytype_, other->keytype_);
+    std::swap(key_, other->key_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata symmetry_encryption_key_distribution::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = symmetry_encryption_key_distribution_descriptor_;
+  metadata.reflection = symmetry_encryption_key_distribution_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
 #ifndef _MSC_VER
 const int avim_message::kItemTextFieldNumber;
 const int avim_message::kItemImageFieldNumber;
+const int avim_message::kItemEmojiFieldNumber;
+const int avim_message::kItemKeyFieldNumber;
 #endif  // !_MSC_VER
 
 avim_message::avim_message()
@@ -1360,6 +1692,8 @@ avim_message::avim_message()
 void avim_message::InitAsDefaultInstance() {
   item_text_ = const_cast< ::proto::text_message*>(&::proto::text_message::default_instance());
   item_image_ = const_cast< ::proto::img_message*>(&::proto::img_message::default_instance());
+  item_emoji_ = const_cast< ::proto::emoji_message*>(&::proto::emoji_message::default_instance());
+  item_key_ = const_cast< ::proto::symmetry_encryption_key_distribution*>(&::proto::symmetry_encryption_key_distribution::default_instance());
 }
 
 avim_message::avim_message(const avim_message& from)
@@ -1373,6 +1707,8 @@ void avim_message::SharedCtor() {
   _cached_size_ = 0;
   item_text_ = NULL;
   item_image_ = NULL;
+  item_emoji_ = NULL;
+  item_key_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1392,6 +1728,8 @@ void avim_message::SharedDtor() {
   if (this != default_instance_) {
     delete item_text_;
     delete item_image_;
+    delete item_emoji_;
+    delete item_key_;
   }
 }
 
@@ -1417,12 +1755,18 @@ avim_message* avim_message::New() const {
 }
 
 void avim_message::Clear() {
-  if (_has_bits_[0 / 32] & 3) {
+  if (_has_bits_[0 / 32] & 15) {
     if (has_item_text()) {
       if (item_text_ != NULL) item_text_->::proto::text_message::Clear();
     }
     if (has_item_image()) {
       if (item_image_ != NULL) item_image_->::proto::img_message::Clear();
+    }
+    if (has_item_emoji()) {
+      if (item_emoji_ != NULL) item_emoji_->::proto::emoji_message::Clear();
+    }
+    if (has_item_key()) {
+      if (item_key_ != NULL) item_key_->::proto::symmetry_encryption_key_distribution::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -1435,7 +1779,7 @@ bool avim_message::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:proto.avim_message)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -1457,6 +1801,32 @@ bool avim_message::MergePartialFromCodedStream(
          parse_item_image:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_item_image()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_item_emoji;
+        break;
+      }
+
+      // optional .proto.emoji_message item_emoji = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_item_emoji:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_item_emoji()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(162)) goto parse_item_key;
+        break;
+      }
+
+      // optional .proto.symmetry_encryption_key_distribution item_key = 20;
+      case 20: {
+        if (tag == 162) {
+         parse_item_key:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_item_key()));
         } else {
           goto handle_unusual;
         }
@@ -1501,6 +1871,18 @@ void avim_message::SerializeWithCachedSizes(
       2, this->item_image(), output);
   }
 
+  // optional .proto.emoji_message item_emoji = 3;
+  if (has_item_emoji()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->item_emoji(), output);
+  }
+
+  // optional .proto.symmetry_encryption_key_distribution item_key = 20;
+  if (has_item_key()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      20, this->item_key(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -1523,6 +1905,20 @@ void avim_message::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         2, this->item_image(), target);
+  }
+
+  // optional .proto.emoji_message item_emoji = 3;
+  if (has_item_emoji()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->item_emoji(), target);
+  }
+
+  // optional .proto.symmetry_encryption_key_distribution item_key = 20;
+  if (has_item_key()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        20, this->item_key(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1549,6 +1945,20 @@ int avim_message::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->item_image());
+    }
+
+    // optional .proto.emoji_message item_emoji = 3;
+    if (has_item_emoji()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->item_emoji());
+    }
+
+    // optional .proto.symmetry_encryption_key_distribution item_key = 20;
+    if (has_item_key()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->item_key());
     }
 
   }
@@ -1584,6 +1994,12 @@ void avim_message::MergeFrom(const avim_message& from) {
     if (from.has_item_image()) {
       mutable_item_image()->::proto::img_message::MergeFrom(from.item_image());
     }
+    if (from.has_item_emoji()) {
+      mutable_item_emoji()->::proto::emoji_message::MergeFrom(from.item_emoji());
+    }
+    if (from.has_item_key()) {
+      mutable_item_key()->::proto::symmetry_encryption_key_distribution::MergeFrom(from.item_key());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -1608,6 +2024,12 @@ bool avim_message::IsInitialized() const {
   if (has_item_image()) {
     if (!this->item_image().IsInitialized()) return false;
   }
+  if (has_item_emoji()) {
+    if (!this->item_emoji().IsInitialized()) return false;
+  }
+  if (has_item_key()) {
+    if (!this->item_key().IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -1615,6 +2037,8 @@ void avim_message::Swap(avim_message* other) {
   if (other != this) {
     std::swap(item_text_, other->item_text_);
     std::swap(item_image_, other->item_image_);
+    std::swap(item_emoji_, other->item_emoji_);
+    std::swap(item_key_, other->item_key_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -1633,188 +2057,8 @@ void avim_message::Swap(avim_message* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-#endif  // !_MSC_VER
-
-avim_group_message::avim_group_message()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:proto.avim_group_message)
-}
-
-void avim_group_message::InitAsDefaultInstance() {
-}
-
-avim_group_message::avim_group_message(const avim_group_message& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:proto.avim_group_message)
-}
-
-void avim_group_message::SharedCtor() {
-  _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-#if __cplusplus >= 201103L || _MSC_VER >= 1600
-avim_group_message::avim_group_message(avim_group_message&& from)
-  : ::google::protobuf::Message() {
-  Swap(&from);
-}
-#endif
-
-avim_group_message::~avim_group_message() {
-  // @@protoc_insertion_point(destructor:proto.avim_group_message)
-  SharedDtor();
-}
-
-void avim_group_message::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void avim_group_message::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* avim_group_message::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return avim_group_message_descriptor_;
-}
-
-const avim_group_message& avim_group_message::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_im_2eproto();
-  return *default_instance_;
-}
-
-avim_group_message* avim_group_message::default_instance_ = NULL;
-
-avim_group_message* avim_group_message::New() const {
-  return new avim_group_message;
-}
-
-void avim_group_message::Clear() {
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool avim_group_message::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:proto.avim_group_message)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-  handle_unusual:
-    if (tag == 0 ||
-        ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-      goto success;
-    }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, mutable_unknown_fields()));
-  }
-success:
-  // @@protoc_insertion_point(parse_success:proto.avim_group_message)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:proto.avim_group_message)
-  return false;
-#undef DO_
-}
-
-void avim_group_message::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:proto.avim_group_message)
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:proto.avim_group_message)
-}
-
-::google::protobuf::uint8* avim_group_message::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:proto.avim_group_message)
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:proto.avim_group_message)
-  return target;
-}
-
-int avim_group_message::ByteSize() const {
-  int total_size = 0;
-
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void avim_group_message::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const avim_group_message* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const avim_group_message*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void avim_group_message::MergeFrom(const avim_group_message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void avim_group_message::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void avim_group_message::CopyFrom(const avim_group_message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool avim_group_message::IsInitialized() const {
-
-  return true;
-}
-
-void avim_group_message::Swap(avim_group_message* other) {
-  if (other != this) {
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata avim_group_message::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = avim_group_message_descriptor_;
-  metadata.reflection = avim_group_message_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
 const int avim_message_packet::kAvimFieldNumber;
+const int avim_message_packet::kSerialFieldNumber;
 #endif  // !_MSC_VER
 
 avim_message_packet::avim_message_packet()
@@ -1824,7 +2068,6 @@ avim_message_packet::avim_message_packet()
 }
 
 void avim_message_packet::InitAsDefaultInstance() {
-  avim_ = const_cast< ::proto::avim_message*>(&::proto::avim_message::default_instance());
 }
 
 avim_message_packet::avim_message_packet(const avim_message_packet& from)
@@ -1836,7 +2079,7 @@ avim_message_packet::avim_message_packet(const avim_message_packet& from)
 
 void avim_message_packet::SharedCtor() {
   _cached_size_ = 0;
-  avim_ = NULL;
+  serial_ = GOOGLE_ULONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1854,7 +2097,6 @@ avim_message_packet::~avim_message_packet() {
 
 void avim_message_packet::SharedDtor() {
   if (this != default_instance_) {
-    delete avim_;
   }
 }
 
@@ -1880,9 +2122,8 @@ avim_message_packet* avim_message_packet::New() const {
 }
 
 void avim_message_packet::Clear() {
-  if (has_avim()) {
-    if (avim_ != NULL) avim_->::proto::avim_message::Clear();
-  }
+  serial_ = GOOGLE_ULONGLONG(0);
+  avim_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -1897,11 +2138,28 @@ bool avim_message_packet::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .proto.avim_message avim = 1;
+      // repeated .proto.avim_message avim = 1;
       case 1: {
         if (tag == 10) {
+         parse_avim:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_avim()));
+                input, add_avim()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(10)) goto parse_avim;
+        if (input->ExpectTag(16)) goto parse_serial;
+        break;
+      }
+
+      // optional uint64 serial = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_serial:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &serial_)));
+          set_has_serial();
         } else {
           goto handle_unusual;
         }
@@ -1934,10 +2192,15 @@ failure:
 void avim_message_packet::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:proto.avim_message_packet)
-  // optional .proto.avim_message avim = 1;
-  if (has_avim()) {
+  // repeated .proto.avim_message avim = 1;
+  for (int i = 0; i < this->avim_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->avim(), output);
+      1, this->avim(i), output);
+  }
+
+  // optional uint64 serial = 2;
+  if (has_serial()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->serial(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -1950,11 +2213,16 @@ void avim_message_packet::SerializeWithCachedSizes(
 ::google::protobuf::uint8* avim_message_packet::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:proto.avim_message_packet)
-  // optional .proto.avim_message avim = 1;
-  if (has_avim()) {
+  // repeated .proto.avim_message avim = 1;
+  for (int i = 0; i < this->avim_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        1, this->avim(), target);
+        1, this->avim(i), target);
+  }
+
+  // optional uint64 serial = 2;
+  if (has_serial()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->serial(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1968,15 +2236,23 @@ void avim_message_packet::SerializeWithCachedSizes(
 int avim_message_packet::ByteSize() const {
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional .proto.avim_message avim = 1;
-    if (has_avim()) {
+  if (_has_bits_[1 / 32] & (0xffu << (1 % 32))) {
+    // optional uint64 serial = 2;
+    if (has_serial()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->avim());
+        ::google::protobuf::internal::WireFormatLite::UInt64Size(
+          this->serial());
     }
 
   }
+  // repeated .proto.avim_message avim = 1;
+  total_size += 1 * this->avim_size();
+  for (int i = 0; i < this->avim_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->avim(i));
+  }
+
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -2002,9 +2278,10 @@ void avim_message_packet::MergeFrom(const ::google::protobuf::Message& from) {
 
 void avim_message_packet::MergeFrom(const avim_message_packet& from) {
   GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_avim()) {
-      mutable_avim()->::proto::avim_message::MergeFrom(from.avim());
+  avim_.MergeFrom(from.avim_);
+  if (from._has_bits_[1 / 32] & (0xffu << (1 % 32))) {
+    if (from.has_serial()) {
+      set_serial(from.serial());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -2024,15 +2301,14 @@ void avim_message_packet::CopyFrom(const avim_message_packet& from) {
 
 bool avim_message_packet::IsInitialized() const {
 
-  if (has_avim()) {
-    if (!this->avim().IsInitialized()) return false;
-  }
+  if (!::google::protobuf::internal::AllAreInitialized(this->avim())) return false;
   return true;
 }
 
 void avim_message_packet::Swap(avim_message_packet* other) {
   if (other != this) {
-    std::swap(avim_, other->avim_);
+    avim_.Swap(&other->avim_);
+    std::swap(serial_, other->serial_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
