@@ -37,7 +37,8 @@ class text_message;
 class img_message;
 class emoji_message;
 class avim_message;
-class avim_packet;
+class avim_group_message;
+class avim_message_packet;
 
 // ===================================================================
 
@@ -534,20 +535,20 @@ class avim_message : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class avim_packet : public ::google::protobuf::Message {
+class avim_group_message : public ::google::protobuf::Message {
  public:
-  avim_packet();
-  virtual ~avim_packet();
+  avim_group_message();
+  virtual ~avim_group_message();
 
-  avim_packet(const avim_packet& from);
+  avim_group_message(const avim_group_message& from);
 
-  inline avim_packet& operator=(const avim_packet& from) {
+  inline avim_group_message& operator=(const avim_group_message& from) {
     CopyFrom(from);
     return *this;
   }
 
   #if __cplusplus >= 201103L || _MSC_VER >= 1600
-  inline avim_packet& operator=(avim_packet&& from) {
+  inline avim_group_message& operator=(avim_group_message&& from) {
     if (&from != this) {
       Clear();
       Swap(&from);
@@ -555,7 +556,7 @@ class avim_packet : public ::google::protobuf::Message {
     return *this;
   }
 
-  avim_packet(avim_packet&& from);
+  avim_group_message(avim_group_message&& from);
   #endif
 
   inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
@@ -567,17 +568,17 @@ class avim_packet : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const avim_packet& default_instance();
+  static const avim_group_message& default_instance();
 
-  void Swap(avim_packet* other);
+  void Swap(avim_group_message* other);
 
   // implements Message ----------------------------------------------
 
-  avim_packet* New() const;
+  avim_group_message* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const avim_packet& from);
-  void MergeFrom(const avim_packet& from);
+  void CopyFrom(const avim_group_message& from);
+  void MergeFrom(const avim_group_message& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -599,32 +600,112 @@ class avim_packet : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // repeated .proto.avim_message avim = 1;
-  inline int avim_size() const;
-  inline void clear_avim();
-  static const int kAvimFieldNumber = 1;
-  inline const ::proto::avim_message& avim(int index) const;
-  inline ::proto::avim_message* mutable_avim(int index);
-  inline ::proto::avim_message* add_avim();
-  inline const ::google::protobuf::RepeatedPtrField< ::proto::avim_message >&
-      avim() const;
-  inline ::google::protobuf::RepeatedPtrField< ::proto::avim_message >*
-      mutable_avim();
-
-  // @@protoc_insertion_point(class_scope:proto.avim_packet)
+  // @@protoc_insertion_point(class_scope:proto.avim_group_message)
  private:
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::google::protobuf::RepeatedPtrField< ::proto::avim_message > avim_;
   friend void  protobuf_AddDesc_im_2eproto();
   friend void protobuf_AssignDesc_im_2eproto();
   friend void protobuf_ShutdownFile_im_2eproto();
 
   void InitAsDefaultInstance();
-  static avim_packet* default_instance_;
+  static avim_group_message* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class avim_message_packet : public ::google::protobuf::Message {
+ public:
+  avim_message_packet();
+  virtual ~avim_message_packet();
+
+  avim_message_packet(const avim_message_packet& from);
+
+  inline avim_message_packet& operator=(const avim_message_packet& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  #if __cplusplus >= 201103L || _MSC_VER >= 1600
+  inline avim_message_packet& operator=(avim_message_packet&& from) {
+    if (&from != this) {
+      Clear();
+      Swap(&from);
+    }
+    return *this;
+  }
+
+  avim_message_packet(avim_message_packet&& from);
+  #endif
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const avim_message_packet& default_instance();
+
+  void Swap(avim_message_packet* other);
+
+  // implements Message ----------------------------------------------
+
+  avim_message_packet* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const avim_message_packet& from);
+  void MergeFrom(const avim_message_packet& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .proto.avim_message avim = 1;
+  inline bool has_avim() const;
+  inline void clear_avim();
+  static const int kAvimFieldNumber = 1;
+  inline const ::proto::avim_message& avim() const;
+  inline ::proto::avim_message* mutable_avim();
+  inline ::proto::avim_message* release_avim();
+  inline void set_allocated_avim(::proto::avim_message* avim);
+
+  // @@protoc_insertion_point(class_scope:proto.avim_message_packet)
+ private:
+  inline void set_has_avim();
+  inline void clear_has_avim();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::proto::avim_message* avim_;
+  friend void  protobuf_AddDesc_im_2eproto();
+  friend void protobuf_AssignDesc_im_2eproto();
+  friend void protobuf_ShutdownFile_im_2eproto();
+
+  void InitAsDefaultInstance();
+  static avim_message_packet* default_instance_;
 };
 // ===================================================================
 
@@ -1437,36 +1518,51 @@ inline void avim_message::set_allocated_item_image(::proto::img_message* item_im
 
 // -------------------------------------------------------------------
 
-// avim_packet
+// avim_group_message
 
-// repeated .proto.avim_message avim = 1;
-inline int avim_packet::avim_size() const {
-  return avim_.size();
+// -------------------------------------------------------------------
+
+// avim_message_packet
+
+// optional .proto.avim_message avim = 1;
+inline bool avim_message_packet::has_avim() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void avim_packet::clear_avim() {
-  avim_.Clear();
+inline void avim_message_packet::set_has_avim() {
+  _has_bits_[0] |= 0x00000001u;
 }
-inline const ::proto::avim_message& avim_packet::avim(int index) const {
-  // @@protoc_insertion_point(field_get:proto.avim_packet.avim)
-  return avim_.Get(index);
+inline void avim_message_packet::clear_has_avim() {
+  _has_bits_[0] &= ~0x00000001u;
 }
-inline ::proto::avim_message* avim_packet::mutable_avim(int index) {
-  // @@protoc_insertion_point(field_mutable:proto.avim_packet.avim)
-  return avim_.Mutable(index);
+inline void avim_message_packet::clear_avim() {
+  if (avim_ != NULL) avim_->::proto::avim_message::Clear();
+  clear_has_avim();
 }
-inline ::proto::avim_message* avim_packet::add_avim() {
-  // @@protoc_insertion_point(field_add:proto.avim_packet.avim)
-  return avim_.Add();
+inline const ::proto::avim_message& avim_message_packet::avim() const {
+  // @@protoc_insertion_point(field_get:proto.avim_message_packet.avim)
+  return avim_ != NULL ? *avim_ : *default_instance_->avim_;
 }
-inline const ::google::protobuf::RepeatedPtrField< ::proto::avim_message >&
-avim_packet::avim() const {
-  // @@protoc_insertion_point(field_list:proto.avim_packet.avim)
+inline ::proto::avim_message* avim_message_packet::mutable_avim() {
+  set_has_avim();
+  if (avim_ == NULL) avim_ = new ::proto::avim_message;
+  // @@protoc_insertion_point(field_mutable:proto.avim_message_packet.avim)
   return avim_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::proto::avim_message >*
-avim_packet::mutable_avim() {
-  // @@protoc_insertion_point(field_mutable_list:proto.avim_packet.avim)
-  return &avim_;
+inline ::proto::avim_message* avim_message_packet::release_avim() {
+  clear_has_avim();
+  ::proto::avim_message* temp = avim_;
+  avim_ = NULL;
+  return temp;
+}
+inline void avim_message_packet::set_allocated_avim(::proto::avim_message* avim) {
+  delete avim_;
+  avim_ = avim;
+  if (avim) {
+    set_has_avim();
+  } else {
+    clear_has_avim();
+  }
+  // @@protoc_insertion_point(field_set_allocated:proto.avim_message_packet.avim)
 }
 
 

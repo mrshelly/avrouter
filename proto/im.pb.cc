@@ -32,9 +32,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* avim_message_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   avim_message_reflection_ = NULL;
-const ::google::protobuf::Descriptor* avim_packet_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* avim_group_message_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  avim_packet_reflection_ = NULL;
+  avim_group_message_reflection_ = NULL;
+const ::google::protobuf::Descriptor* avim_message_packet_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  avim_message_packet_reflection_ = NULL;
 
 }  // namespace
 
@@ -113,21 +116,35 @@ void protobuf_AssignDesc_im_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(avim_message));
-  avim_packet_descriptor_ = file->message_type(4);
-  static const int avim_packet_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_packet, avim_),
+  avim_group_message_descriptor_ = file->message_type(4);
+  static const int avim_group_message_offsets_[1] = {
   };
-  avim_packet_reflection_ =
+  avim_group_message_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      avim_packet_descriptor_,
-      avim_packet::default_instance_,
-      avim_packet_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_packet, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_packet, _unknown_fields_),
+      avim_group_message_descriptor_,
+      avim_group_message::default_instance_,
+      avim_group_message_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_group_message, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_group_message, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(avim_packet));
+      sizeof(avim_group_message));
+  avim_message_packet_descriptor_ = file->message_type(5);
+  static const int avim_message_packet_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_message_packet, avim_),
+  };
+  avim_message_packet_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      avim_message_packet_descriptor_,
+      avim_message_packet::default_instance_,
+      avim_message_packet_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_message_packet, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avim_message_packet, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(avim_message_packet));
 }
 
 namespace {
@@ -149,7 +166,9 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     avim_message_descriptor_, &avim_message::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    avim_packet_descriptor_, &avim_packet::default_instance());
+    avim_group_message_descriptor_, &avim_group_message::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    avim_message_packet_descriptor_, &avim_message_packet::default_instance());
 }
 
 }  // namespace
@@ -163,8 +182,10 @@ void protobuf_ShutdownFile_im_2eproto() {
   delete emoji_message_reflection_;
   delete avim_message::default_instance_;
   delete avim_message_reflection_;
-  delete avim_packet::default_instance_;
-  delete avim_packet_reflection_;
+  delete avim_group_message::default_instance_;
+  delete avim_group_message_reflection_;
+  delete avim_message_packet::default_instance_;
+  delete avim_message_packet_reflection_;
 }
 
 void protobuf_AddDesc_im_2eproto() {
@@ -182,20 +203,23 @@ void protobuf_AddDesc_im_2eproto() {
     "theme\030\002 \001(\t\022\024\n\014custom_image\030\003 \001(\014\"^\n\014avi"
     "m_message\022&\n\titem_text\030\001 \001(\0132\023.proto.tex"
     "t_message\022&\n\nitem_image\030\002 \001(\0132\022.proto.im"
-    "g_message\"0\n\013avim_packet\022!\n\004avim\030\001 \003(\0132\023"
-    ".proto.avim_message", 379);
+    "g_message\"\024\n\022avim_group_message\"8\n\023avim_"
+    "message_packet\022!\n\004avim\030\001 \001(\0132\023.proto.avi"
+    "m_message", 409);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "im.proto", &protobuf_RegisterTypes);
   text_message::default_instance_ = new text_message();
   img_message::default_instance_ = new img_message();
   emoji_message::default_instance_ = new emoji_message();
   avim_message::default_instance_ = new avim_message();
-  avim_packet::default_instance_ = new avim_packet();
+  avim_group_message::default_instance_ = new avim_group_message();
+  avim_message_packet::default_instance_ = new avim_message_packet();
   text_message::default_instance_->InitAsDefaultInstance();
   img_message::default_instance_->InitAsDefaultInstance();
   emoji_message::default_instance_->InitAsDefaultInstance();
   avim_message::default_instance_->InitAsDefaultInstance();
-  avim_packet::default_instance_->InitAsDefaultInstance();
+  avim_group_message::default_instance_->InitAsDefaultInstance();
+  avim_message_packet::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_im_2eproto);
 }
 
@@ -1609,94 +1633,278 @@ void avim_message::Swap(avim_message* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int avim_packet::kAvimFieldNumber;
 #endif  // !_MSC_VER
 
-avim_packet::avim_packet()
+avim_group_message::avim_group_message()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:proto.avim_packet)
+  // @@protoc_insertion_point(constructor:proto.avim_group_message)
 }
 
-void avim_packet::InitAsDefaultInstance() {
+void avim_group_message::InitAsDefaultInstance() {
 }
 
-avim_packet::avim_packet(const avim_packet& from)
+avim_group_message::avim_group_message(const avim_group_message& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:proto.avim_packet)
+  // @@protoc_insertion_point(copy_constructor:proto.avim_group_message)
 }
 
-void avim_packet::SharedCtor() {
+void avim_group_message::SharedCtor() {
   _cached_size_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 #if __cplusplus >= 201103L || _MSC_VER >= 1600
-avim_packet::avim_packet(avim_packet&& from)
+avim_group_message::avim_group_message(avim_group_message&& from)
   : ::google::protobuf::Message() {
   Swap(&from);
 }
 #endif
 
-avim_packet::~avim_packet() {
-  // @@protoc_insertion_point(destructor:proto.avim_packet)
+avim_group_message::~avim_group_message() {
+  // @@protoc_insertion_point(destructor:proto.avim_group_message)
   SharedDtor();
 }
 
-void avim_packet::SharedDtor() {
+void avim_group_message::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void avim_packet::SetCachedSize(int size) const {
+void avim_group_message::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* avim_packet::descriptor() {
+const ::google::protobuf::Descriptor* avim_group_message::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return avim_packet_descriptor_;
+  return avim_group_message_descriptor_;
 }
 
-const avim_packet& avim_packet::default_instance() {
+const avim_group_message& avim_group_message::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_im_2eproto();
   return *default_instance_;
 }
 
-avim_packet* avim_packet::default_instance_ = NULL;
+avim_group_message* avim_group_message::default_instance_ = NULL;
 
-avim_packet* avim_packet::New() const {
-  return new avim_packet;
+avim_group_message* avim_group_message::New() const {
+  return new avim_group_message;
 }
 
-void avim_packet::Clear() {
-  avim_.Clear();
+void avim_group_message::Clear() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
-bool avim_packet::MergePartialFromCodedStream(
+bool avim_group_message::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:proto.avim_packet)
+  // @@protoc_insertion_point(parse_start:proto.avim_group_message)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+  handle_unusual:
+    if (tag == 0 ||
+        ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+        ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+      goto success;
+    }
+    DO_(::google::protobuf::internal::WireFormat::SkipField(
+          input, tag, mutable_unknown_fields()));
+  }
+success:
+  // @@protoc_insertion_point(parse_success:proto.avim_group_message)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:proto.avim_group_message)
+  return false;
+#undef DO_
+}
+
+void avim_group_message::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:proto.avim_group_message)
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:proto.avim_group_message)
+}
+
+::google::protobuf::uint8* avim_group_message::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:proto.avim_group_message)
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:proto.avim_group_message)
+  return target;
+}
+
+int avim_group_message::ByteSize() const {
+  int total_size = 0;
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void avim_group_message::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const avim_group_message* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const avim_group_message*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void avim_group_message::MergeFrom(const avim_group_message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void avim_group_message::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void avim_group_message::CopyFrom(const avim_group_message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool avim_group_message::IsInitialized() const {
+
+  return true;
+}
+
+void avim_group_message::Swap(avim_group_message* other) {
+  if (other != this) {
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata avim_group_message::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = avim_group_message_descriptor_;
+  metadata.reflection = avim_group_message_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int avim_message_packet::kAvimFieldNumber;
+#endif  // !_MSC_VER
+
+avim_message_packet::avim_message_packet()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:proto.avim_message_packet)
+}
+
+void avim_message_packet::InitAsDefaultInstance() {
+  avim_ = const_cast< ::proto::avim_message*>(&::proto::avim_message::default_instance());
+}
+
+avim_message_packet::avim_message_packet(const avim_message_packet& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:proto.avim_message_packet)
+}
+
+void avim_message_packet::SharedCtor() {
+  _cached_size_ = 0;
+  avim_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+#if __cplusplus >= 201103L || _MSC_VER >= 1600
+avim_message_packet::avim_message_packet(avim_message_packet&& from)
+  : ::google::protobuf::Message() {
+  Swap(&from);
+}
+#endif
+
+avim_message_packet::~avim_message_packet() {
+  // @@protoc_insertion_point(destructor:proto.avim_message_packet)
+  SharedDtor();
+}
+
+void avim_message_packet::SharedDtor() {
+  if (this != default_instance_) {
+    delete avim_;
+  }
+}
+
+void avim_message_packet::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* avim_message_packet::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return avim_message_packet_descriptor_;
+}
+
+const avim_message_packet& avim_message_packet::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_im_2eproto();
+  return *default_instance_;
+}
+
+avim_message_packet* avim_message_packet::default_instance_ = NULL;
+
+avim_message_packet* avim_message_packet::New() const {
+  return new avim_message_packet;
+}
+
+void avim_message_packet::Clear() {
+  if (has_avim()) {
+    if (avim_ != NULL) avim_->::proto::avim_message::Clear();
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool avim_message_packet::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:proto.avim_message_packet)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .proto.avim_message avim = 1;
+      // optional .proto.avim_message avim = 1;
       case 1: {
         if (tag == 10) {
-         parse_avim:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_avim()));
+               input, mutable_avim()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(10)) goto parse_avim;
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -1715,59 +1923,60 @@ bool avim_packet::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:proto.avim_packet)
+  // @@protoc_insertion_point(parse_success:proto.avim_message_packet)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:proto.avim_packet)
+  // @@protoc_insertion_point(parse_failure:proto.avim_message_packet)
   return false;
 #undef DO_
 }
 
-void avim_packet::SerializeWithCachedSizes(
+void avim_message_packet::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:proto.avim_packet)
-  // repeated .proto.avim_message avim = 1;
-  for (int i = 0; i < this->avim_size(); i++) {
+  // @@protoc_insertion_point(serialize_start:proto.avim_message_packet)
+  // optional .proto.avim_message avim = 1;
+  if (has_avim()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->avim(i), output);
+      1, this->avim(), output);
   }
 
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:proto.avim_packet)
+  // @@protoc_insertion_point(serialize_end:proto.avim_message_packet)
 }
 
-::google::protobuf::uint8* avim_packet::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* avim_message_packet::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:proto.avim_packet)
-  // repeated .proto.avim_message avim = 1;
-  for (int i = 0; i < this->avim_size(); i++) {
+  // @@protoc_insertion_point(serialize_to_array_start:proto.avim_message_packet)
+  // optional .proto.avim_message avim = 1;
+  if (has_avim()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        1, this->avim(i), target);
+        1, this->avim(), target);
   }
 
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:proto.avim_packet)
+  // @@protoc_insertion_point(serialize_to_array_end:proto.avim_message_packet)
   return target;
 }
 
-int avim_packet::ByteSize() const {
+int avim_message_packet::ByteSize() const {
   int total_size = 0;
 
-  // repeated .proto.avim_message avim = 1;
-  total_size += 1 * this->avim_size();
-  for (int i = 0; i < this->avim_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->avim(i));
-  }
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional .proto.avim_message avim = 1;
+    if (has_avim()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->avim());
+    }
 
+  }
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -1779,10 +1988,10 @@ int avim_packet::ByteSize() const {
   return total_size;
 }
 
-void avim_packet::MergeFrom(const ::google::protobuf::Message& from) {
+void avim_message_packet::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const avim_packet* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const avim_packet*>(
+  const avim_message_packet* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const avim_message_packet*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -1791,44 +2000,50 @@ void avim_packet::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void avim_packet::MergeFrom(const avim_packet& from) {
+void avim_message_packet::MergeFrom(const avim_message_packet& from) {
   GOOGLE_CHECK_NE(&from, this);
-  avim_.MergeFrom(from.avim_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_avim()) {
+      mutable_avim()->::proto::avim_message::MergeFrom(from.avim());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void avim_packet::CopyFrom(const ::google::protobuf::Message& from) {
+void avim_message_packet::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void avim_packet::CopyFrom(const avim_packet& from) {
+void avim_message_packet::CopyFrom(const avim_message_packet& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool avim_packet::IsInitialized() const {
+bool avim_message_packet::IsInitialized() const {
 
-  if (!::google::protobuf::internal::AllAreInitialized(this->avim())) return false;
+  if (has_avim()) {
+    if (!this->avim().IsInitialized()) return false;
+  }
   return true;
 }
 
-void avim_packet::Swap(avim_packet* other) {
+void avim_message_packet::Swap(avim_message_packet* other) {
   if (other != this) {
-    avim_.Swap(&other->avim_);
+    std::swap(avim_, other->avim_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
-::google::protobuf::Metadata avim_packet::GetMetadata() const {
+::google::protobuf::Metadata avim_message_packet::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = avim_packet_descriptor_;
-  metadata.reflection = avim_packet_reflection_;
+  metadata.descriptor = avim_message_packet_descriptor_;
+  metadata.reflection = avim_message_packet_reflection_;
   return metadata;
 }
 

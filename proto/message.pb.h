@@ -34,8 +34,8 @@ void  protobuf_AddDesc_message_2eproto();
 void protobuf_AssignDesc_message_2eproto();
 void protobuf_ShutdownFile_message_2eproto();
 
-class avPacket;
-class avPacket_ack_control;
+class avpacket;
+class avpacket_ack_control;
 class aGMP;
 class aGMP_PKREPLY;
 class aGMP_NOROUTTOHOST;
@@ -43,20 +43,20 @@ class aGMP_TTLOUT;
 
 // ===================================================================
 
-class avPacket_ack_control : public ::google::protobuf::Message {
+class avpacket_ack_control : public ::google::protobuf::Message {
  public:
-  avPacket_ack_control();
-  virtual ~avPacket_ack_control();
+  avpacket_ack_control();
+  virtual ~avpacket_ack_control();
 
-  avPacket_ack_control(const avPacket_ack_control& from);
+  avpacket_ack_control(const avpacket_ack_control& from);
 
-  inline avPacket_ack_control& operator=(const avPacket_ack_control& from) {
+  inline avpacket_ack_control& operator=(const avpacket_ack_control& from) {
     CopyFrom(from);
     return *this;
   }
 
   #if __cplusplus >= 201103L || _MSC_VER >= 1600
-  inline avPacket_ack_control& operator=(avPacket_ack_control&& from) {
+  inline avpacket_ack_control& operator=(avpacket_ack_control&& from) {
     if (&from != this) {
       Clear();
       Swap(&from);
@@ -64,7 +64,7 @@ class avPacket_ack_control : public ::google::protobuf::Message {
     return *this;
   }
 
-  avPacket_ack_control(avPacket_ack_control&& from);
+  avpacket_ack_control(avpacket_ack_control&& from);
   #endif
 
   inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
@@ -76,17 +76,17 @@ class avPacket_ack_control : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const avPacket_ack_control& default_instance();
+  static const avpacket_ack_control& default_instance();
 
-  void Swap(avPacket_ack_control* other);
+  void Swap(avpacket_ack_control* other);
 
   // implements Message ----------------------------------------------
 
-  avPacket_ack_control* New() const;
+  avpacket_ack_control* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const avPacket_ack_control& from);
-  void MergeFrom(const avPacket_ack_control& from);
+  void CopyFrom(const avpacket_ack_control& from);
+  void MergeFrom(const avpacket_ack_control& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -115,7 +115,7 @@ class avPacket_ack_control : public ::google::protobuf::Message {
   inline ::google::protobuf::uint64 ack_seq() const;
   inline void set_ack_seq(::google::protobuf::uint64 value);
 
-  // @@protoc_insertion_point(class_scope:proto.avPacket.ack_control)
+  // @@protoc_insertion_point(class_scope:proto.avpacket.ack_control)
  private:
   inline void set_has_ack_seq();
   inline void clear_has_ack_seq();
@@ -130,24 +130,24 @@ class avPacket_ack_control : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_message_2eproto();
 
   void InitAsDefaultInstance();
-  static avPacket_ack_control* default_instance_;
+  static avpacket_ack_control* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class avPacket : public ::google::protobuf::Message {
+class avpacket : public ::google::protobuf::Message {
  public:
-  avPacket();
-  virtual ~avPacket();
+  avpacket();
+  virtual ~avpacket();
 
-  avPacket(const avPacket& from);
+  avpacket(const avpacket& from);
 
-  inline avPacket& operator=(const avPacket& from) {
+  inline avpacket& operator=(const avpacket& from) {
     CopyFrom(from);
     return *this;
   }
 
   #if __cplusplus >= 201103L || _MSC_VER >= 1600
-  inline avPacket& operator=(avPacket&& from) {
+  inline avpacket& operator=(avpacket&& from) {
     if (&from != this) {
       Clear();
       Swap(&from);
@@ -155,7 +155,7 @@ class avPacket : public ::google::protobuf::Message {
     return *this;
   }
 
-  avPacket(avPacket&& from);
+  avpacket(avpacket&& from);
   #endif
 
   inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
@@ -167,17 +167,17 @@ class avPacket : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const avPacket& default_instance();
+  static const avpacket& default_instance();
 
-  void Swap(avPacket* other);
+  void Swap(avpacket* other);
 
   // implements Message ----------------------------------------------
 
-  avPacket* New() const;
+  avpacket* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const avPacket& from);
-  void MergeFrom(const avPacket& from);
+  void CopyFrom(const avpacket& from);
+  void MergeFrom(const avpacket& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -197,27 +197,27 @@ class avPacket : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
-  typedef avPacket_ack_control ack_control;
+  typedef avpacket_ack_control ack_control;
 
   // accessors -------------------------------------------------------
 
-  // required .proto.avAddress src = 1;
+  // required .proto.av_address src = 1;
   inline bool has_src() const;
   inline void clear_src();
   static const int kSrcFieldNumber = 1;
-  inline const ::proto::avAddress& src() const;
-  inline ::proto::avAddress* mutable_src();
-  inline ::proto::avAddress* release_src();
-  inline void set_allocated_src(::proto::avAddress* src);
+  inline const ::proto::av_address& src() const;
+  inline ::proto::av_address* mutable_src();
+  inline ::proto::av_address* release_src();
+  inline void set_allocated_src(::proto::av_address* src);
 
-  // required .proto.avAddress dest = 2;
+  // required .proto.av_address dest = 2;
   inline bool has_dest() const;
   inline void clear_dest();
   static const int kDestFieldNumber = 2;
-  inline const ::proto::avAddress& dest() const;
-  inline ::proto::avAddress* mutable_dest();
-  inline ::proto::avAddress* release_dest();
-  inline void set_allocated_dest(::proto::avAddress* dest);
+  inline const ::proto::av_address& dest() const;
+  inline ::proto::av_address* mutable_dest();
+  inline ::proto::av_address* release_dest();
+  inline void set_allocated_dest(::proto::av_address* dest);
 
   // optional bytes publickey = 3;
   inline bool has_publickey() const;
@@ -271,14 +271,14 @@ class avPacket : public ::google::protobuf::Message {
   inline ::google::protobuf::uint64 timestamp() const;
   inline void set_timestamp(::google::protobuf::uint64 value);
 
-  // optional .proto.avPacket.ack_control need_seq = 11;
+  // optional .proto.avpacket.ack_control need_seq = 11;
   inline bool has_need_seq() const;
   inline void clear_need_seq();
   static const int kNeedSeqFieldNumber = 11;
-  inline const ::proto::avPacket_ack_control& need_seq() const;
-  inline ::proto::avPacket_ack_control* mutable_need_seq();
-  inline ::proto::avPacket_ack_control* release_need_seq();
-  inline void set_allocated_need_seq(::proto::avPacket_ack_control* need_seq);
+  inline const ::proto::avpacket_ack_control& need_seq() const;
+  inline ::proto::avpacket_ack_control* mutable_need_seq();
+  inline ::proto::avpacket_ack_control* release_need_seq();
+  inline void set_allocated_need_seq(::proto::avpacket_ack_control* need_seq);
 
   // optional bytes payload = 8;
   inline bool has_payload() const;
@@ -292,7 +292,7 @@ class avPacket : public ::google::protobuf::Message {
   inline ::std::string* release_payload();
   inline void set_allocated_payload(::std::string* payload);
 
-  // @@protoc_insertion_point(class_scope:proto.avPacket)
+  // @@protoc_insertion_point(class_scope:proto.avpacket)
  private:
   inline void set_has_src();
   inline void clear_has_src();
@@ -319,15 +319,15 @@ class avPacket : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::proto::avAddress* src_;
-  ::proto::avAddress* dest_;
+  ::proto::av_address* src_;
+  ::proto::av_address* dest_;
   ::std::string* publickey_;
   static ::std::string* _default_upperlayerpotocol_;
   ::std::string* upperlayerpotocol_;
   ::google::protobuf::uint32 time_to_live_;
   ::google::protobuf::uint32 encrype_method_;
   ::google::protobuf::uint64 timestamp_;
-  ::proto::avPacket_ack_control* need_seq_;
+  ::proto::avpacket_ack_control* need_seq_;
   ::std::string* payload_;
   bool msg_dont_route_;
   friend void  protobuf_AddDesc_message_2eproto();
@@ -335,7 +335,7 @@ class avPacket : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_message_2eproto();
 
   void InitAsDefaultInstance();
-  static avPacket* default_instance_;
+  static avpacket* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -500,14 +500,14 @@ class aGMP_NOROUTTOHOST : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .proto.avAddress host = 1;
+  // required .proto.av_address host = 1;
   inline bool has_host() const;
   inline void clear_host();
   static const int kHostFieldNumber = 1;
-  inline const ::proto::avAddress& host() const;
-  inline ::proto::avAddress* mutable_host();
-  inline ::proto::avAddress* release_host();
-  inline void set_allocated_host(::proto::avAddress* host);
+  inline const ::proto::av_address& host() const;
+  inline ::proto::av_address* mutable_host();
+  inline ::proto::av_address* release_host();
+  inline void set_allocated_host(::proto::av_address* host);
 
   // @@protoc_insertion_point(class_scope:proto.aGMP.NOROUTTOHOST)
  private:
@@ -518,7 +518,7 @@ class aGMP_NOROUTTOHOST : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::proto::avAddress* host_;
+  ::proto::av_address* host_;
   friend void  protobuf_AddDesc_message_2eproto();
   friend void protobuf_AssignDesc_message_2eproto();
   friend void protobuf_ShutdownFile_message_2eproto();
@@ -593,14 +593,14 @@ class aGMP_TTLOUT : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .proto.avAddress host = 1;
+  // required .proto.av_address host = 1;
   inline bool has_host() const;
   inline void clear_host();
   static const int kHostFieldNumber = 1;
-  inline const ::proto::avAddress& host() const;
-  inline ::proto::avAddress* mutable_host();
-  inline ::proto::avAddress* release_host();
-  inline void set_allocated_host(::proto::avAddress* host);
+  inline const ::proto::av_address& host() const;
+  inline ::proto::av_address* mutable_host();
+  inline ::proto::av_address* release_host();
+  inline void set_allocated_host(::proto::av_address* host);
 
   // @@protoc_insertion_point(class_scope:proto.aGMP.TTLOUT)
  private:
@@ -611,7 +611,7 @@ class aGMP_TTLOUT : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::proto::avAddress* host_;
+  ::proto::av_address* host_;
   friend void  protobuf_AddDesc_message_2eproto();
   friend void protobuf_AssignDesc_message_2eproto();
   friend void protobuf_ShutdownFile_message_2eproto();
@@ -745,67 +745,67 @@ class aGMP : public ::google::protobuf::Message {
 
 // ===================================================================
 
-// avPacket_ack_control
+// avpacket_ack_control
 
 // required uint64 ack_seq = 1;
-inline bool avPacket_ack_control::has_ack_seq() const {
+inline bool avpacket_ack_control::has_ack_seq() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void avPacket_ack_control::set_has_ack_seq() {
+inline void avpacket_ack_control::set_has_ack_seq() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void avPacket_ack_control::clear_has_ack_seq() {
+inline void avpacket_ack_control::clear_has_ack_seq() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void avPacket_ack_control::clear_ack_seq() {
+inline void avpacket_ack_control::clear_ack_seq() {
   ack_seq_ = GOOGLE_ULONGLONG(0);
   clear_has_ack_seq();
 }
-inline ::google::protobuf::uint64 avPacket_ack_control::ack_seq() const {
-  // @@protoc_insertion_point(field_get:proto.avPacket.ack_control.ack_seq)
+inline ::google::protobuf::uint64 avpacket_ack_control::ack_seq() const {
+  // @@protoc_insertion_point(field_get:proto.avpacket.ack_control.ack_seq)
   return ack_seq_;
 }
-inline void avPacket_ack_control::set_ack_seq(::google::protobuf::uint64 value) {
+inline void avpacket_ack_control::set_ack_seq(::google::protobuf::uint64 value) {
   set_has_ack_seq();
   ack_seq_ = value;
-  // @@protoc_insertion_point(field_set:proto.avPacket.ack_control.ack_seq)
+  // @@protoc_insertion_point(field_set:proto.avpacket.ack_control.ack_seq)
 }
 
 // -------------------------------------------------------------------
 
-// avPacket
+// avpacket
 
-// required .proto.avAddress src = 1;
-inline bool avPacket::has_src() const {
+// required .proto.av_address src = 1;
+inline bool avpacket::has_src() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void avPacket::set_has_src() {
+inline void avpacket::set_has_src() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void avPacket::clear_has_src() {
+inline void avpacket::clear_has_src() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void avPacket::clear_src() {
-  if (src_ != NULL) src_->::proto::avAddress::Clear();
+inline void avpacket::clear_src() {
+  if (src_ != NULL) src_->::proto::av_address::Clear();
   clear_has_src();
 }
-inline const ::proto::avAddress& avPacket::src() const {
-  // @@protoc_insertion_point(field_get:proto.avPacket.src)
+inline const ::proto::av_address& avpacket::src() const {
+  // @@protoc_insertion_point(field_get:proto.avpacket.src)
   return src_ != NULL ? *src_ : *default_instance_->src_;
 }
-inline ::proto::avAddress* avPacket::mutable_src() {
+inline ::proto::av_address* avpacket::mutable_src() {
   set_has_src();
-  if (src_ == NULL) src_ = new ::proto::avAddress;
-  // @@protoc_insertion_point(field_mutable:proto.avPacket.src)
+  if (src_ == NULL) src_ = new ::proto::av_address;
+  // @@protoc_insertion_point(field_mutable:proto.avpacket.src)
   return src_;
 }
-inline ::proto::avAddress* avPacket::release_src() {
+inline ::proto::av_address* avpacket::release_src() {
   clear_has_src();
-  ::proto::avAddress* temp = src_;
+  ::proto::av_address* temp = src_;
   src_ = NULL;
   return temp;
 }
-inline void avPacket::set_allocated_src(::proto::avAddress* src) {
+inline void avpacket::set_allocated_src(::proto::av_address* src) {
   delete src_;
   src_ = src;
   if (src) {
@@ -813,40 +813,40 @@ inline void avPacket::set_allocated_src(::proto::avAddress* src) {
   } else {
     clear_has_src();
   }
-  // @@protoc_insertion_point(field_set_allocated:proto.avPacket.src)
+  // @@protoc_insertion_point(field_set_allocated:proto.avpacket.src)
 }
 
-// required .proto.avAddress dest = 2;
-inline bool avPacket::has_dest() const {
+// required .proto.av_address dest = 2;
+inline bool avpacket::has_dest() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void avPacket::set_has_dest() {
+inline void avpacket::set_has_dest() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void avPacket::clear_has_dest() {
+inline void avpacket::clear_has_dest() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void avPacket::clear_dest() {
-  if (dest_ != NULL) dest_->::proto::avAddress::Clear();
+inline void avpacket::clear_dest() {
+  if (dest_ != NULL) dest_->::proto::av_address::Clear();
   clear_has_dest();
 }
-inline const ::proto::avAddress& avPacket::dest() const {
-  // @@protoc_insertion_point(field_get:proto.avPacket.dest)
+inline const ::proto::av_address& avpacket::dest() const {
+  // @@protoc_insertion_point(field_get:proto.avpacket.dest)
   return dest_ != NULL ? *dest_ : *default_instance_->dest_;
 }
-inline ::proto::avAddress* avPacket::mutable_dest() {
+inline ::proto::av_address* avpacket::mutable_dest() {
   set_has_dest();
-  if (dest_ == NULL) dest_ = new ::proto::avAddress;
-  // @@protoc_insertion_point(field_mutable:proto.avPacket.dest)
+  if (dest_ == NULL) dest_ = new ::proto::av_address;
+  // @@protoc_insertion_point(field_mutable:proto.avpacket.dest)
   return dest_;
 }
-inline ::proto::avAddress* avPacket::release_dest() {
+inline ::proto::av_address* avpacket::release_dest() {
   clear_has_dest();
-  ::proto::avAddress* temp = dest_;
+  ::proto::av_address* temp = dest_;
   dest_ = NULL;
   return temp;
 }
-inline void avPacket::set_allocated_dest(::proto::avAddress* dest) {
+inline void avpacket::set_allocated_dest(::proto::av_address* dest) {
   delete dest_;
   dest_ = dest;
   if (dest) {
@@ -854,62 +854,62 @@ inline void avPacket::set_allocated_dest(::proto::avAddress* dest) {
   } else {
     clear_has_dest();
   }
-  // @@protoc_insertion_point(field_set_allocated:proto.avPacket.dest)
+  // @@protoc_insertion_point(field_set_allocated:proto.avpacket.dest)
 }
 
 // optional bytes publickey = 3;
-inline bool avPacket::has_publickey() const {
+inline bool avpacket::has_publickey() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void avPacket::set_has_publickey() {
+inline void avpacket::set_has_publickey() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void avPacket::clear_has_publickey() {
+inline void avpacket::clear_has_publickey() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void avPacket::clear_publickey() {
+inline void avpacket::clear_publickey() {
   if (publickey_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     publickey_->clear();
   }
   clear_has_publickey();
 }
-inline const ::std::string& avPacket::publickey() const {
-  // @@protoc_insertion_point(field_get:proto.avPacket.publickey)
+inline const ::std::string& avpacket::publickey() const {
+  // @@protoc_insertion_point(field_get:proto.avpacket.publickey)
   return *publickey_;
 }
-inline void avPacket::set_publickey(const ::std::string& value) {
+inline void avpacket::set_publickey(const ::std::string& value) {
   set_has_publickey();
   if (publickey_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     publickey_ = new ::std::string;
   }
   publickey_->assign(value);
-  // @@protoc_insertion_point(field_set:proto.avPacket.publickey)
+  // @@protoc_insertion_point(field_set:proto.avpacket.publickey)
 }
-inline void avPacket::set_publickey(const char* value) {
+inline void avpacket::set_publickey(const char* value) {
   set_has_publickey();
   if (publickey_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     publickey_ = new ::std::string;
   }
   publickey_->assign(value);
-  // @@protoc_insertion_point(field_set_char:proto.avPacket.publickey)
+  // @@protoc_insertion_point(field_set_char:proto.avpacket.publickey)
 }
-inline void avPacket::set_publickey(const void* value, size_t size) {
+inline void avpacket::set_publickey(const void* value, size_t size) {
   set_has_publickey();
   if (publickey_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     publickey_ = new ::std::string;
   }
   publickey_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:proto.avPacket.publickey)
+  // @@protoc_insertion_point(field_set_pointer:proto.avpacket.publickey)
 }
-inline ::std::string* avPacket::mutable_publickey() {
+inline ::std::string* avpacket::mutable_publickey() {
   set_has_publickey();
   if (publickey_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     publickey_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:proto.avPacket.publickey)
+  // @@protoc_insertion_point(field_mutable:proto.avpacket.publickey)
   return publickey_;
 }
-inline ::std::string* avPacket::release_publickey() {
+inline ::std::string* avpacket::release_publickey() {
   clear_has_publickey();
   if (publickey_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
@@ -919,7 +919,7 @@ inline ::std::string* avPacket::release_publickey() {
     return temp;
   }
 }
-inline void avPacket::set_allocated_publickey(::std::string* publickey) {
+inline void avpacket::set_allocated_publickey(::std::string* publickey) {
   if (publickey_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete publickey_;
   }
@@ -930,86 +930,86 @@ inline void avPacket::set_allocated_publickey(::std::string* publickey) {
     clear_has_publickey();
     publickey_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:proto.avPacket.publickey)
+  // @@protoc_insertion_point(field_set_allocated:proto.avpacket.publickey)
 }
 
 // required uint32 time_to_live = 4 [default = 64];
-inline bool avPacket::has_time_to_live() const {
+inline bool avpacket::has_time_to_live() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void avPacket::set_has_time_to_live() {
+inline void avpacket::set_has_time_to_live() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void avPacket::clear_has_time_to_live() {
+inline void avpacket::clear_has_time_to_live() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void avPacket::clear_time_to_live() {
+inline void avpacket::clear_time_to_live() {
   time_to_live_ = 64u;
   clear_has_time_to_live();
 }
-inline ::google::protobuf::uint32 avPacket::time_to_live() const {
-  // @@protoc_insertion_point(field_get:proto.avPacket.time_to_live)
+inline ::google::protobuf::uint32 avpacket::time_to_live() const {
+  // @@protoc_insertion_point(field_get:proto.avpacket.time_to_live)
   return time_to_live_;
 }
-inline void avPacket::set_time_to_live(::google::protobuf::uint32 value) {
+inline void avpacket::set_time_to_live(::google::protobuf::uint32 value) {
   set_has_time_to_live();
   time_to_live_ = value;
-  // @@protoc_insertion_point(field_set:proto.avPacket.time_to_live)
+  // @@protoc_insertion_point(field_set:proto.avpacket.time_to_live)
 }
 
 // required string upperlayerpotocol = 6 [default = "avim"];
-inline bool avPacket::has_upperlayerpotocol() const {
+inline bool avpacket::has_upperlayerpotocol() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void avPacket::set_has_upperlayerpotocol() {
+inline void avpacket::set_has_upperlayerpotocol() {
   _has_bits_[0] |= 0x00000010u;
 }
-inline void avPacket::clear_has_upperlayerpotocol() {
+inline void avpacket::clear_has_upperlayerpotocol() {
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void avPacket::clear_upperlayerpotocol() {
+inline void avpacket::clear_upperlayerpotocol() {
   if (upperlayerpotocol_ != _default_upperlayerpotocol_) {
     upperlayerpotocol_->assign(*_default_upperlayerpotocol_);
   }
   clear_has_upperlayerpotocol();
 }
-inline const ::std::string& avPacket::upperlayerpotocol() const {
-  // @@protoc_insertion_point(field_get:proto.avPacket.upperlayerpotocol)
+inline const ::std::string& avpacket::upperlayerpotocol() const {
+  // @@protoc_insertion_point(field_get:proto.avpacket.upperlayerpotocol)
   return *upperlayerpotocol_;
 }
-inline void avPacket::set_upperlayerpotocol(const ::std::string& value) {
+inline void avpacket::set_upperlayerpotocol(const ::std::string& value) {
   set_has_upperlayerpotocol();
   if (upperlayerpotocol_ == _default_upperlayerpotocol_) {
     upperlayerpotocol_ = new ::std::string;
   }
   upperlayerpotocol_->assign(value);
-  // @@protoc_insertion_point(field_set:proto.avPacket.upperlayerpotocol)
+  // @@protoc_insertion_point(field_set:proto.avpacket.upperlayerpotocol)
 }
-inline void avPacket::set_upperlayerpotocol(const char* value) {
+inline void avpacket::set_upperlayerpotocol(const char* value) {
   set_has_upperlayerpotocol();
   if (upperlayerpotocol_ == _default_upperlayerpotocol_) {
     upperlayerpotocol_ = new ::std::string;
   }
   upperlayerpotocol_->assign(value);
-  // @@protoc_insertion_point(field_set_char:proto.avPacket.upperlayerpotocol)
+  // @@protoc_insertion_point(field_set_char:proto.avpacket.upperlayerpotocol)
 }
-inline void avPacket::set_upperlayerpotocol(const char* value, size_t size) {
+inline void avpacket::set_upperlayerpotocol(const char* value, size_t size) {
   set_has_upperlayerpotocol();
   if (upperlayerpotocol_ == _default_upperlayerpotocol_) {
     upperlayerpotocol_ = new ::std::string;
   }
   upperlayerpotocol_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:proto.avPacket.upperlayerpotocol)
+  // @@protoc_insertion_point(field_set_pointer:proto.avpacket.upperlayerpotocol)
 }
-inline ::std::string* avPacket::mutable_upperlayerpotocol() {
+inline ::std::string* avpacket::mutable_upperlayerpotocol() {
   set_has_upperlayerpotocol();
   if (upperlayerpotocol_ == _default_upperlayerpotocol_) {
     upperlayerpotocol_ = new ::std::string(*_default_upperlayerpotocol_);
   }
-  // @@protoc_insertion_point(field_mutable:proto.avPacket.upperlayerpotocol)
+  // @@protoc_insertion_point(field_mutable:proto.avpacket.upperlayerpotocol)
   return upperlayerpotocol_;
 }
-inline ::std::string* avPacket::release_upperlayerpotocol() {
+inline ::std::string* avpacket::release_upperlayerpotocol() {
   clear_has_upperlayerpotocol();
   if (upperlayerpotocol_ == _default_upperlayerpotocol_) {
     return NULL;
@@ -1019,7 +1019,7 @@ inline ::std::string* avPacket::release_upperlayerpotocol() {
     return temp;
   }
 }
-inline void avPacket::set_allocated_upperlayerpotocol(::std::string* upperlayerpotocol) {
+inline void avpacket::set_allocated_upperlayerpotocol(::std::string* upperlayerpotocol) {
   if (upperlayerpotocol_ != _default_upperlayerpotocol_) {
     delete upperlayerpotocol_;
   }
@@ -1030,112 +1030,112 @@ inline void avPacket::set_allocated_upperlayerpotocol(::std::string* upperlayerp
     clear_has_upperlayerpotocol();
     upperlayerpotocol_ = const_cast< ::std::string*>(_default_upperlayerpotocol_);
   }
-  // @@protoc_insertion_point(field_set_allocated:proto.avPacket.upperlayerpotocol)
+  // @@protoc_insertion_point(field_set_allocated:proto.avpacket.upperlayerpotocol)
 }
 
 // optional uint32 encrype_method = 7 [default = 0];
-inline bool avPacket::has_encrype_method() const {
+inline bool avpacket::has_encrype_method() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void avPacket::set_has_encrype_method() {
+inline void avpacket::set_has_encrype_method() {
   _has_bits_[0] |= 0x00000020u;
 }
-inline void avPacket::clear_has_encrype_method() {
+inline void avpacket::clear_has_encrype_method() {
   _has_bits_[0] &= ~0x00000020u;
 }
-inline void avPacket::clear_encrype_method() {
+inline void avpacket::clear_encrype_method() {
   encrype_method_ = 0u;
   clear_has_encrype_method();
 }
-inline ::google::protobuf::uint32 avPacket::encrype_method() const {
-  // @@protoc_insertion_point(field_get:proto.avPacket.encrype_method)
+inline ::google::protobuf::uint32 avpacket::encrype_method() const {
+  // @@protoc_insertion_point(field_get:proto.avpacket.encrype_method)
   return encrype_method_;
 }
-inline void avPacket::set_encrype_method(::google::protobuf::uint32 value) {
+inline void avpacket::set_encrype_method(::google::protobuf::uint32 value) {
   set_has_encrype_method();
   encrype_method_ = value;
-  // @@protoc_insertion_point(field_set:proto.avPacket.encrype_method)
+  // @@protoc_insertion_point(field_set:proto.avpacket.encrype_method)
 }
 
 // optional bool msg_dont_route = 9;
-inline bool avPacket::has_msg_dont_route() const {
+inline bool avpacket::has_msg_dont_route() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void avPacket::set_has_msg_dont_route() {
+inline void avpacket::set_has_msg_dont_route() {
   _has_bits_[0] |= 0x00000040u;
 }
-inline void avPacket::clear_has_msg_dont_route() {
+inline void avpacket::clear_has_msg_dont_route() {
   _has_bits_[0] &= ~0x00000040u;
 }
-inline void avPacket::clear_msg_dont_route() {
+inline void avpacket::clear_msg_dont_route() {
   msg_dont_route_ = false;
   clear_has_msg_dont_route();
 }
-inline bool avPacket::msg_dont_route() const {
-  // @@protoc_insertion_point(field_get:proto.avPacket.msg_dont_route)
+inline bool avpacket::msg_dont_route() const {
+  // @@protoc_insertion_point(field_get:proto.avpacket.msg_dont_route)
   return msg_dont_route_;
 }
-inline void avPacket::set_msg_dont_route(bool value) {
+inline void avpacket::set_msg_dont_route(bool value) {
   set_has_msg_dont_route();
   msg_dont_route_ = value;
-  // @@protoc_insertion_point(field_set:proto.avPacket.msg_dont_route)
+  // @@protoc_insertion_point(field_set:proto.avpacket.msg_dont_route)
 }
 
 // optional uint64 timestamp = 10;
-inline bool avPacket::has_timestamp() const {
+inline bool avpacket::has_timestamp() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void avPacket::set_has_timestamp() {
+inline void avpacket::set_has_timestamp() {
   _has_bits_[0] |= 0x00000080u;
 }
-inline void avPacket::clear_has_timestamp() {
+inline void avpacket::clear_has_timestamp() {
   _has_bits_[0] &= ~0x00000080u;
 }
-inline void avPacket::clear_timestamp() {
+inline void avpacket::clear_timestamp() {
   timestamp_ = GOOGLE_ULONGLONG(0);
   clear_has_timestamp();
 }
-inline ::google::protobuf::uint64 avPacket::timestamp() const {
-  // @@protoc_insertion_point(field_get:proto.avPacket.timestamp)
+inline ::google::protobuf::uint64 avpacket::timestamp() const {
+  // @@protoc_insertion_point(field_get:proto.avpacket.timestamp)
   return timestamp_;
 }
-inline void avPacket::set_timestamp(::google::protobuf::uint64 value) {
+inline void avpacket::set_timestamp(::google::protobuf::uint64 value) {
   set_has_timestamp();
   timestamp_ = value;
-  // @@protoc_insertion_point(field_set:proto.avPacket.timestamp)
+  // @@protoc_insertion_point(field_set:proto.avpacket.timestamp)
 }
 
-// optional .proto.avPacket.ack_control need_seq = 11;
-inline bool avPacket::has_need_seq() const {
+// optional .proto.avpacket.ack_control need_seq = 11;
+inline bool avpacket::has_need_seq() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void avPacket::set_has_need_seq() {
+inline void avpacket::set_has_need_seq() {
   _has_bits_[0] |= 0x00000100u;
 }
-inline void avPacket::clear_has_need_seq() {
+inline void avpacket::clear_has_need_seq() {
   _has_bits_[0] &= ~0x00000100u;
 }
-inline void avPacket::clear_need_seq() {
-  if (need_seq_ != NULL) need_seq_->::proto::avPacket_ack_control::Clear();
+inline void avpacket::clear_need_seq() {
+  if (need_seq_ != NULL) need_seq_->::proto::avpacket_ack_control::Clear();
   clear_has_need_seq();
 }
-inline const ::proto::avPacket_ack_control& avPacket::need_seq() const {
-  // @@protoc_insertion_point(field_get:proto.avPacket.need_seq)
+inline const ::proto::avpacket_ack_control& avpacket::need_seq() const {
+  // @@protoc_insertion_point(field_get:proto.avpacket.need_seq)
   return need_seq_ != NULL ? *need_seq_ : *default_instance_->need_seq_;
 }
-inline ::proto::avPacket_ack_control* avPacket::mutable_need_seq() {
+inline ::proto::avpacket_ack_control* avpacket::mutable_need_seq() {
   set_has_need_seq();
-  if (need_seq_ == NULL) need_seq_ = new ::proto::avPacket_ack_control;
-  // @@protoc_insertion_point(field_mutable:proto.avPacket.need_seq)
+  if (need_seq_ == NULL) need_seq_ = new ::proto::avpacket_ack_control;
+  // @@protoc_insertion_point(field_mutable:proto.avpacket.need_seq)
   return need_seq_;
 }
-inline ::proto::avPacket_ack_control* avPacket::release_need_seq() {
+inline ::proto::avpacket_ack_control* avpacket::release_need_seq() {
   clear_has_need_seq();
-  ::proto::avPacket_ack_control* temp = need_seq_;
+  ::proto::avpacket_ack_control* temp = need_seq_;
   need_seq_ = NULL;
   return temp;
 }
-inline void avPacket::set_allocated_need_seq(::proto::avPacket_ack_control* need_seq) {
+inline void avpacket::set_allocated_need_seq(::proto::avpacket_ack_control* need_seq) {
   delete need_seq_;
   need_seq_ = need_seq;
   if (need_seq) {
@@ -1143,62 +1143,62 @@ inline void avPacket::set_allocated_need_seq(::proto::avPacket_ack_control* need
   } else {
     clear_has_need_seq();
   }
-  // @@protoc_insertion_point(field_set_allocated:proto.avPacket.need_seq)
+  // @@protoc_insertion_point(field_set_allocated:proto.avpacket.need_seq)
 }
 
 // optional bytes payload = 8;
-inline bool avPacket::has_payload() const {
+inline bool avpacket::has_payload() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void avPacket::set_has_payload() {
+inline void avpacket::set_has_payload() {
   _has_bits_[0] |= 0x00000200u;
 }
-inline void avPacket::clear_has_payload() {
+inline void avpacket::clear_has_payload() {
   _has_bits_[0] &= ~0x00000200u;
 }
-inline void avPacket::clear_payload() {
+inline void avpacket::clear_payload() {
   if (payload_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     payload_->clear();
   }
   clear_has_payload();
 }
-inline const ::std::string& avPacket::payload() const {
-  // @@protoc_insertion_point(field_get:proto.avPacket.payload)
+inline const ::std::string& avpacket::payload() const {
+  // @@protoc_insertion_point(field_get:proto.avpacket.payload)
   return *payload_;
 }
-inline void avPacket::set_payload(const ::std::string& value) {
+inline void avpacket::set_payload(const ::std::string& value) {
   set_has_payload();
   if (payload_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     payload_ = new ::std::string;
   }
   payload_->assign(value);
-  // @@protoc_insertion_point(field_set:proto.avPacket.payload)
+  // @@protoc_insertion_point(field_set:proto.avpacket.payload)
 }
-inline void avPacket::set_payload(const char* value) {
+inline void avpacket::set_payload(const char* value) {
   set_has_payload();
   if (payload_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     payload_ = new ::std::string;
   }
   payload_->assign(value);
-  // @@protoc_insertion_point(field_set_char:proto.avPacket.payload)
+  // @@protoc_insertion_point(field_set_char:proto.avpacket.payload)
 }
-inline void avPacket::set_payload(const void* value, size_t size) {
+inline void avpacket::set_payload(const void* value, size_t size) {
   set_has_payload();
   if (payload_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     payload_ = new ::std::string;
   }
   payload_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:proto.avPacket.payload)
+  // @@protoc_insertion_point(field_set_pointer:proto.avpacket.payload)
 }
-inline ::std::string* avPacket::mutable_payload() {
+inline ::std::string* avpacket::mutable_payload() {
   set_has_payload();
   if (payload_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     payload_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:proto.avPacket.payload)
+  // @@protoc_insertion_point(field_mutable:proto.avpacket.payload)
   return payload_;
 }
-inline ::std::string* avPacket::release_payload() {
+inline ::std::string* avpacket::release_payload() {
   clear_has_payload();
   if (payload_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
@@ -1208,7 +1208,7 @@ inline ::std::string* avPacket::release_payload() {
     return temp;
   }
 }
-inline void avPacket::set_allocated_payload(::std::string* payload) {
+inline void avpacket::set_allocated_payload(::std::string* payload) {
   if (payload_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete payload_;
   }
@@ -1219,7 +1219,7 @@ inline void avPacket::set_allocated_payload(::std::string* payload) {
     clear_has_payload();
     payload_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:proto.avPacket.payload)
+  // @@protoc_insertion_point(field_set_allocated:proto.avpacket.payload)
 }
 
 // -------------------------------------------------------------------
@@ -1306,7 +1306,7 @@ inline void aGMP_PKREPLY::set_allocated_x509_cert(::std::string* x509_cert) {
 
 // aGMP_NOROUTTOHOST
 
-// required .proto.avAddress host = 1;
+// required .proto.av_address host = 1;
 inline bool aGMP_NOROUTTOHOST::has_host() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1317,26 +1317,26 @@ inline void aGMP_NOROUTTOHOST::clear_has_host() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void aGMP_NOROUTTOHOST::clear_host() {
-  if (host_ != NULL) host_->::proto::avAddress::Clear();
+  if (host_ != NULL) host_->::proto::av_address::Clear();
   clear_has_host();
 }
-inline const ::proto::avAddress& aGMP_NOROUTTOHOST::host() const {
+inline const ::proto::av_address& aGMP_NOROUTTOHOST::host() const {
   // @@protoc_insertion_point(field_get:proto.aGMP.NOROUTTOHOST.host)
   return host_ != NULL ? *host_ : *default_instance_->host_;
 }
-inline ::proto::avAddress* aGMP_NOROUTTOHOST::mutable_host() {
+inline ::proto::av_address* aGMP_NOROUTTOHOST::mutable_host() {
   set_has_host();
-  if (host_ == NULL) host_ = new ::proto::avAddress;
+  if (host_ == NULL) host_ = new ::proto::av_address;
   // @@protoc_insertion_point(field_mutable:proto.aGMP.NOROUTTOHOST.host)
   return host_;
 }
-inline ::proto::avAddress* aGMP_NOROUTTOHOST::release_host() {
+inline ::proto::av_address* aGMP_NOROUTTOHOST::release_host() {
   clear_has_host();
-  ::proto::avAddress* temp = host_;
+  ::proto::av_address* temp = host_;
   host_ = NULL;
   return temp;
 }
-inline void aGMP_NOROUTTOHOST::set_allocated_host(::proto::avAddress* host) {
+inline void aGMP_NOROUTTOHOST::set_allocated_host(::proto::av_address* host) {
   delete host_;
   host_ = host;
   if (host) {
@@ -1351,7 +1351,7 @@ inline void aGMP_NOROUTTOHOST::set_allocated_host(::proto::avAddress* host) {
 
 // aGMP_TTLOUT
 
-// required .proto.avAddress host = 1;
+// required .proto.av_address host = 1;
 inline bool aGMP_TTLOUT::has_host() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1362,26 +1362,26 @@ inline void aGMP_TTLOUT::clear_has_host() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void aGMP_TTLOUT::clear_host() {
-  if (host_ != NULL) host_->::proto::avAddress::Clear();
+  if (host_ != NULL) host_->::proto::av_address::Clear();
   clear_has_host();
 }
-inline const ::proto::avAddress& aGMP_TTLOUT::host() const {
+inline const ::proto::av_address& aGMP_TTLOUT::host() const {
   // @@protoc_insertion_point(field_get:proto.aGMP.TTLOUT.host)
   return host_ != NULL ? *host_ : *default_instance_->host_;
 }
-inline ::proto::avAddress* aGMP_TTLOUT::mutable_host() {
+inline ::proto::av_address* aGMP_TTLOUT::mutable_host() {
   set_has_host();
-  if (host_ == NULL) host_ = new ::proto::avAddress;
+  if (host_ == NULL) host_ = new ::proto::av_address;
   // @@protoc_insertion_point(field_mutable:proto.aGMP.TTLOUT.host)
   return host_;
 }
-inline ::proto::avAddress* aGMP_TTLOUT::release_host() {
+inline ::proto::av_address* aGMP_TTLOUT::release_host() {
   clear_has_host();
-  ::proto::avAddress* temp = host_;
+  ::proto::av_address* temp = host_;
   host_ = NULL;
   return temp;
 }
-inline void aGMP_TTLOUT::set_allocated_host(::proto::avAddress* host) {
+inline void aGMP_TTLOUT::set_allocated_host(::proto::av_address* host) {
   delete host_;
   host_ = host;
   if (host) {

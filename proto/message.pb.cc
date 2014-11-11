@@ -20,12 +20,12 @@ namespace proto {
 
 namespace {
 
-const ::google::protobuf::Descriptor* avPacket_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* avpacket_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  avPacket_reflection_ = NULL;
-const ::google::protobuf::Descriptor* avPacket_ack_control_descriptor_ = NULL;
+  avpacket_reflection_ = NULL;
+const ::google::protobuf::Descriptor* avpacket_ack_control_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  avPacket_ack_control_reflection_ = NULL;
+  avpacket_ack_control_reflection_ = NULL;
 const ::google::protobuf::Descriptor* aGMP_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   aGMP_reflection_ = NULL;
@@ -48,45 +48,45 @@ void protobuf_AssignDesc_message_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "message.proto");
   GOOGLE_CHECK(file != NULL);
-  avPacket_descriptor_ = file->message_type(0);
-  static const int avPacket_offsets_[10] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, src_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, dest_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, publickey_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, time_to_live_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, upperlayerpotocol_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, encrype_method_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, msg_dont_route_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, timestamp_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, need_seq_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, payload_),
+  avpacket_descriptor_ = file->message_type(0);
+  static const int avpacket_offsets_[10] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket, src_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket, dest_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket, publickey_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket, time_to_live_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket, upperlayerpotocol_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket, encrype_method_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket, msg_dont_route_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket, timestamp_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket, need_seq_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket, payload_),
   };
-  avPacket_reflection_ =
+  avpacket_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      avPacket_descriptor_,
-      avPacket::default_instance_,
-      avPacket_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket, _unknown_fields_),
+      avpacket_descriptor_,
+      avpacket::default_instance_,
+      avpacket_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(avPacket));
-  avPacket_ack_control_descriptor_ = avPacket_descriptor_->nested_type(0);
-  static const int avPacket_ack_control_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket_ack_control, ack_seq_),
+      sizeof(avpacket));
+  avpacket_ack_control_descriptor_ = avpacket_descriptor_->nested_type(0);
+  static const int avpacket_ack_control_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket_ack_control, ack_seq_),
   };
-  avPacket_ack_control_reflection_ =
+  avpacket_ack_control_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      avPacket_ack_control_descriptor_,
-      avPacket_ack_control::default_instance_,
-      avPacket_ack_control_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket_ack_control, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avPacket_ack_control, _unknown_fields_),
+      avpacket_ack_control_descriptor_,
+      avpacket_ack_control::default_instance_,
+      avpacket_ack_control_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket_ack_control, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avpacket_ack_control, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(avPacket_ack_control));
+      sizeof(avpacket_ack_control));
   aGMP_descriptor_ = file->message_type(1);
   static const int aGMP_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(aGMP, pkreply_),
@@ -162,9 +162,9 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    avPacket_descriptor_, &avPacket::default_instance());
+    avpacket_descriptor_, &avpacket::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    avPacket_ack_control_descriptor_, &avPacket_ack_control::default_instance());
+    avpacket_ack_control_descriptor_, &avpacket_ack_control::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     aGMP_descriptor_, &aGMP::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -178,11 +178,11 @@ void protobuf_RegisterTypes(const ::std::string&) {
 }  // namespace
 
 void protobuf_ShutdownFile_message_2eproto() {
-  delete avPacket::default_instance_;
-  delete avPacket_reflection_;
-  delete avPacket::_default_upperlayerpotocol_;
-  delete avPacket_ack_control::default_instance_;
-  delete avPacket_ack_control_reflection_;
+  delete avpacket::default_instance_;
+  delete avpacket_reflection_;
+  delete avpacket::_default_upperlayerpotocol_;
+  delete avpacket_ack_control::default_instance_;
+  delete avpacket_ack_control_reflection_;
   delete aGMP::default_instance_;
   delete aGMP_reflection_;
   delete aGMP_PKREPLY::default_instance_;
@@ -201,34 +201,34 @@ void protobuf_AddDesc_message_2eproto() {
 
   ::proto::protobuf_AddDesc_address_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\rmessage.proto\022\005proto\032\raddress.proto\"\275\002"
-    "\n\010avPacket\022\035\n\003src\030\001 \002(\0132\020.proto.avAddres"
-    "s\022\036\n\004dest\030\002 \002(\0132\020.proto.avAddress\022\021\n\tpub"
-    "lickey\030\003 \001(\014\022\030\n\014time_to_live\030\004 \002(\r:\00264\022\037"
-    "\n\021upperlayerpotocol\030\006 \002(\t:\004avim\022\031\n\016encry"
-    "pe_method\030\007 \001(\r:\0010\022\026\n\016msg_dont_route\030\t \001"
-    "(\010\022\021\n\ttimestamp\030\n \001(\004\022-\n\010need_seq\030\013 \001(\0132"
-    "\033.proto.avPacket.ack_control\022\017\n\007payload\030"
-    "\010 \001(\014\032\036\n\013ack_control\022\017\n\007ack_seq\030\001 \002(\004\"\371\001"
-    "\n\004aGMP\022$\n\007pkreply\030\001 \001(\0132\023.proto.aGMP.PKR"
-    "EPLY\022/\n\rnoroutetohost\030\002 \001(\0132\030.proto.aGMP"
-    ".NOROUTTOHOST\022\"\n\006ttlout\030\003 \001(\0132\022.proto.aG"
-    "MP.TTLOUT\032\034\n\007PKREPLY\022\021\n\tx509_cert\030\001 \002(\014\032"
-    ".\n\014NOROUTTOHOST\022\036\n\004host\030\001 \002(\0132\020.proto.av"
-    "Address\032(\n\006TTLOUT\022\036\n\004host\030\001 \002(\0132\020.proto."
-    "avAddressP\000", 611);
+    "\n\rmessage.proto\022\005proto\032\raddress.proto\"\277\002"
+    "\n\010avpacket\022\036\n\003src\030\001 \002(\0132\021.proto.av_addre"
+    "ss\022\037\n\004dest\030\002 \002(\0132\021.proto.av_address\022\021\n\tp"
+    "ublickey\030\003 \001(\014\022\030\n\014time_to_live\030\004 \002(\r:\00264"
+    "\022\037\n\021upperlayerpotocol\030\006 \002(\t:\004avim\022\031\n\016enc"
+    "rype_method\030\007 \001(\r:\0010\022\026\n\016msg_dont_route\030\t"
+    " \001(\010\022\021\n\ttimestamp\030\n \001(\004\022-\n\010need_seq\030\013 \001("
+    "\0132\033.proto.avpacket.ack_control\022\017\n\007payloa"
+    "d\030\010 \001(\014\032\036\n\013ack_control\022\017\n\007ack_seq\030\001 \002(\004\""
+    "\373\001\n\004aGMP\022$\n\007pkreply\030\001 \001(\0132\023.proto.aGMP.P"
+    "KREPLY\022/\n\rnoroutetohost\030\002 \001(\0132\030.proto.aG"
+    "MP.NOROUTTOHOST\022\"\n\006ttlout\030\003 \001(\0132\022.proto."
+    "aGMP.TTLOUT\032\034\n\007PKREPLY\022\021\n\tx509_cert\030\001 \002("
+    "\014\032/\n\014NOROUTTOHOST\022\037\n\004host\030\001 \002(\0132\021.proto."
+    "av_address\032)\n\006TTLOUT\022\037\n\004host\030\001 \002(\0132\021.pro"
+    "to.av_addressP\000", 615);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "message.proto", &protobuf_RegisterTypes);
-  avPacket::_default_upperlayerpotocol_ =
+  avpacket::_default_upperlayerpotocol_ =
       new ::std::string("avim", 4);
-  avPacket::default_instance_ = new avPacket();
-  avPacket_ack_control::default_instance_ = new avPacket_ack_control();
+  avpacket::default_instance_ = new avpacket();
+  avpacket_ack_control::default_instance_ = new avpacket_ack_control();
   aGMP::default_instance_ = new aGMP();
   aGMP_PKREPLY::default_instance_ = new aGMP_PKREPLY();
   aGMP_NOROUTTOHOST::default_instance_ = new aGMP_NOROUTTOHOST();
   aGMP_TTLOUT::default_instance_ = new aGMP_TTLOUT();
-  avPacket::default_instance_->InitAsDefaultInstance();
-  avPacket_ack_control::default_instance_->InitAsDefaultInstance();
+  avpacket::default_instance_->InitAsDefaultInstance();
+  avpacket_ack_control::default_instance_->InitAsDefaultInstance();
   aGMP::default_instance_->InitAsDefaultInstance();
   aGMP_PKREPLY::default_instance_->InitAsDefaultInstance();
   aGMP_NOROUTTOHOST::default_instance_->InitAsDefaultInstance();
@@ -246,80 +246,80 @@ struct StaticDescriptorInitializer_message_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int avPacket_ack_control::kAckSeqFieldNumber;
+const int avpacket_ack_control::kAckSeqFieldNumber;
 #endif  // !_MSC_VER
 
-avPacket_ack_control::avPacket_ack_control()
+avpacket_ack_control::avpacket_ack_control()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:proto.avPacket.ack_control)
+  // @@protoc_insertion_point(constructor:proto.avpacket.ack_control)
 }
 
-void avPacket_ack_control::InitAsDefaultInstance() {
+void avpacket_ack_control::InitAsDefaultInstance() {
 }
 
-avPacket_ack_control::avPacket_ack_control(const avPacket_ack_control& from)
+avpacket_ack_control::avpacket_ack_control(const avpacket_ack_control& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:proto.avPacket.ack_control)
+  // @@protoc_insertion_point(copy_constructor:proto.avpacket.ack_control)
 }
 
-void avPacket_ack_control::SharedCtor() {
+void avpacket_ack_control::SharedCtor() {
   _cached_size_ = 0;
   ack_seq_ = GOOGLE_ULONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 #if __cplusplus >= 201103L || _MSC_VER >= 1600
-avPacket_ack_control::avPacket_ack_control(avPacket_ack_control&& from)
+avpacket_ack_control::avpacket_ack_control(avpacket_ack_control&& from)
   : ::google::protobuf::Message() {
   Swap(&from);
 }
 #endif
 
-avPacket_ack_control::~avPacket_ack_control() {
-  // @@protoc_insertion_point(destructor:proto.avPacket.ack_control)
+avpacket_ack_control::~avpacket_ack_control() {
+  // @@protoc_insertion_point(destructor:proto.avpacket.ack_control)
   SharedDtor();
 }
 
-void avPacket_ack_control::SharedDtor() {
+void avpacket_ack_control::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void avPacket_ack_control::SetCachedSize(int size) const {
+void avpacket_ack_control::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* avPacket_ack_control::descriptor() {
+const ::google::protobuf::Descriptor* avpacket_ack_control::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return avPacket_ack_control_descriptor_;
+  return avpacket_ack_control_descriptor_;
 }
 
-const avPacket_ack_control& avPacket_ack_control::default_instance() {
+const avpacket_ack_control& avpacket_ack_control::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_message_2eproto();
   return *default_instance_;
 }
 
-avPacket_ack_control* avPacket_ack_control::default_instance_ = NULL;
+avpacket_ack_control* avpacket_ack_control::default_instance_ = NULL;
 
-avPacket_ack_control* avPacket_ack_control::New() const {
-  return new avPacket_ack_control;
+avpacket_ack_control* avpacket_ack_control::New() const {
+  return new avpacket_ack_control;
 }
 
-void avPacket_ack_control::Clear() {
+void avpacket_ack_control::Clear() {
   ack_seq_ = GOOGLE_ULONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
-bool avPacket_ack_control::MergePartialFromCodedStream(
+bool avpacket_ack_control::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:proto.avPacket.ack_control)
+  // @@protoc_insertion_point(parse_start:proto.avpacket.ack_control)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -353,17 +353,17 @@ bool avPacket_ack_control::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:proto.avPacket.ack_control)
+  // @@protoc_insertion_point(parse_success:proto.avpacket.ack_control)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:proto.avPacket.ack_control)
+  // @@protoc_insertion_point(parse_failure:proto.avpacket.ack_control)
   return false;
 #undef DO_
 }
 
-void avPacket_ack_control::SerializeWithCachedSizes(
+void avpacket_ack_control::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:proto.avPacket.ack_control)
+  // @@protoc_insertion_point(serialize_start:proto.avpacket.ack_control)
   // required uint64 ack_seq = 1;
   if (has_ack_seq()) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->ack_seq(), output);
@@ -373,12 +373,12 @@ void avPacket_ack_control::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:proto.avPacket.ack_control)
+  // @@protoc_insertion_point(serialize_end:proto.avpacket.ack_control)
 }
 
-::google::protobuf::uint8* avPacket_ack_control::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* avpacket_ack_control::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:proto.avPacket.ack_control)
+  // @@protoc_insertion_point(serialize_to_array_start:proto.avpacket.ack_control)
   // required uint64 ack_seq = 1;
   if (has_ack_seq()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->ack_seq(), target);
@@ -388,11 +388,11 @@ void avPacket_ack_control::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:proto.avPacket.ack_control)
+  // @@protoc_insertion_point(serialize_to_array_end:proto.avpacket.ack_control)
   return target;
 }
 
-int avPacket_ack_control::ByteSize() const {
+int avpacket_ack_control::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -415,10 +415,10 @@ int avPacket_ack_control::ByteSize() const {
   return total_size;
 }
 
-void avPacket_ack_control::MergeFrom(const ::google::protobuf::Message& from) {
+void avpacket_ack_control::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const avPacket_ack_control* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const avPacket_ack_control*>(
+  const avpacket_ack_control* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const avpacket_ack_control*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -427,7 +427,7 @@ void avPacket_ack_control::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void avPacket_ack_control::MergeFrom(const avPacket_ack_control& from) {
+void avpacket_ack_control::MergeFrom(const avpacket_ack_control& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_ack_seq()) {
@@ -437,25 +437,25 @@ void avPacket_ack_control::MergeFrom(const avPacket_ack_control& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void avPacket_ack_control::CopyFrom(const ::google::protobuf::Message& from) {
+void avpacket_ack_control::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void avPacket_ack_control::CopyFrom(const avPacket_ack_control& from) {
+void avpacket_ack_control::CopyFrom(const avpacket_ack_control& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool avPacket_ack_control::IsInitialized() const {
+bool avpacket_ack_control::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
 
-void avPacket_ack_control::Swap(avPacket_ack_control* other) {
+void avpacket_ack_control::Swap(avpacket_ack_control* other) {
   if (other != this) {
     std::swap(ack_seq_, other->ack_seq_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -464,51 +464,51 @@ void avPacket_ack_control::Swap(avPacket_ack_control* other) {
   }
 }
 
-::google::protobuf::Metadata avPacket_ack_control::GetMetadata() const {
+::google::protobuf::Metadata avpacket_ack_control::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = avPacket_ack_control_descriptor_;
-  metadata.reflection = avPacket_ack_control_reflection_;
+  metadata.descriptor = avpacket_ack_control_descriptor_;
+  metadata.reflection = avpacket_ack_control_reflection_;
   return metadata;
 }
 
 
 // -------------------------------------------------------------------
 
-::std::string* avPacket::_default_upperlayerpotocol_ = NULL;
+::std::string* avpacket::_default_upperlayerpotocol_ = NULL;
 #ifndef _MSC_VER
-const int avPacket::kSrcFieldNumber;
-const int avPacket::kDestFieldNumber;
-const int avPacket::kPublickeyFieldNumber;
-const int avPacket::kTimeToLiveFieldNumber;
-const int avPacket::kUpperlayerpotocolFieldNumber;
-const int avPacket::kEncrypeMethodFieldNumber;
-const int avPacket::kMsgDontRouteFieldNumber;
-const int avPacket::kTimestampFieldNumber;
-const int avPacket::kNeedSeqFieldNumber;
-const int avPacket::kPayloadFieldNumber;
+const int avpacket::kSrcFieldNumber;
+const int avpacket::kDestFieldNumber;
+const int avpacket::kPublickeyFieldNumber;
+const int avpacket::kTimeToLiveFieldNumber;
+const int avpacket::kUpperlayerpotocolFieldNumber;
+const int avpacket::kEncrypeMethodFieldNumber;
+const int avpacket::kMsgDontRouteFieldNumber;
+const int avpacket::kTimestampFieldNumber;
+const int avpacket::kNeedSeqFieldNumber;
+const int avpacket::kPayloadFieldNumber;
 #endif  // !_MSC_VER
 
-avPacket::avPacket()
+avpacket::avpacket()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:proto.avPacket)
+  // @@protoc_insertion_point(constructor:proto.avpacket)
 }
 
-void avPacket::InitAsDefaultInstance() {
-  src_ = const_cast< ::proto::avAddress*>(&::proto::avAddress::default_instance());
-  dest_ = const_cast< ::proto::avAddress*>(&::proto::avAddress::default_instance());
-  need_seq_ = const_cast< ::proto::avPacket_ack_control*>(&::proto::avPacket_ack_control::default_instance());
+void avpacket::InitAsDefaultInstance() {
+  src_ = const_cast< ::proto::av_address*>(&::proto::av_address::default_instance());
+  dest_ = const_cast< ::proto::av_address*>(&::proto::av_address::default_instance());
+  need_seq_ = const_cast< ::proto::avpacket_ack_control*>(&::proto::avpacket_ack_control::default_instance());
 }
 
-avPacket::avPacket(const avPacket& from)
+avpacket::avpacket(const avpacket& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:proto.avPacket)
+  // @@protoc_insertion_point(copy_constructor:proto.avpacket)
 }
 
-void avPacket::SharedCtor() {
+void avpacket::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   src_ = NULL;
@@ -525,18 +525,18 @@ void avPacket::SharedCtor() {
 }
 
 #if __cplusplus >= 201103L || _MSC_VER >= 1600
-avPacket::avPacket(avPacket&& from)
+avpacket::avpacket(avpacket&& from)
   : ::google::protobuf::Message() {
   Swap(&from);
 }
 #endif
 
-avPacket::~avPacket() {
-  // @@protoc_insertion_point(destructor:proto.avPacket)
+avpacket::~avpacket() {
+  // @@protoc_insertion_point(destructor:proto.avpacket)
   SharedDtor();
 }
 
-void avPacket::SharedDtor() {
+void avpacket::SharedDtor() {
   if (publickey_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete publickey_;
   }
@@ -553,30 +553,30 @@ void avPacket::SharedDtor() {
   }
 }
 
-void avPacket::SetCachedSize(int size) const {
+void avpacket::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* avPacket::descriptor() {
+const ::google::protobuf::Descriptor* avpacket::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return avPacket_descriptor_;
+  return avpacket_descriptor_;
 }
 
-const avPacket& avPacket::default_instance() {
+const avpacket& avpacket::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_message_2eproto();
   return *default_instance_;
 }
 
-avPacket* avPacket::default_instance_ = NULL;
+avpacket* avpacket::default_instance_ = NULL;
 
-avPacket* avPacket::New() const {
-  return new avPacket;
+avpacket* avpacket::New() const {
+  return new avpacket;
 }
 
-void avPacket::Clear() {
+void avpacket::Clear() {
 #define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
-  &reinterpret_cast<avPacket*>(16)->f) - \
+  &reinterpret_cast<avpacket*>(16)->f) - \
    reinterpret_cast<char*>(16))
 
 #define ZR_(first, last) do {                              \
@@ -588,10 +588,10 @@ void avPacket::Clear() {
   if (_has_bits_[0 / 32] & 255) {
     ZR_(encrype_method_, timestamp_);
     if (has_src()) {
-      if (src_ != NULL) src_->::proto::avAddress::Clear();
+      if (src_ != NULL) src_->::proto::av_address::Clear();
     }
     if (has_dest()) {
-      if (dest_ != NULL) dest_->::proto::avAddress::Clear();
+      if (dest_ != NULL) dest_->::proto::av_address::Clear();
     }
     if (has_publickey()) {
       if (publickey_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -608,7 +608,7 @@ void avPacket::Clear() {
   }
   if (_has_bits_[8 / 32] & 768) {
     if (has_need_seq()) {
-      if (need_seq_ != NULL) need_seq_->::proto::avPacket_ack_control::Clear();
+      if (need_seq_ != NULL) need_seq_->::proto::avpacket_ack_control::Clear();
     }
     if (has_payload()) {
       if (payload_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -624,17 +624,17 @@ void avPacket::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool avPacket::MergePartialFromCodedStream(
+bool avpacket::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:proto.avPacket)
+  // @@protoc_insertion_point(parse_start:proto.avpacket)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .proto.avAddress src = 1;
+      // required .proto.av_address src = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -646,7 +646,7 @@ bool avPacket::MergePartialFromCodedStream(
         break;
       }
 
-      // required .proto.avAddress dest = 2;
+      // required .proto.av_address dest = 2;
       case 2: {
         if (tag == 18) {
          parse_dest:
@@ -762,7 +762,7 @@ bool avPacket::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .proto.avPacket.ack_control need_seq = 11;
+      // optional .proto.avpacket.ack_control need_seq = 11;
       case 11: {
         if (tag == 90) {
          parse_need_seq:
@@ -789,24 +789,24 @@ bool avPacket::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:proto.avPacket)
+  // @@protoc_insertion_point(parse_success:proto.avpacket)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:proto.avPacket)
+  // @@protoc_insertion_point(parse_failure:proto.avpacket)
   return false;
 #undef DO_
 }
 
-void avPacket::SerializeWithCachedSizes(
+void avpacket::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:proto.avPacket)
-  // required .proto.avAddress src = 1;
+  // @@protoc_insertion_point(serialize_start:proto.avpacket)
+  // required .proto.av_address src = 1;
   if (has_src()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->src(), output);
   }
 
-  // required .proto.avAddress dest = 2;
+  // required .proto.av_address dest = 2;
   if (has_dest()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->dest(), output);
@@ -854,7 +854,7 @@ void avPacket::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(10, this->timestamp(), output);
   }
 
-  // optional .proto.avPacket.ack_control need_seq = 11;
+  // optional .proto.avpacket.ack_control need_seq = 11;
   if (has_need_seq()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       11, this->need_seq(), output);
@@ -864,20 +864,20 @@ void avPacket::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:proto.avPacket)
+  // @@protoc_insertion_point(serialize_end:proto.avpacket)
 }
 
-::google::protobuf::uint8* avPacket::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* avpacket::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:proto.avPacket)
-  // required .proto.avAddress src = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:proto.avpacket)
+  // required .proto.av_address src = 1;
   if (has_src()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, this->src(), target);
   }
 
-  // required .proto.avAddress dest = 2;
+  // required .proto.av_address dest = 2;
   if (has_dest()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -929,7 +929,7 @@ void avPacket::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(10, this->timestamp(), target);
   }
 
-  // optional .proto.avPacket.ack_control need_seq = 11;
+  // optional .proto.avpacket.ack_control need_seq = 11;
   if (has_need_seq()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -940,22 +940,22 @@ void avPacket::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:proto.avPacket)
+  // @@protoc_insertion_point(serialize_to_array_end:proto.avpacket)
   return target;
 }
 
-int avPacket::ByteSize() const {
+int avpacket::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .proto.avAddress src = 1;
+    // required .proto.av_address src = 1;
     if (has_src()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->src());
     }
 
-    // required .proto.avAddress dest = 2;
+    // required .proto.av_address dest = 2;
     if (has_dest()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -1004,7 +1004,7 @@ int avPacket::ByteSize() const {
 
   }
   if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // optional .proto.avPacket.ack_control need_seq = 11;
+    // optional .proto.avpacket.ack_control need_seq = 11;
     if (has_need_seq()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -1030,10 +1030,10 @@ int avPacket::ByteSize() const {
   return total_size;
 }
 
-void avPacket::MergeFrom(const ::google::protobuf::Message& from) {
+void avpacket::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const avPacket* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const avPacket*>(
+  const avpacket* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const avpacket*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -1042,14 +1042,14 @@ void avPacket::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void avPacket::MergeFrom(const avPacket& from) {
+void avpacket::MergeFrom(const avpacket& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_src()) {
-      mutable_src()->::proto::avAddress::MergeFrom(from.src());
+      mutable_src()->::proto::av_address::MergeFrom(from.src());
     }
     if (from.has_dest()) {
-      mutable_dest()->::proto::avAddress::MergeFrom(from.dest());
+      mutable_dest()->::proto::av_address::MergeFrom(from.dest());
     }
     if (from.has_publickey()) {
       set_publickey(from.publickey());
@@ -1072,7 +1072,7 @@ void avPacket::MergeFrom(const avPacket& from) {
   }
   if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_need_seq()) {
-      mutable_need_seq()->::proto::avPacket_ack_control::MergeFrom(from.need_seq());
+      mutable_need_seq()->::proto::avpacket_ack_control::MergeFrom(from.need_seq());
     }
     if (from.has_payload()) {
       set_payload(from.payload());
@@ -1081,19 +1081,19 @@ void avPacket::MergeFrom(const avPacket& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void avPacket::CopyFrom(const ::google::protobuf::Message& from) {
+void avpacket::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void avPacket::CopyFrom(const avPacket& from) {
+void avpacket::CopyFrom(const avpacket& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool avPacket::IsInitialized() const {
+bool avpacket::IsInitialized() const {
   if ((_has_bits_[0] & 0x0000001b) != 0x0000001b) return false;
 
   if (has_src()) {
@@ -1108,7 +1108,7 @@ bool avPacket::IsInitialized() const {
   return true;
 }
 
-void avPacket::Swap(avPacket* other) {
+void avpacket::Swap(avpacket* other) {
   if (other != this) {
     std::swap(src_, other->src_);
     std::swap(dest_, other->dest_);
@@ -1126,11 +1126,11 @@ void avPacket::Swap(avPacket* other) {
   }
 }
 
-::google::protobuf::Metadata avPacket::GetMetadata() const {
+::google::protobuf::Metadata avpacket::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = avPacket_descriptor_;
-  metadata.reflection = avPacket_reflection_;
+  metadata.descriptor = avpacket_descriptor_;
+  metadata.reflection = avpacket_reflection_;
   return metadata;
 }
 
@@ -1387,7 +1387,7 @@ aGMP_NOROUTTOHOST::aGMP_NOROUTTOHOST()
 }
 
 void aGMP_NOROUTTOHOST::InitAsDefaultInstance() {
-  host_ = const_cast< ::proto::avAddress*>(&::proto::avAddress::default_instance());
+  host_ = const_cast< ::proto::av_address*>(&::proto::av_address::default_instance());
 }
 
 aGMP_NOROUTTOHOST::aGMP_NOROUTTOHOST(const aGMP_NOROUTTOHOST& from)
@@ -1444,7 +1444,7 @@ aGMP_NOROUTTOHOST* aGMP_NOROUTTOHOST::New() const {
 
 void aGMP_NOROUTTOHOST::Clear() {
   if (has_host()) {
-    if (host_ != NULL) host_->::proto::avAddress::Clear();
+    if (host_ != NULL) host_->::proto::av_address::Clear();
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -1460,7 +1460,7 @@ bool aGMP_NOROUTTOHOST::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .proto.avAddress host = 1;
+      // required .proto.av_address host = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -1497,7 +1497,7 @@ failure:
 void aGMP_NOROUTTOHOST::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:proto.aGMP.NOROUTTOHOST)
-  // required .proto.avAddress host = 1;
+  // required .proto.av_address host = 1;
   if (has_host()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->host(), output);
@@ -1513,7 +1513,7 @@ void aGMP_NOROUTTOHOST::SerializeWithCachedSizes(
 ::google::protobuf::uint8* aGMP_NOROUTTOHOST::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:proto.aGMP.NOROUTTOHOST)
-  // required .proto.avAddress host = 1;
+  // required .proto.av_address host = 1;
   if (has_host()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -1532,7 +1532,7 @@ int aGMP_NOROUTTOHOST::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .proto.avAddress host = 1;
+    // required .proto.av_address host = 1;
     if (has_host()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -1567,7 +1567,7 @@ void aGMP_NOROUTTOHOST::MergeFrom(const aGMP_NOROUTTOHOST& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_host()) {
-      mutable_host()->::proto::avAddress::MergeFrom(from.host());
+      mutable_host()->::proto::av_address::MergeFrom(from.host());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -1625,7 +1625,7 @@ aGMP_TTLOUT::aGMP_TTLOUT()
 }
 
 void aGMP_TTLOUT::InitAsDefaultInstance() {
-  host_ = const_cast< ::proto::avAddress*>(&::proto::avAddress::default_instance());
+  host_ = const_cast< ::proto::av_address*>(&::proto::av_address::default_instance());
 }
 
 aGMP_TTLOUT::aGMP_TTLOUT(const aGMP_TTLOUT& from)
@@ -1682,7 +1682,7 @@ aGMP_TTLOUT* aGMP_TTLOUT::New() const {
 
 void aGMP_TTLOUT::Clear() {
   if (has_host()) {
-    if (host_ != NULL) host_->::proto::avAddress::Clear();
+    if (host_ != NULL) host_->::proto::av_address::Clear();
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -1698,7 +1698,7 @@ bool aGMP_TTLOUT::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .proto.avAddress host = 1;
+      // required .proto.av_address host = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -1735,7 +1735,7 @@ failure:
 void aGMP_TTLOUT::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:proto.aGMP.TTLOUT)
-  // required .proto.avAddress host = 1;
+  // required .proto.av_address host = 1;
   if (has_host()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->host(), output);
@@ -1751,7 +1751,7 @@ void aGMP_TTLOUT::SerializeWithCachedSizes(
 ::google::protobuf::uint8* aGMP_TTLOUT::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:proto.aGMP.TTLOUT)
-  // required .proto.avAddress host = 1;
+  // required .proto.av_address host = 1;
   if (has_host()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -1770,7 +1770,7 @@ int aGMP_TTLOUT::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .proto.avAddress host = 1;
+    // required .proto.av_address host = 1;
     if (has_host()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -1805,7 +1805,7 @@ void aGMP_TTLOUT::MergeFrom(const aGMP_TTLOUT& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_host()) {
-      mutable_host()->::proto::avAddress::MergeFrom(from.host());
+      mutable_host()->::proto::av_address::MergeFrom(from.host());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());

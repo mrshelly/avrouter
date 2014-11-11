@@ -33,24 +33,24 @@ void  protobuf_AddDesc_address_2eproto();
 void protobuf_AssignDesc_address_2eproto();
 void protobuf_ShutdownFile_address_2eproto();
 
-class avAddress;
+class av_address;
 
 // ===================================================================
 
-class avAddress : public ::google::protobuf::Message {
+class av_address : public ::google::protobuf::Message {
  public:
-  avAddress();
-  virtual ~avAddress();
+  av_address();
+  virtual ~av_address();
 
-  avAddress(const avAddress& from);
+  av_address(const av_address& from);
 
-  inline avAddress& operator=(const avAddress& from) {
+  inline av_address& operator=(const av_address& from) {
     CopyFrom(from);
     return *this;
   }
 
   #if __cplusplus >= 201103L || _MSC_VER >= 1600
-  inline avAddress& operator=(avAddress&& from) {
+  inline av_address& operator=(av_address&& from) {
     if (&from != this) {
       Clear();
       Swap(&from);
@@ -58,7 +58,7 @@ class avAddress : public ::google::protobuf::Message {
     return *this;
   }
 
-  avAddress(avAddress&& from);
+  av_address(av_address&& from);
   #endif
 
   inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
@@ -70,17 +70,17 @@ class avAddress : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const avAddress& default_instance();
+  static const av_address& default_instance();
 
-  void Swap(avAddress* other);
+  void Swap(av_address* other);
 
   // implements Message ----------------------------------------------
 
-  avAddress* New() const;
+  av_address* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const avAddress& from);
-  void MergeFrom(const avAddress& from);
+  void CopyFrom(const av_address& from);
+  void MergeFrom(const av_address& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -138,7 +138,7 @@ class avAddress : public ::google::protobuf::Message {
   inline ::std::string* release_resource();
   inline void set_allocated_resource(::std::string* resource);
 
-  // @@protoc_insertion_point(class_scope:proto.avAddress)
+  // @@protoc_insertion_point(class_scope:proto.av_address)
  private:
   inline void set_has_username();
   inline void clear_has_username();
@@ -159,68 +159,68 @@ class avAddress : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_address_2eproto();
 
   void InitAsDefaultInstance();
-  static avAddress* default_instance_;
+  static av_address* default_instance_;
 };
 // ===================================================================
 
 
 // ===================================================================
 
-// avAddress
+// av_address
 
 // required string username = 1;
-inline bool avAddress::has_username() const {
+inline bool av_address::has_username() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void avAddress::set_has_username() {
+inline void av_address::set_has_username() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void avAddress::clear_has_username() {
+inline void av_address::clear_has_username() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void avAddress::clear_username() {
+inline void av_address::clear_username() {
   if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     username_->clear();
   }
   clear_has_username();
 }
-inline const ::std::string& avAddress::username() const {
-  // @@protoc_insertion_point(field_get:proto.avAddress.username)
+inline const ::std::string& av_address::username() const {
+  // @@protoc_insertion_point(field_get:proto.av_address.username)
   return *username_;
 }
-inline void avAddress::set_username(const ::std::string& value) {
+inline void av_address::set_username(const ::std::string& value) {
   set_has_username();
   if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     username_ = new ::std::string;
   }
   username_->assign(value);
-  // @@protoc_insertion_point(field_set:proto.avAddress.username)
+  // @@protoc_insertion_point(field_set:proto.av_address.username)
 }
-inline void avAddress::set_username(const char* value) {
+inline void av_address::set_username(const char* value) {
   set_has_username();
   if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     username_ = new ::std::string;
   }
   username_->assign(value);
-  // @@protoc_insertion_point(field_set_char:proto.avAddress.username)
+  // @@protoc_insertion_point(field_set_char:proto.av_address.username)
 }
-inline void avAddress::set_username(const char* value, size_t size) {
+inline void av_address::set_username(const char* value, size_t size) {
   set_has_username();
   if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     username_ = new ::std::string;
   }
   username_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:proto.avAddress.username)
+  // @@protoc_insertion_point(field_set_pointer:proto.av_address.username)
 }
-inline ::std::string* avAddress::mutable_username() {
+inline ::std::string* av_address::mutable_username() {
   set_has_username();
   if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     username_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:proto.avAddress.username)
+  // @@protoc_insertion_point(field_mutable:proto.av_address.username)
   return username_;
 }
-inline ::std::string* avAddress::release_username() {
+inline ::std::string* av_address::release_username() {
   clear_has_username();
   if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
@@ -230,7 +230,7 @@ inline ::std::string* avAddress::release_username() {
     return temp;
   }
 }
-inline void avAddress::set_allocated_username(::std::string* username) {
+inline void av_address::set_allocated_username(::std::string* username) {
   if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete username_;
   }
@@ -241,62 +241,62 @@ inline void avAddress::set_allocated_username(::std::string* username) {
     clear_has_username();
     username_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:proto.avAddress.username)
+  // @@protoc_insertion_point(field_set_allocated:proto.av_address.username)
 }
 
 // required string domain = 2;
-inline bool avAddress::has_domain() const {
+inline bool av_address::has_domain() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void avAddress::set_has_domain() {
+inline void av_address::set_has_domain() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void avAddress::clear_has_domain() {
+inline void av_address::clear_has_domain() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void avAddress::clear_domain() {
+inline void av_address::clear_domain() {
   if (domain_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     domain_->clear();
   }
   clear_has_domain();
 }
-inline const ::std::string& avAddress::domain() const {
-  // @@protoc_insertion_point(field_get:proto.avAddress.domain)
+inline const ::std::string& av_address::domain() const {
+  // @@protoc_insertion_point(field_get:proto.av_address.domain)
   return *domain_;
 }
-inline void avAddress::set_domain(const ::std::string& value) {
+inline void av_address::set_domain(const ::std::string& value) {
   set_has_domain();
   if (domain_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     domain_ = new ::std::string;
   }
   domain_->assign(value);
-  // @@protoc_insertion_point(field_set:proto.avAddress.domain)
+  // @@protoc_insertion_point(field_set:proto.av_address.domain)
 }
-inline void avAddress::set_domain(const char* value) {
+inline void av_address::set_domain(const char* value) {
   set_has_domain();
   if (domain_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     domain_ = new ::std::string;
   }
   domain_->assign(value);
-  // @@protoc_insertion_point(field_set_char:proto.avAddress.domain)
+  // @@protoc_insertion_point(field_set_char:proto.av_address.domain)
 }
-inline void avAddress::set_domain(const char* value, size_t size) {
+inline void av_address::set_domain(const char* value, size_t size) {
   set_has_domain();
   if (domain_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     domain_ = new ::std::string;
   }
   domain_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:proto.avAddress.domain)
+  // @@protoc_insertion_point(field_set_pointer:proto.av_address.domain)
 }
-inline ::std::string* avAddress::mutable_domain() {
+inline ::std::string* av_address::mutable_domain() {
   set_has_domain();
   if (domain_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     domain_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:proto.avAddress.domain)
+  // @@protoc_insertion_point(field_mutable:proto.av_address.domain)
   return domain_;
 }
-inline ::std::string* avAddress::release_domain() {
+inline ::std::string* av_address::release_domain() {
   clear_has_domain();
   if (domain_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
@@ -306,7 +306,7 @@ inline ::std::string* avAddress::release_domain() {
     return temp;
   }
 }
-inline void avAddress::set_allocated_domain(::std::string* domain) {
+inline void av_address::set_allocated_domain(::std::string* domain) {
   if (domain_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete domain_;
   }
@@ -317,62 +317,62 @@ inline void avAddress::set_allocated_domain(::std::string* domain) {
     clear_has_domain();
     domain_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:proto.avAddress.domain)
+  // @@protoc_insertion_point(field_set_allocated:proto.av_address.domain)
 }
 
 // optional string resource = 3;
-inline bool avAddress::has_resource() const {
+inline bool av_address::has_resource() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void avAddress::set_has_resource() {
+inline void av_address::set_has_resource() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void avAddress::clear_has_resource() {
+inline void av_address::clear_has_resource() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void avAddress::clear_resource() {
+inline void av_address::clear_resource() {
   if (resource_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     resource_->clear();
   }
   clear_has_resource();
 }
-inline const ::std::string& avAddress::resource() const {
-  // @@protoc_insertion_point(field_get:proto.avAddress.resource)
+inline const ::std::string& av_address::resource() const {
+  // @@protoc_insertion_point(field_get:proto.av_address.resource)
   return *resource_;
 }
-inline void avAddress::set_resource(const ::std::string& value) {
+inline void av_address::set_resource(const ::std::string& value) {
   set_has_resource();
   if (resource_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     resource_ = new ::std::string;
   }
   resource_->assign(value);
-  // @@protoc_insertion_point(field_set:proto.avAddress.resource)
+  // @@protoc_insertion_point(field_set:proto.av_address.resource)
 }
-inline void avAddress::set_resource(const char* value) {
+inline void av_address::set_resource(const char* value) {
   set_has_resource();
   if (resource_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     resource_ = new ::std::string;
   }
   resource_->assign(value);
-  // @@protoc_insertion_point(field_set_char:proto.avAddress.resource)
+  // @@protoc_insertion_point(field_set_char:proto.av_address.resource)
 }
-inline void avAddress::set_resource(const char* value, size_t size) {
+inline void av_address::set_resource(const char* value, size_t size) {
   set_has_resource();
   if (resource_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     resource_ = new ::std::string;
   }
   resource_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:proto.avAddress.resource)
+  // @@protoc_insertion_point(field_set_pointer:proto.av_address.resource)
 }
-inline ::std::string* avAddress::mutable_resource() {
+inline ::std::string* av_address::mutable_resource() {
   set_has_resource();
   if (resource_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     resource_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:proto.avAddress.resource)
+  // @@protoc_insertion_point(field_mutable:proto.av_address.resource)
   return resource_;
 }
-inline ::std::string* avAddress::release_resource() {
+inline ::std::string* av_address::release_resource() {
   clear_has_resource();
   if (resource_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
@@ -382,7 +382,7 @@ inline ::std::string* avAddress::release_resource() {
     return temp;
   }
 }
-inline void avAddress::set_allocated_resource(::std::string* resource) {
+inline void av_address::set_allocated_resource(::std::string* resource) {
   if (resource_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete resource_;
   }
@@ -393,7 +393,7 @@ inline void avAddress::set_allocated_resource(::std::string* resource) {
     clear_has_resource();
     resource_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:proto.avAddress.resource)
+  // @@protoc_insertion_point(field_set_allocated:proto.av_address.resource)
 }
 
 

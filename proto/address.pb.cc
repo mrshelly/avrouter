@@ -20,9 +20,9 @@ namespace proto {
 
 namespace {
 
-const ::google::protobuf::Descriptor* avAddress_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* av_address_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  avAddress_reflection_ = NULL;
+  av_address_reflection_ = NULL;
 
 }  // namespace
 
@@ -33,23 +33,23 @@ void protobuf_AssignDesc_address_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "address.proto");
   GOOGLE_CHECK(file != NULL);
-  avAddress_descriptor_ = file->message_type(0);
-  static const int avAddress_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avAddress, username_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avAddress, domain_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avAddress, resource_),
+  av_address_descriptor_ = file->message_type(0);
+  static const int av_address_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(av_address, username_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(av_address, domain_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(av_address, resource_),
   };
-  avAddress_reflection_ =
+  av_address_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      avAddress_descriptor_,
-      avAddress::default_instance_,
-      avAddress_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avAddress, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(avAddress, _unknown_fields_),
+      av_address_descriptor_,
+      av_address::default_instance_,
+      av_address_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(av_address, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(av_address, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(avAddress));
+      sizeof(av_address));
 }
 
 namespace {
@@ -63,14 +63,14 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    avAddress_descriptor_, &avAddress::default_instance());
+    av_address_descriptor_, &av_address::default_instance());
 }
 
 }  // namespace
 
 void protobuf_ShutdownFile_address_2eproto() {
-  delete avAddress::default_instance_;
-  delete avAddress_reflection_;
+  delete av_address::default_instance_;
+  delete av_address_reflection_;
 }
 
 void protobuf_AddDesc_address_2eproto() {
@@ -80,13 +80,13 @@ void protobuf_AddDesc_address_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\raddress.proto\022\005proto\"\?\n\tavAddress\022\020\n\010u"
-    "sername\030\001 \002(\t\022\016\n\006domain\030\002 \002(\t\022\020\n\010resourc"
-    "e\030\003 \001(\t", 87);
+    "\n\raddress.proto\022\005proto\"@\n\nav_address\022\020\n\010"
+    "username\030\001 \002(\t\022\016\n\006domain\030\002 \002(\t\022\020\n\010resour"
+    "ce\030\003 \001(\t", 88);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "address.proto", &protobuf_RegisterTypes);
-  avAddress::default_instance_ = new avAddress();
-  avAddress::default_instance_->InitAsDefaultInstance();
+  av_address::default_instance_ = new av_address();
+  av_address::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_address_2eproto);
 }
 
@@ -100,28 +100,28 @@ struct StaticDescriptorInitializer_address_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int avAddress::kUsernameFieldNumber;
-const int avAddress::kDomainFieldNumber;
-const int avAddress::kResourceFieldNumber;
+const int av_address::kUsernameFieldNumber;
+const int av_address::kDomainFieldNumber;
+const int av_address::kResourceFieldNumber;
 #endif  // !_MSC_VER
 
-avAddress::avAddress()
+av_address::av_address()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:proto.avAddress)
+  // @@protoc_insertion_point(constructor:proto.av_address)
 }
 
-void avAddress::InitAsDefaultInstance() {
+void av_address::InitAsDefaultInstance() {
 }
 
-avAddress::avAddress(const avAddress& from)
+av_address::av_address(const av_address& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:proto.avAddress)
+  // @@protoc_insertion_point(copy_constructor:proto.av_address)
 }
 
-void avAddress::SharedCtor() {
+void av_address::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   username_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -131,18 +131,18 @@ void avAddress::SharedCtor() {
 }
 
 #if __cplusplus >= 201103L || _MSC_VER >= 1600
-avAddress::avAddress(avAddress&& from)
+av_address::av_address(av_address&& from)
   : ::google::protobuf::Message() {
   Swap(&from);
 }
 #endif
 
-avAddress::~avAddress() {
-  // @@protoc_insertion_point(destructor:proto.avAddress)
+av_address::~av_address() {
+  // @@protoc_insertion_point(destructor:proto.av_address)
   SharedDtor();
 }
 
-void avAddress::SharedDtor() {
+void av_address::SharedDtor() {
   if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete username_;
   }
@@ -156,28 +156,28 @@ void avAddress::SharedDtor() {
   }
 }
 
-void avAddress::SetCachedSize(int size) const {
+void av_address::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* avAddress::descriptor() {
+const ::google::protobuf::Descriptor* av_address::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return avAddress_descriptor_;
+  return av_address_descriptor_;
 }
 
-const avAddress& avAddress::default_instance() {
+const av_address& av_address::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_address_2eproto();
   return *default_instance_;
 }
 
-avAddress* avAddress::default_instance_ = NULL;
+av_address* av_address::default_instance_ = NULL;
 
-avAddress* avAddress::New() const {
-  return new avAddress;
+av_address* av_address::New() const {
+  return new av_address;
 }
 
-void avAddress::Clear() {
+void av_address::Clear() {
   if (_has_bits_[0 / 32] & 7) {
     if (has_username()) {
       if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -199,11 +199,11 @@ void avAddress::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool avAddress::MergePartialFromCodedStream(
+bool av_address::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:proto.avAddress)
+  // @@protoc_insertion_point(parse_start:proto.av_address)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -273,17 +273,17 @@ bool avAddress::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:proto.avAddress)
+  // @@protoc_insertion_point(parse_success:proto.av_address)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:proto.avAddress)
+  // @@protoc_insertion_point(parse_failure:proto.av_address)
   return false;
 #undef DO_
 }
 
-void avAddress::SerializeWithCachedSizes(
+void av_address::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:proto.avAddress)
+  // @@protoc_insertion_point(serialize_start:proto.av_address)
   // required string username = 1;
   if (has_username()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -318,12 +318,12 @@ void avAddress::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:proto.avAddress)
+  // @@protoc_insertion_point(serialize_end:proto.av_address)
 }
 
-::google::protobuf::uint8* avAddress::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* av_address::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:proto.avAddress)
+  // @@protoc_insertion_point(serialize_to_array_start:proto.av_address)
   // required string username = 1;
   if (has_username()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -361,11 +361,11 @@ void avAddress::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:proto.avAddress)
+  // @@protoc_insertion_point(serialize_to_array_end:proto.av_address)
   return target;
 }
 
-int avAddress::ByteSize() const {
+int av_address::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -402,10 +402,10 @@ int avAddress::ByteSize() const {
   return total_size;
 }
 
-void avAddress::MergeFrom(const ::google::protobuf::Message& from) {
+void av_address::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const avAddress* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const avAddress*>(
+  const av_address* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const av_address*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -414,7 +414,7 @@ void avAddress::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void avAddress::MergeFrom(const avAddress& from) {
+void av_address::MergeFrom(const av_address& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_username()) {
@@ -430,25 +430,25 @@ void avAddress::MergeFrom(const avAddress& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void avAddress::CopyFrom(const ::google::protobuf::Message& from) {
+void av_address::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void avAddress::CopyFrom(const avAddress& from) {
+void av_address::CopyFrom(const av_address& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool avAddress::IsInitialized() const {
+bool av_address::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
 
-void avAddress::Swap(avAddress* other) {
+void av_address::Swap(av_address* other) {
   if (other != this) {
     std::swap(username_, other->username_);
     std::swap(domain_, other->domain_);
@@ -459,11 +459,11 @@ void avAddress::Swap(avAddress* other) {
   }
 }
 
-::google::protobuf::Metadata avAddress::GetMetadata() const {
+::google::protobuf::Metadata av_address::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = avAddress_descriptor_;
-  metadata.reflection = avAddress_reflection_;
+  metadata.descriptor = av_address_descriptor_;
+  metadata.reflection = av_address_reflection_;
   return metadata;
 }
 
