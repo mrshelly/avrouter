@@ -14,7 +14,6 @@
     <ClCompile Include="proto\address.pb.cc" />
     <ClCompile Include="proto\im.pb.cc" />
     <ClCompile Include="proto\message.pb.cc" />
-    <ClCompile Include="proto\old.pb.cc" />
     <ClCompile Include="proto\user.pb.cc" />
     <ClCompile Include="src\connection.cpp" />
     <ClCompile Include="src\database.cpp" />
@@ -36,7 +35,6 @@
     <ClInclude Include="proto\address.pb.h" />
     <ClInclude Include="proto\im.pb.h" />
     <ClInclude Include="proto\message.pb.h" />
-    <ClInclude Include="proto\old.pb.h" />
     <ClInclude Include="proto\user.pb.h" />
   </ItemGroup>
   <ItemGroup>

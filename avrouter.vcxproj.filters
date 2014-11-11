@@ -22,9 +22,6 @@
     <ClCompile Include="proto\message.pb.cc">
       <Filter>proto</Filter>
     </ClCompile>
-    <ClCompile Include="proto\old.pb.cc">
-      <Filter>proto</Filter>
-    </ClCompile>
     <ClCompile Include="proto\user.pb.cc">
       <Filter>proto</Filter>
     </ClCompile>
@@ -61,9 +58,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="proto\message.pb.h">
-      <Filter>proto</Filter>
-    </ClInclude>
-    <ClInclude Include="proto\old.pb.h">
       <Filter>proto</Filter>
     </ClInclude>
     <ClInclude Include="proto\user.pb.h">
