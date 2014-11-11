@@ -46,7 +46,7 @@ int main(int argc, char** argv)
 		desc.add_options()
 			("help,h", "help message")
 			("version", "current avrouter version")
-			("port", po::value<unsigned short>(&server_port), "avrouter listen port")
+			("port", po::value<unsigned short>(&server_port)->default_value(24950), "avrouter listen port")
 			("thread", po::value<int>(&num_threads)->default_value(boost::thread::hardware_concurrency()), "threads")
 			("pool", po::value<int>(&pool_size)->default_value(32), "connection pool size")
 			;
