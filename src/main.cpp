@@ -60,8 +60,6 @@ int main(int argc, char** argv)
 			return 0;
 		}
 
-		// 直接指定数据库后端, 避免寻找dll而失败, 这里指定为postgresql数据库后端.
-		soci::backend_factory const &db_backend(*soci::factory_postgresql());
 		// 十个数据库并发链接.
 		soci::connection_pool db_pool(pool_size);
 
@@ -72,7 +70,8 @@ int main(int argc, char** argv)
 			{
 				soci::session& sql = db_pool.at(i);
 				// 连接本机的数据库.
-				sql.open(db_backend, connection_string);
+				// 直接指定数据库后端, 避免寻找dll而失败, 这里指定为postgresql数据库后端.
+				sql.open(soci::postgresql, connection_string);
 			}
 		}
 		catch (soci::soci_error& ec)
