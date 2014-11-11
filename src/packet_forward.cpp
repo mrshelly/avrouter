@@ -36,7 +36,7 @@ namespace av_router {
 
 	void packet_forward::process_packet(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
 	{
-		proto::avPacket * pkt = dynamic_cast<proto::avPacket*>(msg);
+		proto::avpacket * pkt = dynamic_cast<proto::avpacket*>(msg);
 		if( pkt->dest().domain() != m_thisdomain)
 		{
 			// TODO 暂时不实现非本域的转发.
