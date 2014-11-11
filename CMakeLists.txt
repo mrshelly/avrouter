@@ -47,8 +47,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 set(PostgreSQL_FIND_QUIETLY TRUE)
 find_package(PostgreSQL REQUIRED)
 
-find_library(SOCI_LIBRARY NAMES soci_core HINTS /usr/lib64 /usr/lib /usr/lib/soci/lib)
-find_library(SOCI_PG_LIBRARY NAMES soci_postgresql HINTS /usr/lib64 /usr/lib /usr/lib/soci/lib)
+find_library(SOCI_LIBRARY NAMES soci_core HINTS /usr/local/lib /usr/local/lib64 /usr/lib64 /usr/lib /usr/local/lib /usr/lib/soci/lib)
+find_library(SOCI_PG_LIBRARY NAMES soci_postgresql HINTS /usr/local/lib /usr/local/lib64 /usr/lib64 /usr/lib /usr/lib/soci/lib)
 
 find_path( SOCI_INCLUDE_DIRS connection-pool.h PATHS /usr/include/soci /usr/locale/include/soci /opt/soci/include/soci)
 
