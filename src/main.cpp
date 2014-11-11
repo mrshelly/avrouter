@@ -95,8 +95,8 @@ int main(int argc, char** argv)
 		serv.add_message_process_moudle("proto.login", boost::bind(&login_moudle::process_login_message, &moudle_login, _1, _2, _3, boost::ref(async_database)));
 
 		// 添加包的转发处理模块
-		serv.add_message_process_moudle("proto.avPacket", boost::bind(&packet_forward::process_packet, &forward_packet, _1, _2, _3));
-		serv.add_connection_process_moudle("proto.avPacket", boost::bind(&packet_forward::connection_notify, &forward_packet, _1, _2, _3));
+		serv.add_message_process_moudle("proto.avpacket", boost::bind(&packet_forward::process_packet, &forward_packet, _1, _2, _3));
+		serv.add_connection_process_moudle("proto.avpacket", boost::bind(&packet_forward::connection_notify, &forward_packet, _1, _2, _3));
 		// 启动服务器.
 		serv.start();
 
