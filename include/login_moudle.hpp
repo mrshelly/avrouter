@@ -21,21 +21,22 @@ namespace av_router {
 	class login_moudle
 	{
 	public:
-		login_moudle(av_router::io_service_pool&, X509* root_ca_cert);
+		login_moudle(io_service_pool&, database&, X509* root_ca_cert);
 		~login_moudle();
 
 	public:
 		void quit();
 
-		void process_login_message(google::protobuf::Message*, connection_ptr, connection_manager&, database&);
-		void process_hello_message(google::protobuf::Message*, connection_ptr, connection_manager&, database&);
+		void process_login_message(google::protobuf::Message*, connection_ptr, connection_manager&);
+		void process_hello_message(google::protobuf::Message*, connection_ptr, connection_manager&);
 
 	private:
 		void on_tick(const boost::system::error_code& error);
 		void continue_timer();
 
 	private:
-		av_router::io_service_pool& m_io_service_pool;
+		io_service_pool& m_io_service_pool;
+		database& m_database;
 		boost::asio::deadline_timer m_timer;
 		struct login_state
 		{

@@ -61,9 +61,10 @@ private:
 
 namespace av_router {
 
-	login_moudle::login_moudle(av_router::io_service_pool& io_poll, X509* root_ca_cert)
-		: m_io_service_pool(io_poll)
-		, m_timer(io_poll.get_io_service())
+	login_moudle::login_moudle(io_service_pool& io_pool, database& db, X509* root_ca_cert)
+		: m_io_service_pool(io_pool)
+		, m_database(db)
+		, m_timer(io_pool.get_io_service())
 		, m_root_ca_cert(root_ca_cert)
 	{
 		continue_timer();
@@ -72,7 +73,7 @@ namespace av_router {
 	login_moudle::~login_moudle()
 	{}
 
-	void login_moudle::process_login_message(google::protobuf::Message* msg, connection_ptr connection, connection_manager&, database&)
+	void login_moudle::process_login_message(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
 	{
 		proto::login* login = dynamic_cast<proto::login*>(msg);
 		std::map<ptrdiff_t, login_state>::iterator iter = m_log_state.find(reinterpret_cast<ptrdiff_t>(connection.get()));
@@ -132,7 +133,7 @@ namespace av_router {
 		connection->write_msg(response);
 	}
 
-	void login_moudle::process_hello_message(google::protobuf::Message* hellomsg, connection_ptr connection, connection_manager&, database&)
+	void login_moudle::process_hello_message(google::protobuf::Message* hellomsg, connection_ptr connection, connection_manager&)
 	{
 		proto::client_hello* client_hello = dynamic_cast<proto::client_hello*>(hellomsg);
 		login_state& state = m_log_state[reinterpret_cast<ptrdiff_t>(connection.get())];
