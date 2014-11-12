@@ -37,6 +37,9 @@
     <ClCompile Include="src\root_ca.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\register_moudle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\connection.hpp">
@@ -73,6 +76,9 @@
       <Filter>proto</Filter>
     </ClInclude>
     <ClInclude Include="include\database.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\register_moudle.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
