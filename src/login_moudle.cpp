@@ -114,8 +114,19 @@ namespace av_router {
 		boost::shared_ptr<X509> user_cert(d2i_X509(NULL, &in , login->user_cert().length()), X509_free);
 		connection->store_module_private("user_cert", user_cert);
 
-		// TODO 首先验证用户的证书
 
+		unsigned char * CN = NULL;
+		auto cert_name = X509_get_subject_name(user_cert.get());
+		auto cert_entry = X509_NAME_get_entry(cert_name,
+			X509_NAME_get_index_by_NID(cert_name, NID_commonName, 0)
+		);
+		ASN1_STRING *entryData = X509_NAME_ENTRY_get_data( cert_entry );
+		auto strlengh = ASN1_STRING_to_UTF8(&CN, entryData);
+		printf("%s\n",CN);
+		std::string commonname((char*)CN, strlengh);
+		OPENSSL_free(CN);
+
+		// TODO 首先验证用户的证书
 
 		// 证书验证通过后, 用用户的公钥解密 encryped_radom_key 然后比较是否是 login_check_key
 		// 如果是, 那么此次就不是冒名登录
@@ -137,6 +148,9 @@ namespace av_router {
 			state.status = login_state::succeed;
 
 			result.set_result(proto::login_result::LOGIN_SUCCEED);
+
+			// 记录登录用户名
+			connection->store_module_private("user_name", commonname);
 		}
 		else
 		{
