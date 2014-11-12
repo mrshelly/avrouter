@@ -6,7 +6,7 @@ namespace po = boost::program_options;
 #include "database.hpp"
 #include "io_service_pool.hpp"
 #include "login_moudle.hpp"
-#include "packet_forward.hpp"
+#include "forward_moudle.hpp"
 #include "server.hpp"
 
 // 测试数据库.
@@ -100,15 +100,15 @@ int main(int argc, char** argv)
 
 		// 创建登陆处理模块.
 		login_moudle moudle_login(io_pool, async_database, root_cert.get());
-		packet_forward forward_packet(io_pool);
+		forward_moudle forward_packet(io_pool);
 
 		// 添加登陆处理模块.
 		serv.add_message_process_moudle("proto.client_hello", boost::bind(&login_moudle::process_hello_message, &moudle_login, _1, _2, _3));
 		serv.add_message_process_moudle("proto.login", boost::bind(&login_moudle::process_login_message, &moudle_login, _1, _2, _3));
 
 		// 添加包的转发处理模块
-		serv.add_message_process_moudle("proto.avpacket", boost::bind(&packet_forward::process_packet, &forward_packet, _1, _2, _3));
-		serv.add_connection_process_moudle("proto.avpacket", boost::bind(&packet_forward::connection_notify, &forward_packet, _1, _2, _3));
+		serv.add_message_process_moudle("proto.avpacket", boost::bind(&forward_moudle::process_packet, &forward_packet, _1, _2, _3));
+		serv.add_connection_process_moudle("proto.avpacket", boost::bind(&forward_moudle::connection_notify, &forward_packet, _1, _2, _3));
 		// 启动服务器.
 		serv.start();
 

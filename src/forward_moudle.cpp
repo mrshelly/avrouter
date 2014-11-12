@@ -1,6 +1,6 @@
 #include <boost/any.hpp>
 
-#include "packet_forward.hpp"
+#include "forward_moudle.hpp"
 #include "message.pb.h"
 
 #include <openssl/dh.h>
@@ -8,16 +8,16 @@
 
 namespace av_router {
 
-	packet_forward::packet_forward(av_router::io_service_pool& io_pool)
+	forward_moudle::forward_moudle(av_router::io_service_pool& io_pool)
 		: m_io_service_poll(io_pool)
 	{
 		m_thisdomain = "avplayer.org";
 	}
 
-	packet_forward::~packet_forward()
+	forward_moudle::~forward_moudle()
 	{}
 
-	void packet_forward::connection_notify(int type, connection_ptr connection, connection_manager&)
+	void forward_moudle::connection_notify(int type, connection_ptr connection, connection_manager&)
 	{
 		try
 		{
@@ -34,7 +34,7 @@ namespace av_router {
 		{}
 	}
 
-	void packet_forward::process_packet(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
+	void forward_moudle::process_packet(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
 	{
 		proto::avpacket * pkt = dynamic_cast<proto::avpacket*>(msg);
 		if( pkt->dest().domain() != m_thisdomain)
