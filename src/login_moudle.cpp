@@ -5,6 +5,87 @@
 #include <openssl/dh.h>
 #include <openssl/aes.h>
 #include <openssl/x509.h>
+#include <openssl/rsa.h>
+
+inline std::string RSA_public_encrypt(RSA * rsa, const std::string & from)
+{
+	std::string result;
+	const int keysize = RSA_size(rsa);
+	std::vector<unsigned char> block(keysize);
+	const int chunksize = keysize  - RSA_PKCS1_PADDING_SIZE;
+	int inputlen = from.length();
+
+	for(int i = 0 ; i < inputlen; i+= chunksize)
+	{
+		auto resultsize = RSA_public_encrypt(std::min(chunksize, inputlen - i), (uint8_t*) &from[i],  &block[0], (RSA*) rsa, RSA_PKCS1_PADDING);
+		result.append((char*)block.data(), resultsize);
+	}
+	return result;
+}
+
+inline std::string RSA_private_decrypt(RSA * rsa, const std::string & from)
+{
+	std::string result;
+	const int keysize = RSA_size(rsa);
+	std::vector<unsigned char> block(keysize);
+
+	for(int i = 0 ; i < from.length(); i+= keysize)
+	{
+		auto resultsize = RSA_private_decrypt(std::min<int>(keysize, from.length() - i), (uint8_t*) &from[i],  &block[0], rsa, RSA_PKCS1_PADDING);
+		result.append((char*)block.data(), resultsize);
+	}
+	return result;
+}
+
+inline std::string RSA_private_encrypt(RSA * rsa, const std::string & from)
+{
+	std::string result;
+	const int keysize = RSA_size(rsa);
+	std::vector<unsigned char> block(keysize);
+	const int chunksize = keysize  - RSA_PKCS1_PADDING_SIZE;
+	int inputlen = from.length();
+
+	for(int i = 0 ; i < from.length(); i+= chunksize)
+	{
+		int flen = std::min<int>(chunksize, inputlen - i);
+
+		std::fill(block.begin(),block.end(), 0);
+
+		auto resultsize = RSA_private_encrypt(
+			flen,
+			(uint8_t*) &from[i],
+			&block[0],
+			rsa,
+			RSA_PKCS1_PADDING
+		);
+		result.append((char*)block.data(), resultsize);
+	}
+	return result;
+}
+
+inline std::string RSA_public_decrypt(RSA * rsa, const std::string & from)
+{
+	std::string result;
+	const int keysize = RSA_size(rsa);
+	std::vector<unsigned char> block(keysize);
+
+	int inputlen = from.length();
+
+	for(int i = 0 ; i < from.length(); i+= keysize)
+	{
+		int flen = std::min(keysize, inputlen - i);
+
+		auto resultsize = RSA_public_decrypt(
+			flen,
+			(uint8_t*) &from[i],
+			&block[0],
+			rsa,
+			RSA_PKCS1_PADDING
+		);
+		result.append((char*)block.data(), resultsize);
+	}
+	return result;
+}
 
 namespace av_router {
 
@@ -41,14 +122,28 @@ namespace av_router {
 
 		// 接着到数据库查询是否阻止登录, 是不是帐号没钱了不给登录了 etc
 
-		login->encryped_radom_key();
+		auto evPkey = X509_get_pubkey(user_cert.get());
+		auto user_rsa_pubkey = EVP_PKEY_get1_RSA(evPkey);
+		EVP_PKEY_free(evPkey);
 
-		// 登陆成功.
-		login_state& state = iter->second;
-		state.status = login_state::succeed;
+		auto decrypted_key = RSA_public_decrypt(user_rsa_pubkey, login->encryped_radom_key());
+		RSA_free(user_rsa_pubkey);
 
 		proto::login_result result;
-		result.set_result(proto::login_result::LOGIN_SUCCEED);
+		if(decrypted_key == login_check_key)
+		{
+			// 登陆成功.
+			login_state& state = iter->second;
+			state.status = login_state::succeed;
+
+			result.set_result(proto::login_result::LOGIN_SUCCEED);
+		}
+		else
+		{
+			// 登录失败
+			result.set_result(proto::login_result::PUBLIC_KEY_MISMATCH);
+		}
+
 		std::string response = encode(result);
 		connection->write_msg(response);
 	}
