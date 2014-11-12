@@ -43,6 +43,7 @@ extern const char* avim_root_ca_certificate_string;
 
 int main(int argc, char** argv)
 {
+	OpenSSL_add_all_algorithms();
 	try
 	{
 		unsigned short server_port = 0;
