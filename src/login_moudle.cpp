@@ -49,6 +49,11 @@ public:
 		X509_STORE_free(m_store);
 	}
 
+	bool operator()(X509* cert)
+	{
+		return verity(cert);
+	}
+
 	bool verity(X509* cert)
 	{
 		boost::shared_ptr<X509_STORE_CTX> storeCtx(X509_STORE_CTX_new(), X509_STORE_CTX_free);
@@ -101,9 +106,7 @@ namespace av_router {
 		OPENSSL_free(CN);
 
 		// 首先验证用户的证书
-
-		cert_validater cert(m_root_ca_cert);
-		bool user_cert_valid = cert.verity(user_cert.get());
+		bool user_cert_valid = cert_validater(m_root_ca_cert)(user_cert.get());
 
 		// 证书验证通过后, 用用户的公钥解密 encryped_radom_key 然后比较是否是 login_check_key
 		// 如果是, 那么此次就不是冒名登录
