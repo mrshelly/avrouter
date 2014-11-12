@@ -7,62 +7,6 @@
 #include <openssl/x509.h>
 #include <openssl/rsa.h>
 
-inline std::string RSA_public_encrypt(RSA * rsa, const std::string & from)
-{
-	std::string result;
-	const int keysize = RSA_size(rsa);
-	std::vector<unsigned char> block(keysize);
-	const int chunksize = keysize  - RSA_PKCS1_PADDING_SIZE;
-	int inputlen = from.length();
-
-	for(int i = 0 ; i < inputlen; i+= chunksize)
-	{
-		auto resultsize = RSA_public_encrypt(std::min(chunksize, inputlen - i), (uint8_t*) &from[i],  &block[0], (RSA*) rsa, RSA_PKCS1_PADDING);
-		result.append((char*)block.data(), resultsize);
-	}
-	return result;
-}
-
-inline std::string RSA_private_decrypt(RSA * rsa, const std::string & from)
-{
-	std::string result;
-	const int keysize = RSA_size(rsa);
-	std::vector<unsigned char> block(keysize);
-
-	for(int i = 0 ; i < from.length(); i+= keysize)
-	{
-		auto resultsize = RSA_private_decrypt(std::min<int>(keysize, from.length() - i), (uint8_t*) &from[i],  &block[0], rsa, RSA_PKCS1_PADDING);
-		result.append((char*)block.data(), resultsize);
-	}
-	return result;
-}
-
-inline std::string RSA_private_encrypt(RSA * rsa, const std::string & from)
-{
-	std::string result;
-	const int keysize = RSA_size(rsa);
-	std::vector<unsigned char> block(keysize);
-	const int chunksize = keysize  - RSA_PKCS1_PADDING_SIZE;
-	int inputlen = from.length();
-
-	for(int i = 0 ; i < from.length(); i+= chunksize)
-	{
-		int flen = std::min<int>(chunksize, inputlen - i);
-
-		std::fill(block.begin(),block.end(), 0);
-
-		auto resultsize = RSA_private_encrypt(
-			flen,
-			(uint8_t*) &from[i],
-			&block[0],
-			rsa,
-			RSA_PKCS1_PADDING
-		);
-		result.append((char*)block.data(), resultsize);
-	}
-	return result;
-}
-
 inline std::string RSA_public_decrypt(RSA * rsa, const std::string & from)
 {
 	std::string result;
@@ -87,11 +31,41 @@ inline std::string RSA_public_decrypt(RSA * rsa, const std::string & from)
 	return result;
 }
 
+class cert_validater
+	: boost::noncopyable
+{
+	X509_STORE* m_store;
+public:
+	cert_validater(X509* ca)
+	{
+		m_store = X509_STORE_new();
+
+		X509_STORE_add_cert(m_store, ca);
+		X509_STORE_set_default_paths(m_store);
+	}
+
+	~cert_validater()
+	{
+		X509_STORE_free(m_store);
+	}
+
+	bool verity(X509* cert)
+	{
+		boost::shared_ptr<X509_STORE_CTX> storeCtx(X509_STORE_CTX_new(), X509_STORE_CTX_free);
+		X509_STORE_CTX_init(storeCtx.get(), m_store,cert,NULL);
+		X509_STORE_CTX_set_flags(storeCtx.get(), X509_V_FLAG_CB_ISSUER_CHECK);
+		return X509_verify_cert(storeCtx.get());
+	}
+
+};
+
+
 namespace av_router {
 
-	login_moudle::login_moudle(av_router::io_service_pool& io_poll)
+	login_moudle::login_moudle(av_router::io_service_pool& io_poll, X509* root_ca_cert)
 		: m_io_service_pool(io_poll)
 		, m_timer(io_poll.get_io_service())
+		, m_root_ca_cert(root_ca_cert)
 	{
 		continue_timer();
 	}
@@ -128,6 +102,10 @@ namespace av_router {
 
 		// TODO 首先验证用户的证书
 
+		cert_validater cert(m_root_ca_cert);
+
+		bool user_cert_valid = cert.verity(user_cert.get());
+
 		// 证书验证通过后, 用用户的公钥解密 encryped_radom_key 然后比较是否是 login_check_key
 		// 如果是, 那么此次就不是冒名登录
 
@@ -141,7 +119,7 @@ namespace av_router {
 		RSA_free(user_rsa_pubkey);
 
 		proto::login_result result;
-		if(decrypted_key == login_check_key)
+		if(user_cert_valid && decrypted_key == login_check_key)
 		{
 			// 登陆成功.
 			login_state& state = iter->second;

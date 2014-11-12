@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <openssl/x509.h>
+
 #include "server.hpp"
 #include "serialization.hpp"
 
@@ -19,7 +21,7 @@ namespace av_router {
 	class login_moudle
 	{
 	public:
-		login_moudle(av_router::io_service_pool&);
+		login_moudle(av_router::io_service_pool&, X509* root_ca_cert);
 		~login_moudle();
 
 	public:
@@ -44,6 +46,7 @@ namespace av_router {
 			state status;
 		};
 		std::map<ptrdiff_t, login_state> m_log_state;
+		X509* m_root_ca_cert;
 	};
 
 }

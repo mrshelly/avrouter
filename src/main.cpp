@@ -16,6 +16,10 @@ namespace po = boost::program_options;
 #include <connection-pool.h>
 #include <postgresql/soci-postgresql.h>
 
+#include <openssl/pem.h>
+#include <openssl/x509.h>
+#include <openssl/evp.h>
+
 using namespace av_router;
 
 void terminator(io_service_pool& ios, server& serv, login_moudle& login)
@@ -33,6 +37,8 @@ const std::string connection_string = "hostaddr = '127.0.0.1' "
 	"dbname = 'avim' "
 	"connect_timeout = '3' "
 	"application_name = 'avrouter'";
+
+extern const char * avim_root_ca_certificate_string;
 
 int main(int argc, char** argv)
 {
@@ -79,6 +85,10 @@ int main(int argc, char** argv)
 			LOG_ERR << "create database connection pool failed, error: " << ec.what();
 		}
 
+		boost::shared_ptr<BIO> bp(BIO_new_mem_buf((void*)avim_root_ca_certificate_string, strlen(avim_root_ca_certificate_string)), BIO_free);
+		boost::shared_ptr<X509> root_cert(PEM_read_bio_X509(bp.get(), 0, 0, 0), X509_free);
+		bp.reset();
+
 		// 8线程并发.
 		io_service_pool io_pool(num_threads);
 		// 创建服务器.
@@ -87,7 +97,7 @@ int main(int argc, char** argv)
 		database async_database(io_pool.get_io_service(), db_pool);
 
 		// 创建登陆处理模块.
-		login_moudle moudle_login(io_pool);
+		login_moudle moudle_login(io_pool, root_cert.get());
 		packet_forward forward_packet(io_pool);
 
 		// 添加登陆处理模块.
