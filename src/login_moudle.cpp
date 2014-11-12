@@ -18,14 +18,7 @@ inline std::string RSA_public_decrypt(RSA * rsa, const std::string & from)
 	for (int i = 0; i < from.length(); i += keysize)
 	{
 		int flen = std::min(keysize, inputlen - i);
-
-		auto resultsize = RSA_public_decrypt(
-			flen,
-			(uint8_t*)&from[i],
-			&block[0],
-			rsa,
-			RSA_PKCS1_PADDING
-			);
+		auto resultsize = RSA_public_decrypt(flen, (uint8_t*)&from[i], &block[0], rsa, RSA_PKCS1_PADDING);
 		result.append((char*)block.data(), resultsize);
 	}
 	return result;
