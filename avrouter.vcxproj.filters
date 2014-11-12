@@ -16,9 +16,6 @@
     <ClCompile Include="src\server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\packet_forward.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="proto\message.pb.cc">
       <Filter>proto</Filter>
     </ClCompile>
@@ -38,6 +35,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\register_moudle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\forward_moudle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -60,9 +60,6 @@
     <ClInclude Include="include\logging.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\packet_forward.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="proto\message.pb.h">
       <Filter>proto</Filter>
     </ClInclude>
@@ -79,6 +76,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\register_moudle.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\forward_moudle.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

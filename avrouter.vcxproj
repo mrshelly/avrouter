@@ -20,7 +20,7 @@
     <ClCompile Include="src\io_service_pool.cpp" />
     <ClCompile Include="src\login_moudle.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\packet_forward.cpp" />
+    <ClCompile Include="src\forward_moudle.cpp" />
     <ClCompile Include="src\register_moudle.cpp" />
     <ClCompile Include="src\root_ca.cpp" />
     <ClCompile Include="src\server.cpp" />
@@ -31,7 +31,7 @@
     <ClInclude Include="include\io_service_pool.hpp" />
     <ClInclude Include="include\logging.hpp" />
     <ClInclude Include="include\login_moudle.hpp" />
-    <ClInclude Include="include\packet_forward.hpp" />
+    <ClInclude Include="include\forward_moudle.hpp" />
     <ClInclude Include="include\register_moudle.hpp" />
     <ClInclude Include="include\serialization.hpp" />
     <ClInclude Include="include\server.hpp" />
