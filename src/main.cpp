@@ -112,7 +112,7 @@ int main(int argc, char** argv)
 		// 启动服务器.
 		serv.start();
 
-		//  Ctrl+c异步处理退出.
+		// Ctrl+c异步处理退出.
 		boost::asio::signal_set terminator_signal(io_pool.get_io_service());
 		terminator_signal.add(SIGINT);
 		terminator_signal.add(SIGTERM);
