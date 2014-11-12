@@ -34,6 +34,9 @@
     <ClCompile Include="src\database.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\root_ca.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\connection.hpp">

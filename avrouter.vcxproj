@@ -21,6 +21,7 @@
     <ClCompile Include="src\login_moudle.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\packet_forward.cpp" />
+    <ClCompile Include="src\root_ca.cpp" />
     <ClCompile Include="src\server.cpp" />
   </ItemGroup>
   <ItemGroup>

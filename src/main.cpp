@@ -38,7 +38,8 @@ const std::string connection_string = "hostaddr = '127.0.0.1' "
 	"connect_timeout = '3' "
 	"application_name = 'avrouter'";
 
-const char* avim_root_ca_certificate_string = nullptr;
+// 定义在 root_ca.cpp.
+extern const char* avim_root_ca_certificate_string;
 
 int main(int argc, char** argv)
 {
