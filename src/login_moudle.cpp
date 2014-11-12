@@ -15,17 +15,17 @@ inline std::string RSA_public_decrypt(RSA * rsa, const std::string & from)
 
 	int inputlen = from.length();
 
-	for(int i = 0 ; i < from.length(); i+= keysize)
+	for (int i = 0; i < from.length(); i += keysize)
 	{
 		int flen = std::min(keysize, inputlen - i);
 
 		auto resultsize = RSA_public_decrypt(
 			flen,
-			(uint8_t*) &from[i],
+			(uint8_t*)&from[i],
 			&block[0],
 			rsa,
 			RSA_PKCS1_PADDING
-		);
+			);
 		result.append((char*)block.data(), resultsize);
 	}
 	return result;
@@ -34,7 +34,6 @@ inline std::string RSA_public_decrypt(RSA * rsa, const std::string & from)
 class cert_validater
 	: boost::noncopyable
 {
-	X509_STORE* m_store;
 public:
 	cert_validater(X509* ca)
 	{
@@ -57,11 +56,13 @@ public:
 	bool verity(X509* cert)
 	{
 		boost::shared_ptr<X509_STORE_CTX> storeCtx(X509_STORE_CTX_new(), X509_STORE_CTX_free);
-		X509_STORE_CTX_init(storeCtx.get(), m_store,cert,NULL);
+		X509_STORE_CTX_init(storeCtx.get(), m_store, cert, NULL);
 		X509_STORE_CTX_set_flags(storeCtx.get(), X509_V_FLAG_CB_ISSUER_CHECK);
 		return X509_verify_cert(storeCtx.get());
 	}
 
+private:
+	X509_STORE* m_store;
 };
 
 
@@ -85,34 +86,30 @@ namespace av_router {
 		if (iter == m_log_state.end())
 			return;
 
-		std::string login_check_key = boost::any_cast<std::string>(
-			connection->retrive_module_private("login_check_key"));
+		std::string login_check_key = boost::any_cast<std::string>(connection->retrive_module_private("login_check_key"));
 
-		const unsigned char * in = (unsigned char *) login->user_cert().data();
+		const unsigned char* in = (unsigned char*)login->user_cert().data();
 
-		boost::shared_ptr<X509> user_cert(d2i_X509(NULL, &in , login->user_cert().length()), X509_free);
+		boost::shared_ptr<X509> user_cert(d2i_X509(NULL, &in, login->user_cert().length()), X509_free);
 		connection->store_module_private("user_cert", user_cert);
 
-
-		unsigned char * CN = NULL;
+		unsigned char* common_name_ptr = NULL;
 		auto cert_name = X509_get_subject_name(user_cert.get());
-		auto cert_entry = X509_NAME_get_entry(cert_name,
-			X509_NAME_get_index_by_NID(cert_name, NID_commonName, 0)
-		);
-		ASN1_STRING *entryData = X509_NAME_ENTRY_get_data( cert_entry );
-		auto strlengh = ASN1_STRING_to_UTF8(&CN, entryData);
-		printf("%s\n",CN);
-		std::string commonname((char*)CN, strlengh);
-		OPENSSL_free(CN);
+		auto cert_entry = X509_NAME_get_entry(cert_name, X509_NAME_get_index_by_NID(cert_name, NID_commonName, 0));
+		ASN1_STRING* entry_data = X509_NAME_ENTRY_get_data(cert_entry);
+		auto strlengh = ASN1_STRING_to_UTF8(&common_name_ptr, entry_data);
+		std::string common_name((char*)common_name_ptr, strlengh);
+		OPENSSL_free(common_name_ptr);
+		LOG_DBG << "CN: " << common_name;
 
 		// 首先验证用户的证书
 		bool user_cert_valid = cert_validater(m_root_ca_cert)(user_cert.get());
 
 		// 证书验证通过后, 用用户的公钥解密 encryped_radom_key 然后比较是否是 login_check_key
-		// 如果是, 那么此次就不是冒名登录
-		auto evPkey = X509_get_pubkey(user_cert.get());
-		auto user_rsa_pubkey = EVP_PKEY_get1_RSA(evPkey);
-		EVP_PKEY_free(evPkey);
+		// 如果是, 那么此次就不是冒名登录.
+		auto evp_key = X509_get_pubkey(user_cert.get());
+		auto user_rsa_pubkey = EVP_PKEY_get1_RSA(evp_key);
+		EVP_PKEY_free(evp_key);
 
 		auto decrypted_key = RSA_public_decrypt(user_rsa_pubkey, login->encryped_radom_key());
 		RSA_free(user_rsa_pubkey);
@@ -130,7 +127,7 @@ namespace av_router {
 			result.set_result(proto::login_result::LOGIN_SUCCEED);
 
 			// 记录登录用户名
-			connection->store_module_private("user_name", commonname);
+			connection->store_module_private("user_name", common_name);
 		}
 		else
 		{
