@@ -6,6 +6,7 @@ namespace po = boost::program_options;
 #include "database.hpp"
 #include "io_service_pool.hpp"
 #include "login_moudle.hpp"
+#include "register_moudle.hpp"
 #include "forward_moudle.hpp"
 #include "server.hpp"
 
@@ -101,6 +102,13 @@ int main(int argc, char** argv)
 		// 创建登陆处理模块.
 		login_moudle moudle_login(io_pool, async_database, root_cert.get());
 		forward_moudle forward_packet(io_pool);
+		register_moudle moudle_register(io_pool, async_database);
+
+		// 添加注册模块处理.
+		serv.add_message_process_moudle("proto.username_availability_check",
+			boost::bind(&register_moudle::availability_check, &moudle_register, _1, _2, _3));
+		serv.add_message_process_moudle("proto.user_register",
+			boost::bind(&register_moudle::user_register, &moudle_register, _1, _2, _3));
 
 		// 添加登陆处理模块.
 		serv.add_message_process_moudle("proto.client_hello", boost::bind(&login_moudle::process_hello_message, &moudle_login, _1, _2, _3));
