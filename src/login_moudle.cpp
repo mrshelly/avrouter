@@ -100,26 +100,25 @@ namespace av_router {
 		std::string commonname((char*)CN, strlengh);
 		OPENSSL_free(CN);
 
-		// TODO 首先验证用户的证书
+		// 首先验证用户的证书
 
 		cert_validater cert(m_root_ca_cert);
-
 		bool user_cert_valid = cert.verity(user_cert.get());
 
 		// 证书验证通过后, 用用户的公钥解密 encryped_radom_key 然后比较是否是 login_check_key
 		// 如果是, 那么此次就不是冒名登录
-
-		// 接着到数据库查询是否阻止登录, 是不是帐号没钱了不给登录了 etc
-
 		auto evPkey = X509_get_pubkey(user_cert.get());
 		auto user_rsa_pubkey = EVP_PKEY_get1_RSA(evPkey);
 		EVP_PKEY_free(evPkey);
 
 		auto decrypted_key = RSA_public_decrypt(user_rsa_pubkey, login->encryped_radom_key());
 		RSA_free(user_rsa_pubkey);
+		bool user_rsa_key_valid = (decrypted_key == login_check_key);
 
 		proto::login_result result;
-		if(user_cert_valid && decrypted_key == login_check_key)
+
+		// TODO 接着到数据库查询是否阻止登录, 是不是帐号没钱了不给登录了 etc
+		if(user_cert_valid && user_rsa_key_valid)
 		{
 			// 登陆成功.
 			login_state& state = iter->second;
