@@ -50,7 +50,7 @@ find_package(PostgreSQL REQUIRED)
 find_library(SOCI_LIBRARY NAMES soci_core HINTS /usr/local/lib /usr/local/lib64 /usr/lib64 /usr/lib /usr/local/lib /usr/lib/soci/lib)
 find_library(SOCI_PG_LIBRARY NAMES soci_postgresql HINTS /usr/local/lib /usr/local/lib64 /usr/lib64 /usr/lib /usr/lib/soci/lib)
 
-find_path( SOCI_INCLUDE_DIRS connection-pool.h PATHS /usr/include/soci /usr/locale/include/soci /opt/soci/include/soci)
+find_path( SOCI_INCLUDE_DIRS connection-pool.h PATHS /usr/include/soci /usr/local/include/soci /opt/soci/include/soci)
 
 if(NOT SOCI_LIBRARY)
 message(FATAL_ERROR "SOCI library NOT FOUND!" )
