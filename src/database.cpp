@@ -63,10 +63,12 @@ namespace av_router {
 			{
 				// 在这里检查数据库中是否存在这个用户名, 检查到的话, 调用对应的handler.
 				std::string user;
+				soci::indicator user_name_indicator;
+
 				soci::session ses(m_db_pool);
 				try
 				{
-					ses << "SELECT user_id FROM avim_user where user_id = :name", soci::use(user_id), soci::into(user);
+					ses << "SELECT user_id FROM avim_user where user_id = :name", soci::use(user_id), soci::into(user, user_name_indicator);
 				}
 				catch (soci::soci_error const & err)
 				{
@@ -74,7 +76,7 @@ namespace av_router {
 					m_io_service.post(boost::bind(handler, false));
 					return;
 				}
-				if (!user.empty())
+				if (user_name_indicator == soci::i_ok)
 				{
 					m_io_service.post(boost::bind(handler, true));
 					return;
