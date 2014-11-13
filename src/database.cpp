@@ -64,7 +64,7 @@ namespace av_router {
 				// 在这里检查数据库中是否存在这个用户名, 检查到的话, 调用对应的handler.
 				std::string user;
 				soci::session ses(m_db_pool);
- 				try
+				try
 				{
 					ses << "SELECT user_id FROM avim_user where user_id = :name", soci::use(user_id), soci::into(user);
 				}
