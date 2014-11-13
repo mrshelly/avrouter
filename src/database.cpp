@@ -66,7 +66,7 @@ namespace av_router {
 				soci::session ses(m_db_pool);
 				try
 				{
-					ses << "SELECT user_id FROM avim_user where user_id = :name", soci::use(user_id), soci::into(user);
+					ses << "SELECT user_id FROM avim_user WHERE user_id = :name", soci::use(user_id), soci::into(user);
 				}
 				catch (soci::soci_error const& err)
 				{
