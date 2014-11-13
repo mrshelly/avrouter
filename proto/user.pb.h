@@ -38,7 +38,10 @@ class client_hello;
 class server_hello;
 class login;
 class login_result;
+class username_availability_check;
+class username_availability_result;
 class user_register;
+class user_register_result;
 class user_cert_lost_request;
 class user_cert_lost_verify;
 
@@ -62,6 +65,47 @@ inline bool login_result_login_result_code_Parse(
     const ::std::string& name, login_result_login_result_code* value) {
   return ::google::protobuf::internal::ParseNamedEnum<login_result_login_result_code>(
     login_result_login_result_code_descriptor(), name, value);
+}
+enum username_availability_result_username_availability_result_code {
+  username_availability_result_username_availability_result_code_NAME_AVAILABLE = 0,
+  username_availability_result_username_availability_result_code_NAME_DISALLOW = 1,
+  username_availability_result_username_availability_result_code_NAME_TAKEN = 2
+};
+bool username_availability_result_username_availability_result_code_IsValid(int value);
+const username_availability_result_username_availability_result_code username_availability_result_username_availability_result_code_username_availability_result_code_MIN = username_availability_result_username_availability_result_code_NAME_AVAILABLE;
+const username_availability_result_username_availability_result_code username_availability_result_username_availability_result_code_username_availability_result_code_MAX = username_availability_result_username_availability_result_code_NAME_TAKEN;
+const int username_availability_result_username_availability_result_code_username_availability_result_code_ARRAYSIZE = username_availability_result_username_availability_result_code_username_availability_result_code_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* username_availability_result_username_availability_result_code_descriptor();
+inline const ::std::string& username_availability_result_username_availability_result_code_Name(username_availability_result_username_availability_result_code value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    username_availability_result_username_availability_result_code_descriptor(), value);
+}
+inline bool username_availability_result_username_availability_result_code_Parse(
+    const ::std::string& name, username_availability_result_username_availability_result_code* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<username_availability_result_username_availability_result_code>(
+    username_availability_result_username_availability_result_code_descriptor(), name, value);
+}
+enum user_register_result_user_register_result_code {
+  user_register_result_user_register_result_code_REGISTER_SUCCEED = 0,
+  user_register_result_user_register_result_code_REGISTER_FAILED_NAME_TAKEN = 1,
+  user_register_result_user_register_result_code_REGISTER_FAILED_TOO_SHORT_KEY = 2,
+  user_register_result_user_register_result_code_REGISTER_FAILED_NAME_DISALLOW = 3
+};
+bool user_register_result_user_register_result_code_IsValid(int value);
+const user_register_result_user_register_result_code user_register_result_user_register_result_code_user_register_result_code_MIN = user_register_result_user_register_result_code_REGISTER_SUCCEED;
+const user_register_result_user_register_result_code user_register_result_user_register_result_code_user_register_result_code_MAX = user_register_result_user_register_result_code_REGISTER_FAILED_NAME_DISALLOW;
+const int user_register_result_user_register_result_code_user_register_result_code_ARRAYSIZE = user_register_result_user_register_result_code_user_register_result_code_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* user_register_result_user_register_result_code_descriptor();
+inline const ::std::string& user_register_result_user_register_result_code_Name(user_register_result_user_register_result_code value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    user_register_result_user_register_result_code_descriptor(), value);
+}
+inline bool user_register_result_user_register_result_code_Parse(
+    const ::std::string& name, user_register_result_user_register_result_code* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<user_register_result_user_register_result_code>(
+    user_register_result_user_register_result_code_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -300,10 +344,10 @@ class server_hello : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 version() const;
   inline void set_version(::google::protobuf::uint32 value);
 
-  // required bytes random_pub_key = 5;
+  // required bytes random_pub_key = 3;
   inline bool has_random_pub_key() const;
   inline void clear_random_pub_key();
-  static const int kRandomPubKeyFieldNumber = 5;
+  static const int kRandomPubKeyFieldNumber = 3;
   inline const ::std::string& random_pub_key() const;
   inline void set_random_pub_key(const ::std::string& value);
   inline void set_random_pub_key(const char* value);
@@ -312,10 +356,10 @@ class server_hello : public ::google::protobuf::Message {
   inline ::std::string* release_random_pub_key();
   inline void set_allocated_random_pub_key(::std::string* random_pub_key);
 
-  // required string server_av_address = 3;
+  // required string server_av_address = 4;
   inline bool has_server_av_address() const;
   inline void clear_server_av_address();
-  static const int kServerAvAddressFieldNumber = 3;
+  static const int kServerAvAddressFieldNumber = 4;
   inline const ::std::string& server_av_address() const;
   inline void set_server_av_address(const ::std::string& value);
   inline void set_server_av_address(const char* value);
@@ -595,6 +639,218 @@ class login_result : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class username_availability_check : public ::google::protobuf::Message {
+ public:
+  username_availability_check();
+  virtual ~username_availability_check();
+
+  username_availability_check(const username_availability_check& from);
+
+  inline username_availability_check& operator=(const username_availability_check& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  #if __cplusplus >= 201103L || _MSC_VER >= 1600
+  inline username_availability_check& operator=(username_availability_check&& from) {
+    if (&from != this) {
+      Clear();
+      Swap(&from);
+    }
+    return *this;
+  }
+
+  username_availability_check(username_availability_check&& from);
+  #endif
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const username_availability_check& default_instance();
+
+  void Swap(username_availability_check* other);
+
+  // implements Message ----------------------------------------------
+
+  username_availability_check* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const username_availability_check& from);
+  void MergeFrom(const username_availability_check& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string user_name = 1;
+  inline bool has_user_name() const;
+  inline void clear_user_name();
+  static const int kUserNameFieldNumber = 1;
+  inline const ::std::string& user_name() const;
+  inline void set_user_name(const ::std::string& value);
+  inline void set_user_name(const char* value);
+  inline void set_user_name(const char* value, size_t size);
+  inline ::std::string* mutable_user_name();
+  inline ::std::string* release_user_name();
+  inline void set_allocated_user_name(::std::string* user_name);
+
+  // @@protoc_insertion_point(class_scope:proto.username_availability_check)
+ private:
+  inline void set_has_user_name();
+  inline void clear_has_user_name();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* user_name_;
+  friend void  protobuf_AddDesc_user_2eproto();
+  friend void protobuf_AssignDesc_user_2eproto();
+  friend void protobuf_ShutdownFile_user_2eproto();
+
+  void InitAsDefaultInstance();
+  static username_availability_check* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class username_availability_result : public ::google::protobuf::Message {
+ public:
+  username_availability_result();
+  virtual ~username_availability_result();
+
+  username_availability_result(const username_availability_result& from);
+
+  inline username_availability_result& operator=(const username_availability_result& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  #if __cplusplus >= 201103L || _MSC_VER >= 1600
+  inline username_availability_result& operator=(username_availability_result&& from) {
+    if (&from != this) {
+      Clear();
+      Swap(&from);
+    }
+    return *this;
+  }
+
+  username_availability_result(username_availability_result&& from);
+  #endif
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const username_availability_result& default_instance();
+
+  void Swap(username_availability_result* other);
+
+  // implements Message ----------------------------------------------
+
+  username_availability_result* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const username_availability_result& from);
+  void MergeFrom(const username_availability_result& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef username_availability_result_username_availability_result_code username_availability_result_code;
+  static const username_availability_result_code NAME_AVAILABLE = username_availability_result_username_availability_result_code_NAME_AVAILABLE;
+  static const username_availability_result_code NAME_DISALLOW = username_availability_result_username_availability_result_code_NAME_DISALLOW;
+  static const username_availability_result_code NAME_TAKEN = username_availability_result_username_availability_result_code_NAME_TAKEN;
+  static inline bool username_availability_result_code_IsValid(int value) {
+    return username_availability_result_username_availability_result_code_IsValid(value);
+  }
+  static const username_availability_result_code username_availability_result_code_MIN =
+    username_availability_result_username_availability_result_code_username_availability_result_code_MIN;
+  static const username_availability_result_code username_availability_result_code_MAX =
+    username_availability_result_username_availability_result_code_username_availability_result_code_MAX;
+  static const int username_availability_result_code_ARRAYSIZE =
+    username_availability_result_username_availability_result_code_username_availability_result_code_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  username_availability_result_code_descriptor() {
+    return username_availability_result_username_availability_result_code_descriptor();
+  }
+  static inline const ::std::string& username_availability_result_code_Name(username_availability_result_code value) {
+    return username_availability_result_username_availability_result_code_Name(value);
+  }
+  static inline bool username_availability_result_code_Parse(const ::std::string& name,
+      username_availability_result_code* value) {
+    return username_availability_result_username_availability_result_code_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .proto.username_availability_result.username_availability_result_code result = 1;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 1;
+  inline ::proto::username_availability_result_username_availability_result_code result() const;
+  inline void set_result(::proto::username_availability_result_username_availability_result_code value);
+
+  // @@protoc_insertion_point(class_scope:proto.username_availability_result)
+ private:
+  inline void set_has_result();
+  inline void clear_has_result();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  int result_;
+  friend void  protobuf_AddDesc_user_2eproto();
+  friend void protobuf_AssignDesc_user_2eproto();
+  friend void protobuf_ShutdownFile_user_2eproto();
+
+  void InitAsDefaultInstance();
+  static username_availability_result* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class user_register : public ::google::protobuf::Message {
  public:
   user_register();
@@ -684,10 +940,22 @@ class user_register : public ::google::protobuf::Message {
   inline ::std::string* release_rsa_pubkey();
   inline void set_allocated_rsa_pubkey(::std::string* rsa_pubkey);
 
-  // optional string mail_address = 3;
+  // required bytes CSR = 3;
+  inline bool has_csr() const;
+  inline void clear_csr();
+  static const int kCSRFieldNumber = 3;
+  inline const ::std::string& csr() const;
+  inline void set_csr(const ::std::string& value);
+  inline void set_csr(const char* value);
+  inline void set_csr(const void* value, size_t size);
+  inline ::std::string* mutable_csr();
+  inline ::std::string* release_csr();
+  inline void set_allocated_csr(::std::string* csr);
+
+  // optional string mail_address = 4;
   inline bool has_mail_address() const;
   inline void clear_mail_address();
-  static const int kMailAddressFieldNumber = 3;
+  static const int kMailAddressFieldNumber = 4;
   inline const ::std::string& mail_address() const;
   inline void set_mail_address(const ::std::string& value);
   inline void set_mail_address(const char* value);
@@ -696,10 +964,10 @@ class user_register : public ::google::protobuf::Message {
   inline ::std::string* release_mail_address();
   inline void set_allocated_mail_address(::std::string* mail_address);
 
-  // optional string cell_phone = 4;
+  // optional string cell_phone = 5;
   inline bool has_cell_phone() const;
   inline void clear_cell_phone();
-  static const int kCellPhoneFieldNumber = 4;
+  static const int kCellPhoneFieldNumber = 5;
   inline const ::std::string& cell_phone() const;
   inline void set_cell_phone(const ::std::string& value);
   inline void set_cell_phone(const char* value);
@@ -714,6 +982,8 @@ class user_register : public ::google::protobuf::Message {
   inline void clear_has_user_name();
   inline void set_has_rsa_pubkey();
   inline void clear_has_rsa_pubkey();
+  inline void set_has_csr();
+  inline void clear_has_csr();
   inline void set_has_mail_address();
   inline void clear_has_mail_address();
   inline void set_has_cell_phone();
@@ -725,6 +995,7 @@ class user_register : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::std::string* user_name_;
   ::std::string* rsa_pubkey_;
+  ::std::string* csr_;
   ::std::string* mail_address_;
   ::std::string* cell_phone_;
   friend void  protobuf_AddDesc_user_2eproto();
@@ -733,6 +1004,123 @@ class user_register : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static user_register* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class user_register_result : public ::google::protobuf::Message {
+ public:
+  user_register_result();
+  virtual ~user_register_result();
+
+  user_register_result(const user_register_result& from);
+
+  inline user_register_result& operator=(const user_register_result& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  #if __cplusplus >= 201103L || _MSC_VER >= 1600
+  inline user_register_result& operator=(user_register_result&& from) {
+    if (&from != this) {
+      Clear();
+      Swap(&from);
+    }
+    return *this;
+  }
+
+  user_register_result(user_register_result&& from);
+  #endif
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const user_register_result& default_instance();
+
+  void Swap(user_register_result* other);
+
+  // implements Message ----------------------------------------------
+
+  user_register_result* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const user_register_result& from);
+  void MergeFrom(const user_register_result& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef user_register_result_user_register_result_code user_register_result_code;
+  static const user_register_result_code REGISTER_SUCCEED = user_register_result_user_register_result_code_REGISTER_SUCCEED;
+  static const user_register_result_code REGISTER_FAILED_NAME_TAKEN = user_register_result_user_register_result_code_REGISTER_FAILED_NAME_TAKEN;
+  static const user_register_result_code REGISTER_FAILED_TOO_SHORT_KEY = user_register_result_user_register_result_code_REGISTER_FAILED_TOO_SHORT_KEY;
+  static const user_register_result_code REGISTER_FAILED_NAME_DISALLOW = user_register_result_user_register_result_code_REGISTER_FAILED_NAME_DISALLOW;
+  static inline bool user_register_result_code_IsValid(int value) {
+    return user_register_result_user_register_result_code_IsValid(value);
+  }
+  static const user_register_result_code user_register_result_code_MIN =
+    user_register_result_user_register_result_code_user_register_result_code_MIN;
+  static const user_register_result_code user_register_result_code_MAX =
+    user_register_result_user_register_result_code_user_register_result_code_MAX;
+  static const int user_register_result_code_ARRAYSIZE =
+    user_register_result_user_register_result_code_user_register_result_code_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  user_register_result_code_descriptor() {
+    return user_register_result_user_register_result_code_descriptor();
+  }
+  static inline const ::std::string& user_register_result_code_Name(user_register_result_code value) {
+    return user_register_result_user_register_result_code_Name(value);
+  }
+  static inline bool user_register_result_code_Parse(const ::std::string& name,
+      user_register_result_code* value) {
+    return user_register_result_user_register_result_code_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  // required .proto.user_register_result.user_register_result_code result = 1;
+  inline bool has_result() const;
+  inline void clear_result();
+  static const int kResultFieldNumber = 1;
+  inline ::proto::user_register_result_user_register_result_code result() const;
+  inline void set_result(::proto::user_register_result_user_register_result_code value);
+
+  // @@protoc_insertion_point(class_scope:proto.user_register_result)
+ private:
+  inline void set_has_result();
+  inline void clear_has_result();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  int result_;
+  friend void  protobuf_AddDesc_user_2eproto();
+  friend void protobuf_AssignDesc_user_2eproto();
+  friend void protobuf_ShutdownFile_user_2eproto();
+
+  void InitAsDefaultInstance();
+  static user_register_result* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -1395,7 +1783,7 @@ inline void server_hello::set_version(::google::protobuf::uint32 value) {
   // @@protoc_insertion_point(field_set:proto.server_hello.version)
 }
 
-// required bytes random_pub_key = 5;
+// required bytes random_pub_key = 3;
 inline bool server_hello::has_random_pub_key() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -1471,7 +1859,7 @@ inline void server_hello::set_allocated_random_pub_key(::std::string* random_pub
   // @@protoc_insertion_point(field_set_allocated:proto.server_hello.random_pub_key)
 }
 
-// required string server_av_address = 3;
+// required string server_av_address = 4;
 inline bool server_hello::has_server_av_address() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -1810,6 +2198,115 @@ inline void login_result::set_result(::proto::login_result_login_result_code val
 
 // -------------------------------------------------------------------
 
+// username_availability_check
+
+// required string user_name = 1;
+inline bool username_availability_check::has_user_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void username_availability_check::set_has_user_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void username_availability_check::clear_has_user_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void username_availability_check::clear_user_name() {
+  if (user_name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_name_->clear();
+  }
+  clear_has_user_name();
+}
+inline const ::std::string& username_availability_check::user_name() const {
+  // @@protoc_insertion_point(field_get:proto.username_availability_check.user_name)
+  return *user_name_;
+}
+inline void username_availability_check::set_user_name(const ::std::string& value) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(value);
+  // @@protoc_insertion_point(field_set:proto.username_availability_check.user_name)
+}
+inline void username_availability_check::set_user_name(const char* value) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(value);
+  // @@protoc_insertion_point(field_set_char:proto.username_availability_check.user_name)
+}
+inline void username_availability_check::set_user_name(const char* value, size_t size) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:proto.username_availability_check.user_name)
+}
+inline ::std::string* username_availability_check::mutable_user_name() {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    user_name_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:proto.username_availability_check.user_name)
+  return user_name_;
+}
+inline ::std::string* username_availability_check::release_user_name() {
+  clear_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = user_name_;
+    user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void username_availability_check::set_allocated_user_name(::std::string* user_name) {
+  if (user_name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete user_name_;
+  }
+  if (user_name) {
+    set_has_user_name();
+    user_name_ = user_name;
+  } else {
+    clear_has_user_name();
+    user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:proto.username_availability_check.user_name)
+}
+
+// -------------------------------------------------------------------
+
+// username_availability_result
+
+// required .proto.username_availability_result.username_availability_result_code result = 1;
+inline bool username_availability_result::has_result() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void username_availability_result::set_has_result() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void username_availability_result::clear_has_result() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void username_availability_result::clear_result() {
+  result_ = 0;
+  clear_has_result();
+}
+inline ::proto::username_availability_result_username_availability_result_code username_availability_result::result() const {
+  // @@protoc_insertion_point(field_get:proto.username_availability_result.result)
+  return static_cast< ::proto::username_availability_result_username_availability_result_code >(result_);
+}
+inline void username_availability_result::set_result(::proto::username_availability_result_username_availability_result_code value) {
+  assert(::proto::username_availability_result_username_availability_result_code_IsValid(value));
+  set_has_result();
+  result_ = value;
+  // @@protoc_insertion_point(field_set:proto.username_availability_result.result)
+}
+
+// -------------------------------------------------------------------
+
 // user_register
 
 // required string user_name = 1;
@@ -1964,15 +2461,91 @@ inline void user_register::set_allocated_rsa_pubkey(::std::string* rsa_pubkey) {
   // @@protoc_insertion_point(field_set_allocated:proto.user_register.rsa_pubkey)
 }
 
-// optional string mail_address = 3;
-inline bool user_register::has_mail_address() const {
+// required bytes CSR = 3;
+inline bool user_register::has_csr() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void user_register::set_has_mail_address() {
+inline void user_register::set_has_csr() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void user_register::clear_has_mail_address() {
+inline void user_register::clear_has_csr() {
   _has_bits_[0] &= ~0x00000004u;
+}
+inline void user_register::clear_csr() {
+  if (csr_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    csr_->clear();
+  }
+  clear_has_csr();
+}
+inline const ::std::string& user_register::csr() const {
+  // @@protoc_insertion_point(field_get:proto.user_register.CSR)
+  return *csr_;
+}
+inline void user_register::set_csr(const ::std::string& value) {
+  set_has_csr();
+  if (csr_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    csr_ = new ::std::string;
+  }
+  csr_->assign(value);
+  // @@protoc_insertion_point(field_set:proto.user_register.CSR)
+}
+inline void user_register::set_csr(const char* value) {
+  set_has_csr();
+  if (csr_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    csr_ = new ::std::string;
+  }
+  csr_->assign(value);
+  // @@protoc_insertion_point(field_set_char:proto.user_register.CSR)
+}
+inline void user_register::set_csr(const void* value, size_t size) {
+  set_has_csr();
+  if (csr_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    csr_ = new ::std::string;
+  }
+  csr_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:proto.user_register.CSR)
+}
+inline ::std::string* user_register::mutable_csr() {
+  set_has_csr();
+  if (csr_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    csr_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:proto.user_register.CSR)
+  return csr_;
+}
+inline ::std::string* user_register::release_csr() {
+  clear_has_csr();
+  if (csr_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = csr_;
+    csr_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void user_register::set_allocated_csr(::std::string* csr) {
+  if (csr_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete csr_;
+  }
+  if (csr) {
+    set_has_csr();
+    csr_ = csr;
+  } else {
+    clear_has_csr();
+    csr_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:proto.user_register.CSR)
+}
+
+// optional string mail_address = 4;
+inline bool user_register::has_mail_address() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void user_register::set_has_mail_address() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void user_register::clear_has_mail_address() {
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void user_register::clear_mail_address() {
   if (mail_address_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -2040,15 +2613,15 @@ inline void user_register::set_allocated_mail_address(::std::string* mail_addres
   // @@protoc_insertion_point(field_set_allocated:proto.user_register.mail_address)
 }
 
-// optional string cell_phone = 4;
+// optional string cell_phone = 5;
 inline bool user_register::has_cell_phone() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void user_register::set_has_cell_phone() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void user_register::clear_has_cell_phone() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void user_register::clear_cell_phone() {
   if (cell_phone_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
@@ -2114,6 +2687,35 @@ inline void user_register::set_allocated_cell_phone(::std::string* cell_phone) {
     cell_phone_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
   // @@protoc_insertion_point(field_set_allocated:proto.user_register.cell_phone)
+}
+
+// -------------------------------------------------------------------
+
+// user_register_result
+
+// required .proto.user_register_result.user_register_result_code result = 1;
+inline bool user_register_result::has_result() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void user_register_result::set_has_result() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void user_register_result::clear_has_result() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void user_register_result::clear_result() {
+  result_ = 0;
+  clear_has_result();
+}
+inline ::proto::user_register_result_user_register_result_code user_register_result::result() const {
+  // @@protoc_insertion_point(field_get:proto.user_register_result.result)
+  return static_cast< ::proto::user_register_result_user_register_result_code >(result_);
+}
+inline void user_register_result::set_result(::proto::user_register_result_user_register_result_code value) {
+  assert(::proto::user_register_result_user_register_result_code_IsValid(value));
+  set_has_result();
+  result_ = value;
+  // @@protoc_insertion_point(field_set:proto.user_register_result.result)
 }
 
 // -------------------------------------------------------------------
@@ -2441,6 +3043,16 @@ template <> struct is_proto_enum< ::proto::login_result_login_result_code> : ::g
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::proto::login_result_login_result_code>() {
   return ::proto::login_result_login_result_code_descriptor();
+}
+template <> struct is_proto_enum< ::proto::username_availability_result_username_availability_result_code> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::proto::username_availability_result_username_availability_result_code>() {
+  return ::proto::username_availability_result_username_availability_result_code_descriptor();
+}
+template <> struct is_proto_enum< ::proto::user_register_result_user_register_result_code> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::proto::user_register_result_user_register_result_code>() {
+  return ::proto::user_register_result_user_register_result_code_descriptor();
 }
 
 }  // namespace google
