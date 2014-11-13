@@ -14,8 +14,9 @@ namespace av_router {
 		, m_db_pool(db_pool)
 	{
 		std::async(std::launch::async,
-			[this](){
-				soci::session& ses = m_db_pool.at(m_db_pool.lease());
+			[this]()
+			{
+				soci::session ses(m_db_pool);
 				try
 				{
 					// 检查数据库是否存在, 如果不存在, 则创建数据库.
