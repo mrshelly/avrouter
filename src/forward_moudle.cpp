@@ -24,9 +24,7 @@ namespace av_router {
 			if( type != 0)
 			{
 				// 从 routing table 里删掉这个连接.
-				boost::any username_ = connection->retrive_module_private("username");
-				std::string username = boost::any_cast<std::string>(username_);
-
+				std::string username = boost::any_cast<std::string>(connection->retrive_module_private("username"));
 				m_routing_table.erase(username);
 			}
 		}
