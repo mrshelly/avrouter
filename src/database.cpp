@@ -21,7 +21,7 @@ namespace av_router {
 					// 检查数据库是否存在, 如果不存在, 则创建数据库.
 					ses << "CREATE DATABASE " << db_name;
 				}
-				catch (soci::soci_error const & err)
+				catch (soci::soci_error const& err)
 				{
 					LOG_ERR << err.what();
 				}
@@ -44,7 +44,7 @@ namespace av_router {
 						"ALTER TABLE avim_user "
 						"OWNER TO postgres;";
 				}
-				catch (soci::soci_error const & err)
+				catch (soci::soci_error const& err)
 				{
 					LOG_ERR << err.what();
 				}
@@ -68,7 +68,7 @@ namespace av_router {
 				{
 					ses << "SELECT user_id FROM avim_user where user_id = :name", soci::use(user_id), soci::into(user);
 				}
-				catch (soci::soci_error const & err)
+				catch (soci::soci_error const& err)
 				{
 					LOG_ERR << err.what();
 					m_io_service.post(boost::bind(handler, false));
