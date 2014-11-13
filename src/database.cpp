@@ -14,14 +14,15 @@ namespace av_router {
 		, m_db_pool(db_pool)
 	{
 		std::async(std::launch::async,
-			[this](){
-				soci::session& ses = m_db_pool.at(m_db_pool.lease());
+			[this]()
+			{
+				soci::session ses(m_db_pool);
 				try
 				{
 					// 检查数据库是否存在, 如果不存在, 则创建数据库.
 					ses << "CREATE DATABASE " << db_name;
 				}
-				catch (soci::soci_error const & err)
+				catch (soci::soci_error const& err)
 				{
 					LOG_ERR << err.what();
 				}
@@ -44,7 +45,7 @@ namespace av_router {
 						"ALTER TABLE avim_user "
 						"OWNER TO postgres;";
 				}
-				catch (soci::soci_error const & err)
+				catch (soci::soci_error const& err)
 				{
 					LOG_ERR << err.what();
 				}
@@ -68,9 +69,9 @@ namespace av_router {
 				soci::session ses(m_db_pool);
 				try
 				{
-					ses << "SELECT user_id FROM avim_user where user_id = :name", soci::use(user_id), soci::into(user, user_name_indicator);
+					ses << "SELECT user_id FROM avim_user WHERE user_id = :name", soci::use(user_id), soci::into(user, user_name_indicator);
 				}
-				catch (soci::soci_error const & err)
+				catch (soci::soci_error const& err)
 				{
 					LOG_ERR << err.what();
 					m_io_service.post(boost::bind(handler, false));
