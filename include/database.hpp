@@ -9,8 +9,11 @@
 
 #include <boost/noncopyable.hpp>
 #include <boost/asio.hpp>
-#include <session.h>
-#include <connection-pool.h>
+#include <boost/function.hpp>
+
+#include "soci.h"
+#include "session.h"
+#include "connection-pool.h"
 
 namespace av_router {
 
@@ -20,6 +23,10 @@ namespace av_router {
 	public:
 		explicit database(boost::asio::io_service& io, soci::connection_pool& db_pool);
 		~database();
+
+	public:
+		typedef boost::function<void(bool result)> result_handler;
+		void availability_check(const std::string& user_id, result_handler handler);
 
 	public:
 		boost::asio::io_service& m_io_service;
