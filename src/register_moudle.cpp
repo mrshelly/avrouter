@@ -45,8 +45,20 @@ namespace av_router {
 			return;
 
 		// TODO 检查 CSR 证书是否有伪造
+		auto in = (const unsigned char *) register_msg->csr().data();
 
-		// TODO 办法, 检查 X509_REQ 签名 X509_REQ_verify() 就可以了
+		std::shared_ptr<X509_REQ> csr(d2i_X509_REQ(NULL, &in, register_msg->csr().length()), X509_REQ_free);
+
+		in = (const unsigned char *) register_msg->rsa_pubkey().data();
+		std::shared_ptr<RSA> user_rsa_pubkey(d2i_RSAPublicKey(NULL, &in, register_msg->rsa_pubkey().length()), RSA_free);
+		std::shared_ptr<EVP_PKEY> user_EVP_PKEY_pubkey(EVP_PKEY_new(), EVP_PKEY_free);
+		EVP_PKEY_set1_RSA(user_EVP_PKEY_pubkey.get(), user_rsa_pubkey.get());
+
+		if (X509_REQ_verify(csr.get(), user_EVP_PKEY_pubkey.get()) <= 0)
+		{
+			// 失败了.
+
+		}
 
 		// 确定是合法的 CSR 证书, 接着数据库内插
 		m_database.register_user(register_msg->user_name(),register_msg->rsa_pubkey(),
@@ -58,6 +70,9 @@ namespace av_router {
 				{
 					// TODO 调用 openssl 将 CSR 签名成证书.
 					// TODO 将证书更新进数据库
+
+					// TODO 发送一一份证书验证申请到 CA 认证服务器上并等待 CA 返回 Cert
+					// TODO 之所以不放到 avrouter 来做, 是为了保证CA的私钥的安全性.
 
 					// TODO 返回注册成功信息 将证书一并返回
 
