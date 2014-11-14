@@ -146,6 +146,8 @@ namespace av_router {
 
 		}
 
+		LOG_INFO << "csr fine, start registering";
+
 		std::string user_name = register_msg->user_name();
 
 		// 确定是合法的 CSR 证书, 接着数据库内插
@@ -153,6 +155,8 @@ namespace av_router {
 			register_msg->mail_address(), register_msg->cell_phone(),
 			[&, this](bool result)
 			{
+				LOG_INFO << "database fine, send csr to peter";
+
 				// 插入成功了, 那就立马签名出证书来
 				if(result)
 				{
