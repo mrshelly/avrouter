@@ -15,12 +15,13 @@
 static char ** to_argv(std::vector<std::string> args)
 {
 	typedef char * str;
-	char ** ret = new  str[args.size()];
+	char ** ret = new  str[args.size()+1];
 
 	for(int i = 0; i < args.size(); i++)
 	{
 		ret[i] =(char*) args[i].c_str();
 	}
+	ret[args.size()] = NULL;
 	return ret;
 }
 
@@ -56,12 +57,11 @@ static void async_send_email_coro(boost::asio::io_service& io, std::string subje
 		args.push_back("-F");
 		args.push_back(std::string("attachment=@") + attachment.first );
 
-		auto argv = to_argv(args);
 		pid_t pid;
-		if( (pid = fork()) == 0 )
+		if( (pid = fork()) == 0 ){
+			auto argv = to_argv(args);
 			execv("/usr/bin/curl", argv);
-
-		waitpid(pid, 0, 0);
+		}
 
 	}catch(const boost::system::error_code& ec)
 	{
