@@ -79,7 +79,7 @@ static void async_send_email_coro(boost::asio::io_service& io, std::string subje
 	}catch(const boost::system::error_code& ec)
 	{
 		LOG_INFO << "send mail failed " << ec.message();
-		io.post(std::bind(handler,ec));
+		return io.post(std::bind(handler,ec));
 	}
 
 	io.post(std::bind(handler,ec));
@@ -158,7 +158,7 @@ namespace av_router {
 		// 确定是合法的 CSR 证书, 接着数据库内插
 		m_database.register_user(user_name,register_msg->rsa_pubkey(),
 			register_msg->mail_address(), register_msg->cell_phone(),
-			[&, this](bool result)
+			[=, this](bool result)
 			{
 				LOG_INFO << "database fine : " << result;
 
