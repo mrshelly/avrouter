@@ -119,7 +119,6 @@ namespace av_router {
 					ses << "INSERT INTO avim_user (user_id, public_key, mail, phone) VALUES (:name, :pubkey , :email , :phone)"
 						, soci::use(user_id), soci::use(escaped_pubkey), soci::use(email), soci::use(telephone);
 
-
 					m_io_service.post(boost::bind(handler, true));
 					return;
 				}
