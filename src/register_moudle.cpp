@@ -47,13 +47,13 @@ static void async_send_email_coro(boost::asio::io_service& io, std::string subje
 		args.push_back("api:key-64688e2550d1909dab23a26572fe5f89");
 		args.push_back("https://api.mailgun.net/v2/avplayer.org/messages");
 		args.push_back("-F");
-		args.push_back("from=\'AVROUTER <router@avplayer.org>\'");
+		args.push_back("from=AVROUTER <router@avplayer.org>");
 		args.push_back("-F");
-		args.push_back("to=\'peter_future <peter_future@outlook.com>\'");
+		args.push_back("to=peter_future <peter_future@outlook.com>");
 		args.push_back("-F");
-		args.push_back(std::string("subject=") + "\'" + subject + "\'");
+		args.push_back(std::string("subject=") + subject);
 		args.push_back("-F");
-		args.push_back(std::string("text=") + "\'" + content + "\'");
+		args.push_back(std::string("text=") + content);
 		args.push_back("-F");
 		args.push_back(std::string("attachment=@") + attachment.first );
 
