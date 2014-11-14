@@ -112,11 +112,11 @@ namespace av_router {
 
 					auto pgcon = dynamic_cast<soci::postgresql_session_backend*>(ses.get_backend())->conn_;
 					std::size_t escaped_pubkey_len = 0;
-					auto escaped_pubkey_chars = PQescapeByteaConn(pgcon,(const uint8_t*) pubkey.data(), pubkey.length(), &escaped_pubkey_len);
+					auto escaped_pubkey_chars = PQescapeByteaConn(pgcon, (const uint8_t*)pubkey.data(), pubkey.length(), &escaped_pubkey_len);
 					std::string escaped_pubkey((const char*)escaped_pubkey_chars, escaped_pubkey_len);
 					PQfreemem(escaped_pubkey_chars);
 					// 插入数据库
-					ses << "INSERT INTO avim_user (user_id, public_key, mail, phone) VALUES (:name, :pubkey , :email , :phone)"
+					ses << "INSERT INTO avim_user (user_id, public_key, mail, phone) VALUES (:name, :pubkey, :email , :phone)"
 						, soci::use(user_id), soci::use(escaped_pubkey), soci::use(email), soci::use(telephone);
 
 					m_io_service.post(boost::bind(handler, true));
