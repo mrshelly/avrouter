@@ -11,7 +11,7 @@
 #include "internet_mail_format.hpp"
 
 template<class Handler>
-static void async_send_email_coro(boost::asio::io_service& io,std::string subject, std::string content, std::pair<std::string, std::string> attachment, Handler handler, boost::asio::yield_context yield_context)
+static void async_send_email_coro(boost::asio::io_service& io, std::string subject, std::string content, std::pair<std::string, std::string> attachment, Handler handler, boost::asio::yield_context yield_context)
 {
 	boost::system::error_code ec;
 	try{
@@ -23,7 +23,11 @@ static void async_send_email_coro(boost::asio::io_service& io,std::string subjec
 
 		auto endpoint = boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string("65.55.92.184"), 25);
 
+		LOG_INFO << "connectiong to 65.55.92.184:25" ;
+
 		boost::asio::async_connect(socket, & endpoint , yield_context);
+
+		LOG_INFO << "connected 65.55.92.184:25" ;
 
 		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
 		readbuf.consume(bytes_transfered);
@@ -74,6 +78,7 @@ static void async_send_email_coro(boost::asio::io_service& io,std::string subjec
 		readbuf.consume(bytes_transfered);
 	}catch(const boost::system::error_code& ec)
 	{
+		LOG_INFO << "send mail failed " << ec.message();
 		io.post(std::bind(handler,ec));
 	}
 
