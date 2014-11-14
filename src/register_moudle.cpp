@@ -73,7 +73,7 @@ static void async_send_email_coro(boost::asio::io_service& io, std::string subje
 		imf_write_stream(imf, sendbuf);
 
 		bytes_transfered = boost::asio::async_write(socket, readbuf.data(), yield_context);
-		readbuf.commit(bytes_transfered);
+		readbuf.consume(readbuf.size());
 		line = "\r\n.\r\n";
 		boost::asio::async_write(socket, boost::asio::buffer(line), yield_context);
 		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
