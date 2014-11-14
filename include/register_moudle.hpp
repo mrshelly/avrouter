@@ -23,7 +23,7 @@ namespace av_router {
 
 	public:
 		void availability_check(google::protobuf::Message*, connection_ptr, connection_manager&);
-		void user_register(google::protobuf::Message* msg, av_router::connection_ptr connection, av_router::connection_manager&);
+		void user_register(google::protobuf::Message*, connection_ptr, connection_manager&);
 
 	private:
 		av_router::io_service_pool& m_io_service_pool;
