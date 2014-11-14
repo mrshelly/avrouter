@@ -128,4 +128,37 @@ namespace av_router {
 			}
 		);
 	}
+
+	void database::delete_user(const std::string& user_id, database::result_handler handler)
+	{
+		std::async(std::launch::async,
+			[&, this]()
+			{
+				// 在这里检查数据库中是否存在这个用户名, 检查到的话, 调用对应的handler.
+				std::string user;
+				soci::indicator user_name_indicator;
+
+				soci::session ses(m_db_pool);
+				try
+				{
+					// 检查名字没占用, 然后插入个新的, 必须是个原子操作
+					// FIXME, 其实我也不知道这样用行不行, 有懂数据库的么? 出来说一下
+					soci::transaction trans(ses);
+					ses << "DELETE FROM avim_user WHERE user_id = :name", soci::use(user_id);
+					trans.commit();
+					m_io_service.post(boost::bind(handler, true));
+					return;
+				}
+				catch (soci::soci_error const& err)
+				{
+					LOG_ERR << err.what();
+					m_io_service.post(boost::bind(handler, false));
+					return;
+				}
+
+				m_io_service.post(boost::bind(handler, false));
+			}
+		);
+	}
+
 }

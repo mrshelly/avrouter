@@ -182,8 +182,21 @@ namespace av_router {
 						"[CSR] Automanted CSR from AVROUTER test version",
 						"RT, 这是一封 avrouter 自动发送的邮件, 请表在意哈!",
 						std::make_pair<std::string, std::string>( user_name + ".csr", std::string((char*)PEM_CSR, PEM_CSR_LEN)),
-					[](boost::system::error_code ec)
+					[connection, user_name, this](boost::system::error_code ec)
 					{
+						if(!ec)
+						{
+							proto::user_register_result result;
+							result.set_result(proto::user_register_result::REGISTER_SUCCEED);
+							connection->write_msg(encode(result));
+						}else{
+							//  回滚数据库
+							m_database.delete_user(user_name, [connection, this](int){
+								proto::user_register_result result;
+								result.set_result(proto::user_register_result::REGISTER_FAILED_NAME_DISALLOW);
+								connection->write_msg(encode(result));
+							});
+						}
 
 					});
 				}
