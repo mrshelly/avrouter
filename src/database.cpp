@@ -80,7 +80,7 @@ namespace av_router {
 					m_io_service.post(boost::bind(handler, false));
 					return;
 				}
-				if (ses.got_data() && user_name_indicator == soci::i_ok)
+				if (!ses.got_data() || user_name_indicator != soci::i_ok)
 				{
 					m_io_service.post(boost::bind(handler, true));
 					return;
