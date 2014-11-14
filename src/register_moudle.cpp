@@ -2,6 +2,7 @@
 #include "register_moudle.hpp"
 #include "user.pb.h"
 
+#include <future>
 #include <boost/regex.hpp>
 #include <boost/asio/spawn.hpp>
 #include <openssl/x509.h>
@@ -25,59 +26,51 @@ static char ** to_argv(std::vector<std::string> args)
 	return ret;
 }
 
-
+// 暂时的嘛, 等 CA 签名服务器写好了, 这个就可以删了.
 template<class Handler>
-static void async_send_email_coro(boost::asio::io_service& io, std::string subject, std::string content, std::pair<std::string, std::string> attachment, Handler handler, boost::asio::yield_context yield_context)
+static void async_send_email(boost::asio::io_service& io, std::string subject, std::string content, std::pair<std::string, std::string> attachment, Handler handler)
 {
 	boost::system::error_code ec;
-	try{
+
 // curl -s --user 'api:key-64688e2550d1909dab23a26572fe5f89' \
 //     https://api.mailgun.net/v2/avplayer.org/messages \
 //     -F from=from='AVROUTER <router@avplayer.org>' \
 //     -F to='peter_future <peter_future@outlook.com>' \
 //     -F subject='Hello' \
 //     -F text='Testing some mail!'
-		{std::ofstream csrfile(attachment.first);
-		csrfile.write(attachment.second.c_str(), attachment.second.length());}
+	{std::ofstream csrfile(attachment.first);
+	csrfile.write(attachment.second.c_str(), attachment.second.length());}
 
-		std::vector<std::string> args;
-		args.push_back("/usr/bin/curl");
-		args.push_back("-s");
-		args.push_back("--user");
-		args.push_back("api:key-64688e2550d1909dab23a26572fe5f89");
-		args.push_back("https://api.mailgun.net/v2/avplayer.org/messages");
-		args.push_back("-F");
-		args.push_back("from=AVROUTER <router@avplayer.org>");
-		args.push_back("-F");
-		args.push_back("to=peter_future <peter_future@outlook.com>");
-		args.push_back("-F");
-		args.push_back(std::string("subject=") + subject);
-		args.push_back("-F");
-		args.push_back(std::string("text=") + content);
-		args.push_back("-F");
-		args.push_back(std::string("attachment=@") + attachment.first );
+	std::vector<std::string> args;
+	args.push_back("/usr/bin/curl");
+	args.push_back("-s");
+	args.push_back("--user");
+	args.push_back("api:key-64688e2550d1909dab23a26572fe5f89");
+	args.push_back("https://api.mailgun.net/v2/avplayer.org/messages");
+	args.push_back("-F");
+	args.push_back("from=AVROUTER <router@avplayer.org>");
+	args.push_back("-F");
+	args.push_back("to=peter_future <peter_future@outlook.com>");
+	args.push_back("-F");
+	args.push_back(std::string("subject=") + subject);
+	args.push_back("-F");
+	args.push_back(std::string("text=") + content);
+	args.push_back("-F");
+	args.push_back(std::string("attachment=@") + attachment.first );
 
-		pid_t pid;
-		if( (pid = fork()) == 0 ){
-			auto argv = to_argv(args);
-			execv("/usr/bin/curl", argv);
-		}
-
-	}catch(const boost::system::error_code& ec)
-	{
-		LOG_INFO << "send mail failed " << ec.message();
-		return io.post(std::bind(handler,ec));
+	pid_t pid;
+	if( (pid = fork()) == 0 ){
+		auto argv = to_argv(args);
+		execv("/usr/bin/curl", argv);
 	}
 
-	io.post(std::bind(handler,ec));
-}
-
-
-// 暂时的嘛, 等 CA 签名服务器写好了, 这个就可以删了.
-template<class Handler>
-static void async_send_email(boost::asio::io_service& io, std::string subject, std::string content, std::pair<std::string, std::string> attachment, Handler handler)
-{
-	boost::asio::spawn(io, boost::bind(async_send_email_coro<Handler>, boost::ref(io), subject, content, attachment, handler, _1));
+	std::async(std::launch::async,
+		[handler, ec, &io, pid](){
+			int status;
+			waitpid(pid, &status ,0);
+			io.post(std::bind(handler,ec));
+		}
+	);
 }
 
 #endif
