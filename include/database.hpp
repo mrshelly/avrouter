@@ -27,8 +27,7 @@ namespace av_router {
 	public:
 		typedef boost::function<void(bool result)> result_handler;
 		void availability_check(const std::string& user_id, result_handler handler);
-		void register_user(const std::string& user_id, const std::string& pubkey, const std::string& email,
-			const std::string& telephone, result_handler handler);
+		void register_user(std::string user_id, std::string pubkey, std::string email, std::string telephone, result_handler handler);
 		void delete_user(const std::string& user_id, result_handler handler);
 
 	public:

@@ -87,7 +87,7 @@ namespace av_router {
 		);
 	}
 
-	void database::register_user(const std::string& user_id, const std::string& pubkey, const std::string& email, const std::string& telephone, av_router::database::result_handler handler)
+	void database::register_user(std::string user_id, std::string pubkey, std::string email, std::string telephone, result_handler handler)
 	{
 		std::async(std::launch::async,
 			[&, this]()
