@@ -3,6 +3,9 @@
 #include <boost/thread.hpp>
 #include "logging.hpp"
 
+#include <libpq-fe.h>
+#include <soci-backend.h>
+#include <postgresql/soci-postgresql.h>
 
 namespace av_router {
 
@@ -77,7 +80,7 @@ namespace av_router {
 					m_io_service.post(boost::bind(handler, false));
 					return;
 				}
-				if (user_name_indicator == soci::i_ok)
+				if (ses.got_data() && user_name_indicator == soci::i_ok)
 				{
 					m_io_service.post(boost::bind(handler, true));
 					return;
@@ -90,7 +93,7 @@ namespace av_router {
 	void database::register_user(std::string user_id, std::string pubkey, std::string email, std::string telephone, result_handler handler)
 	{
 		std::async(std::launch::async,
-			[&, this]()
+			[user_id, pubkey, email, telephone, handler, this]()
 			{
 				// 在这里检查数据库中是否存在这个用户名, 检查到的话, 调用对应的handler.
 				std::string user;
@@ -101,15 +104,21 @@ namespace av_router {
 				{
 					// 检查名字没占用, 然后插入个新的
 					ses << "SELECT user_id FROM avim_user WHERE user_id = :name", soci::use(user_id), soci::into(user, user_name_indicator);
-					if (user_name_indicator == soci::i_ok)
+					if (ses.got_data() && user_name_indicator == soci::i_ok)
 					{
 						m_io_service.post(boost::bind(handler, false));
 						return;
 					}
 
+					auto pgcon = dynamic_cast<soci::postgresql_session_backend*>(ses.get_backend())->conn_;
+					std::size_t escaped_pubkey_len = 0;
+					auto escaped_pubkey_chars = PQescapeByteaConn(pgcon,(const uint8_t*) pubkey.data(), pubkey.length(), &escaped_pubkey_len);
+					std::string escaped_pubkey((const char*)escaped_pubkey_chars, escaped_pubkey_len);
+					PQfreemem(escaped_pubkey_chars);
 					// 插入数据库
 					ses << "INSERT INTO avim_user (user_id, public_key, mail, phone) VALUES (:name, :pubkey , :email , :phone)"
-						, soci::use(user_id), soci::use(pubkey), soci::use(email), soci::use(telephone);
+						, soci::use(user_id), soci::use(escaped_pubkey), soci::use(email), soci::use(telephone);
+
 
 					m_io_service.post(boost::bind(handler, true));
 					return;
