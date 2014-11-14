@@ -99,9 +99,7 @@ namespace av_router {
 				soci::session ses(m_db_pool);
 				try
 				{
-					// 检查名字没占用, 然后插入个新的, 必须是个原子操作
-					// FIXME, 其实我也不知道这样用行不行, 有懂数据库的么? 出来说一下
-					soci::transaction trans(ses);
+					// 检查名字没占用, 然后插入个新的
 					ses << "SELECT user_id FROM avim_user WHERE user_id = :name", soci::use(user_id), soci::into(user, user_name_indicator);
 					if (user_name_indicator == soci::i_ok)
 					{
@@ -113,7 +111,6 @@ namespace av_router {
 					ses << "INSERT INTO avim_user (user_id, public_key, mail, phone) VALUES (:name, :pubkey , :email , :phone)"
 						, soci::use(user_id), soci::use(pubkey), soci::use(email), soci::use(telephone);
 
-					trans.commit();
 					m_io_service.post(boost::bind(handler, true));
 					return;
 				}
