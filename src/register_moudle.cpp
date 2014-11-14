@@ -181,6 +181,7 @@ namespace av_router {
 					unsigned char * PEM_CSR = NULL;
 					auto PEM_CSR_LEN = BIO_get_mem_data(bio.get(),&PEM_CSR);
 
+					LOG_DBG << PEM_CSR;
 					// 开始发邮件
 					async_send_email(m_io_service_pool.get_io_service(),
 						"[CSR] Automanted CSR from AVROUTER test version",
