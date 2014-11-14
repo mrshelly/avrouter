@@ -30,15 +30,6 @@ void terminator(io_service_pool& ios, server& serv, login_moudle& login)
 	ios.stop();
 }
 
-
-const std::string connection_string = "hostaddr = '127.0.0.1' "
-	"port = '4321' "
-	"user = 'postgres' "
-	"password = 'avrouter' "
-	"dbname = 'avim' "
-	"connect_timeout = '3' "
-	"application_name = 'avrouter'";
-
 // 定义在 root_ca.cpp.
 extern const char* avim_root_ca_certificate_string;
 
@@ -50,6 +41,13 @@ int main(int argc, char** argv)
 		unsigned short server_port = 0;
 		int num_threads = 0;
 		int pool_size = 0;
+		std::string db_server;
+		std::string db_port;
+		std::string db_user;
+		std::string db_password;
+		std::string db_name;
+		std::string db_timeout;
+		std::string db_application_name;
 
 		po::options_description desc("options");
 		desc.add_options()
@@ -58,7 +56,15 @@ int main(int argc, char** argv)
 			("port", po::value<unsigned short>(&server_port)->default_value(24950), "avrouter listen port")
 			("thread", po::value<int>(&num_threads)->default_value(boost::thread::hardware_concurrency()), "threads")
 			("pool", po::value<int>(&pool_size)->default_value(32), "connection pool size")
+			("db_server", po::value<std::string>(&db_server)->default_value("127.0.0.1"), "postresql database server addr")
+			("db_port", po::value<std::string>(&db_port)->default_value("4321"), "postresql database server port")
+			("db_user", po::value<std::string>(&db_user)->default_value("postgres"), "postresql database server user")
+			("db_password", po::value<std::string>(&db_password)->default_value("avrouter"), "postresql database server password")
+			("db_name", po::value<std::string>(&db_name)->default_value("avim"), "postresql database name")
+			("db_timeout", po::value<std::string>(&db_timeout)->default_value("3"), "postresql database timeout")
+			("db_application_name", po::value<std::string>(&db_application_name)->default_value("3"), "postresql database application_name")
 			;
+
 		po::variables_map vm;
 		po::store(po::parse_command_line(argc, argv, desc), vm);
 		po::notify(vm);
@@ -68,6 +74,15 @@ int main(int argc, char** argv)
 			std::cout << desc << "\n";
 			return 0;
 		}
+
+		// 组合连接串.
+		std::string connection_string = "hostaddr = \'" + db_server + "' "
+			"port = '" + db_port + "' "
+			"user = '" + db_user + "' "
+			"password = '" + db_password + "' "
+			"dbname = '" + db_name + "' "
+			"connect_timeout = '" + db_timeout + "' "
+			"application_name = '" + db_application_name + "'";
 
 		// 十个数据库并发链接.
 		soci::connection_pool db_pool(pool_size);
