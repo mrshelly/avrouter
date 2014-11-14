@@ -186,7 +186,7 @@ namespace av_router {
 							connection->write_msg(encode(result));
 						}else{
 							//  回滚数据库
-							m_database.delete_user(user_name, [connection, this](int){
+							m_database.delete_user(user_name, [connection, this](int) {
 								proto::user_register_result result;
 								result.set_result(proto::user_register_result::REGISTER_FAILED_NAME_DISALLOW);
 								connection->write_msg(encode(result));
