@@ -208,6 +208,14 @@ namespace av_router {
 
 					});
 				}
+				else
+				{
+					LOG_INFO << "db op failed, register stoped";
+
+					proto::user_register_result result;
+					result.set_result(proto::user_register_result::REGISTER_FAILED_NAME_TAKEN);
+					connection->write_msg(encode(result));
+				}
 			}
 		);
 	}
