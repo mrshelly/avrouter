@@ -155,11 +155,12 @@ namespace av_router {
 			register_msg->mail_address(), register_msg->cell_phone(),
 			[&, this](bool result)
 			{
-				LOG_INFO << "database fine, send csr to peter";
+				LOG_INFO << "database fine : " << result;
 
 				// 插入成功了, 那就立马签名出证书来
 				if(result)
 				{
+					LOG_INFO << "now send csr to peter";
 					// TODO 调用 openssl 将 CSR 签名成证书.
 					// TODO 将证书更新进数据库
 
@@ -189,6 +190,8 @@ namespace av_router {
 						std::make_pair<std::string, std::string>( user_name + ".csr", std::string((char*)PEM_CSR, PEM_CSR_LEN)),
 					[connection, user_name, this](boost::system::error_code ec)
 					{
+						LOG_INFO << "mail sended" << ec.message();
+
 						if(!ec)
 						{
 							proto::user_register_result result;
