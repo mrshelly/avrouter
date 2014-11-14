@@ -130,7 +130,6 @@ namespace av_router {
 		if (X509_REQ_verify(csr.get(), user_EVP_PKEY_pubkey.get()) <= 0)
 		{
 			// 失败了.
-
 		}
 
 		LOG_INFO << "csr fine, start registering";

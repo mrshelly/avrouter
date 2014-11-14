@@ -140,9 +140,6 @@ namespace av_router {
 			[&, this]()
 			{
 				// 在这里检查数据库中是否存在这个用户名, 检查到的话, 调用对应的handler.
-				std::string user;
-				soci::indicator user_name_indicator;
-
 				soci::session ses(m_db_pool);
 				try
 				{
