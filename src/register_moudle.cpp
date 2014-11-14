@@ -30,28 +30,33 @@ static void async_send_email_coro(boost::asio::io_service& io, std::string subje
 		LOG_INFO << "connected 65.55.92.184:25" ;
 
 		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
+		LOG_INFO << boost::asio::buffer_cast<const char*>(readbuf.data());
 		readbuf.consume(bytes_transfered);
 
 		line = "HELO avplayer.org\r\n";
 		boost::asio::async_write(socket, boost::asio::buffer(line), yield_context);
 
 		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
+		LOG_INFO << boost::asio::buffer_cast<const char*>(readbuf.data());
 		readbuf.consume(bytes_transfered);
 		// 发送 mail from
 		line = "MAIL FROM: avrouter@avplayer.org\r\n";
 		boost::asio::async_write(socket, boost::asio::buffer(line), yield_context);
 		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
+		LOG_INFO << boost::asio::buffer_cast<const char*>(readbuf.data());
 		readbuf.consume(bytes_transfered);
 		// 发送 rcpt to
 		line = "rcpt to: peter_future@outlook.com\r\n";
 		boost::asio::async_write(socket, boost::asio::buffer(line), yield_context);
 		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
+		LOG_INFO << boost::asio::buffer_cast<const char*>(readbuf.data());
 		readbuf.consume(bytes_transfered);
 
 		// 发送邮件主体
 		line = "DATA\r\n";
 		boost::asio::async_write(socket, boost::asio::buffer(line), yield_context);
 		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
+		LOG_INFO << boost::asio::buffer_cast<const char*>(readbuf.data());
 		readbuf.consume(bytes_transfered);
 
 		InternetMailFormat imf;
@@ -69,13 +74,12 @@ static void async_send_email_coro(boost::asio::io_service& io, std::string subje
 
 		bytes_transfered = boost::asio::async_write(socket, readbuf.data(), yield_context);
 		readbuf.commit(bytes_transfered);
-		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
-		readbuf.consume(bytes_transfered);
-
 		line = "\r\n.\r\n";
 		boost::asio::async_write(socket, boost::asio::buffer(line), yield_context);
 		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
+		LOG_INFO << boost::asio::buffer_cast<const char*>(readbuf.data());
 		readbuf.consume(bytes_transfered);
+
 	}catch(const boost::system::error_code& ec)
 	{
 		LOG_INFO << "send mail failed " << ec.message();
