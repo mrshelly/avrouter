@@ -40,8 +40,8 @@ namespace av_router {
 
 	void register_moudle::user_register(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
 	{
-		proto::user_register* user_register = dynamic_cast<proto::user_register*>(msg);
-		if (!user_register || user_register->user_name().empty())
+		proto::user_register* register_msg = dynamic_cast<proto::user_register*>(msg);
+		if (!register_msg || register_msg->user_name().empty())
 			return;
 
 		// TODO 检查 CSR 证书是否有伪造
@@ -49,8 +49,8 @@ namespace av_router {
 		// TODO 办法, 检查 X509_REQ 签名 X509_REQ_verify() 就可以了
 
 		// 确定是合法的 CSR 证书, 接着数据库内插
-		m_database.register_user(user_register->user_name(),user_register->rsa_pubkey(),
-			user_register->mail_address(), user_register->cell_phone(),
+		m_database.register_user(register_msg->user_name(),register_msg->rsa_pubkey(),
+			register_msg->mail_address(), register_msg->cell_phone(),
 			[](bool result)
 			{
 				// 插入成功了, 那就立马签名出证书来
