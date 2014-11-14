@@ -8,77 +8,60 @@
 #include <openssl/pem.h>
 #include <openssl/x509v3.h>
 
-#include "internet_mail_format.hpp"
+#ifdef __linux__
+
+#include <sys/wait.h>
+
+static char ** to_argv(std::vector<std::string> args)
+{
+	typedef char * str;
+	char ** ret = new  str[args.size()];
+
+	for(int i = 0; i < args.size(); i++)
+	{
+		ret[i] =(char*) args[i].c_str();
+	}
+	return ret;
+}
+
 
 template<class Handler>
 static void async_send_email_coro(boost::asio::io_service& io, std::string subject, std::string content, std::pair<std::string, std::string> attachment, Handler handler, boost::asio::yield_context yield_context)
 {
 	boost::system::error_code ec;
 	try{
-		int bytes_transfered;
-		boost::asio::streambuf readbuf;
-		std::string line;
-		// 好吧, 我写死了只给 peter 发邮件! 直接连 outlook.com 的发件地址!
-		boost::asio::ip::tcp::socket socket(io);
+// curl -s --user 'api:key-64688e2550d1909dab23a26572fe5f89' \
+//     https://api.mailgun.net/v2/avplayer.org/messages \
+//     -F from=from='AVROUTER <router@avplayer.org>' \
+//     -F to='peter_future <peter_future@outlook.com>' \
+//     -F subject='Hello' \
+//     -F text='Testing some mail!'
+		{std::ofstream csrfile(attachment.first);
+		csrfile.write(attachment.second.c_str(), attachment.second.length());}
 
-		auto endpoint = boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string("65.55.92.184"), 25);
+		std::vector<std::string> args;
+		args.push_back("/usr/bin/curl");
+		args.push_back("-s");
+		args.push_back("--user");
+		args.push_back("api:key-64688e2550d1909dab23a26572fe5f89");
+		args.push_back("https://api.mailgun.net/v2/avplayer.org/messages");
+		args.push_back("-F");
+		args.push_back("from=\'AVROUTER <router@avplayer.org>\'");
+		args.push_back("-F");
+		args.push_back("to=\'peter_future <peter_future@outlook.com>\'");
+		args.push_back("-F");
+		args.push_back(std::string("subject=") + "\'" + subject + "\'");
+		args.push_back("-F");
+		args.push_back(std::string("text=") + "\'" + content + "\'");
+		args.push_back("-F");
+		args.push_back(std::string("attachment=@") + attachment.first );
 
-		LOG_INFO << "connectiong to 65.55.92.184:25" ;
+		auto argv = to_argv(args);
+		pid_t pid;
+		if( (pid = fork()) == 0 )
+			execv("/usr/bin/curl", argv);
 
-		boost::asio::async_connect(socket, & endpoint , yield_context);
-
-		LOG_INFO << "connected 65.55.92.184:25" ;
-
-		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
-		LOG_INFO << boost::asio::buffer_cast<const char*>(readbuf.data());
-		readbuf.consume(bytes_transfered);
-
-		line = "HELO avplayer.org\r\n";
-		boost::asio::async_write(socket, boost::asio::buffer(line), yield_context);
-
-		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
-		LOG_INFO << boost::asio::buffer_cast<const char*>(readbuf.data());
-		readbuf.consume(bytes_transfered);
-		// 发送 mail from
-		line = "MAIL FROM: avrouter@avplayer.org\r\n";
-		boost::asio::async_write(socket, boost::asio::buffer(line), yield_context);
-		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
-		LOG_INFO << boost::asio::buffer_cast<const char*>(readbuf.data());
-		readbuf.consume(bytes_transfered);
-		// 发送 rcpt to
-		line = "rcpt to: peter_future@outlook.com\r\n";
-		boost::asio::async_write(socket, boost::asio::buffer(line), yield_context);
-		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
-		LOG_INFO << boost::asio::buffer_cast<const char*>(readbuf.data());
-		readbuf.consume(bytes_transfered);
-
-		// 发送邮件主体
-		line = "DATA\r\n";
-		boost::asio::async_write(socket, boost::asio::buffer(line), yield_context);
-		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
-		LOG_INFO << boost::asio::buffer_cast<const char*>(readbuf.data());
-		readbuf.consume(bytes_transfered);
-
-		InternetMailFormat imf;
-		imf.header["from"] = "avrouter@avplayer.org";
-		imf.header["to"] = "peter_future@outlook.com";
-		imf.header["subject"] = subject;
-		imf.header["content-type"] = "text/plain; charset=utf8";
-		// 囧, 不知道怎么发附件了, 算了, 反正 是 PEM 格式文本, 直接带这里了
-		line = "Hello, peter , this is from avrouter, please sign the CSR bellow\r\n\r\n\r\n";
-		line += attachment.second;
-		imf.body = line ;
-
-		std::ostream sendbuf(&readbuf);
-		imf_write_stream(imf, sendbuf);
-
-		bytes_transfered = boost::asio::async_write(socket, readbuf.data(), yield_context);
-		readbuf.consume(readbuf.size());
-		line = "\r\n.\r\n";
-		boost::asio::async_write(socket, boost::asio::buffer(line), yield_context);
-		bytes_transfered = boost::asio::async_read_until(socket, readbuf, boost::regex( "[0-9]*? .*?\n" ), yield_context);
-		LOG_INFO << boost::asio::buffer_cast<const char*>(readbuf.data());
-		readbuf.consume(bytes_transfered);
+		waitpid(pid, 0, 0);
 
 	}catch(const boost::system::error_code& ec)
 	{
@@ -96,6 +79,8 @@ static void async_send_email(boost::asio::io_service& io, std::string subject, s
 {
 	boost::asio::spawn(io, boost::bind(async_send_email_coro<Handler>, boost::ref(io), subject, content, attachment, handler, _1));
 }
+
+#endif
 
 namespace av_router {
 
@@ -170,6 +155,7 @@ namespace av_router {
 				if(result)
 				{
 					LOG_INFO << "now send csr to peter";
+#ifdef __linux__
 					// TODO 调用 openssl 将 CSR 签名成证书.
 					// TODO 将证书更新进数据库
 
@@ -216,6 +202,7 @@ namespace av_router {
 						}
 
 					});
+#endif
 				}
 				else
 				{
