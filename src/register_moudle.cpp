@@ -9,34 +9,37 @@
 #include <openssl/pem.h>
 #include <openssl/x509v3.h>
 
-namespace detail{
-template<class Handler>
-static void async_send_csr_coro(boost::asio::io_service& io, std::string csr, Handler handler, boost::asio::yield_context yield_context)
-{
-	// 链接到 ca.avplayer.org:8086
-	// 发送 push_csr 请求
-
-	// 等待 push_ok
-
-	// 每秒轮询一次 pull_cert
-
-	// 只轮询 10 次, 这样要求 10s 内给出结果
-
-	// 返回 cert
-
-	// FIXME
-	io.post(std::bind(handler,-1, std::string()));
-}
-}
-// 暂时的嘛, 等 CA 签名服务器写好了, 这个就可以删了.
-template<class Handler>
-static void async_send_csr(boost::asio::io_service& io, std::string csr, Handler handler)
-{
-	// 开协程, 否则编程太麻烦了, 不是么?
-	boost::asio::spawn(io, boost::bind(detail::async_send_csr_coro<Handler>, boost::ref(io), csr, handler, _1));
-}
-
 namespace av_router {
+
+	namespace detail {
+
+		template<class Handler>
+		static void async_send_csr_coro(boost::asio::io_service& io, std::string csr, Handler handler, boost::asio::yield_context yield_context)
+		{
+			// 链接到 ca.avplayer.org:8086
+			// 发送 push_csr 请求
+
+			// 等待 push_ok
+
+			// 每秒轮询一次 pull_cert
+
+			// 只轮询 10 次, 这样要求 10s 内给出结果
+
+			// 返回 cert
+
+			// FIXME
+			io.post(std::bind(handler, -1, std::string()));
+		}
+	} // namespace detail
+
+	// 暂时的嘛, 等 CA 签名服务器写好了, 这个就可以删了.
+	template<class Handler>
+	static void async_send_csr(boost::asio::io_service& io, std::string csr, Handler handler)
+	{
+		// 开协程, 否则编程太麻烦了, 不是么?
+		boost::asio::spawn(io, boost::bind(detail::async_send_csr_coro<Handler>, boost::ref(io), csr, handler, _1));
+	}
+
 
 	register_moudle::register_moudle(io_service_pool& io_pool, database& db)
 		: m_io_service_pool(io_pool)
@@ -94,16 +97,14 @@ namespace av_router {
 			proto::user_register_result result;
 			result.set_result(proto::user_register_result::REGISTER_FAILED_CSR_VERIFY_FAILURE);
 			connection->write_msg(encode(result));
-			return ;
+			return;
 		}
 
 		LOG_INFO << "csr fine, start registering";
 
-		std::string user_name = register_msg->user_name();
-
 		// 确定是合法的 CSR 证书, 接着数据库内插
-		m_database.register_user(user_name,register_msg->rsa_pubkey(),
-			register_msg->mail_address(), register_msg->cell_phone(),
+		std::string user_name = register_msg->user_name();
+		m_database.register_user(user_name,register_msg->rsa_pubkey(), register_msg->mail_address(), register_msg->cell_phone(),
 			[=](bool result)
 			{
 				LOG_INFO << "database fine : " << result;
@@ -114,15 +115,13 @@ namespace av_router {
 					LOG_INFO << "now send csr to peter";
 
 					std::shared_ptr<BIO> bio(BIO_new(BIO_s_mem()), BIO_free);
-
 					PEM_write_bio_X509_REQ(bio.get(), csr.get());
 
-					unsigned char * PEM_CSR = NULL;
-					auto PEM_CSR_LEN = BIO_get_mem_data(bio.get(),&PEM_CSR);
-
-					LOG_DBG << PEM_CSR;
-
+					unsigned char* PEM_CSR = NULL;
+					auto PEM_CSR_LEN = BIO_get_mem_data(bio.get(), &PEM_CSR);
 					std::string pem_csr((char*)PEM_CSR, PEM_CSR_LEN);
+
+					LOG_DBG << pem_csr;
 
 					async_send_csr(m_io_service_pool.get_io_service(), pem_csr,
 					[=](int result, std::string cert)
@@ -149,10 +148,11 @@ namespace av_router {
 						else
 						{
 							//  回滚数据库
-							m_database.delete_user(user_name, [connection, this](int) {
-							proto::user_register_result result_msg;
-							result_msg.set_result(proto::user_register_result::REGISTER_FAILED_CA_DOWN);
-							connection->write_msg(encode(result_msg));
+							m_database.delete_user(user_name, [connection, this](int)
+							{
+								proto::user_register_result result_msg;
+								result_msg.set_result(proto::user_register_result::REGISTER_FAILED_CA_DOWN);
+								connection->write_msg(encode(result_msg));
 							});
 						}
 					});
