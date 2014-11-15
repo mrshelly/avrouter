@@ -79,7 +79,7 @@ namespace av_router {
 			return;
 
 		// TODO 检查 CSR 证书是否有伪造
-		auto in = (const unsigned char *) register_msg->csr().data();
+		auto in = (const unsigned char *)register_msg->csr().data();
 
 		std::shared_ptr<X509_REQ> csr(d2i_X509_REQ(NULL, &in, register_msg->csr().length()), X509_REQ_free);
 
