@@ -88,13 +88,16 @@ inline bool username_availability_result_username_availability_result_code_Parse
 }
 enum user_register_result_user_register_result_code {
   user_register_result_user_register_result_code_REGISTER_SUCCEED = 0,
-  user_register_result_user_register_result_code_REGISTER_FAILED_NAME_TAKEN = 1,
-  user_register_result_user_register_result_code_REGISTER_FAILED_TOO_SHORT_KEY = 2,
-  user_register_result_user_register_result_code_REGISTER_FAILED_NAME_DISALLOW = 3
+  user_register_result_user_register_result_code_REGISTER_SUCCEED_PENDDING_CERT = 1,
+  user_register_result_user_register_result_code_REGISTER_FAILED_NAME_TAKEN = 2,
+  user_register_result_user_register_result_code_REGISTER_FAILED_TOO_SHORT_KEY = 3,
+  user_register_result_user_register_result_code_REGISTER_FAILED_NAME_DISALLOW = 4,
+  user_register_result_user_register_result_code_REGISTER_FAILED_CA_DOWN = 5,
+  user_register_result_user_register_result_code_REGISTER_FAILED_CSR_VERIFY_FAILURE = 6
 };
 bool user_register_result_user_register_result_code_IsValid(int value);
 const user_register_result_user_register_result_code user_register_result_user_register_result_code_user_register_result_code_MIN = user_register_result_user_register_result_code_REGISTER_SUCCEED;
-const user_register_result_user_register_result_code user_register_result_user_register_result_code_user_register_result_code_MAX = user_register_result_user_register_result_code_REGISTER_FAILED_NAME_DISALLOW;
+const user_register_result_user_register_result_code user_register_result_user_register_result_code_user_register_result_code_MAX = user_register_result_user_register_result_code_REGISTER_FAILED_CSR_VERIFY_FAILURE;
 const int user_register_result_user_register_result_code_user_register_result_code_ARRAYSIZE = user_register_result_user_register_result_code_user_register_result_code_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* user_register_result_user_register_result_code_descriptor();
@@ -1072,9 +1075,12 @@ class user_register_result : public ::google::protobuf::Message {
 
   typedef user_register_result_user_register_result_code user_register_result_code;
   static const user_register_result_code REGISTER_SUCCEED = user_register_result_user_register_result_code_REGISTER_SUCCEED;
+  static const user_register_result_code REGISTER_SUCCEED_PENDDING_CERT = user_register_result_user_register_result_code_REGISTER_SUCCEED_PENDDING_CERT;
   static const user_register_result_code REGISTER_FAILED_NAME_TAKEN = user_register_result_user_register_result_code_REGISTER_FAILED_NAME_TAKEN;
   static const user_register_result_code REGISTER_FAILED_TOO_SHORT_KEY = user_register_result_user_register_result_code_REGISTER_FAILED_TOO_SHORT_KEY;
   static const user_register_result_code REGISTER_FAILED_NAME_DISALLOW = user_register_result_user_register_result_code_REGISTER_FAILED_NAME_DISALLOW;
+  static const user_register_result_code REGISTER_FAILED_CA_DOWN = user_register_result_user_register_result_code_REGISTER_FAILED_CA_DOWN;
+  static const user_register_result_code REGISTER_FAILED_CSR_VERIFY_FAILURE = user_register_result_user_register_result_code_REGISTER_FAILED_CSR_VERIFY_FAILURE;
   static inline bool user_register_result_code_IsValid(int value) {
     return user_register_result_user_register_result_code_IsValid(value);
   }
@@ -1105,15 +1111,30 @@ class user_register_result : public ::google::protobuf::Message {
   inline ::proto::user_register_result_user_register_result_code result() const;
   inline void set_result(::proto::user_register_result_user_register_result_code value);
 
+  // optional bytes cert = 2;
+  inline bool has_cert() const;
+  inline void clear_cert();
+  static const int kCertFieldNumber = 2;
+  inline const ::std::string& cert() const;
+  inline void set_cert(const ::std::string& value);
+  inline void set_cert(const char* value);
+  inline void set_cert(const void* value, size_t size);
+  inline ::std::string* mutable_cert();
+  inline ::std::string* release_cert();
+  inline void set_allocated_cert(::std::string* cert);
+
   // @@protoc_insertion_point(class_scope:proto.user_register_result)
  private:
   inline void set_has_result();
   inline void clear_has_result();
+  inline void set_has_cert();
+  inline void clear_has_cert();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
+  ::std::string* cert_;
   int result_;
   friend void  protobuf_AddDesc_user_2eproto();
   friend void protobuf_AssignDesc_user_2eproto();
@@ -2716,6 +2737,82 @@ inline void user_register_result::set_result(::proto::user_register_result_user_
   set_has_result();
   result_ = value;
   // @@protoc_insertion_point(field_set:proto.user_register_result.result)
+}
+
+// optional bytes cert = 2;
+inline bool user_register_result::has_cert() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void user_register_result::set_has_cert() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void user_register_result::clear_has_cert() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void user_register_result::clear_cert() {
+  if (cert_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cert_->clear();
+  }
+  clear_has_cert();
+}
+inline const ::std::string& user_register_result::cert() const {
+  // @@protoc_insertion_point(field_get:proto.user_register_result.cert)
+  return *cert_;
+}
+inline void user_register_result::set_cert(const ::std::string& value) {
+  set_has_cert();
+  if (cert_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cert_ = new ::std::string;
+  }
+  cert_->assign(value);
+  // @@protoc_insertion_point(field_set:proto.user_register_result.cert)
+}
+inline void user_register_result::set_cert(const char* value) {
+  set_has_cert();
+  if (cert_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cert_ = new ::std::string;
+  }
+  cert_->assign(value);
+  // @@protoc_insertion_point(field_set_char:proto.user_register_result.cert)
+}
+inline void user_register_result::set_cert(const void* value, size_t size) {
+  set_has_cert();
+  if (cert_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cert_ = new ::std::string;
+  }
+  cert_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:proto.user_register_result.cert)
+}
+inline ::std::string* user_register_result::mutable_cert() {
+  set_has_cert();
+  if (cert_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    cert_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:proto.user_register_result.cert)
+  return cert_;
+}
+inline ::std::string* user_register_result::release_cert() {
+  clear_has_cert();
+  if (cert_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = cert_;
+    cert_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void user_register_result::set_allocated_cert(::std::string* cert) {
+  if (cert_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete cert_;
+  }
+  if (cert) {
+    set_has_cert();
+    cert_ = cert;
+  } else {
+    clear_has_cert();
+    cert_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:proto.user_register_result.cert)
 }
 
 // -------------------------------------------------------------------

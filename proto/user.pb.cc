@@ -184,8 +184,9 @@ void protobuf_AssignDesc_user_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(user_register));
   user_register_result_descriptor_ = file->message_type(7);
-  static const int user_register_result_offsets_[1] = {
+  static const int user_register_result_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(user_register_result, result_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(user_register_result, cert_),
   };
   user_register_result_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -318,17 +319,20 @@ void protobuf_AddDesc_user_2eproto() {
     "E_DISALLOW\020\001\022\016\n\nNAME_TAKEN\020\002\"m\n\ruser_reg"
     "ister\022\021\n\tuser_name\030\001 \002(\t\022\022\n\nrsa_pubkey\030\002"
     " \002(\014\022\013\n\003CSR\030\003 \002(\014\022\024\n\014mail_address\030\004 \001(\t\022"
-    "\022\n\ncell_phone\030\005 \001(\t\"\367\001\n\024user_register_re"
+    "\022\n\ncell_phone\030\005 \001(\t\"\356\002\n\024user_register_re"
     "sult\022E\n\006result\030\001 \002(\01625.proto.user_regist"
-    "er_result.user_register_result_code\"\227\001\n\031"
-    "user_register_result_code\022\024\n\020REGISTER_SU"
-    "CCEED\020\000\022\036\n\032REGISTER_FAILED_NAME_TAKEN\020\001\022"
-    "!\n\035REGISTER_FAILED_TOO_SHORT_KEY\020\002\022!\n\035RE"
-    "GISTER_FAILED_NAME_DISALLOW\020\003\"U\n\026user_ce"
-    "rt_lost_request\022\021\n\tuser_name\030\001 \002(\t\022\024\n\014ma"
-    "il_address\030\003 \001(\t\022\022\n\ncell_phone\030\004 \001(\t\",\n\025"
-    "user_cert_lost_verify\022\023\n\013secret_code\030\001 \002"
-    "(\t", 1242);
+    "er_result.user_register_result_code\022\014\n\004c"
+    "ert\030\002 \001(\014\"\200\002\n\031user_register_result_code\022"
+    "\024\n\020REGISTER_SUCCEED\020\000\022\"\n\036REGISTER_SUCCEE"
+    "D_PENDDING_CERT\020\001\022\036\n\032REGISTER_FAILED_NAM"
+    "E_TAKEN\020\002\022!\n\035REGISTER_FAILED_TOO_SHORT_K"
+    "EY\020\003\022!\n\035REGISTER_FAILED_NAME_DISALLOW\020\004\022"
+    "\033\n\027REGISTER_FAILED_CA_DOWN\020\005\022&\n\"REGISTER"
+    "_FAILED_CSR_VERIFY_FAILURE\020\006\"U\n\026user_cer"
+    "t_lost_request\022\021\n\tuser_name\030\001 \002(\t\022\024\n\014mai"
+    "l_address\030\003 \001(\t\022\022\n\ncell_phone\030\004 \001(\t\",\n\025u"
+    "ser_cert_lost_verify\022\023\n\013secret_code\030\001 \002("
+    "\t", 1361);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "user.proto", &protobuf_RegisterTypes);
   client_hello::default_instance_ = new client_hello();
@@ -2787,6 +2791,9 @@ bool user_register_result_user_register_result_code_IsValid(int value) {
     case 1:
     case 2:
     case 3:
+    case 4:
+    case 5:
+    case 6:
       return true;
     default:
       return false;
@@ -2795,15 +2802,19 @@ bool user_register_result_user_register_result_code_IsValid(int value) {
 
 #ifndef _MSC_VER
 const user_register_result_user_register_result_code user_register_result::REGISTER_SUCCEED;
+const user_register_result_user_register_result_code user_register_result::REGISTER_SUCCEED_PENDDING_CERT;
 const user_register_result_user_register_result_code user_register_result::REGISTER_FAILED_NAME_TAKEN;
 const user_register_result_user_register_result_code user_register_result::REGISTER_FAILED_TOO_SHORT_KEY;
 const user_register_result_user_register_result_code user_register_result::REGISTER_FAILED_NAME_DISALLOW;
+const user_register_result_user_register_result_code user_register_result::REGISTER_FAILED_CA_DOWN;
+const user_register_result_user_register_result_code user_register_result::REGISTER_FAILED_CSR_VERIFY_FAILURE;
 const user_register_result_user_register_result_code user_register_result::user_register_result_code_MIN;
 const user_register_result_user_register_result_code user_register_result::user_register_result_code_MAX;
 const int user_register_result::user_register_result_code_ARRAYSIZE;
 #endif  // _MSC_VER
 #ifndef _MSC_VER
 const int user_register_result::kResultFieldNumber;
+const int user_register_result::kCertFieldNumber;
 #endif  // !_MSC_VER
 
 user_register_result::user_register_result()
@@ -2823,8 +2834,10 @@ user_register_result::user_register_result(const user_register_result& from)
 }
 
 void user_register_result::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   result_ = 0;
+  cert_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2841,6 +2854,9 @@ user_register_result::~user_register_result() {
 }
 
 void user_register_result::SharedDtor() {
+  if (cert_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete cert_;
+  }
   if (this != default_instance_) {
   }
 }
@@ -2867,7 +2883,14 @@ user_register_result* user_register_result::New() const {
 }
 
 void user_register_result::Clear() {
-  result_ = 0;
+  if (_has_bits_[0 / 32] & 3) {
+    result_ = 0;
+    if (has_cert()) {
+      if (cert_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        cert_->clear();
+      }
+    }
+  }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -2894,6 +2917,19 @@ bool user_register_result::MergePartialFromCodedStream(
           } else {
             mutable_unknown_fields()->AddVarint(1, value);
           }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_cert;
+        break;
+      }
+
+      // optional bytes cert = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_cert:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_cert()));
         } else {
           goto handle_unusual;
         }
@@ -2932,6 +2968,12 @@ void user_register_result::SerializeWithCachedSizes(
       1, this->result(), output);
   }
 
+  // optional bytes cert = 2;
+  if (has_cert()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      2, this->cert(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -2946,6 +2988,13 @@ void user_register_result::SerializeWithCachedSizes(
   if (has_result()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->result(), target);
+  }
+
+  // optional bytes cert = 2;
+  if (has_cert()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        2, this->cert(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2964,6 +3013,13 @@ int user_register_result::ByteSize() const {
     if (has_result()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->result());
+    }
+
+    // optional bytes cert = 2;
+    if (has_cert()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->cert());
     }
 
   }
@@ -2996,6 +3052,9 @@ void user_register_result::MergeFrom(const user_register_result& from) {
     if (from.has_result()) {
       set_result(from.result());
     }
+    if (from.has_cert()) {
+      set_cert(from.cert());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -3021,6 +3080,7 @@ bool user_register_result::IsInitialized() const {
 void user_register_result::Swap(user_register_result* other) {
   if (other != this) {
     std::swap(result_, other->result_);
+    std::swap(cert_, other->cert_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
