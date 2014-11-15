@@ -84,10 +84,10 @@ namespace av_router {
 		// TODO 检查 CSR 证书是否有伪造
 		auto in = (const unsigned char *)register_msg->csr().data();
 
-		std::shared_ptr<X509_REQ> csr(d2i_X509_REQ(NULL, &in, register_msg->csr().length()), X509_REQ_free);
+		std::shared_ptr<X509_REQ> csr(d2i_X509_REQ(NULL, &in, static_cast<long>(register_msg->csr().length())), X509_REQ_free);
 
 		in = (const unsigned char *)register_msg->rsa_pubkey().data();
-		std::shared_ptr<RSA> user_rsa_pubkey(d2i_RSAPublicKey(NULL, &in, register_msg->rsa_pubkey().length()), RSA_free);
+		std::shared_ptr<RSA> user_rsa_pubkey(d2i_RSAPublicKey(NULL, &in, static_cast<long>(register_msg->rsa_pubkey().length())), RSA_free);
 		std::shared_ptr<EVP_PKEY> user_EVP_PKEY_pubkey(EVP_PKEY_new(), EVP_PKEY_free);
 		EVP_PKEY_set1_RSA(user_EVP_PKEY_pubkey.get(), user_rsa_pubkey.get());
 
