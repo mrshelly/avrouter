@@ -7,59 +7,60 @@
 #include <openssl/x509.h>
 #include <openssl/rsa.h>
 
-inline std::string RSA_public_decrypt(RSA * rsa, const std::string & from)
-{
-	std::string result;
-	const int keysize = RSA_size(rsa);
-	std::vector<unsigned char> block(keysize);
-
-	int inputlen = from.length();
-
-	for (int i = 0; i < from.length(); i += keysize)
-	{
-		int flen = std::min(keysize, inputlen - i);
-		auto resultsize = RSA_public_decrypt(flen, (uint8_t*)&from[i], &block[0], rsa, RSA_PKCS1_PADDING);
-		result.append((char*)block.data(), resultsize);
-	}
-	return result;
-}
-
-class cert_validater
-	: boost::noncopyable
-{
-public:
-	cert_validater(X509* ca)
-	{
-		m_store = X509_STORE_new();
-
-		X509_STORE_add_cert(m_store, ca);
-		X509_STORE_set_default_paths(m_store);
-	}
-
-	~cert_validater()
-	{
-		X509_STORE_free(m_store);
-	}
-
-	bool operator()(X509* cert)
-	{
-		return verity(cert);
-	}
-
-	bool verity(X509* cert)
-	{
-		boost::shared_ptr<X509_STORE_CTX> storeCtx(X509_STORE_CTX_new(), X509_STORE_CTX_free);
-		X509_STORE_CTX_init(storeCtx.get(), m_store, cert, NULL);
-		X509_STORE_CTX_set_flags(storeCtx.get(), X509_V_FLAG_CB_ISSUER_CHECK);
-		return X509_verify_cert(storeCtx.get());
-	}
-
-private:
-	X509_STORE* m_store;
-};
-
 
 namespace av_router {
+
+	inline std::string RSA_public_decrypt(RSA * rsa, const std::string & from)
+	{
+		const int keysize = RSA_size(rsa);
+		const int inputlen = static_cast<int>(from.length());
+
+		std::vector<unsigned char> block(keysize);
+		std::string result;
+
+		for (int i = 0; i < from.length(); i += keysize)
+		{
+			int flen = std::min(keysize, inputlen - i);
+			auto resultsize = RSA_public_decrypt(flen, (uint8_t*)&from[i], &block[0], rsa, RSA_PKCS1_PADDING);
+			result.append((char*)block.data(), resultsize);
+		}
+		return result;
+	}
+
+	class cert_validater
+		: boost::noncopyable
+	{
+	public:
+		cert_validater(X509* ca)
+		{
+			m_store = X509_STORE_new();
+
+			X509_STORE_add_cert(m_store, ca);
+			X509_STORE_set_default_paths(m_store);
+		}
+
+		~cert_validater()
+		{
+			X509_STORE_free(m_store);
+		}
+
+		bool operator()(X509* cert)
+		{
+			return verity(cert);
+		}
+
+		bool verity(X509* cert)
+		{
+			boost::shared_ptr<X509_STORE_CTX> storeCtx(X509_STORE_CTX_new(), X509_STORE_CTX_free);
+			X509_STORE_CTX_init(storeCtx.get(), m_store, cert, NULL);
+			X509_STORE_CTX_set_flags(storeCtx.get(), X509_V_FLAG_CB_ISSUER_CHECK);
+			return X509_verify_cert(storeCtx.get()) ? true : false;
+		}
+
+	private:
+		X509_STORE* m_store;
+	};
+
 
 	login_moudle::login_moudle(io_service_pool& io_pool, database& db, X509* root_ca_cert)
 		: m_io_service_pool(io_pool)
@@ -84,7 +85,7 @@ namespace av_router {
 
 		const unsigned char* in = (unsigned char*)login->user_cert().data();
 
-		boost::shared_ptr<X509> user_cert(d2i_X509(NULL, &in, login->user_cert().length()), X509_free);
+		boost::shared_ptr<X509> user_cert(d2i_X509(NULL, &in, static_cast<long>(login->user_cert().length())), X509_free);
 		connection->store_module_private("user_cert", user_cert);
 
 		unsigned char* common_name_ptr = NULL;
@@ -145,8 +146,8 @@ namespace av_router {
 
 		// 生成随机数然后返回 m_dh->p ，让客户端去算共享密钥.
 		DH_generate_parameters_ex(dh, 64, DH_GENERATOR_5, NULL);
-		dh->g = BN_bin2bn((const unsigned char *)client_hello->random_g().data(), client_hello->random_g().length(), dh->g);
-		dh->p = BN_bin2bn((const unsigned char *)client_hello->random_p().data(), client_hello->random_p().length(), dh->p);
+		dh->g = BN_bin2bn((const unsigned char *)client_hello->random_g().data(), static_cast<long>(client_hello->random_g().length()), dh->g);
+		dh->p = BN_bin2bn((const unsigned char *)client_hello->random_p().data(), static_cast<long>(client_hello->random_p().length()), dh->p);
 
 		DH_generate_key(dh);
 
@@ -157,7 +158,7 @@ namespace av_router {
 		server_hello.set_server_av_address("router@avplayer.org");
 
 		shared_key.resize(DH_size(dh));
-		BIGNUM* client_pubkey = BN_bin2bn((const unsigned char *)client_hello->random_pub_key().data(), client_hello->random_pub_key().length(), NULL);
+		BIGNUM* client_pubkey = BN_bin2bn((const unsigned char *)client_hello->random_pub_key().data(), static_cast<long>(client_hello->random_pub_key().length()), NULL);
 		DH_compute_key(&shared_key[0], client_pubkey, dh);
 		BN_free(client_pubkey);
 		DH_free(dh);
