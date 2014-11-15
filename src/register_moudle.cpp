@@ -128,9 +128,9 @@ namespace av_router {
 					{
 						LOG_INFO << "csr sended";
 
-						if(result == 0)
+						if (result == 0)
 						{
-							// TODO 将 CERT 存入数据库
+							// TODO 将 CERT 存入数据库.
 
 							// CERT 就有了, 开始登录吧!
 							proto::user_register_result result_msg;
@@ -138,16 +138,16 @@ namespace av_router {
 							result_msg.set_cert(cert);
 							connection->write_msg(encode(result_msg));
 						}
-						else if( result == 1)
+						else if (result == 1)
 						{
-							// CERT 等待注册
+							// CERT 等待注册.
 							proto::user_register_result result_msg;
 							result_msg.set_result(proto::user_register_result::REGISTER_SUCCEED_PENDDING_CERT);
 							connection->write_msg(encode(result_msg));
 						}
 						else
 						{
-							//  回滚数据库
+							//  回滚数据库.
 							m_database.delete_user(user_name, [connection, this](int)
 							{
 								proto::user_register_result result_msg;
