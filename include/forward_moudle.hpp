@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "server.hpp"
+#include "avrouterserver.hpp"
 #include "serialization.hpp"
 
 struct dh_st;

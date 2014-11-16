@@ -1,13 +1,13 @@
-﻿#include <boost/smart_ptr.hpp>
+#include <boost/smart_ptr.hpp>
 #include <boost/any.hpp>
-#include "server.hpp"
+#include "avrouterserver.hpp"
 #include "connection.hpp"
 #include "logging.hpp"
 #include "serialization.hpp"
 
 namespace av_router {
 
-	connection::connection(boost::asio::io_service& io, server& serv, connection_manager* connection_man)
+	connection::connection(boost::asio::io_service& io, avrouterserver& serv, connection_manager* connection_man)
 		: m_io_service(io)
 		, m_server(serv)
 		, m_socket(io)

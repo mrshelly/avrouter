@@ -1,4 +1,4 @@
-﻿//
+//
 // Copyright (C) 2013 Jack.
 //
 // Author: jack
@@ -29,14 +29,14 @@ using namespace boost::posix_time;
 
 namespace av_router {
 
-	class server;
+	class avrouterserver;
 	class connection_manager;
 	class connection
 		: public boost::enable_shared_from_this<connection>
 		, public boost::noncopyable
 	{
 	public:
-		explicit connection(boost::asio::io_service& io, server& serv, connection_manager* connection_man);
+		explicit connection(boost::asio::io_service& io, avrouterserver& serv, connection_manager* connection_man);
 		~connection();
 
 	public:
@@ -59,7 +59,7 @@ namespace av_router {
 
 	private:
 		boost::asio::io_service& m_io_service;
-		server& m_server;
+		avrouterserver& m_server;
 		tcp::socket m_socket;
 		connection_manager* m_connection_manager;
 		boost::asio::streambuf m_request;
