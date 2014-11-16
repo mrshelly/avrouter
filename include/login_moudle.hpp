@@ -9,7 +9,7 @@
 
 #include <openssl/x509.h>
 
-#include "avrouterserver.hpp"
+#include "router_server.hpp"
 #include "serialization.hpp"
 
 struct dh_st;

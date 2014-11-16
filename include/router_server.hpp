@@ -22,13 +22,13 @@ namespace av_router {
 	typedef boost::function<void(int type, connection_ptr, connection_manager&)> connection_callback;
 	typedef std::map<std::string, connection_callback> connection_callback_table;
 
-	class avrouterserver
+	class router_server
 		: public boost::noncopyable
 	{
 		friend class connection;
 	public:
-		explicit avrouterserver(io_service_pool& ios, unsigned short port, std::string address = "0.0.0.0");
-		~avrouterserver();
+		explicit router_server(io_service_pool& ios, unsigned short port, std::string address = "0.0.0.0");
+		~router_server();
 
 	public:
 		// 启动或停止.

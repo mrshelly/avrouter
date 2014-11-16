@@ -1,9 +1,9 @@
 ﻿#include "logging.hpp"
-#include "avrouterserver.hpp"
+#include "router_server.hpp"
 
 namespace av_router {
 
-	avrouterserver::avrouterserver(io_service_pool& ios, unsigned short port, std::string address /*= "0.0.0.0"*/)
+	router_server::router_server(io_service_pool& ios, unsigned short port, std::string address /*= "0.0.0.0"*/)
 		: m_io_service_pool(ios)
 		, m_io_service(ios.get_io_service())
 		, m_acceptor(m_io_service)
@@ -48,22 +48,22 @@ namespace av_router {
 		}
 	}
 
-	avrouterserver::~avrouterserver()
+	router_server::~router_server()
 	{}
 
-	void avrouterserver::start()
+	void router_server::start()
 	{
 		start_impl();
 		continue_timer();
 	}
 
-	void avrouterserver::start_impl()
+	void router_server::start_impl()
 	{
 		m_connection = boost::make_shared<connection>(boost::ref(m_io_service_pool.get_io_service()), boost::ref(*this), &m_connection_manager);
-		m_acceptor.async_accept(m_connection->socket(), boost::bind(&avrouterserver::handle_accept, this, boost::asio::placeholders::error));
+		m_acceptor.async_accept(m_connection->socket(), boost::bind(&router_server::handle_accept, this, boost::asio::placeholders::error));
 	}
 
-	void avrouterserver::stop()
+	void router_server::stop()
 	{
 		boost::system::error_code ignore_ec;
 		m_timer.cancel(ignore_ec);
@@ -71,7 +71,7 @@ namespace av_router {
 		m_connection_manager.stop_all();
 	}
 
-	void avrouterserver::handle_accept(const boost::system::error_code& error)
+	void router_server::handle_accept(const boost::system::error_code& error)
 	{
 		if (!m_acceptor.is_open() || error)
 		{
@@ -85,13 +85,13 @@ namespace av_router {
 		start_impl();
 	}
 
-	void avrouterserver::on_tick(const boost::system::error_code& error)
+	void router_server::on_tick(const boost::system::error_code& error)
 	{
 		// TODO: 定时要做的事.
 		continue_timer();
 	}
 
-	void avrouterserver::do_message(google::protobuf::Message* msg, connection_ptr conn)
+	void router_server::do_message(google::protobuf::Message* msg, connection_ptr conn)
 	{
 		const std::string name = msg->GetTypeName();
 		boost::shared_lock<boost::shared_mutex> l(m_message_callback_mtx);
@@ -101,14 +101,14 @@ namespace av_router {
 		iter->second(msg, conn, boost::ref(m_connection_manager)); // 或者直接: m_message_callback[name](msg, conn, boost::ref(m_connection_manager));
 	}
 
-	void avrouterserver::do_connection_notify(int type, connection_ptr conn)
+	void router_server::do_connection_notify(int type, connection_ptr conn)
 	{
 		boost::shared_lock<boost::shared_mutex> l(m_connection_callback_mtx);
 		for (const auto& item : m_connection_callbacks)
 			item.second(type, conn, boost::ref(m_connection_manager));
 	}
 
-	bool avrouterserver::add_message_process_moudle(const std::string& name, message_callback cb)
+	bool router_server::add_message_process_moudle(const std::string& name, message_callback cb)
 	{
 		boost::unique_lock<boost::shared_mutex> l(m_message_callback_mtx);
 		if (m_message_callbacks.find(name) != m_message_callbacks.end())
@@ -120,7 +120,7 @@ namespace av_router {
 		return true;
 	}
 
-	bool avrouterserver::del_message_process_moudle(const std::string& name)
+	bool router_server::del_message_process_moudle(const std::string& name)
 	{
 		boost::unique_lock<boost::shared_mutex> l(m_message_callback_mtx);
 		if (m_message_callbacks.find(name) == m_message_callbacks.end())
@@ -132,7 +132,7 @@ namespace av_router {
 		return true;
 	}
 
-	bool avrouterserver::add_connection_process_moudle(const std::string& name, connection_callback cb)
+	bool router_server::add_connection_process_moudle(const std::string& name, connection_callback cb)
 	{
 		boost::unique_lock<boost::shared_mutex> l(m_connection_callback_mtx);
 		if (m_connection_callbacks.find(name) != m_connection_callbacks.end())
@@ -144,7 +144,7 @@ namespace av_router {
 		return true;
 	}
 
-	bool avrouterserver::del_connection_process_moudle(const std::string& name)
+	bool router_server::del_connection_process_moudle(const std::string& name)
 	{
 		boost::unique_lock<boost::shared_mutex> l(m_connection_callback_mtx);
 		if (m_connection_callbacks.find(name) == m_connection_callbacks.end())
@@ -156,9 +156,9 @@ namespace av_router {
 		return true;
 	}
 
-	void avrouterserver::continue_timer()
+	void router_server::continue_timer()
 	{
 		m_timer.expires_from_now(seconds(1));
-		m_timer.async_wait(boost::bind(&avrouterserver::on_tick, this, boost::asio::placeholders::error));
+		m_timer.async_wait(boost::bind(&router_server::on_tick, this, boost::asio::placeholders::error));
 	}
 }

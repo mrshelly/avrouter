@@ -24,20 +24,24 @@
     <ClCompile Include="src\register_moudle.cpp" />
     <ClCompile Include="src\root_ca.cpp" />
     <ClCompile Include="src\http_server.cpp" />
-	<ClCompile Include="src\http_connection.cpp" />
-    <ClCompile Include="src\avrouterserver.cpp" />
+    <ClCompile Include="src\http_connection.cpp" />
+    <ClCompile Include="src\router_server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\connection.hpp" />
     <ClInclude Include="include\database.hpp" />
+    <ClInclude Include="include\escape_string.hpp" />
+    <ClInclude Include="include\http_connection.hpp" />
+    <ClInclude Include="include\http_helper.hpp" />
     <ClInclude Include="include\io_service_pool.hpp" />
     <ClInclude Include="include\logging.hpp" />
     <ClInclude Include="include\login_moudle.hpp" />
     <ClInclude Include="include\forward_moudle.hpp" />
     <ClInclude Include="include\register_moudle.hpp" />
     <ClInclude Include="include\serialization.hpp" />
-    <ClInclude Include="include\avrouterserver.hpp" />
-	<ClInclude Include="include\http_server.hpp" />
+    <ClInclude Include="include\router_server.hpp" />
+    <ClInclude Include="include\http_server.hpp" />
+    <ClInclude Include="include\utf8.hpp" />
     <ClInclude Include="proto\address.pb.h" />
     <ClInclude Include="proto\im.pb.h" />
     <ClInclude Include="proto\message.pb.h" />

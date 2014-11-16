@@ -19,9 +19,6 @@
     <ClCompile Include="src\http_connection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\avrouterserver.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="proto\message.pb.cc">
       <Filter>proto</Filter>
     </ClCompile>
@@ -46,6 +43,9 @@
     <ClCompile Include="src\forward_moudle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\router_server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\connection.hpp">
@@ -60,13 +60,10 @@
     <ClInclude Include="include\serialization.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\avrouterserver.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\http_server.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-	<ClInclude Include="include\logging.hpp">
+    <ClInclude Include="include\logging.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="proto\message.pb.h">
@@ -88,6 +85,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\forward_moudle.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utf8.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\http_helper.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\http_connection.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\escape_string.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\router_server.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

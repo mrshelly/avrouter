@@ -8,7 +8,7 @@ namespace po = boost::program_options;
 #include "login_moudle.hpp"
 #include "register_moudle.hpp"
 #include "forward_moudle.hpp"
-#include "avrouterserver.hpp"
+#include "router_server.hpp"
 #include "http_server.hpp"
 
 // 测试数据库.
@@ -24,7 +24,7 @@ namespace po = boost::program_options;
 
 using namespace av_router;
 
-void terminator(io_service_pool& ios, avrouterserver& serv, login_moudle& login)
+void terminator(io_service_pool& ios, router_server& serv, login_moudle& login)
 {
 	login.quit();
 	serv.stop();
@@ -113,7 +113,7 @@ int main(int argc, char** argv)
 		// 8线程并发.
 		io_service_pool io_pool(num_threads);
 		// 创建服务器.
-		avrouterserver router_serv(io_pool, server_port);
+		router_server router_serv(io_pool, server_port);
 		// 创建 http 服务器
 		http_server http_serv(io_pool, http_port);
 
