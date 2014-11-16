@@ -79,6 +79,7 @@ namespace av_router {
 	void register_moudle::availability_check_httpd(const request&, http_connection_ptr, http_connection_manager&)
 	{
 		// TODO 添加实现.
+		LOG_DBG << "register_moudle::availability_check_httpd called";
 	}
 
 	void register_moudle::user_register(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
