@@ -16,6 +16,9 @@
     <ClCompile Include="src\http_server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\http_connection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\avrouterserver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

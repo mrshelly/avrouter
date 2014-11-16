@@ -24,6 +24,7 @@
     <ClCompile Include="src\register_moudle.cpp" />
     <ClCompile Include="src\root_ca.cpp" />
     <ClCompile Include="src\http_server.cpp" />
+	<ClCompile Include="src\http_connection.cpp" />
     <ClCompile Include="src\avrouterserver.cpp" />
   </ItemGroup>
   <ItemGroup>
