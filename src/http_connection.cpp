@@ -67,7 +67,7 @@ namespace av_router {
 
 		boost::tribool result;
 		boost::tie(result, boost::tuples::ignore) = m_request_parser.parse(m_http_request, buffer.begin(), buffer.end());
-		if (result || result == boost::indeterminate)
+		if (!result || result == boost::indeterminate)
 		{
 			// 断开.
 			m_connection_manager->stop(shared_from_this());
