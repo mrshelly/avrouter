@@ -46,6 +46,7 @@ namespace av_router {
 		tcp::socket& socket();
 	private:
 		void handle_read_headers(const boost::system::error_code& error, std::size_t bytes_transferred);
+		void handle_read_body(const boost::system::error_code& error, std::size_t bytes_transferred);
 		void handle_write_http(const boost::system::error_code& error, std::size_t bytes_transferred);
 
 	private:

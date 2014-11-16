@@ -303,6 +303,42 @@ namespace av_router
 		int http_version_major;
 		int http_version_minor;
 		std::vector<header> headers;
+
+		// 只有在调用了 normalise 后才能访问的成员
+		boost::uint64_t content_length;
+		bool keep_alive;
+
+		std::string body;
+
+		std::string operator[](const std::string& name) const
+		{
+			for (const header& hdr : headers)
+			{
+				if (strncasecmp(name.c_str(), hdr.name.c_str(), name.length()) == 0)
+				{
+					return hdr.value;
+				}
+			}
+		}
+
+		// 将一些标准头部从 headers 提取出来
+		// 必要的小写化
+		void normalise()
+		{
+			boost::to_lower(method);
+			boost::to_lower(uri);
+			for (header& hdr : headers) boost::to_lower(hdr.name);
+			auto contentlength = (*this)["content-length"];
+			if (!contentlength.empty())
+			{
+				std::istringstream contentlength_string;
+				contentlength_string.str(contentlength);
+				contentlength_string.imbue(std::locale("C"));
+				contentlength_string >> content_length;
+			}
+
+			keep_alive = boost::to_lower_copy((*this)["connection"]) == "keep-alive";
+		}
 	};
 
 	/// Parser for incoming requests.
