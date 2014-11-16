@@ -9,6 +9,7 @@ namespace po = boost::program_options;
 #include "register_moudle.hpp"
 #include "forward_moudle.hpp"
 #include "avrouterserver.hpp"
+#include "http_server.hpp"
 
 // 测试数据库.
 #include <soci.h>
@@ -39,6 +40,7 @@ int main(int argc, char** argv)
 	try
 	{
 		unsigned short server_port = 0;
+		unsigned short http_port = 0;
 		int num_threads = 0;
 		int pool_size = 0;
 		std::string db_server;
@@ -54,6 +56,7 @@ int main(int argc, char** argv)
 			("help,h", "help message")
 			("version", "current avrouter version")
 			("port", po::value<unsigned short>(&server_port)->default_value(24950), "avrouter listen port")
+			("httpport", po::value<unsigned short>(&http_port)->default_value(24951), "http RPC listen port")
 			("thread", po::value<int>(&num_threads)->default_value(boost::thread::hardware_concurrency()), "threads")
 			("pool", po::value<int>(&pool_size)->default_value(32), "connection pool size")
 			("db_server", po::value<std::string>(&db_server)->default_value("127.0.0.1"), "postresql database server addr")
@@ -110,7 +113,9 @@ int main(int argc, char** argv)
 		// 8线程并发.
 		io_service_pool io_pool(num_threads);
 		// 创建服务器.
-		avrouterserver serv(io_pool, server_port);
+		avrouterserver router_serv(io_pool, server_port);
+		// 创建 http 服务器
+		http_server http_serv(io_pool, http_port);
 
 		database async_database(io_pool.get_io_service(), db_pool);
 
@@ -120,20 +125,20 @@ int main(int argc, char** argv)
 		register_moudle moudle_register(io_pool, async_database);
 
 		// 添加注册模块处理.
-		serv.add_message_process_moudle("proto.username_availability_check",
+		router_serv.add_message_process_moudle("proto.username_availability_check",
 			boost::bind(&register_moudle::availability_check, &moudle_register, _1, _2, _3));
-		serv.add_message_process_moudle("proto.user_register",
+		router_serv.add_message_process_moudle("proto.user_register",
 			boost::bind(&register_moudle::user_register, &moudle_register, _1, _2, _3));
 
 		// 添加登陆处理模块.
-		serv.add_message_process_moudle("proto.client_hello", boost::bind(&login_moudle::process_hello_message, &moudle_login, _1, _2, _3));
-		serv.add_message_process_moudle("proto.login", boost::bind(&login_moudle::process_login_message, &moudle_login, _1, _2, _3));
+		router_serv.add_message_process_moudle("proto.client_hello", boost::bind(&login_moudle::process_hello_message, &moudle_login, _1, _2, _3));
+		router_serv.add_message_process_moudle("proto.login", boost::bind(&login_moudle::process_login_message, &moudle_login, _1, _2, _3));
 
 		// 添加包的转发处理模块
-		serv.add_message_process_moudle("proto.avpacket", boost::bind(&forward_moudle::process_packet, &forward_packet, _1, _2, _3));
-		serv.add_connection_process_moudle("proto.avpacket", boost::bind(&forward_moudle::connection_notify, &forward_packet, _1, _2, _3));
+		router_serv.add_message_process_moudle("proto.avpacket", boost::bind(&forward_moudle::process_packet, &forward_packet, _1, _2, _3));
+		router_serv.add_connection_process_moudle("proto.avpacket", boost::bind(&forward_moudle::connection_notify, &forward_packet, _1, _2, _3));
 		// 启动服务器.
-		serv.start();
+		router_serv.start();
 
 		// Ctrl+c异步处理退出.
 		boost::asio::signal_set terminator_signal(io_pool.get_io_service());
@@ -142,7 +147,7 @@ int main(int argc, char** argv)
 #if defined(SIGQUIT)
 		terminator_signal.add(SIGQUIT);
 #endif // defined(SIGQUIT)
-		terminator_signal.async_wait(boost::bind(&terminator, boost::ref(io_pool), boost::ref(serv), boost::ref(moudle_login)));
+		terminator_signal.async_wait(boost::bind(&terminator, boost::ref(io_pool), boost::ref(router_serv), boost::ref(moudle_login)));
 
 		// 开始启动整个系统事件循环.
 		io_pool.run();
