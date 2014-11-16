@@ -21,7 +21,7 @@ namespace av_router {
 	{
 		friend class http_connection;
 	public:
-		explicit http_server(io_service_pool& ios, unsigned short port, std::string address = "127.0.0.1");
+		explicit http_server(io_service_pool& ios, unsigned short port, std::string address = "0.0.0.0");
 		~http_server();
 
 	public:
@@ -39,7 +39,7 @@ namespace av_router {
 		io_service_pool& m_io_service_pool;
 		boost::asio::io_service& m_io_service;
 		boost::asio::ip::tcp::acceptor m_acceptor;
-		bool m_is_listen;
+		bool m_listening;
 		http_connection_ptr m_connection;
 		http_connection_manager m_connection_manager;
 		boost::asio::deadline_timer m_timer;

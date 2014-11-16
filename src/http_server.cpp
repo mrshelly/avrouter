@@ -10,7 +10,7 @@ namespace av_router {
 		: m_io_service_pool(ios)
 		, m_io_service(ios.get_io_service())
 		, m_acceptor(m_io_service)
-		, m_is_listen(false)
+		, m_listening(false)
 		, m_timer(m_io_service)
 	{
 		boost::asio::ip::tcp::resolver resolver(m_io_service);
@@ -50,7 +50,7 @@ namespace av_router {
 			LOG_ERR << "HTTP Server listen failed: " << ignore_ec.message();
 			return;
 		}
-		m_is_listen = true;
+		m_listening = true;
 		m_timer.expires_from_now(seconds(1));
 		m_timer.async_wait(boost::bind(&http_server::on_tick, this, boost::asio::placeholders::error));
 	}
@@ -60,7 +60,7 @@ namespace av_router {
 
 	void http_server::start()
 	{
-		if (!m_is_listen) return;
+		if (!m_listening) return;
 		m_connection = boost::make_shared<http_connection>(boost::ref(m_io_service_pool.get_io_service()), boost::ref(*this), &m_connection_manager);
 		m_acceptor.async_accept(m_connection->socket(), boost::bind(&http_server::handle_accept, this, boost::asio::placeholders::error));
 	}
