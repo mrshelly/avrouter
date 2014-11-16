@@ -46,7 +46,6 @@ namespace av_router {
 		tcp::socket& socket();
 	private:
 		void handle_read_headers(const boost::system::error_code& error, std::size_t bytes_transferred);
-		void handle_write_range(const boost::system::error_code& error, std::size_t bytes_transferred);
 		void handle_write_http(const boost::system::error_code& error, std::size_t bytes_transferred);
 
 	private:
@@ -58,6 +57,7 @@ namespace av_router {
 		boost::asio::streambuf m_response;
 		request_parser m_request_parser;
 		request m_http_request;
+		bool m_abort;
 	};
 
 
@@ -65,16 +65,6 @@ namespace av_router {
 	class http_connection_manager
 		: private boost::noncopyable
 	{
-		enum {
-			rate_sec = 5,
-		};
-
-		struct statistics {
-			int last_rate[rate_sec];
-			int rate;
-			int cycle;
-		};
-
 	public:
 		/// Add the specified connection to the manager and start it.
 		void start(http_connection_ptr c)
@@ -102,35 +92,14 @@ namespace av_router {
 			m_connections.clear();
 		}
 
-		void bytes_transferred(int channel_id, int bytes)
-		{
-			boost::mutex::scoped_lock l(m_mutex);
-			statistics& stat = m_statistics[channel_id];
-			stat.last_rate[stat.cycle] += bytes;
-		}
-
 		void tick()
 		{
 			boost::mutex m_mutex;
-			std::map<int, statistics>::iterator iter;
-			for (iter = m_statistics.begin(); iter != m_statistics.end(); iter++)
-			{
-				double upload_speed = 0.0f;
-				statistics& stat = iter->second;
-				for (int i = 0; i < rate_sec; i++)
-					upload_speed += stat.last_rate[i];
-				upload_speed /= rate_sec;
-				if (++stat.cycle > rate_sec)
-					stat.cycle = 0;
-				stat.last_rate[stat.cycle] = 0;
-				stat.rate = upload_speed;
-			}
 		}
 
 	private:
 		boost::mutex m_mutex;
 		std::set<http_connection_ptr> m_connections;
-		std::map<int, statistics> m_statistics;
 	};
 
 }
