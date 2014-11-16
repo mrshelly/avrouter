@@ -130,13 +130,14 @@ namespace av_router {
 
 						if (result == 0)
 						{
-							// TODO 将 CERT 存入数据库.
-
-							// CERT 就有了, 开始登录吧!
-							proto::user_register_result result_msg;
-							result_msg.set_result(proto::user_register_result::REGISTER_SUCCEED);
-							result_msg.set_cert(cert);
-							connection->write_msg(encode(result_msg));
+							// 将 CERT 存入数据库.
+							m_database.update_user_cert(user_name, cert, [=](int){
+								// CERT 就有了, 开始登录吧!
+								proto::user_register_result result_msg;
+								result_msg.set_result(proto::user_register_result::REGISTER_SUCCEED);
+								result_msg.set_cert(cert);
+								connection->write_msg(encode(result_msg));
+							});
 						}
 						else if (result == 1)
 						{

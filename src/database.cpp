@@ -12,6 +12,16 @@ namespace av_router {
 	static const std::string db_name = "avim";
 	static const std::string db_user_table = "avim_user";
 
+	static std::string pg_escape_bytea(const soci::session& ses, const std::string bytea)
+	{
+		auto pgcon = dynamic_cast<soci::postgresql_session_backend*>(
+			const_cast<soci::session&>(ses).get_backend())->conn_;
+		std::size_t escaped_len = 0;
+		std::shared_ptr<unsigned char> escaped_chars;
+		escaped_chars.reset(PQescapeByteaConn(pgcon, (const uint8_t*)bytea.data(), bytea.length(), &escaped_len), PQfreemem);
+		return std::string((const char*)escaped_chars.get(), escaped_len);
+	}
+
 	database::database(boost::asio::io_service& io, soci::connection_pool& db_pool)
 		: m_io_service(io)
 		, m_db_pool(db_pool)
@@ -109,15 +119,9 @@ namespace av_router {
 						m_io_service.post(boost::bind(handler, false));
 						return;
 					}
-
-					auto pgcon = dynamic_cast<soci::postgresql_session_backend*>(ses.get_backend())->conn_;
-					std::size_t escaped_pubkey_len = 0;
-					auto escaped_pubkey_chars = PQescapeByteaConn(pgcon, (const uint8_t*)pubkey.data(), pubkey.length(), &escaped_pubkey_len);
-					std::string escaped_pubkey((const char*)escaped_pubkey_chars, escaped_pubkey_len);
-					PQfreemem(escaped_pubkey_chars);
 					// 插入数据库
 					ses << "INSERT INTO avim_user (user_id, public_key, mail, phone) VALUES (:name, :pubkey, :email , :phone)"
-						, soci::use(user_id), soci::use(escaped_pubkey), soci::use(email), soci::use(telephone);
+						, soci::use(user_id), soci::use(pg_escape_bytea(ses, pubkey)), soci::use(email), soci::use(telephone);
 
 					m_io_service.post(boost::bind(handler, true));
 					return;
@@ -145,6 +149,31 @@ namespace av_router {
 				{
 					// 检查名字没占用, 然后插入个新的, 必须是个原子操作
 					ses << "DELETE FROM avim_user WHERE user_id = :name", soci::use(user_id);
+					m_io_service.post(boost::bind(handler, true));
+					return;
+				}
+				catch (soci::soci_error const& err)
+				{
+					LOG_ERR << err.what();
+					m_io_service.post(boost::bind(handler, false));
+					return;
+				}
+			}
+		);
+	}
+
+	void database::update_user_cert(const std::string& user_id, const std::string& cert, database::result_handler handler)
+	{
+		std::async(std::launch::async,
+			[=]()
+			{
+				// 在这里检查数据库中是否存在这个用户名, 检查到的话, 调用对应的handler.
+				soci::session ses(m_db_pool);
+				try
+				{
+					std::string cert_escapted = pg_escape_bytea(ses, cert);
+					// 检查名字没占用, 然后插入个新的, 必须是个原子操作
+					ses << "update avim_user set cert=:cert WHERE user_id = :name", soci::use(cert_escapted), soci::use(user_id);
 					m_io_service.post(boost::bind(handler, true));
 					return;
 				}
