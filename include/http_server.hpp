@@ -19,7 +19,7 @@ namespace av_router {
 		: public boost::noncopyable
 	{
 	public:
-		explicit http_server(io_service_pool& ios, unsigned short port, std::string address = "127.0.0.1");
+		explicit http_server(io_service_pool& ios, unsigned short port, std::string address = "0.0.0.0");
 		~http_server();
 
 	public:
