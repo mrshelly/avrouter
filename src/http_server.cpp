@@ -98,9 +98,27 @@ namespace av_router {
 		m_timer.async_wait(boost::bind(&http_server::on_tick, this, boost::asio::placeholders::error));
 	}
 
-	void http_server::handle_request(const request&, http_connection_ptr)
+	void http_server::handle_request(const request& req, http_connection_ptr conn)
 	{
 		// 根据 URI 调用不同的处理
+		const std::string& uri = req.uri;
+		boost::shared_lock<boost::shared_mutex> l(m_request_callback_mtx);
+		auto iter = m_http_request_callbacks.find(uri);
+		if (iter == m_http_request_callbacks.end())
+			return;
+		iter->second(req, conn, boost::ref(m_connection_manager));
+	}
+
+	bool http_server::add_uri_handler(const std::string& uri, http_request_callback cb)
+	{
+		boost::unique_lock<boost::shared_mutex> l(m_request_callback_mtx);
+		if (m_http_request_callbacks.find(uri) != m_http_request_callbacks.end())
+		{
+			BOOST_ASSERT("module already exist!" && false);
+			return false;
+		}
+		m_http_request_callbacks[uri] = cb;
+		return true;
 	}
 
 }

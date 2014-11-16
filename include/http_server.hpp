@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <boost/thread.hpp>
+
 #include "internal.hpp"
 #include "io_service_pool.hpp"
 #include "http_connection.hpp"
@@ -14,6 +16,9 @@
 #include <boost/noncopyable.hpp>
 
 namespace av_router {
+
+	typedef boost::function<void(const request&, http_connection_ptr, http_connection_manager&)> http_request_callback;
+	typedef std::map<std::string, http_request_callback> http_request_callback_table;
 
 	class http_connection;
 	class http_server
@@ -27,6 +32,8 @@ namespace av_router {
 	public:
 		void start();
 		void stop();
+
+		bool add_uri_handler(const std::string& uri, http_request_callback);
 
 	private:
 		void handle_accept(const boost::system::error_code& error);
@@ -43,6 +50,8 @@ namespace av_router {
 		http_connection_ptr m_connection;
 		http_connection_manager m_connection_manager;
 		boost::asio::deadline_timer m_timer;
+		boost::shared_mutex m_request_callback_mtx;
+		http_request_callback_table m_http_request_callbacks;
 	};
 
 }

@@ -11,6 +11,7 @@
 
 #include <openssl/x509.h>
 
+#include "http_server.hpp"
 #include "router_server.hpp"
 #include "serialization.hpp"
 
@@ -22,6 +23,9 @@ namespace av_router {
 	public:
 		register_moudle(io_service_pool&, database&);
 		~register_moudle();
+
+	public: // for HTTPD
+		void availability_check_httpd(const request&, http_connection_ptr, http_connection_manager&);
 
 	public:
 		void availability_check(google::protobuf::Message*, connection_ptr, connection_manager&);

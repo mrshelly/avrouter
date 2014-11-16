@@ -75,6 +75,12 @@ namespace av_router {
 		);
 	}
 
+	// HTTP 版本, 大同小异, 只是返回的不是 protobuf 消息, 而是 json 格式的消息
+	void register_moudle::availability_check_httpd(const request&, http_connection_ptr, http_connection_manager&)
+	{
+		// TODO 添加实现.
+	}
+
 	void register_moudle::user_register(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
 	{
 		proto::user_register* register_msg = dynamic_cast<proto::user_register*>(msg);
