@@ -53,7 +53,6 @@ namespace av_router {
 		http_server& m_server;
 		tcp::socket m_socket;
 		http_connection_manager* m_connection_manager;
-		boost::asio::deadline_timer m_try_read_timer;
 		boost::asio::streambuf m_request;
 		boost::asio::streambuf m_response;
 		request_parser m_request_parser;

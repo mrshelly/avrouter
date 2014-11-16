@@ -12,7 +12,6 @@ namespace av_router {
 		, m_socket(io)
 		, m_connection_manager(connection_man)
 		, m_abort(false)
-		, m_try_read_timer(io)
 	{}
 
 	http_connection::~http_connection()
@@ -44,7 +43,6 @@ namespace av_router {
 		boost::system::error_code ignore_ec;
 		m_abort = true;
 		m_socket.close(ignore_ec);
-		m_try_read_timer.cancel(ignore_ec);
 	}
 
 	tcp::socket& http_connection::socket()
@@ -67,8 +65,14 @@ namespace av_router {
 		buffer[m_request.size()] = 0;
 		m_request.sgetn(&buffer[0], m_request.size());
 
-
-		m_request_parser.parse(m_http_request, buffer.begin(), buffer.end());
+		boost::tribool result;
+		boost::tie(result, boost::tuples::ignore) = m_request_parser.parse(m_http_request, buffer.begin(), buffer.end());
+		if (result || result == boost::indeterminate)
+		{
+			// 断开.
+			m_connection_manager->stop(shared_from_this());
+			return;
+		}
 
 		m_server.handle_request(m_http_request, shared_from_this());
 
