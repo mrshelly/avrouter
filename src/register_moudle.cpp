@@ -131,30 +131,21 @@ namespace av_router {
 						if (result == 0)
 						{
 							// 将 CERT 存入数据库.
-							m_database.update_user_cert(user_name, cert, [=](int){
-								// CERT 就有了, 开始登录吧!
-								proto::user_register_result result_msg;
-								result_msg.set_result(proto::user_register_result::REGISTER_SUCCEED);
-								result_msg.set_cert(cert);
-								connection->write_msg(encode(result_msg));
-							});
+							m_database.update_user_cert(user_name, cert, std::bind(&register_moudle::proto_write_user_register_response, this,
+								proto::user_register_result::REGISTER_SUCCEED, boost::optional<std::string>(cert), connection));
+
 						}
 						else if (result == 1)
 						{
-							// CERT 等待注册.
-							proto::user_register_result result_msg;
-							result_msg.set_result(proto::user_register_result::REGISTER_SUCCEED_PENDDING_CERT);
-							connection->write_msg(encode(result_msg));
+							// 注册成功, CERT 等待.
+							proto_write_user_register_response(proto::user_register_result::REGISTER_SUCCEED_PENDDING_CERT, boost::optional<std::string>(), connection);
 						}
 						else
 						{
 							//  回滚数据库.
-							m_database.delete_user(user_name, [connection, this](int)
-							{
-								proto::user_register_result result_msg;
-								result_msg.set_result(proto::user_register_result::REGISTER_FAILED_CA_DOWN);
-								connection->write_msg(encode(result_msg));
-							});
+							m_database.delete_user(user_name,
+								std::bind(&register_moudle::proto_write_user_register_response, this,
+									proto::user_register_result::REGISTER_FAILED_CA_DOWN, boost::optional<std::string>(), connection));
 						}
 					});
 				}
@@ -162,11 +153,21 @@ namespace av_router {
 				{
 					LOG_INFO << "db op failed, register stoped";
 
-					proto::user_register_result result;
-					result.set_result(proto::user_register_result::REGISTER_FAILED_NAME_TAKEN);
-					connection->write_msg(encode(result));
+					proto_write_user_register_response(proto::user_register_result::REGISTER_FAILED_NAME_TAKEN, boost::optional<std::string>(), connection);
 				}
 			}
 		);
 	}
+
+	void register_moudle::proto_write_user_register_response(int result_code, boost::optional<std::string> cert, connection_ptr connection)
+	{
+		proto::user_register_result result;
+		result.set_result((proto::user_register_result::user_register_result_code)result_code);
+		if (cert.is_initialized())
+		{
+			result.set_cert(cert.value());
+		}
+		connection->write_msg(encode(result));
+	}
+
 }

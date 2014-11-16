@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <boost/optional.hpp>
+
 #include <openssl/x509.h>
 
 #include "server.hpp"
@@ -24,6 +26,9 @@ namespace av_router {
 	public:
 		void availability_check(google::protobuf::Message*, connection_ptr, connection_manager&);
 		void user_register(google::protobuf::Message*, connection_ptr, connection_manager&);
+
+	protected:
+		void proto_write_user_register_response(int result_code, boost::optional<std::string> cert, connection_ptr);
 
 	private:
 		av_router::io_service_pool& m_io_service_pool;
