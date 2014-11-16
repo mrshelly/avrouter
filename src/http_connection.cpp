@@ -2,11 +2,13 @@
 #include "escape_string.hpp"
 #include "io_service_pool.hpp"
 #include "logging.hpp"
+#include "http_server.hpp"
 
 namespace av_router {
 
-	http_connection::http_connection(boost::asio::io_service& io, http_connection_manager* connection_man)
+	http_connection::http_connection(boost::asio::io_service& io, http_server& serv, http_connection_manager* connection_man)
 		: m_io_service(io)
+		, m_server(serv)
 		, m_socket(io)
 		, m_connection_manager(connection_man)
 		, m_abort(false)
@@ -65,17 +67,10 @@ namespace av_router {
 		buffer[m_request.size()] = 0;
 		m_request.sgetn(&buffer[0], m_request.size());
 
-		// 解析HTTP头中的频道name, 检查是否是该频道.
-		boost::tribool result;
-		m_request_parser.reset();
-		m_http_request.headers.clear();
-		boost::tie(result, boost::tuples::ignore) = m_request_parser.parse(
-			m_http_request, buffer.begin(), buffer.end());
 
-		m_response.consume(m_response.size());
-		std::ostream response_stream(&m_response);
-		response_stream << "HTTP/1.1 200 OK\r\n";
-		response_stream << "\r\n";
+		m_request_parser.parse(m_http_request, buffer.begin(), buffer.end());
+
+		m_server.handle_request(m_http_request, shared_from_this());
 
 		// 继续读取下一个请求.
 		m_request.consume(m_request.size());

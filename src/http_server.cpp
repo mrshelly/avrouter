@@ -61,7 +61,7 @@ namespace av_router {
 	void http_server::start()
 	{
 		if (!m_is_listen) return;
-		m_connection = boost::make_shared<http_connection>(boost::ref(m_io_service_pool.get_io_service()), &m_connection_manager);
+		m_connection = boost::make_shared<http_connection>(boost::ref(m_io_service_pool.get_io_service()), boost::ref(*this), &m_connection_manager);
 		m_acceptor.async_accept(m_connection->socket(), boost::bind(&http_server::handle_accept, this, boost::asio::placeholders::error));
 	}
 
@@ -84,7 +84,7 @@ namespace av_router {
 
 		m_connection_manager.start(m_connection);
 
-		m_connection = boost::make_shared<http_connection>(boost::ref(m_io_service_pool.get_io_service()), &m_connection_manager);
+		m_connection = boost::make_shared<http_connection>(boost::ref(m_io_service_pool.get_io_service()), boost::ref(*this), &m_connection_manager);
 		m_acceptor.async_accept(m_connection->socket(), boost::bind(&http_server::handle_accept, this, boost::asio::placeholders::error));
 	}
 
@@ -96,6 +96,11 @@ namespace av_router {
 
 		m_timer.expires_from_now(seconds(1));
 		m_timer.async_wait(boost::bind(&http_server::on_tick, this, boost::asio::placeholders::error));
+	}
+
+	void http_server::handle_request(const request&, http_connection_ptr)
+	{
+		// 根据 URI 调用不同的处理
 	}
 
 }

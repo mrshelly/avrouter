@@ -15,9 +15,11 @@
 
 namespace av_router {
 
+	class http_connection;
 	class http_server
 		: public boost::noncopyable
 	{
+		friend class http_connection;
 	public:
 		explicit http_server(io_service_pool& ios, unsigned short port, std::string address = "127.0.0.1");
 		~http_server();
@@ -29,6 +31,9 @@ namespace av_router {
 	private:
 		void handle_accept(const boost::system::error_code& error);
 		void on_tick(const boost::system::error_code& error);
+
+		// 收到一个 http request 的时候调用
+		void handle_request(const request&, http_connection_ptr);
 
 	private:
 		io_service_pool& m_io_service_pool;

@@ -29,14 +29,14 @@ using namespace boost::posix_time;
 
 namespace av_router {
 
+	class http_server;
 	class http_connection_manager;
-
 	class http_connection
 		: public boost::enable_shared_from_this<http_connection>
 		, public boost::noncopyable
 	{
 	public:
-		explicit http_connection(boost::asio::io_service& io, http_connection_manager* connection_man);
+		explicit http_connection(boost::asio::io_service& io, http_server&, http_connection_manager*);
 		~http_connection();
 
 	public:
@@ -50,6 +50,7 @@ namespace av_router {
 
 	private:
 		boost::asio::io_service& m_io_service;
+		http_server& m_server;
 		tcp::socket m_socket;
 		http_connection_manager* m_connection_manager;
 		boost::asio::deadline_timer m_try_read_timer;
