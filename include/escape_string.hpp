@@ -135,9 +135,12 @@ inline bool unescape_path(const std::string& in, std::string& out)
 			else
 				return false;
 			break;
+		case '+':
+			out += ' ';
+			break;
 		case '-': case '_': case '.': case '!': case '~': case '*':
 		case '\'': case '(': case ')': case ':': case '@': case '&':
-		case '=': case '+': case '$': case ',': case '/': case ';':
+		case '=': case '$': case ',': case '/': case ';':
 			out += in[i];
 			break;
 		default:

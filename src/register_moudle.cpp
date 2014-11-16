@@ -49,6 +49,8 @@ namespace av_router {
 	register_moudle::~register_moudle()
 	{}
 
+
+
 	void register_moudle::availability_check(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)
 	{
 		proto::username_availability_check* availabile = dynamic_cast<proto::username_availability_check*>(msg);
@@ -76,10 +78,20 @@ namespace av_router {
 	}
 
 	// HTTP 版本, 大同小异, 只是返回的不是 protobuf 消息, 而是 json 格式的消息
-	void register_moudle::availability_check_httpd(const request&, http_connection_ptr, http_connection_manager&)
+	void register_moudle::availability_check_httpd(const request& req, http_connection_ptr conn, http_connection_manager&)
 	{
 		// TODO 添加实现.
 		LOG_DBG << "register_moudle::availability_check_httpd called";
+
+		// 这里 name 在 json 消息里
+		http_form request_parameter = req.body;
+
+		std::string user_name = request_parameter["username"];
+
+		m_database.availability_check(user_name, [=](int result){
+			// TODO 返回 json 数据
+			
+		});
 	}
 
 	void register_moudle::user_register(google::protobuf::Message* msg, connection_ptr connection, connection_manager&)

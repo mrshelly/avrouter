@@ -341,6 +341,78 @@ namespace av_router
 		}
 	};
 
+	// HTTP 表单
+	struct http_form
+	{
+		std::vector<std::pair<std::string, std::string>> headers;
+	private:
+		void parse_form_string(const std::string& formdata)
+		{
+			std::string key, value;
+			bool parse_key = true;
+			for ( auto C : formdata)
+			{
+				if (parse_key)
+				{
+					if (C != '=')
+					{
+						key+=C;
+					}
+					else
+					{
+						parse_key = false;
+					}
+				}
+				else
+				{
+					if (C != '&')
+					{
+						value+=C;
+					}
+					else
+					{
+						parse_key = true;
+
+						std::string k,v;
+
+						detail::unescape_path(key, k);
+						detail::unescape_path(value, v);
+
+						headers.push_back(std::make_pair(k,v));
+						key = value = "";
+					}
+				}
+			}
+			if (!parse_key)
+			{
+				std::string k,v;
+
+				detail::unescape_path(key, k);
+				detail::unescape_path(value, v);
+
+				headers.push_back(std::make_pair(k,v));
+			}
+		}
+
+	public:
+		http_form(const std::string& formdata)
+		{
+			parse_form_string(formdata);
+		}
+
+		std::string operator[](const std::string& key) const
+		{
+			for (const auto& hdr : headers)
+			{
+				if (hdr.first == key)
+				{
+					return hdr.second;
+				}
+			}
+			return "";
+		}
+	};
+
 	/// Parser for incoming requests.
 	class request_parser
 	{
