@@ -155,7 +155,7 @@ namespace av_router {
 	{
 		std::ostream out(&m_response);
 
-		out << "HTTP/1.1 200 OK\r\n";
+		out << "HTTP/" << m_http_request.http_version_major << "." << m_http_request.http_version_minor << "200 OK\r\\n";
 		out << "Content-Type: application/json\r\n";
 		out << "Content-Length: " << body.length() << "\r\n";
 		out << "\r\n";
