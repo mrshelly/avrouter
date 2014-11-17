@@ -98,7 +98,7 @@ namespace av_router {
 		m_timer.async_wait(boost::bind(&http_server::on_tick, this, boost::asio::placeholders::error));
 	}
 
-	bool http_server::handle_request(const av_router::request&, av_router::http_connection_ptr)
+	bool http_server::handle_request(const av_router::request& req, av_router::http_connection_ptr conn)
 	{
 		// 根据 URI 调用不同的处理
 		const std::string& uri = req.uri;

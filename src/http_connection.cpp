@@ -108,7 +108,12 @@ namespace av_router {
 		}
 		else
 		{
-			m_server.handle_request(m_http_request, shared_from_this());
+			if (!m_server.handle_request(m_http_request, shared_from_this()))
+			{
+				// 断开. 反正暴力就对了, 越暴力越不容易被人攻击
+				m_connection_manager->stop(shared_from_this());
+				return;
+			}
 
 			if (m_http_request.keep_alive)
 			{
