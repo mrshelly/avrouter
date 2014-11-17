@@ -90,15 +90,21 @@ namespace av_router {
 			}
 
 			auto already_got = m_request.size();
-
-			// 读取 body
-			boost::asio::async_read(m_socket, m_request, boost::asio::transfer_exactly(content_length - already_got),
-				boost::bind(&http_connection::handle_read_body,
-					shared_from_this(),
-					boost::asio::placeholders::error,
-					boost::asio::placeholders::bytes_transferred
-				)
-			);
+			if( already_got >= content_length)
+			{
+				handle_read_body(error, content_length);
+			}
+			else
+			{
+				// 读取 body
+				boost::asio::async_read(m_socket, m_request, boost::asio::transfer_exactly(content_length - already_got),
+					boost::bind(&http_connection::handle_read_body,
+						shared_from_this(),
+						boost::asio::placeholders::error,
+						boost::asio::placeholders::bytes_transferred
+					)
+				);
+			}
 		}
 		else
 		{

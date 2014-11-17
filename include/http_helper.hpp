@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <boost/regex.hpp>
+
 #include "internal.hpp"
 #include "escape_string.hpp"
 #include <boost/algorithm/string.hpp>
@@ -343,10 +345,66 @@ namespace av_router
 	};
 
 	// HTTP 表单
+	// application/x-www-form-urlencoded
+	// multipart/form-data; boundary=xxxx
 	struct http_form
 	{
-		std::vector<std::pair<std::string, std::string>> headers;
+		http_form(const std::string& formdata, const std::string& content_type)
+		{
+			boost::smatch w;
+			if(boost::regex_search(content_type, w, boost::regex("boundary=([^ ]+)")))
+			{
+				std::string boundary = w[1];
+				boundary.insert(0, "--");
+				parse_multipart(formdata, boundary);
+			}
+			else
+			{
+				parse_form_string(formdata);
+			}
+		}
+
+		std::string operator[](const std::string& key) const
+		{
+			for (const auto& hdr : headers)
+			{
+				if (hdr.first == key)
+				{
+					return hdr.second;
+				}
+			}
+			return "";
+		}
 	private:
+		void parse_multipart(const std::string& formdata, const std::string& boundary)
+		{
+			std::vector<std::string> parts;
+
+			std::size_t boundary_start_post, search_pos = boundary.length() + 2;
+
+			while(std::string::npos != (boundary_start_post = formdata.find(boundary, search_pos)))
+			{
+				parts.push_back(formdata.substr(search_pos, boundary_start_post - search_pos - 2));
+				search_pos = boundary_start_post + boundary.length() + 2;
+			}
+
+			// 从parts里提取
+			for (auto p : parts)
+			{
+				auto pos = p.find("\r\n\r\n");
+				auto h = p.substr(0, pos);
+				auto v = p.substr(pos + 4);
+
+				boost::smatch w;
+				if(boost::regex_search(h, w, boost::regex("Content-Disposition: form-data; name=\"([^\"]+)\"")))
+				{
+					std::string key = w[1];
+					detail::unescape_path(key, h);
+					headers.push_back(std::make_pair(h,v));
+				}
+			}
+		}
+
 		void parse_form_string(const std::string& formdata)
 		{
 			std::string key, value;
@@ -394,24 +452,7 @@ namespace av_router
 				headers.push_back(std::make_pair(k,v));
 			}
 		}
-
-	public:
-		http_form(const std::string& formdata)
-		{
-			parse_form_string(formdata);
-		}
-
-		std::string operator[](const std::string& key) const
-		{
-			for (const auto& hdr : headers)
-			{
-				if (hdr.first == key)
-				{
-					return hdr.second;
-				}
-			}
-			return "";
-		}
+		std::vector<std::pair<std::string, std::string>> headers;
 	};
 
 	/// Parser for incoming requests.
