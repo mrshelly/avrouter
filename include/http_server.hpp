@@ -40,7 +40,7 @@ namespace av_router {
 		void on_tick(const boost::system::error_code& error);
 
 		// 收到一个 http request 的时候调用
-		void handle_request(const request&, http_connection_ptr);
+		bool handle_request(const request&, http_connection_ptr);
 
 	private:
 		io_service_pool& m_io_service_pool;

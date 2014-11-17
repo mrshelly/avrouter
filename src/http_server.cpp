@@ -1,4 +1,4 @@
-﻿#include <boost/bind.hpp>
+#include <boost/bind.hpp>
 #include <boost/date_time.hpp>
 using namespace boost::posix_time;
 
@@ -98,15 +98,16 @@ namespace av_router {
 		m_timer.async_wait(boost::bind(&http_server::on_tick, this, boost::asio::placeholders::error));
 	}
 
-	void http_server::handle_request(const request& req, http_connection_ptr conn)
+	bool http_server::handle_request(const av_router::request&, av_router::http_connection_ptr)
 	{
 		// 根据 URI 调用不同的处理
 		const std::string& uri = req.uri;
 		boost::shared_lock<boost::shared_mutex> l(m_request_callback_mtx);
 		auto iter = m_http_request_callbacks.find(uri);
 		if (iter == m_http_request_callbacks.end())
-			return;
+			return false;
 		iter->second(req, conn, boost::ref(m_connection_manager));
+		return true;
 	}
 
 	bool http_server::add_uri_handler(const std::string& uri, http_request_callback cb)
