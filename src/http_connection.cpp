@@ -141,7 +141,12 @@ namespace av_router {
 		m_http_request.body.resize(m_http_request.content_length);
 		m_request.sgetn(&m_http_request.body[0], m_http_request.content_length);
 
-		m_server.handle_request(m_http_request, shared_from_this());
+		if (!m_server.handle_request(m_http_request, shared_from_this()))
+		{
+			// 断开. 反正暴力就对了, 越暴力越不容易被人攻击
+			m_connection_manager->stop(shared_from_this());
+			return;
+		}
 
 		if (m_http_request.keep_alive)
 		{
@@ -160,7 +165,7 @@ namespace av_router {
 	{
 		std::ostream out(&m_response);
 
-		out << "HTTP/" << m_http_request.http_version_major << "." << m_http_request.http_version_minor << "200 OK\r\\n";
+		out << "HTTP/" << m_http_request.http_version_major << "." << m_http_request.http_version_minor << " 200 OK\r\\n";
 		out << "Content-Type: application/json\r\n";
 		out << "Content-Length: " << body.length() << "\r\n";
 		out << "\r\n";
