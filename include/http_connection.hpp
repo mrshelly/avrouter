@@ -44,6 +44,11 @@ namespace av_router {
 		void stop();
 
 		tcp::socket& socket();
+
+	public:
+		// 为了简化实现, 只返回 HTTP 200
+		void write_response(const std::string&);
+
 	private:
 		void handle_read_headers(const boost::system::error_code& error, std::size_t bytes_transferred);
 		void handle_read_body(const boost::system::error_code& error, std::size_t bytes_transferred);

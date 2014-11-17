@@ -151,16 +151,16 @@ namespace av_router {
 		}
 	}
 
-	void http_connection::handle_write_http(const boost::system::error_code& error, std::size_t bytes_transferred)
+	void http_connection::write_response(const std::string& body)
 	{
-		// 出错处理.
-		if (error || m_abort)
-		{
-			m_connection_manager->stop(shared_from_this());
-			return;
-		}
+		std::ostream out(&m_response);
 
-		BOOST_ASSERT(m_response.size() == 0);
+		out << "HTTP/1.1 200 OK\r\n";
+		out << "Content-Type: application/json\r\n";
+		out << "Content-Length: " << body.length() << "\r\n";
+		out << "\r\n";
+
+		out << body;
 
 		boost::asio::async_write(m_socket, m_response,
 			boost::bind(&http_connection::handle_write_http,
@@ -169,5 +169,16 @@ namespace av_router {
 				boost::asio::placeholders::bytes_transferred
 			)
 		);
+
+	}
+
+	void http_connection::handle_write_http(const boost::system::error_code& error, std::size_t bytes_transferred)
+	{
+		// 出错处理.
+		if (error || m_abort)
+		{
+			m_connection_manager->stop(shared_from_this());
+			return;
+		}
 	}
 }

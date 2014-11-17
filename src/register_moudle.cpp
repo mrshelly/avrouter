@@ -5,6 +5,7 @@
 #include <future>
 #include <boost/regex.hpp>
 #include <boost/asio/spawn.hpp>
+#include <boost/format.hpp>
 #include <openssl/x509.h>
 #include <openssl/pem.h>
 #include <openssl/x509v3.h>
@@ -90,9 +91,10 @@ namespace av_router {
 		user_name = request_parameter["username"];
 
 
-		m_database.availability_check(user_name, [=](int result){
+		m_database.availability_check(user_name, [conn](int result){
 			// TODO 返回 json 数据
-
+			auto body = boost::str(boost::format("{\"code\" : \"%d\"}") % result);
+			conn->write_response(body);
 		});
 	}
 
