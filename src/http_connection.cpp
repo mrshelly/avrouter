@@ -185,7 +185,7 @@ namespace av_router {
 	void http_connection::handle_write_http(const boost::system::error_code& error, std::size_t bytes_transferred)
 	{
 		// 出错处理.
-		if (error || m_abort)
+		if (error || m_abort || !m_http_request.keep_alive)
 		{
 			m_connection_manager->stop(shared_from_this());
 			return;
