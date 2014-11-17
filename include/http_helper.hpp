@@ -16,6 +16,7 @@
 #ifndef atoi64
 # ifdef _MSC_VER
 #  define atoi64 _atoi64
+#  define strncasecmp _strnicmp
 # else
 #  define atoi64(x) strtoll(x, (char**)NULL, 10)
 # endif
