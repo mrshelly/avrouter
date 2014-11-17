@@ -319,6 +319,7 @@ namespace av_router
 					return hdr.value;
 				}
 			}
+			return "";
 		}
 
 		// 将一些标准头部从 headers 提取出来

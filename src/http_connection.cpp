@@ -61,9 +61,9 @@ namespace av_router {
 
 		// 复制http头缓冲区.
 		std::vector<char> buffer;
-		buffer.resize(m_request.size() + 1);
-		buffer[m_request.size()] = 0;
-		m_request.sgetn(&buffer[0], m_request.size());
+		buffer.resize(bytes_transferred + 1);
+		buffer[bytes_transferred] = 0;
+		m_request.sgetn(&buffer[0], bytes_transferred);
 
 		boost::tribool result;
 		boost::tie(result, boost::tuples::ignore) = m_request_parser.parse(m_http_request, buffer.begin(), buffer.end());
@@ -73,7 +73,6 @@ namespace av_router {
 			m_connection_manager->stop(shared_from_this());
 			return;
 		}
-		m_request.consume(bytes_transferred);
 
 		m_http_request.normalise();
 
@@ -90,8 +89,10 @@ namespace av_router {
 				return;
 			}
 
+			auto already_got = m_request.size();
+
 			// 读取 body
-			boost::asio::async_read(m_socket, m_request, boost::asio::transfer_exactly(content_length),
+			boost::asio::async_read(m_socket, m_request, boost::asio::transfer_exactly(content_length - already_got),
 				boost::bind(&http_connection::handle_read_body,
 					shared_from_this(),
 					boost::asio::placeholders::error,
@@ -126,8 +127,8 @@ namespace av_router {
 			return;
 		}
 
-		m_http_request.body.resize(bytes_transferred);
-		m_request.sgetn(&m_http_request.body[0], bytes_transferred);
+		m_http_request.body.resize(m_http_request.content_length);
+		m_request.sgetn(&m_http_request.body[0], m_http_request.content_length);
 
 		m_server.handle_request(m_http_request, shared_from_this());
 
