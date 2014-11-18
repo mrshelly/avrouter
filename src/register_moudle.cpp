@@ -1,6 +1,7 @@
 ﻿#include "database.hpp"
 #include "register_moudle.hpp"
 #include "user.pb.h"
+#include "ca.pb.h"
 
 #include <future>
 #include <boost/regex.hpp>
@@ -14,13 +15,57 @@ namespace av_router {
 
 	namespace detail {
 
+		template<class AsyncStream>
+		static google::protobuf::Message* async_read_protobuf_message(AsyncStream &s, boost::asio::yield_context yield_context)
+		{
+			using namespace boost::asio;
+			std::string buf;
+			buf.resize(4);
+			async_read(s, buffer(&buf[0], 4), yield_context);
+
+			uint32_t pktlen = ntohl(*(uint32_t*)(buf.data()));
+			if( pktlen >= 10000)
+				return nullptr;
+			buf.resize(pktlen + 4);
+
+			async_read(s, buffer(&buf[4], pktlen), yield_context);
+
+			return decode(buf);
+		}
+
 		template<class Handler>
-		static void async_send_csr_coro(boost::asio::io_service& io, std::string csr, Handler handler, boost::asio::yield_context yield_context)
+		static void async_send_csr_coro(boost::asio::io_service& io, std::string csr, std::string rsa_figureprint, Handler handler, boost::asio::yield_context yield_context)
 		{
 			// 链接到 ca.avplayer.org:8086
+			using namespace boost::asio;
+
+			ip::tcp::socket socket(io);
+
+			ip::tcp::resolver resolver(io);
+
+			auto endpoint_it = resolver.async_resolve(ip::tcp::resolver::query("ca.avplayer.org", "8086"), yield_context);
+
+			async_connect(socket, endpoint_it, yield_context);
+
 			// 发送 push_csr 请求
 
+			proto::ca::csr_push csr_push;
+			csr_push.set_csr(csr);
+
+			async_write(socket, buffer(encode(csr_push)), yield_context);
+
 			// 等待 push_ok
+			do{
+				std::shared_ptr<proto::ca::push_ok> msg((proto::ca::push_ok*)async_read_protobuf_message(socket, yield_context));
+
+				for (const std::string & figureprint : msg->figureprints())
+				{
+					if(figureprint == rsa_figureprint)
+						break;
+				}
+				io.post(std::bind(handler, -1, std::string()));
+				return;
+			}while(true);
 
 			// 每秒轮询一次 pull_cert
 
@@ -35,10 +80,10 @@ namespace av_router {
 
 	// 暂时的嘛, 等 CA 签名服务器写好了, 这个就可以删了.
 	template<class Handler>
-	static void async_send_csr(boost::asio::io_service& io, std::string csr, Handler handler)
+	static void async_send_csr(boost::asio::io_service& io, std::string csr, std::string rsa_figureprint, Handler handler)
 	{
 		// 开协程, 否则编程太麻烦了, 不是么?
-		boost::asio::spawn(io, boost::bind(detail::async_send_csr_coro<Handler>, boost::ref(io), csr, handler, _1));
+		boost::asio::spawn(io, boost::bind(detail::async_send_csr_coro<Handler>, boost::ref(io), csr, rsa_figureprint, handler, _1));
 	}
 
 
@@ -107,10 +152,12 @@ namespace av_router {
 		// TODO 检查 CSR 证书是否有伪造
 		auto in = (const unsigned char *)register_msg->csr().data();
 
+		std::string rsa_pubkey = register_msg->rsa_pubkey();
+
 		std::shared_ptr<X509_REQ> csr(d2i_X509_REQ(NULL, &in, static_cast<long>(register_msg->csr().length())), X509_REQ_free);
 
-		in = (const unsigned char *)register_msg->rsa_pubkey().data();
-		std::shared_ptr<RSA> user_rsa_pubkey(d2i_RSAPublicKey(NULL, &in, static_cast<long>(register_msg->rsa_pubkey().length())), RSA_free);
+		in = (const unsigned char *)rsa_pubkey.data();
+		std::shared_ptr<RSA> user_rsa_pubkey(d2i_RSA_PUBKEY(NULL, &in, static_cast<long>(rsa_pubkey.length())), RSA_free);
 		std::shared_ptr<EVP_PKEY> user_EVP_PKEY_pubkey(EVP_PKEY_new(), EVP_PKEY_free);
 		EVP_PKEY_set1_RSA(user_EVP_PKEY_pubkey.get(), user_rsa_pubkey.get());
 
@@ -124,7 +171,7 @@ namespace av_router {
 
 		// 确定是合法的 CSR 证书, 接着数据库内插
 		std::string user_name = register_msg->user_name();
-		m_database.register_user(user_name,register_msg->rsa_pubkey(), register_msg->mail_address(), register_msg->cell_phone(),
+		m_database.register_user(user_name, rsa_pubkey, register_msg->mail_address(), register_msg->cell_phone(),
 			[=](bool result)
 			{
 				LOG_INFO << "database fine : " << result;
@@ -133,6 +180,12 @@ namespace av_router {
 				if(result)
 				{
 					LOG_INFO << "now send csr to peter";
+
+					std::string rsa_figureprint;
+
+					rsa_figureprint.resize(20);
+
+					SHA1((unsigned char*)rsa_pubkey.data(), rsa_pubkey.length(), (unsigned char*) &rsa_figureprint[0]);
 
 					std::shared_ptr<BIO> bio(BIO_new(BIO_s_mem()), BIO_free);
 					PEM_write_bio_X509_REQ(bio.get(), csr.get());
@@ -143,7 +196,7 @@ namespace av_router {
 
 					LOG_DBG << pem_csr;
 
-					async_send_csr(m_io_service_pool.get_io_service(), pem_csr,
+					async_send_csr(m_io_service_pool.get_io_service(), pem_csr, rsa_figureprint,
 					[=](int result, std::string cert)
 					{
 						LOG_INFO << "csr sended";
