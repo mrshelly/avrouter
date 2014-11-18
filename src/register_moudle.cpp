@@ -33,8 +33,10 @@ namespace av_router {
 			return decode(buf);
 		}
 
+		// NOTE: 看上去很复杂, 不过这个是暂时的, 因为稍后会用大兽模式, 与 CA 建立长连接来处理
+		// 而不是像现在这样使用短连接+轮询
 		template<class Handler>
-		static void async_send_csr_coro(boost::asio::io_service& io, std::string csr, std::string rsa_figureprint, Handler handler, boost::asio::yield_context yield_context)
+		static void async_send_csr_coro(boost::asio::io_service& io, std::string csr, std::string rsa_fingerprint, Handler handler, boost::asio::yield_context yield_context)
 		{
 			// 链接到 ca.avplayer.org:8086
 			using namespace boost::asio;
@@ -54,27 +56,72 @@ namespace av_router {
 
 			async_write(socket, buffer(encode(csr_push)), yield_context);
 
+			bool push_ready = false;
 			// 等待 push_ok
 			do{
-				std::shared_ptr<proto::ca::push_ok> msg((proto::ca::push_ok*)async_read_protobuf_message(socket, yield_context));
+				std::shared_ptr<google::protobuf::Message> msg(async_read_protobuf_message(socket, yield_context));
 
-				for (const std::string & figureprint : msg->figureprints())
+				if (msg && msg->GetTypeName() == "proto.ca.push_ok")
 				{
-					if(figureprint == rsa_figureprint)
-						break;
+					for (const std::string& fingerprint : dynamic_cast<proto::ca::push_ok*>(msg.get())->fingerprints())
+					{
+						if (fingerprint == rsa_fingerprint)
+							push_ready = true;
+					}
 				}
+			}while(false);
+
+			if(!push_ready)
+			{
 				io.post(std::bind(handler, -1, std::string()));
 				return;
-			}while(true);
+			}
+
+			deadline_timer timer(io);
+
+			std::atomic<bool> can_read;
+			can_read = false;
+
+			async_read(socket, null_buffers(), [&can_read](boost::system::error_code ec, std::size_t){
+				can_read = !ec;
+			});
+
+			// 十秒后取消读取
+			timer.expires_from_now(boost::posix_time::seconds(10));
+			timer.async_wait([&socket](boost::system::error_code ec){
+				if(!ec)
+					socket.cancel();
+			});
 
 			// 每秒轮询一次 pull_cert
-
 			// 只轮询 10 次, 这样要求 10s 内给出结果
+			for (int i=0; i < 10 && !can_read; i++)
+			{
+				proto::ca::cert_pull cert_pull;
+				cert_pull.set_fingerprint(rsa_fingerprint);
+				async_write(socket, buffer(encode(csr_push)), yield_context);
+				deadline_timer timer(io);
+				timer.expires_from_now(boost::posix_time::seconds(1));
+				timer.async_wait(yield_context);
+			}
 
-			// 返回 cert
+			timer.cancel();
 
-			// FIXME
-			io.post(std::bind(handler, -1, std::string()));
+			// 保障上面的 handler 被执行
+			io.poll();
+
+			if (can_read)
+			{
+				// 返回 cert
+				std::shared_ptr<google::protobuf::Message> msg(async_read_protobuf_message(socket, yield_context));
+
+				if (msg && msg->GetTypeName() == "proto.ca.cert_push" && dynamic_cast<proto::ca::cert_push*>(msg.get())->fingerprint() == rsa_fingerprint)
+				{
+					io.post(std::bind(handler, 0, dynamic_cast<proto::ca::cert_push*>(msg.get())->cert()));
+				}
+			}
+
+			io.post(std::bind(handler, 1, std::string()));
 		}
 	} // namespace detail
 
@@ -205,6 +252,7 @@ namespace av_router {
 						{
 							// 将 CERT 存入数据库.
 							m_database.update_user_cert(user_name, cert, std::bind(&register_moudle::proto_write_user_register_response, this,
+								// 向用户返回可以马上登录!
 								proto::user_register_result::REGISTER_SUCCEED, boost::optional<std::string>(cert), connection));
 
 						}
