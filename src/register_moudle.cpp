@@ -107,9 +107,6 @@ namespace av_router {
 
 			timer.cancel();
 
-			// 保障上面的 handler 被执行
-			io.poll();
-
 			if (can_read)
 			{
 				// 返回 cert
