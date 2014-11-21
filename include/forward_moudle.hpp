@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "server.hpp"
+#include "router_server.hpp"
 #include "serialization.hpp"
 
 struct dh_st;
@@ -15,11 +15,11 @@ typedef struct dh_st DH;
 
 namespace av_router {
 
-	class packet_forward
+	class forward_moudle
 	{
 	public:
-		packet_forward(av_router::io_service_pool&);
-		~packet_forward();
+		forward_moudle(av_router::io_service_pool&);
+		~forward_moudle();
 
 	public:
 		void connection_notify(int type, connection_ptr, connection_manager&);

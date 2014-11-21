@@ -1,4 +1,4 @@
 
-add_executable(avrouter main.cpp server.cpp login_moudle.cpp io_service_pool.cpp connection.cpp packet_forward.cpp database.cpp)
+add_executable(avrouter main.cpp http_connection.cpp http_server.cpp router_server.cpp io_service_pool.cpp connection.cpp database.cpp root_ca.cpp forward_moudle.cpp login_moudle.cpp register_moudle.cpp)
 
 target_link_libraries(avrouter avimproto)

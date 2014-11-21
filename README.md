@@ -7,3 +7,7 @@
 
 	$ git clone https://github.com/avplayer/avrouter.git avrouter
 	$ git submodule update --init
+
+# mail list
+
+http://mailman.avplayer.org/pipermail/list/

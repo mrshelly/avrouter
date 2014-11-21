@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <unordered_map>
 #include <boost/noncopyable.hpp>
 #include <boost/thread.hpp>
 
@@ -17,18 +18,18 @@
 namespace av_router {
 
 	typedef boost::function<void(google::protobuf::Message*, connection_ptr, connection_manager&)> message_callback;
-	typedef std::map<std::string, message_callback> message_callback_table;
+	typedef std::unordered_map<std::string, message_callback> message_callback_table;
 
 	typedef boost::function<void(int type, connection_ptr, connection_manager&)> connection_callback;
-	typedef std::map<std::string, connection_callback> connection_callback_table;
+	typedef std::unordered_map<std::string, connection_callback> connection_callback_table;
 
-	class server
+	class router_server
 		: public boost::noncopyable
 	{
 		friend class connection;
 	public:
-		explicit server(io_service_pool& ios, unsigned short port, std::string address = "0.0.0.0");
-		~server();
+		explicit router_server(io_service_pool& ios, unsigned short port, std::string address = "0.0.0.0");
+		~router_server();
 
 	public:
 		// 启动或停止.
